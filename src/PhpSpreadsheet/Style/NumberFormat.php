@@ -2,6 +2,9 @@
 
 namespace PhpOffice\PhpSpreadsheet\Style;
 
+use PhpOffice\PhpSpreadsheet\Locale\CurrentLocale;
+
+
 class NumberFormat extends Supervisor
 {
     // Pre-defined formats
@@ -112,11 +115,11 @@ class NumberFormat extends Supervisor
     protected $formatCode = self::FORMAT_GENERAL;
 
     /**
-     * Built-in format Code.
+     * Built-in format Code ID
      *
      * @var false|int
      */
-    protected $builtInFormatCode = 0;
+    protected $builtInFormatCodeID = 0;
 
     /**
      * Create a new NumberFormat.
@@ -135,7 +138,7 @@ class NumberFormat extends Supervisor
 
         if ($isConditional) {
             $this->formatCode = null;
-            $this->builtInFormatCode = false;
+            $this->builtInFormatCodeID = false;
         }
     }
 
@@ -166,6 +169,8 @@ class NumberFormat extends Supervisor
     }
 
     /**
+     * @ido @fix
+     *
      * Apply styles from array.
      *
      * <code>
@@ -188,6 +193,9 @@ class NumberFormat extends Supervisor
             if (isset($styleArray['formatCode'])) {
                 $this->setFormatCode($styleArray['formatCode']);
             }
+            if (isset($styleArray['builtInFormatCode'])) {
+                $this->setBuiltInFormatCode($styleArray['builtInFormatCode']);
+            }
         }
 
         return $this;
@@ -203,8 +211,8 @@ class NumberFormat extends Supervisor
         if ($this->isSupervisor) {
             return $this->getSharedComponent()->getFormatCode();
         }
-        if (is_int($this->builtInFormatCode)) {
-            return self::builtInFormatCode($this->builtInFormatCode);
+        if (is_int($this->builtInFormatCodeID)) {
+            return CurrentLocale::builtInFormatCode($this->builtInFormatCodeID);
         }
 
         return $this->formatCode;
@@ -227,7 +235,18 @@ class NumberFormat extends Supervisor
             $this->getActiveSheet()->getStyle($this->getSelectedCells())->applyFromArray($styleArray);
         } else {
             $this->formatCode = $formatCode;
-            $this->builtInFormatCode = self::builtInFormatCodeIndex($formatCode);
+            if (is_int($this->builtInFormatCodeID))
+            {
+                $formatCodeCurrent = CurrentLocale::builtInFormatCode($this->builtInFormatCodeID);
+                if (($formatCodeCurrent == '') || ($formatCode <> $formatCodeCurrent))
+                {
+                    $this->builtInFormatCodeID = CurrentLocale::builtInFormatCodeID($formatCode);
+                } else {
+                    // Leave format code ID intact; don't swap if format codes are identical
+                }
+            } else {
+                $this->builtInFormatCodeID = CurrentLocale::builtInFormatCodeID($formatCode);
+            }
         }
 
         return $this;
@@ -245,130 +264,27 @@ class NumberFormat extends Supervisor
         }
 
         // Scrutinizer says this could return true. It is wrong.
-        return $this->builtInFormatCode;
+        return $this->builtInFormatCodeID;
     }
 
     /**
+     * @ido @fix
      * Set Built-In Format Code.
      *
-     * @param int $formatCodeIndex Id of the built-in format code to use
-     *
+     * @param int $formatCodeID Format code ID (0 - 163)
      * @return $this
      */
-    public function setBuiltInFormatCode(int $formatCodeIndex)
+    public function setBuiltInFormatCode($formatCodeID)
     {
         if ($this->isSupervisor) {
-            $styleArray = $this->getStyleArray(['formatCode' => self::builtInFormatCode($formatCodeIndex)]);
+            $styleArray = $this->getStyleArray(['formatCode' => CurrentLocale::builtInFormatCode($formatCodeID), 'builtInFormatCode' => $formatCodeID]);
             $this->getActiveSheet()->getStyle($this->getSelectedCells())->applyFromArray($styleArray);
         } else {
-            $this->builtInFormatCode = $formatCodeIndex;
-            $this->formatCode = self::builtInFormatCode($formatCodeIndex);
+            $this->builtInFormatCodeID = $formatCodeID;
+            $this->formatCode = CurrentLocale::builtInFormatCode($formatCodeID);
         }
 
         return $this;
-    }
-
-    /**
-     * Fill built-in format codes.
-     */
-    private static function fillBuiltInFormatCodes(): void
-    {
-        //  [MS-OI29500: Microsoft Office Implementation Information for ISO/IEC-29500 Standard Compliance]
-        //  18.8.30. numFmt (Number Format)
-        //
-        //  The ECMA standard defines built-in format IDs
-        //      14: "mm-dd-yy"
-        //      22: "m/d/yy h:mm"
-        //      37: "#,##0 ;(#,##0)"
-        //      38: "#,##0 ;[Red](#,##0)"
-        //      39: "#,##0.00;(#,##0.00)"
-        //      40: "#,##0.00;[Red](#,##0.00)"
-        //      47: "mmss.0"
-        //      KOR fmt 55: "yyyy-mm-dd"
-        //  Excel defines built-in format IDs
-        //      14: "m/d/yyyy"
-        //      22: "m/d/yyyy h:mm"
-        //      37: "#,##0_);(#,##0)"
-        //      38: "#,##0_);[Red](#,##0)"
-        //      39: "#,##0.00_);(#,##0.00)"
-        //      40: "#,##0.00_);[Red](#,##0.00)"
-        //      47: "mm:ss.0"
-        //      KOR fmt 55: "yyyy/mm/dd"
-
-        // Built-in format codes
-        if (empty(self::$builtInFormats)) {
-            self::$builtInFormats = [];
-
-            // General
-            self::$builtInFormats[0] = self::FORMAT_GENERAL;
-            self::$builtInFormats[1] = '0';
-            self::$builtInFormats[2] = '0.00';
-            self::$builtInFormats[3] = '#,##0';
-            self::$builtInFormats[4] = '#,##0.00';
-
-            self::$builtInFormats[9] = '0%';
-            self::$builtInFormats[10] = '0.00%';
-            self::$builtInFormats[11] = '0.00E+00';
-            self::$builtInFormats[12] = '# ?/?';
-            self::$builtInFormats[13] = '# ??/??';
-            self::$builtInFormats[14] = 'm/d/yyyy'; // Despite ECMA 'mm-dd-yy';
-            self::$builtInFormats[15] = 'd-mmm-yy';
-            self::$builtInFormats[16] = 'd-mmm';
-            self::$builtInFormats[17] = 'mmm-yy';
-            self::$builtInFormats[18] = 'h:mm AM/PM';
-            self::$builtInFormats[19] = 'h:mm:ss AM/PM';
-            self::$builtInFormats[20] = 'h:mm';
-            self::$builtInFormats[21] = 'h:mm:ss';
-            self::$builtInFormats[22] = 'm/d/yyyy h:mm'; // Despite ECMA 'm/d/yy h:mm';
-
-            self::$builtInFormats[37] = '#,##0_);(#,##0)'; //  Despite ECMA '#,##0 ;(#,##0)';
-            self::$builtInFormats[38] = '#,##0_);[Red](#,##0)'; //  Despite ECMA '#,##0 ;[Red](#,##0)';
-            self::$builtInFormats[39] = '#,##0.00_);(#,##0.00)'; //  Despite ECMA '#,##0.00;(#,##0.00)';
-            self::$builtInFormats[40] = '#,##0.00_);[Red](#,##0.00)'; //  Despite ECMA '#,##0.00;[Red](#,##0.00)';
-
-            self::$builtInFormats[44] = '_("$"* #,##0.00_);_("$"* \(#,##0.00\);_("$"* "-"??_);_(@_)';
-            self::$builtInFormats[45] = 'mm:ss';
-            self::$builtInFormats[46] = '[h]:mm:ss';
-            self::$builtInFormats[47] = 'mm:ss.0'; //  Despite ECMA 'mmss.0';
-            self::$builtInFormats[48] = '##0.0E+0';
-            self::$builtInFormats[49] = '@';
-
-            // CHT
-            self::$builtInFormats[27] = '[$-404]e/m/d';
-            self::$builtInFormats[30] = 'm/d/yy';
-            self::$builtInFormats[36] = '[$-404]e/m/d';
-            self::$builtInFormats[50] = '[$-404]e/m/d';
-            self::$builtInFormats[57] = '[$-404]e/m/d';
-
-            // THA
-            self::$builtInFormats[59] = 't0';
-            self::$builtInFormats[60] = 't0.00';
-            self::$builtInFormats[61] = 't#,##0';
-            self::$builtInFormats[62] = 't#,##0.00';
-            self::$builtInFormats[67] = 't0%';
-            self::$builtInFormats[68] = 't0.00%';
-            self::$builtInFormats[69] = 't# ?/?';
-            self::$builtInFormats[70] = 't# ??/??';
-
-            // JPN
-            self::$builtInFormats[28] = '[$-411]ggge"年"m"月"d"日"';
-            self::$builtInFormats[29] = '[$-411]ggge"年"m"月"d"日"';
-            self::$builtInFormats[31] = 'yyyy"年"m"月"d"日"';
-            self::$builtInFormats[32] = 'h"時"mm"分"';
-            self::$builtInFormats[33] = 'h"時"mm"分"ss"秒"';
-            self::$builtInFormats[34] = 'yyyy"年"m"月"';
-            self::$builtInFormats[35] = 'm"月"d"日"';
-            self::$builtInFormats[51] = '[$-411]ggge"年"m"月"d"日"';
-            self::$builtInFormats[52] = 'yyyy"年"m"月"';
-            self::$builtInFormats[53] = 'm"月"d"日"';
-            self::$builtInFormats[54] = '[$-411]ggge"年"m"月"d"日"';
-            self::$builtInFormats[55] = 'yyyy"年"m"月"';
-            self::$builtInFormats[56] = 'm"月"d"日"';
-            self::$builtInFormats[58] = '[$-411]ggge"年"m"月"d"日"';
-
-            // Flip array (for faster lookups)
-            self::$flippedBuiltInFormats = array_flip(self::$builtInFormats);
-        }
     }
 
     /**
@@ -378,40 +294,22 @@ class NumberFormat extends Supervisor
      *
      * @return string
      */
-    public static function builtInFormatCode($index)
+    public static function builtInFormatCode($intFormatCodeID)
     {
-        // Clean parameter
-        $index = (int) $index;
-
-        // Ensure built-in format codes are available
-        self::fillBuiltInFormatCodes();
-
-        // Lookup format code
-        if (isset(self::$builtInFormats[$index])) {
-            return self::$builtInFormats[$index];
-        }
-
-        return '';
+        return CurrentLocale::builtInFormatCode($intFormatCodeID);
     }
 
     /**
-     * Get built-in format code index.
+     * Get built-in format code ID
      *
-     * @param string $formatCodeIndex
+     * @param string $formatCode
+     * @deprecated: Use CurrentLocale::builtInFormatCodeID($formatCode)
      *
-     * @return false|int
+     * @return int|false
      */
     public static function builtInFormatCodeIndex($formatCodeIndex)
     {
-        // Ensure built-in format codes are available
-        self::fillBuiltInFormatCodes();
-
-        // Lookup format code
-        if (array_key_exists($formatCodeIndex, self::$flippedBuiltInFormats)) {
-            return self::$flippedBuiltInFormats[$formatCodeIndex];
-        }
-
-        return false;
+        return CurrentLocale::builtInFormatCodeID($formatCode);
     }
 
     /**
@@ -426,8 +324,8 @@ class NumberFormat extends Supervisor
         }
 
         return md5(
-            $this->formatCode .
-            $this->builtInFormatCode .
+            $this->formatCode.
+            $this->builtInFormatCodeID.
             __CLASS__
         );
     }

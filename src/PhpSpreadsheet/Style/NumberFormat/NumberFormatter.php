@@ -5,322 +5,216 @@ namespace PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 use PhpOffice\PhpSpreadsheet\Shared\StringHelper;
 use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 
-class NumberFormatter
+
+class NumberFormatter extends BaseNumberFormatter
 {
-    private const NUMBER_REGEX = '/(0+)(\\.?)(0*)/';
+    /**
+     * Fraction detection
+     */
+    protected const PREG_DETECT_FRACTIONS = '/'.self::PREG_CONDITION_NONQUOTED.'[\?\/#0-9]+/u';
 
-    private static function mergeComplexNumberFormatMasks(array $numbers, array $masks): array
+    /**
+     * Scientific number detection
+     */
+    protected const PREG_DETECT_SCIENTIFIC = '/'.self::PREG_CONDITION_NONQUOTED.'((?<!\\\\)E([+]|[\-](?!\-)))/iu';
+
+
+    /**
+     * Format a value according to the format string
+     *
+     * @param mixed $value The value
+     * $param string $format The format string
+     * @return The formatted value
+     */
+    public static function format($value, string $format): string
     {
-        $decimalCount = strlen($numbers[1]);
-        $postDecimalMasks = [];
+        if (!is_numeric($value)) 
+        {
+            return $value;
+        }
+        
+        $dec_sign = StringHelper::getDecimalSeparator();
+        if ($format == NumberFormat::FORMAT_GENERAL)
+        {
+            // Return number, straightforward
+            $precision = 20;
+            $value = self::floatToString($value, $precision, $dec_sign);
+            $value = rtrim($value, '0');
+            $value = rtrim($value, $dec_sign);
+            return $value;
+        }
 
-        do {
-            $tempMask = array_pop($masks);
-            if ($tempMask !== null) {
-                $postDecimalMasks[] = $tempMask;
-                $decimalCount -= strlen($tempMask);
+        // Convert currency marker for actual currency code
+        if (preg_match('/'.self::PREG_CONDITION_NONQUOTED.'\[\$([^\-]*)\]/u', $format, $match))
+        {
+            // Currency or Accounting
+            $current_currency = StringHelper::getCurrencyCode();
+            $format = preg_replace_callback('/'.self::PREG_CONDITION_NONQUOTED.'\[\$([^\]]*)\]/u', function($match) use ($current_currency)
+            {
+                [$currencyCode] = explode('-', $match[1]);
+                // Currency codes will be treated like literals
+                return ($currencyCode == '') ? '"'.$current_currency.'"' : '"'.$currencyCode.'"';
+            }, $format);
+        }
+
+        // Remove locale codes [$-###]
+        $format = preg_replace('/'.self::PREG_CONDITION_NONQUOTED.'\[\$\-.*\]/u', '', $format);
+
+        // Check fractions
+        if (preg_match_all(self::PREG_DETECT_FRACTIONS, $format, $matches))
+        {
+            if (preg_match('/[0-9\?#]\/[0-9\?#]/u', implode($matches[0])))
+            {
+                // Split into 2 parts
+                // number part: no decimal and thousand separators allowed
+                // decimal sign behind ?#0 to be removed. Otherwise treated as literals
+                return (string)FractionFormatter::format($value, $format);
             }
-        } while ($tempMask !== null && $decimalCount > 0);
+        }
 
-        return [
-            implode('.', $masks),
-            implode('.', array_reverse($postDecimalMasks)),
-        ];
+        // Check scientific
+        if (preg_match(self::PREG_DETECT_SCIENTIFIC, $format, $matches))
+        {
+            $sign = preg_replace('/[^+\-]/u', '', $matches[0]);
+            $format_segments = preg_split(self::PREG_DETECT_SCIENTIFIC, $format, 2);
+            return self::formatScientific($value,  $format_segments[0], $sign, $format_segments[1]);
+        }
+
+        return self::formatValueAsNumber($value, $format, true);
     }
 
     /**
-     * @param mixed $number
+     * Format to a scientific value
+     *
+     * @param string $value The value
+     * @param string $format_number The format string for the number part
+     * @param string $format_sign The sign part
+     * @param string $format_power The format string for the power part
+     * @return string The formatted value
      */
-    private static function processComplexNumberFormatMask($number, string $mask): string
+    protected static function formatScientific($value, $format_number, $format_sign, $format_power)
     {
-        /** @var string */
-        $result = $number;
-        $maskingBlockCount = preg_match_all('/0+/', $mask, $maskingBlocks, PREG_OFFSET_CAPTURE);
-
-        if ($maskingBlockCount > 1) {
-            $maskingBlocks = array_reverse($maskingBlocks[0]);
-
-            $offset = 0;
-            foreach ($maskingBlocks as $block) {
-                $size = strlen($block[0]);
-                $divisor = 10 ** $size;
-                $offset = $block[1];
-
-                /** @var float */
-                $numberFloat = $number;
-                $blockValue = sprintf("%0{$size}d", fmod($numberFloat, $divisor));
-                $number = floor($numberFloat / $divisor);
-                $mask = substr_replace($mask, $blockValue, $offset, $size);
-            }
-            /** @var string */
-            $numberString = $number;
-            if ($number > 0) {
-                $mask = substr_replace($mask, $numberString, $offset, 0);
-            }
-            $result = $mask;
+        if (!preg_match('/'.self::PREG_CONDITION_NONQUOTED.'^[#\?0]/u', $format_power, $m))
+        {
+            // If format_power does not start with '#?0', then force display of power
+            $format_power = '#'.$format_power;
         }
 
-        return self::makeString($result);
-    }
+        // Replace all escaped characters into quotes
+        $format_number = self::formatLiteralizeContent($format_number);
+        $format_power = self::formatLiteralizeContent($format_power);
 
+        // Determine the format segments
+        $format_segments = preg_split('/'.self::PREG_CONDITION_NONQUOTED.'(?<!\\.)\\./u', $format_number, 2);
+        $format_segments = array(
+            'integer' => $format_segments[0],
+            'decimal' => isset($format_segments[1]) ? '.'.$format_segments[1] : '',
+        );
+        $format_segments['power'] = $format_power;
+
+        $placeholders_implicit = 0;
+        if (preg_match_all(self::PREG_DETECT_DIGITPLACEHOLDERS, $format_segments['integer'], $matches))
+        {
+            $placeholders_implicit = strlen(implode('', $matches[0]));
+        }
+
+        // Process negative value: set sign
+        $format_number = self::formatNegativeValue($value, $format_number);
+
+        // Extract the scientific number specification
+        preg_match('/(?<integer>[0-9\-]+)[\.]?(?<decimal>[0-9]*)[E](?<sign>[+-])(?<power>[0-9]+)/iu', sprintf('%.16E', $value), $aScientific);
+
+        $power = intval($aScientific['power']);
+        if ($placeholders_implicit <= 1)
+        {
+            $placeholders = $placeholders_implicit;
+        } else {
+            // Calculate the new power
+            if ($aScientific['sign'] == '-')
+            {
+                $power_new = (floor($power / $placeholders_implicit) + (($power % $placeholders_implicit) == 0 ? 0 : 1)) * $placeholders_implicit;
+                $placeholders = ($power_new - $power) + 1;
+            } else {
+                $power_new = floor($power / $placeholders_implicit) * $placeholders_implicit;
+                $placeholders = $power + 1 - $power_new;
+            }
+        }
+
+        $displacement = $placeholders - 1;
+        if ($displacement == 0)
+        {
+            // Do not change value
+            $aScientific['value'] = $aScientific['integer'].'.'.$aScientific['decimal'];
+        } else {
+            // Adjust value
+            if ($displacement < 0)
+            {
+                $aScientific['value'] = '0.'.$aScientific['integer'].$aScientific['decimal'];
+            } else {
+                $aScientific['value'] = $aScientific['integer'].substr($aScientific['decimal'], 0, $displacement);
+                if ($displacement > strlen($aScientific['decimal']))
+                {
+                    $aScientific['value'] .= str_repeat('0', $displacement - strlen($aScientific['decimal']));
+                }
+                $aScientific['value'] .= '.'.substr($aScientific['decimal'], $displacement);
+            }
+
+            // Adjust power
+            $aScientific['power'] = $power + (($aScientific['sign'] == '-') ? $displacement : -$displacement);
+        }
+
+        // Format segments
+        $segment_number = self::formatProcessNumber($aScientific['value'], $format_number, $apply_scale = false, self::FORMAT_ADD_DECIMAL_OPTIONAL);
+        $segment_power = self::formatProcessNumber($aScientific['power'], $format_power, $apply_scale = false, self::FORMAT_ADD_DECIMAL_OPTIONAL);
+
+        $segment_sign = $aScientific['sign'];
+        if (($format_sign == '-') && ($aScientific['sign'] == '+'))
+        {
+            // Hide '+' when power is positive
+            $segment_sign = '';
+        }
+
+        // Restore scientific layout
+        return $segment_number.'E'.$segment_sign.$segment_power;
+    }
+    
     /**
-     * @param mixed $number
+     * @deprecated Function no longer used. Loss of precision.
      */
-    private static function complexNumberFormatMask($number, string $mask, bool $splitOnPoint = true): string
-    {
-        /** @var float */
-        $numberFloat = $number;
-        if ($splitOnPoint) {
-            $masks = explode('.', $mask);
-            if (count($masks) <= 2) {
-                $decmask = $masks[1] ?? '';
-                $decpos = substr_count($decmask, '0');
-                $numberFloat = round($numberFloat, $decpos);
-            }
-        }
-        $sign = ($numberFloat < 0.0) ? '-' : '';
-        $number = self::f2s(abs($numberFloat));
-
-        if ($splitOnPoint && strpos($mask, '.') !== false && strpos($number, '.') !== false) {
-            $numbers = explode('.', $number);
-            $masks = explode('.', $mask);
-            if (count($masks) > 2) {
-                $masks = self::mergeComplexNumberFormatMasks($numbers, $masks);
-            }
-            $integerPart = self::complexNumberFormatMask($numbers[0], $masks[0], false);
-            $numlen = strlen($numbers[1]);
-            $msklen = strlen($masks[1]);
-            if ($numlen < $msklen) {
-                $numbers[1] .= str_repeat('0', $msklen - $numlen);
-            }
-            $decimalPart = strrev(self::complexNumberFormatMask(strrev($numbers[1]), strrev($masks[1]), false));
-            $decimalPart = substr($decimalPart, 0, $msklen);
-
-            return "{$sign}{$integerPart}.{$decimalPart}";
-        }
-
-        if (strlen($number) < strlen($mask)) {
-            $number = str_repeat('0', strlen($mask) - strlen($number)) . $number;
-        }
-        $result = self::processComplexNumberFormatMask($number, $mask);
-
-        return "{$sign}{$result}";
-    }
-
     public static function f2s(float $f): string
     {
         return self::floatStringConvertScientific((string) $f);
     }
 
+    /**
+     * @deprecated Function no longer used. Loss of precision.
+     */
     public static function floatStringConvertScientific(string $s): string
     {
         // convert only normalized form of scientific notation:
         //  optional sign, single digit 1-9,
         //    decimal point and digits (allowed to be omitted),
         //    E (e permitted), optional sign, one or more digits
-        if (preg_match('/^([+-])?([1-9])([.]([0-9]+))?[eE]([+-]?[0-9]+)$/', $s, $matches) === 1) {
+        if (preg_match('/^([+-])?([1-9])([.]([0-9]+))?[eE]([+-]?[0-9]+)$/u', $s, $matches) === 1)
+        {
             $exponent = (int) $matches[5];
             $sign = ($matches[1] === '-') ? '-' : '';
-            if ($exponent >= 0) {
+            if ($exponent >= 0)
+            {
                 $exponentPlus1 = $exponent + 1;
-                $out = $matches[2] . $matches[4];
+                $out = $matches[2].$matches[4];
                 $len = strlen($out);
                 if ($len < $exponentPlus1) {
                     $out .= str_repeat('0', $exponentPlus1 - $len);
                 }
-                $out = substr($out, 0, $exponentPlus1) . ((strlen($out) === $exponentPlus1) ? '' : ('.' . substr($out, $exponentPlus1)));
-                $s = "$sign$out";
+                $out = substr($out, 0, $exponentPlus1).((strlen($out) === $exponentPlus1) ? '' : ('.'.substr($out, $exponentPlus1)));
+                $s = $sign.$out;
             } else {
-                $s = $sign . '0.' . str_repeat('0', -$exponent - 1) . $matches[2] . $matches[4];
+                $s = $sign.'0.'.str_repeat('0', -$exponent - 1).$matches[2].$matches[4];
             }
         }
 
         return $s;
     }
-
-    /**
-     * @param mixed $value
-     */
-    private static function formatStraightNumericValue($value, string $format, array $matches, bool $useThousands): string
-    {
-        /** @var float */
-        $valueFloat = $value;
-        $left = $matches[1];
-        $dec = $matches[2];
-        $right = $matches[3];
-
-        // minimun width of formatted number (including dot)
-        $minWidth = strlen($left) + strlen($dec) + strlen($right);
-        if ($useThousands) {
-            $value = number_format(
-                $valueFloat,
-                strlen($right),
-                StringHelper::getDecimalSeparator(),
-                StringHelper::getThousandsSeparator()
-            );
-
-            return self::pregReplace(self::NUMBER_REGEX, $value, $format);
-        }
-
-        if (preg_match('/[0#]E[+-]0/i', $format)) {
-            //    Scientific format
-            $decimals = strlen($right);
-            $size = $decimals + 3;
-
-            return sprintf("%{$size}.{$decimals}E", $valueFloat);
-        } elseif (preg_match('/0([^\d\.]+)0/', $format) || substr_count($format, '.') > 1) {
-            if ($valueFloat == floor($valueFloat) && substr_count($format, '.') === 1) {
-                $value *= 10 ** strlen(explode('.', $format)[1]);
-            }
-
-            $result = self::complexNumberFormatMask($value, $format);
-            if (strpos($result, 'E') !== false) {
-                // This is a hack and doesn't match Excel.
-                // It will, at least, be an accurate representation,
-                //  even if formatted incorrectly.
-                // This is needed for absolute values >=1E18.
-                $result = self::f2s($valueFloat);
-            }
-
-            return $result;
-        }
-
-        $sprintf_pattern = "%0$minWidth." . strlen($right) . 'f';
-
-        /** @var float */
-        $valueFloat = $value;
-        $value = sprintf($sprintf_pattern, round($valueFloat, strlen($right)));
-
-        return self::pregReplace(self::NUMBER_REGEX, $value, $format);
-    }
-
-    /**
-     * @param mixed $value
-     */
-    public static function format($value, string $format): string
-    {
-        // The "_" in this string has already been stripped out,
-        // so this test is never true. Furthermore, testing
-        // on Excel shows this format uses Euro symbol, not "EUR".
-        // if ($format === NumberFormat::FORMAT_CURRENCY_EUR_SIMPLE) {
-        //     return 'EUR ' . sprintf('%1.2f', $value);
-        // }
-
-        $baseFormat = $format;
-
-        $useThousands = self::areThousandsRequired($format);
-        $scale = self::scaleThousandsMillions($format);
-
-        if (preg_match('/[#\?0]?.*[#\?0]\/(\?+|\d+|#)/', $format)) {
-            // It's a dirty hack; but replace # and 0 digit placeholders with ?
-            $format = (string) preg_replace('/[#0]+\//', '?/', $format);
-            $format = (string) preg_replace('/\/[#0]+/', '/?', $format);
-            $value = FractionFormatter::format($value, $format);
-        } else {
-            // Handle the number itself
-            // scale number
-            $value = $value / $scale;
-            $paddingPlaceholder = (strpos($format, '?') !== false);
-
-            // Replace # or ? with 0
-            $format = self::pregReplace('/[\\#\?](?=(?:[^"]*"[^"]*")*[^"]*\Z)/', '0', $format);
-            // Remove locale code [$-###] for an LCID
-            $format = self::pregReplace('/\[\$\-.*\]/', '', $format);
-
-            $n = '/\\[[^\\]]+\\]/';
-            $m = self::pregReplace($n, '', $format);
-
-            // Some non-number strings are quoted, so we'll get rid of the quotes, likewise any positional * symbols
-            $format = self::makeString(str_replace(['"', '*'], '', $format));
-            if (preg_match(self::NUMBER_REGEX, $m, $matches)) {
-                // There are placeholders for digits, so inject digits from the value into the mask
-                $value = self::formatStraightNumericValue($value, $format, $matches, $useThousands);
-                if ($paddingPlaceholder === true) {
-                    $value = self::padValue($value, $baseFormat);
-                }
-            } elseif ($format !== NumberFormat::FORMAT_GENERAL) {
-                // Yes, I know that this is basically just a hack;
-                //      if there's no placeholders for digits, just return the format mask "as is"
-                $value = self::makeString(str_replace('?', '', $format));
-            }
-        }
-
-        if (preg_match('/\[\$(.*)\]/u', $format, $m)) {
-            //  Currency or Accounting
-            $currencyCode = $m[1];
-            [$currencyCode] = explode('-', $currencyCode);
-            if ($currencyCode == '') {
-                $currencyCode = StringHelper::getCurrencyCode();
-            }
-            $value = self::pregReplace('/\[\$([^\]]*)\]/u', $currencyCode, (string) $value);
-        }
-
-        if (
-            (strpos((string) $value, '0.') !== false) &&
-            ((strpos($baseFormat, '#.') !== false) || (strpos($baseFormat, '?.') !== false))
-        ) {
-            $value = preg_replace('/(\b)0\.|([^\d])0\./', '${2}.', (string) $value);
-        }
-
-        return (string) $value;
-    }
-
-    /**
-     * @param array|string $value
-     */
-    private static function makeString($value): string
-    {
-        return is_array($value) ? '' : "$value";
-    }
-
-    private static function pregReplace(string $pattern, string $replacement, string $subject): string
-    {
-        return self::makeString(preg_replace($pattern, $replacement, $subject) ?? '');
-    }
-
-    public static function padValue(string $value, string $baseFormat): string
-    {
-        /** @phpstan-ignore-next-line */
-        [$preDecimal, $postDecimal] = preg_split('/\.(?=(?:[^"]*"[^"]*")*[^"]*\Z)/miu', $baseFormat . '.?');
-
-        $length = strlen($value);
-        if (strpos($postDecimal, '?') !== false) {
-            $value = str_pad(rtrim($value, '0. '), $length, ' ', STR_PAD_RIGHT);
-        }
-        if (strpos($preDecimal, '?') !== false) {
-            $value = str_pad(ltrim($value, '0, '), $length, ' ', STR_PAD_LEFT);
-        }
-
-        return $value;
-    }
-
-    /**
-     * Find out if we need thousands separator
-     * This is indicated by a comma enclosed by a digit placeholders: #, 0 or ?
-     */
-    public static function areThousandsRequired(string &$format): bool
-    {
-        $useThousands = (bool) preg_match('/([#\?0]),([#\?0])/', $format);
-        if ($useThousands) {
-            $format = self::pregReplace('/([#\?0]),([#\?0])/', '${1}${2}', $format);
-        }
-
-        return $useThousands;
-    }
-
-    /**
-     * Scale thousands, millions,...
-     * This is indicated by a number of commas after a digit placeholder: #, or 0.0,, or ?,.
-     */
-    public static function scaleThousandsMillions(string &$format): int
-    {
-        $scale = 1; // same as no scale
-        if (preg_match('/(#|0|\?)(,+)/', $format, $matches)) {
-            $scale = 1000 ** strlen($matches[2]);
-            // strip the commas
-            $format = self::pregReplace('/([#\?0]),+/', '${1}', $format);
-        }
-
-        return $scale;
-    }
+    
 }

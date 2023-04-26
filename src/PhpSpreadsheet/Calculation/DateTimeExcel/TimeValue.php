@@ -51,25 +51,23 @@ class TimeValue
             $timeValue = implode(':', $arraySplit);
         }
 
-        $PHPDateArray = Helpers::dateParse($timeValue);
-        $retValue = ExcelError::VALUE();
-        if (Helpers::dateParseSucceeded($PHPDateArray)) {
-            /** @var int */
-            $hour = $PHPDateArray['hour'];
-            /** @var int */
-            $minute = $PHPDateArray['minute'];
-            /** @var int */
-            $second = $PHPDateArray['second'];
+         // @ido @fix!
+        $baseYear = SharedDateHelper::getExcelCalendar();
+        $PHPDateArray = date_parse($timeValue);
+        $retValue = Functions::VALUE();
+        if (($PHPDateArray !== false) && ($PHPDateArray['error_count'] == 0)) {
+            // @ido @fix!
             // OpenOffice-specific code removed - it works just like Excel
-            $excelDateValue = SharedDateHelper::formattedPHPToExcel(1900, 1, 1, $hour, $minute, $second) - 1;
+            // $excelDateValue = SharedDateHelper::formattedPHPToExcel(1900, 1, 1, $PHPDateArray['hour'], $PHPDateArray['minute'], $PHPDateArray['second']) - 1;
+            $excelDateValue = SharedDateHelper::formattedPHPToExcel($baseYear, 1, 1, $PHPDateArray['hour'], $PHPDateArray['minute'], $PHPDateArray['second']);
 
             $retType = Functions::getReturnDateType();
             if ($retType === Functions::RETURNDATE_EXCEL) {
                 $retValue = (float) $excelDateValue;
             } elseif ($retType === Functions::RETURNDATE_UNIX_TIMESTAMP) {
-                $retValue = (int) SharedDateHelper::excelToTimestamp($excelDateValue + 25569) - 3600;
+                $retValue = (int) $phpDateValue = SharedDateHelper::excelToTimestamp($excelDateValue + 25569) - 3600;
             } else {
-                $retValue = new DateTime('1900-01-01 ' . $PHPDateArray['hour'] . ':' . $PHPDateArray['minute'] . ':' . $PHPDateArray['second']);
+                $retValue = new DateTime($baseYear.'-01-01 ' . $PHPDateArray['hour'] . ':' . $PHPDateArray['minute'] . ':' . $PHPDateArray['second']);
             }
         }
 

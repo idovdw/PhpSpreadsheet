@@ -2,13 +2,15 @@
 
 namespace PhpOffice\PhpSpreadsheet;
 
-use PhpOffice\PhpSpreadsheet\Calculation\Calculation;
 use PhpOffice\PhpSpreadsheet\Chart\Renderer\IRenderer;
 use PhpOffice\PhpSpreadsheet\Collection\Memory;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\SimpleCache\CacheInterface;
 use ReflectionClass;
+
+use PhpOffice\PhpSpreadsheet\Locale\CurrentLocale;
+
 
 class Settings
 {
@@ -46,21 +48,43 @@ class Settings
      */
     private static $requestFactory;
 
+
     /**
-     * Set the locale code to use for formula translations and any special formatting.
+     * Set the locale tag to use for formula translations and any special formatting.
      *
-     * @param string $locale The locale code to use (e.g. "fr" or "pt_br" or "en_uk")
+     * @param string $locale_tag The locale tag to use (e.g. "fr" or "pt-br" or "en-uk")
      *
      * @return bool Success or failure
      */
-    public static function setLocale(string $locale)
+    public static function setLocale(string $locale_tag)
     {
-        return Calculation::getInstance()->setLocale($locale);
+        try {
+            $locale_result = CurrentLocale::setLocale($locale_tag);
+        } catch (\Exception $ex) {
+            throw $ex;
+            $locale_result = false;
+        }
+
+        return $locale_result;
     }
 
-    public static function getLocale(): string
+    /**
+     * Retrieve the current locale tag
+     * 
+     * @param boolean - Return the raw value (null if not set)
+     * @return string - The locale tag (e.g. "fr-fr" or "pt-br" or "en-us")
+     */
+    public static function getLocale($raw = false): string
     {
-        return Calculation::getInstance()->getLocale();
+        return CurrentLocale::getLocale($raw);
+    }
+
+    /**
+     * Set the default locale "en-us"
+     */
+    public static function setDefaultLocale()
+    {
+        CurrentLocale::setDefaultLocale();
     }
 
     /**

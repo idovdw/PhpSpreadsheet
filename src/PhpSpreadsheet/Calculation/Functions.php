@@ -130,6 +130,28 @@ class Functions
         return '#Not Yet Implemented';
     }
 
+    /**
+     * @ido
+     * NLS: No Longer Supported.
+     *
+     * @return string #No Longer Supported
+     */
+    public static function NLS()
+    {
+        return '#No Longer Supported';
+    }
+
+    /**
+     * @ido
+     * NOPE: Will not be supported
+     *
+     * @return string #Not Supported
+     */
+    public static function NOPE()
+    {
+        return '#Not Supported';
+    }
+
     /** @param mixed $idx */
     public static function isMatrixValue($idx): bool
     {

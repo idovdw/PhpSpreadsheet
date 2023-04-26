@@ -1289,13 +1289,37 @@ class Html extends BaseWriter
             $this->generateRowCellDataValueRich($cell, $cellData);
         } else {
             $origData = $this->preCalculateFormulas ? $cell->getCalculatedValue() : $cell->getValue();
-            $formatCode = $worksheet->getParentOrThrow()->getCellXfByIndex($cell->getXfIndex())->getNumberFormat()->getFormatCode();
+            // @ido @fix Conditional formatting: getAppliedStyle
+            //$formatCode = $worksheet->getParentOrThrow()->getCellXfByIndex($cell->getXfIndex())->getNumberFormat()->getFormatCode();
+            $formatCode = $cell->getAppliedStyle()->getNumberFormat()->getFormatCode();
 
-            $cellData = NumberFormat::toFormattedString(
-                $origData ?? '',
-                $formatCode ?? NumberFormat::FORMAT_GENERAL,
-                [$this, 'formatColor']
-            );
+            if ($formatCode !== null) 
+            {
+                $cellData = NumberFormat::toFormattedString(
+                    $origData ?? '',
+                    $formatCode ?? NumberFormat::FORMAT_GENERAL,
+                    [$this, 'formatColor']
+                );
+
+                // @ido @fix
+                // Convert spaces into visible spaces (avoid color tags)
+                if (!is_null($cellData) && (strpos($cellData, '  ') !== false))
+                {
+                    $cellData = preg_replace_callback("/(^|>)(?<data>[^<]*)/i",
+                        function($matches)
+                        {
+                            $matches['data'] = preg_replace_callback('/ {2,}/', function ($matches) 
+                            {
+                                // Use &thinsp; as &nbsp; hussles visible output in LTR mode
+                                return str_repeat('&thinsp;', strlen($matches[0]));
+                            }, $matches['data']);                        
+
+                            return $matches[1].$matches['data'];
+                        },
+                        $cellData
+                    );
+                }
+            }
 
             if ($cellData === $origData) {
                 $cellData = htmlspecialchars($cellData, Settings::htmlEntityFlags());

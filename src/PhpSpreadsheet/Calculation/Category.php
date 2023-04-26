@@ -17,5 +17,6 @@ abstract class Category
     const CATEGORY_STATISTICAL = 'Statistical';
     const CATEGORY_TEXT_AND_DATA = 'Text and Data';
     const CATEGORY_WEB = 'Web';
+    const CATEGORY_ADDIN_AND_AUTOMATION = 'Add-in and automation';
     const CATEGORY_UNCATEGORISED = 'Uncategorised';
 }

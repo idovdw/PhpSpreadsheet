@@ -2,6 +2,9 @@
 
 namespace PhpOffice\PhpSpreadsheet\Shared;
 
+use PhpOffice\PhpSpreadsheet\Locale\CurrentLocale;
+
+
 class StringHelper
 {
     /**
@@ -53,6 +56,7 @@ class StringHelper
      */
     private static $iconvOptions = '//IGNORE//TRANSLIT';
 
+    
     /**
      * Build control characters array.
      */
@@ -549,18 +553,8 @@ class StringHelper
      */
     public static function getDecimalSeparator(): string
     {
-        if (!isset(self::$decimalSeparator)) {
-            $localeconv = localeconv();
-            self::$decimalSeparator = ($localeconv['decimal_point'] != '')
-                ? $localeconv['decimal_point'] : $localeconv['mon_decimal_point'];
-
-            if (self::$decimalSeparator == '') {
-                // Default to .
-                self::$decimalSeparator = '.';
-            }
-        }
-
-        return self::$decimalSeparator;
+        // @ido @fix
+        return CurrentLocale::getDecimalSeparator();
     }
 
     /**
@@ -571,7 +565,7 @@ class StringHelper
      */
     public static function setDecimalSeparator(string $separator): void
     {
-        self::$decimalSeparator = $separator;
+        CurrentLocale::setDecimalSeparator($separator);
     }
 
     /**
@@ -580,18 +574,7 @@ class StringHelper
      */
     public static function getThousandsSeparator(): string
     {
-        if (!isset(self::$thousandsSeparator)) {
-            $localeconv = localeconv();
-            self::$thousandsSeparator = ($localeconv['thousands_sep'] != '')
-                ? $localeconv['thousands_sep'] : $localeconv['mon_thousands_sep'];
-
-            if (self::$thousandsSeparator == '') {
-                // Default to .
-                self::$thousandsSeparator = ',';
-            }
-        }
-
-        return self::$thousandsSeparator;
+        return CurrentLocale::getThousandsSeparator();
     }
 
     /**
@@ -602,7 +585,7 @@ class StringHelper
      */
     public static function setThousandsSeparator(string $separator): void
     {
-        self::$thousandsSeparator = $separator;
+        CurrentLocale::setThousandsSeparator($separator);
     }
 
     /**
@@ -611,23 +594,7 @@ class StringHelper
      */
     public static function getCurrencyCode(): string
     {
-        if (!empty(self::$currencyCode)) {
-            return self::$currencyCode;
-        }
-        self::$currencyCode = '$';
-        $localeconv = localeconv();
-        if (!empty($localeconv['currency_symbol'])) {
-            self::$currencyCode = $localeconv['currency_symbol'];
-
-            return self::$currencyCode;
-        }
-        if (!empty($localeconv['int_curr_symbol'])) {
-            self::$currencyCode = $localeconv['int_curr_symbol'];
-
-            return self::$currencyCode;
-        }
-
-        return self::$currencyCode;
+        return CurrentLocale::getCurrencyCode();
     }
 
     /**
@@ -638,7 +605,7 @@ class StringHelper
      */
     public static function setCurrencyCode(string $currencyCode): void
     {
-        self::$currencyCode = $currencyCode;
+        CurrentLocale::setCurrencyCode($currencyCode);
     }
 
     /**
@@ -674,11 +641,12 @@ class StringHelper
      */
     public static function testStringAsNumeric($textValue)
     {
-        if (is_numeric($textValue)) {
-            return $textValue;
+        // @fix @ido
+        if (preg_match('/([\d]+(\.[\d]+)?)/u', $textValue, $match))
+        {
+            return (float)$match[0];
         }
-        $v = (float) $textValue;
 
-        return (is_numeric(substr($textValue, 0, strlen((string) $v)))) ? $v : $textValue;
+        return $textValue;
     }
 }

@@ -2,205 +2,512 @@
 
 namespace PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 
-use PhpOffice\PhpSpreadsheet\Calculation\Calculation;
-use PhpOffice\PhpSpreadsheet\Reader\Xls\Color\BIFF8;
-use PhpOffice\PhpSpreadsheet\RichText\RichText;
 use PhpOffice\PhpSpreadsheet\Style\Color;
 use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 
-class Formatter
+use PhpOffice\PhpSpreadsheet\Locale\CurrentLocale;
+use PhpOffice\PhpSpreadsheet\Locale\LocaleLayout;
+use PhpOffice\PhpSpreadsheet\Style\NumberFormat\BaseFormatter;
+
+
+class Formatter extends BaseFormatter
 {
     /**
-     * Matches any @ symbol that isn't enclosed in quotes.
+     * Multiplication tag to bypass format processing
      */
-    private const SYMBOL_AT = '/@(?=(?:[^"]*"[^"]*")*[^"]*\Z)/miu';
+    protected const MULTIPLICATION_TAG = '[@MP]';
 
     /**
-     * Matches any ; symbol that isn't enclosed in quotes, for a "section" split.
+     * Detect multiplication tag
      */
-    private const SECTION_SPLIT = '/;(?=(?:[^"]*"[^"]*")*[^"]*\Z)/miu';
+    protected const PREG_DETECT_MULTIPLICATION_TAG = '/\"\[@MP\](?<repeat_char>(.|\\\\"))\[@MP\]\"/u';
 
     /**
-     * @param mixed $value
-     * @param mixed $comparisonValue
-     * @param mixed $defaultComparisonValue
+     * Split format on multiplication tag
      */
-    private static function splitFormatComparison(
-        $value,
-        ?string $condition,
-        $comparisonValue,
-        string $defaultCondition,
-        $defaultComparisonValue
-    ): bool {
-        if (!$condition) {
-            $condition = $defaultCondition;
-            $comparisonValue = $defaultComparisonValue;
-        }
+    protected const PREG_SPLIT_MULTIPLICATION_TAG = '/\"\[@MP\](.|\\\\")\[@MP\]\"/u';
 
-        switch ($condition) {
-            case '>':
-                return $value > $comparisonValue;
+    /**
+     * Multiplication detection e.g. "*=" or "****"
+     */
+    public const PREG_DETECT_MULTIPLICATION = '/'.self::PREG_CONDITION_NONQUOTED.'\*{2,}|\*[^\*]/u';
 
-            case '<':
-                return $value < $comparisonValue;
+    /**
+     * Detect date/time format
+     */
+    protected const PREG_DETECT_DATETIME_FORMAT = '/'.self::PREG_CONDITION_NONQUOTED.'((\[[hms][hms]?\]\:?)|[hmsdy])/miu';
+    
 
-            case '<=':
-                return $value <= $comparisonValue;
+    /**
+     * @var integer The estimate maximum number of characters in a value (used
+     *              for padding with multiplication string.
+     */
+    protected static $valueCellWidth = 34;
 
-            case '<>':
-                return $value != $comparisonValue;
+    /**
+     * @var boolean Replace the digits for the locale representation
+     */
+    protected static $replaceDigitsByLocale = true;
 
-            case '=':
-                return $value == $comparisonValue;
-        }
 
-        return $value >= $comparisonValue;
+    /**
+     * Set estimate maximum number of characters in a value.
+     *
+     * This value will be used as reference to calculate the padding in a
+     * multiplication string (e.g. "*=" becomes "===========")
+     *
+     * @param integer $valueCellWidth The number of characters
+     */
+    public static function setValueWidth($valueCellWidth)
+    {
+        self::$valueCellWidth = (int)$valueCellWidth;
     }
 
-    /** @param mixed $value */
-    private static function splitFormatForSectionSelection(array $sections, $value): array
+    /**
+     * Set the replacement of digits by the by locale number representation.
+     *
+     * @param boolean $replaceDigitsByLocale Replace digits
+     */
+    public static function setReplaceDigitsByLocale($replaceDigitsByLocale)
     {
-        // Extract the relevant section depending on whether number is positive, negative, or zero?
-        // Text not supported yet.
-        // Here is how the sections apply to various values in Excel:
-        //   1 section:   [POSITIVE/NEGATIVE/ZERO/TEXT]
-        //   2 sections:  [POSITIVE/ZERO/TEXT] [NEGATIVE]
-        //   3 sections:  [POSITIVE/TEXT] [NEGATIVE] [ZERO]
-        //   4 sections:  [POSITIVE] [NEGATIVE] [ZERO] [TEXT]
-        $sectionCount = count($sections);
-        // Colour could be a named colour, or a numeric index entry in the colour-palette
-        $color_regex = '/\\[(' . implode('|', Color::NAMED_COLORS) . '|color\\s*(\\d+))\\]/mui';
-        $cond_regex = '/\\[(>|>=|<|<=|=|<>)([+-]?\\d+([.]\\d+)?)\\]/';
-        $colors = ['', '', '', '', ''];
-        $conditionOperations = ['', '', '', '', ''];
-        $conditionComparisonValues = [0, 0, 0, 0, 0];
-        for ($idx = 0; $idx < $sectionCount; ++$idx) {
-            if (preg_match($color_regex, $sections[$idx], $matches)) {
-                if (isset($matches[2])) {
-                    $colors[$idx] = '#' . BIFF8::lookup((int) $matches[2] + 7)['rgb'];
-                } else {
-                    $colors[$idx] = $matches[0];
-                }
-                $sections[$idx] = (string) preg_replace($color_regex, '', $sections[$idx]);
-            }
-            if (preg_match($cond_regex, $sections[$idx], $matches)) {
-                $conditionOperations[$idx] = $matches[1];
-                $conditionComparisonValues[$idx] = $matches[2];
-                $sections[$idx] = (string) preg_replace($cond_regex, '', $sections[$idx]);
-            }
-        }
-        $color = $colors[0];
-        $format = $sections[0];
-        $absval = $value;
-        switch ($sectionCount) {
-            case 2:
-                $absval = abs($value);
-                if (!self::splitFormatComparison($value, $conditionOperations[0], $conditionComparisonValues[0], '>=', 0)) {
-                    $color = $colors[1];
-                    $format = $sections[1];
-                }
-
-                break;
-            case 3:
-            case 4:
-                $absval = abs($value);
-                if (!self::splitFormatComparison($value, $conditionOperations[0], $conditionComparisonValues[0], '>', 0)) {
-                    if (self::splitFormatComparison($value, $conditionOperations[1], $conditionComparisonValues[1], '<', 0)) {
-                        $color = $colors[1];
-                        $format = $sections[1];
-                    } else {
-                        $color = $colors[2];
-                        $format = $sections[2];
-                    }
-                }
-
-                break;
-        }
-
-        return [$color, $format, $absval];
+        self::$replaceDigitsByLocale = (bool)$replaceDigitsByLocale;
     }
 
     /**
      * Convert a value in a pre-defined format to a PHP string.
      *
-     * @param null|bool|float|int|RichText|string $value Value to format
-     * @param string $format Format code: see = self::FORMAT_* for predefined values;
-     *                          or can be any valid MS Excel custom format string
-     * @param array $callBack Callback function for additional formatting of string
+     * @param mixed $value Value to format
+     * @param string $format Format code, see = NumberFormat::FORMAT_*
+     * @param array $callBack Callback function for additional formatting of
+     * string
      *
      * @return string Formatted string
      */
     public static function toFormattedString($value, $format, $callBack = null)
     {
-        if (is_bool($value)) {
-            return $value ? Calculation::getTRUE() : Calculation::getFALSE();
-        }
-        // For now we do not treat strings in sections, although section 4 of a format code affects strings
-        // Process a single block format code containing @ for text substitution
-        if (preg_match(self::SECTION_SPLIT, $format) === 0 && preg_match(self::SYMBOL_AT, $format) === 1) {
-            return str_replace('"', '', preg_replace(self::SYMBOL_AT, (string) $value, $format) ?? '');
-        }
+        // Prevent processing null value
+        $value = is_null($value) ? '' : $value;
 
-        // If we have a text value, return it "as is"
-        if (!is_numeric($value)) {
-            return (string) $value;
-        }
+        // Extract locale configuration (LCID code, DbNum#, NatNum# settings)
+        $aLocaleConfig = CurrentLocale::getLocaleConfiguration($format);
+        $format = $aLocaleConfig['format'];
 
-        // For 'General' format code, we just pass the value although this is not entirely the way Excel does it,
-        // it seems to round numbers to a total of 10 digits.
-        if (($format === NumberFormat::FORMAT_GENERAL) || ($format === NumberFormat::FORMAT_TEXT)) {
-            return (string) $value;
-        }
+        // Hide backslashes as 0x00, to prevent \\" from being interpreted as \"
+        // @workaround
+        $format = str_replace('\\\\', chr(0x00), $format);
 
-        // Ignore square-$-brackets prefix in format string, like "[$-411]ge.m.d", "[$-010419]0%", etc
-        $format = (string) preg_replace('/^\[\$-[^\]]*\]/', '', $format);
+        // Split the format for conditional formatting
+        [$value, $format, $colors, $isText] = self::splitFormat($value, $format);
 
-        $format = (string) preg_replace_callback(
-            '/(["])(?:(?=(\\\\?))\\2.)*?\\1/u',
-            function ($matches) {
-                return str_replace('.', chr(0x00), $matches[0]);
-            },
-            $format
-        );
+        // For 'General' format code, numbers are rounded like Excel
+        $format = self::processGeneralTextFormat($value, $format, $aLocaleConfig, 7, true);
 
-        // Convert any other escaped characters to quoted strings, e.g. (\T to "T")
-        $format = (string) preg_replace('/(\\\(((.)(?!((AM\/PM)|(A\/P))))|([^ ])))(?=(?:[^"]|"[^"]*")*$)/ui', '"${2}"', $format);
+        // Convert escaped characters to quoted strings, e.g. (\T to "T")
+        $format = preg_replace('/'.self::PREG_CONDITION_NONQUOTED.'(\\\(.))/', '"${2}"', $format);
 
-        // Get the sections, there can be up to four sections, separated with a semi-colon (but only if not a quoted literal)
-        $sections = preg_split(self::SECTION_SPLIT, $format) ?: [];
+        // Replace underscores by spaces
+        $format = self::formatProcessUnderscores($format);
 
-        [$colors, $format, $value] = self::splitFormatForSectionSelection($sections, $value);
+        // Check for multiplication
+        $hasMultiplication = self::formatDetectMultiplication($format);
 
-        // In Excel formats, "_" is used to add spacing,
-        //    The following character indicates the size of the spacing, which we can't do in HTML, so we just use a standard space
-        $format = (string) preg_replace('/_.?/ui', ' ', $format);
-
-        // Let's begin inspecting the format and converting the value to a formatted string
-        if (
-            //  Check for date/time characters (not inside quotes)
-            (preg_match('/(\[\$[A-Z]*-[0-9A-F]*\])*[hmsdy](?=(?:[^"]|"[^"]*")*$)/miu', $format))
-            // A date/time with a decimal time shouldn't have a digit placeholder before the decimal point
-            && (preg_match('/[0\?#]\.(?![^\[]*\])/miu', $format) === 0)
-        ) {
-            // datetime format
-            $value = DateFormatter::format($value, $format);
+        // Let's begin inspecting the format and converting the value to a
+        // formatted string
+        if ($isText || !preg_match('/'.self::PREG_CONDITION_NONQUOTED.'.+/', $format))
+        {
+            $value = $format;
         } else {
-            if (substr($format, 0, 1) === '"' && substr($format, -1, 1) === '"' && substr_count($format, '"') === 2) {
-                $value = substr($format, 1, -1);
-            } elseif (preg_match('/[0#, ]%/', $format)) {
-                // % number format - avoid weird '-0' problem
-                $value = PercentageFormatter::format(0 + (float) $value, $format);
+            // Check for date/time characters (not inside quotes)
+            // Example: '[h]:mm:ss;@'
+            if (preg_match(self::PREG_DETECT_DATETIME_FORMAT, $format, $matches))
+            {
+                // Date/time format
+                $value = DateFormatter::format($value, $format, $aLocaleConfig);
             } else {
                 $value = NumberFormatter::format($value, $format);
             }
         }
 
+        // Consolidate the (literalised) content
+        if ($hasMultiplication)
+        {
+            $value = self::formatApplyMultiplication($value);
+        } else {
+            // Place the content outside of double quotes
+            $value = self::unescapeText($value);
+        }
+        
+        // Replace hidden backslashes
+        $value = str_replace(chr(0x00), '\\\\', $value);
+
         // Additional formatting provided by callback function
-        if ($callBack !== null) {
-            [$writerInstance, $function] = $callBack;
-            $value = $writerInstance->$function($value, $colors);
+        if (is_callable($callBack))
+        {
+            $value = call_user_func_array($callBack, array($value, $colors));
         }
 
-        return str_replace(chr(0x00), '.', $value);
+        if (self::$replaceDigitsByLocale)
+        {
+            // Replace the digits by the locale number representation
+            $value = self::replaceDigits($value, $aLocaleConfig);
+            
+            // Perform natnum transliteration if applicable
+            $value = CurrentLocale::performTransliteration($value, $aLocaleConfig);
+        }
+        
+        return $value;
     }
+    
+    /**
+     * Check if format is 'General' or '@'; specific number formats apply
+     *
+     * @param float $value The value
+     * @param string $format The format string
+     * @param array $aLocaleConfig Locale format configuration
+     * @param int $precision The number of decimal digits
+     * @param boolean $allowScientific Allow scientific representation
+     * @return string The altered format
+     */
+    protected static function processGeneralTextFormat($value, $format, $aLocaleConfig, $precision, $allowScientific = true): string
+    {
+        // For 'General' format code, we round numbers like Excel
+        if (($format !== NumberFormat::FORMAT_GENERAL) && 
+            !preg_match('/'.self::PREG_CONDITION_NONQUOTED.NumberFormat::FORMAT_TEXT.'/u', $format))
+        {
+            return $format;
+        }
+
+        if (is_string($value))
+        {
+            // Literal value, not to be formatted
+            return '"'.str_replace('"', '\"', $value).'"';
+        }
+        
+        if (!is_numeric($value))
+        {
+            return $format;
+        }
+        
+        if ($value == 0)
+        {
+            return '0';
+        }
+     
+        $exponent = log10($value);
+        if (is_nan($exponent) || (abs($exponent) > $precision))
+        {
+            if ($allowScientific)
+            {
+                // Apply scientific representation
+                $format = '0.#####E+00';
+            } else {
+                // Digits only
+                $format = '0';
+                if ($exponent < 0)
+                {
+                    $format = '0.'.str_repeat('#', abs($exponent));
+                }
+            }
+        } else {
+            if (is_int($value) || ($precision < 1))
+            {
+                $format = '0';
+            } else {
+                $format = '0.0'.str_repeat('#', $precision - 2);
+            }
+        }
+        
+        $format = CurrentLocale::translateFormatString($format, $aLocaleConfig);
+
+        return $format;
+    }    
+
+    /**
+     * The relevant format section is extracted, depending on the section
+     * layout / logical condition.
+     *
+     * In Excel the sections comply with the following layout:
+     *   1 section:   [POSITIVE/NEGATIVE/ZERO/TEXT]
+     *   2 sections:  [POSITIVE/ZERO/TEXT];[NEGATIVE]
+     *   3 sections:  [POSITIVE/TEXT];[NEGATIVE];[ZERO]
+     *   4 sections:  [POSITIVE];[NEGATIVE];[ZERO];[TEXT]
+     *
+     * @staticvar string $preg_detect_named_colors
+     * @param mixed $value The value
+     * @param string $format The format string
+     * @return array List of [value, format, color, isText]
+     */
+    protected static function splitFormat($value, $format)
+    {
+        // Set regular expression conditions
+        static $preg_detect_named_colors;
+        if (!isset($preg_detect_named_colors))
+        {
+            $preg_detect_named_colors = '/'.self::PREG_CONDITION_NONQUOTED.'\\[('.implode('|', Color::NAMED_COLORS).')\\]/mui';
+        }
+        $preg_detect_conditions = '/'.self::PREG_CONDITION_NONQUOTED.'\[(>|>=|<|<=|=|<>)([+-]?\d+([.]\d+)?)\]/';
+
+        // Get the sections, there can be up to four sections, separated with
+        // a semi-colon (but only if not a quoted literal)
+        $sections = preg_split('/'.self::PREG_CONDITION_NONQUOTED.';/u', $format, 4);
+
+        // Detect colors, operands and values
+        $condition_values = [0, 0, 0];
+        $condition_operands = ['', '', ''];
+        $condition_operands_default = ['>', '<', '='];
+        $colors = ['', '', '', ''];
+
+        $isText = false;
+        $section_choice = false;
+        $section_count = count($sections);
+        foreach($sections as $pos => &$section)
+        {
+            if (preg_match($preg_detect_named_colors, $section, $matches))
+            {
+                $colors[$pos] = $matches[0];
+                $section = preg_replace($preg_detect_named_colors, '', $section);
+            }
+            if (preg_match($preg_detect_conditions, $section, $matches))
+            {
+                $condition_operands[$pos] = $matches[1];
+                $condition_values[$pos] = $matches[2];
+                $section = preg_replace($preg_detect_conditions, '', $section);
+            }
+
+            if ($section_count == 4)
+            {
+                if ($section_choice !== false)
+                {
+                    // Handle all the sections
+                    continue;
+                }
+                if (!is_numeric($value))
+                {
+                    // Return [TEXT]
+                    $section_choice = 3;
+                    $isText = true;
+                    // Text section does not have condition/color. 
+                    // If present, clear them from the format string
+                    continue;
+                }
+                if ($pos > 1)
+                {
+                    // Return [ZERO]
+                    $section_choice = 2;
+                    break;
+                }
+            }
+
+            // Make the value comparison
+            if (self::splitFormatCompare($value, $condition_operands[$pos], $condition_values[$pos], $condition_operands_default[$pos]))
+            {
+                $section_choice = $pos;
+                break;
+            }
+        }
+
+        if ($section_choice === false)
+        {
+            // Default: [POSITIVE]
+            $section_choice = 0;
+        }
+        if ($section_choice == 1)
+        {
+            // [NEGATIVE] produces a positive value
+            $value = abs($value);
+        }
+
+        return [$value, $sections[$section_choice], $colors[$section_choice], $isText];
+    }
+
+    /**
+     * Apply the split format values/conditions comparison
+     *
+     * @param float $value The value
+     * @param string $condition The logical condition
+     * @param float $compare_value The value to compare with
+     * @param string $default_condition The default condition, in case no condition is provided
+     * @return boolean The comparison result
+     */
+    protected static function splitFormatCompare($value, $condition, $compare_value, $default_condition)
+    {
+        if (!$condition)
+        {
+            // Use defaults
+            $condition = $default_condition;
+            $compare_value = 0;
+        }
+
+        switch ($condition)
+        {
+            case '<':
+                return $value < $compare_value;
+
+            case '<=':
+                return $value <= $compare_value;
+
+            case '>':
+                return $value > $compare_value;
+
+            case '>=':
+                return $value >= $compare_value;
+
+            case '<>':
+                return $value != $compare_value;
+
+            case '=':
+                return $value == $compare_value;
+
+            default:
+                return true;
+        }
+    }
+
+    /**
+     * Convert underscores into spaces
+     *
+     * In Excel formats, "_" is used to add spacing. The following character
+     * indicates the size(?) of the spacing, which we can't do in HTML, so we
+     * just use a standard space
+     *
+     * @param string $format The format string
+     * @return string The altered format (spaces are encapsulated by double quotes)
+     */
+    protected static function formatProcessUnderscores($format)
+    {
+        $format = preg_replace_callback('/'.self::PREG_CONDITION_NONQUOTED.'\_+.?/u', function($match)
+        {
+            $length = strlen($match[0]);
+            $char = substr($match[0], -1);
+            if ($char != '_') {
+                $length -= 1;
+            } else {
+                $char = '';
+            }
+            if ($length % 2 == 0)
+            {
+                $length = $length / 2;
+            } else {
+                $length = (($length-1) / 2) + 1;
+                $char = '';
+            }
+            return '"'.str_repeat(' ', $length).'"'.$char;
+        }, $format);
+
+        return $format;
+    }
+
+    /**
+     * Check for multiplication: add [@MP] tags
+     *
+     * @param string $format The format string
+     * @return boolean True if multiplication is found
+     */
+    protected static function formatDetectMultiplication(&$format): bool
+    {
+        if (preg_match_all(self::PREG_DETECT_MULTIPLICATION, $format, $matches))
+        {
+            // Only the last occurance of `/\*\*/` or `/\*./` in the format.
+            $match_count = count($matches[0]);
+            $pos_count = 0;
+            $format = preg_replace_callback(self::PREG_DETECT_MULTIPLICATION, function($match) use (&$match_count, &$pos_count, &$format)
+            {
+                $pos_count++;
+                if ($pos_count < $match_count)
+                {
+                    return $match[0];
+                }
+                // Place a multiplication indicator
+                $char = substr($match[0], 1, 1);
+                $char = ($char == '"') ? '\"' : $char;
+                return '"'.self::MULTIPLICATION_TAG.$char.self::MULTIPLICATION_TAG.'"';
+            }, $format);
+
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Apply the multiplication format. Besides all quoted text will be unquoted.
+     *
+     * Multiplication is triggered by '*' followed by the character to repeat.
+     * Examples:
+     *      "*=" -> "=======...
+     *      "*s" -> "sssssss...
+     *      "***" -> "*******...
+     * ...) repetition until total content with reaches $valueCellWidth
+     *
+     * @param string $format Format
+     * @return string The final content
+     */
+    protected static function formatApplyMultiplication($format)
+    {
+        // Detect multiplication indicator
+        if (!preg_match(self::PREG_DETECT_MULTIPLICATION_TAG, $format, $match))
+        {
+            return self::unescapeText($format);
+        }
+
+        // Retrieve text segments
+        $segments = preg_split(self::PREG_SPLIT_MULTIPLICATION_TAG, $format, 2);
+        $segments_final = array(
+            0 => self::unescapeText($segments[0]),
+            1 => self::unescapeText($segments[1]),
+        );
+        $length = strlen(implode('', $segments_final));
+        $pad_lenth = (self::$valueCellWidth > $length) ? self::$valueCellWidth - $length : 2;
+        if ($match['repeat_char'] == '\\"')
+        {
+            $match['repeat_char'] = '"';
+        }
+        $padding = str_repeat($match['repeat_char'], $pad_lenth);
+
+        return $segments_final[0].$padding.$segments_final[1];
+    }
+
+    /**
+     * Get content outside of double quotes
+     *
+     * Example: 'This is "a test" 123' becomes 'This is a test 123'
+     *
+     * @param string $string The string containing double-quoted text
+     * @return string The unquoted text
+     */
+    protected static function unescapeText($string)
+    {
+        // @todo
+        $result = preg_replace_callback('/'.self::PREG_CONDITION_QUOTED.'/u', function($matches)
+        {
+            return str_replace('\"', '"', substr($matches[0], 1, -1));
+        }, $string);
+
+        return $result;
+    }
+
+    /**
+     * Replace the digits in a string by the locale number representation
+     *
+     * @param string $string The raw string
+     * @param array $aLocaleConfig Locale format configuration
+     * @return string The converted string
+     */
+    protected static function replaceDigits($string, $aLocaleConfig)
+    {
+        if (($aLocaleConfig['numerals'] == LocaleLayout::NUMERALS_DEFAULT) || ($aLocaleConfig['numerals'] == LocaleLayout::NUMERALS_ARABIC))
+        {
+            return $string;
+        }
+        
+        $digits = LocaleLayout::getDigits($aLocaleConfig['numerals']);
+        
+        $string = preg_replace_callback('/[0-9]/', function($matches) use ($digits)
+        {
+            return $digits[intval($matches[0])];
+        }, $string);
+
+        return $string;
+    }
+
 }

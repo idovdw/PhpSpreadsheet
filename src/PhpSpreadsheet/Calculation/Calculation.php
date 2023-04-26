@@ -21,6 +21,10 @@ use ReflectionMethod;
 use ReflectionParameter;
 use Throwable;
 
+use PhpOffice\PhpSpreadsheet\Locale\FormulaLocaleFactory;
+use PhpOffice\PhpSpreadsheet\Locale\FormulaLocale;
+
+
 class Calculation
 {
     /** Constants                */
@@ -195,15 +199,6 @@ class Calculation
      */
     private static $localeLanguage = 'en_us'; //    US English    (default locale)
 
-    /**
-     * List of available locale settings
-     * Note that this is read for the locale subdirectory only when requested.
-     *
-     * @var string[]
-     */
-    private static $validLocaleLanguages = [
-        'en', //    English        (default language)
-    ];
 
     /**
      * Locale-specific argument separator for function arguments.
@@ -218,13 +213,20 @@ class Calculation
     /**
      * Locale-specific translations for Excel constants (True, False and Null).
      *
-     * @var array<string, string>
+     * @var array<string,string>
      */
     private static $localeBoolean = [
         'TRUE' => 'TRUE',
         'FALSE' => 'FALSE',
         'NULL' => 'NULL',
     ];
+
+
+    // @ido
+    public static function setVersionMode(string $version)
+    {
+        FormulaLocale::setVersionMode($version);
+    }
 
     public static function getLocaleBoolean(string $index): string
     {
@@ -235,7 +237,7 @@ class Calculation
      * Excel constant string translations to their PHP equivalents
      * Constant conversion from text name/value to actual (datatyped) value.
      *
-     * @var array<string, mixed>
+     * @var array<string,mixed>
      */
     private static $excelConstants = [
         'TRUE' => true,
@@ -1623,8 +1625,9 @@ class Calculation
             'argumentCount' => '?',
         ],
         'JIS' => [
+            // @ido
             'category' => Category::CATEGORY_TEXT_AND_DATA,
-            'functionCall' => [Functions::class, 'DUMMY'],
+            'functionCall' => [Functions::class, 'NLS'],
             'argumentCount' => '1',
         ],
         'KURT' => [
@@ -1958,8 +1961,9 @@ class Calculation
             'argumentCount' => '2+',
         ],
         'NUMBERSTRING' => [
+            // @ido
             'category' => Category::CATEGORY_TEXT_AND_DATA,
-            'functionCall' => [Functions::class, 'DUMMY'],
+            'functionCall' => [Functions::class, 'NLS'],
             'argumentCount' => '?',
         ],
         'NUMBERVALUE' => [
@@ -2897,6 +2901,28 @@ class Calculation
             'functionCall' => [Statistical\Distributions\StandardNormal::class, 'zTest'],
             'argumentCount' => '2-3',
         ],
+
+        // @ido Extra functions:
+        'CALL' => [
+            'category' => Category::CATEGORY_ADDIN_AND_AUTOMATION,
+            'functionCall' => [Functions::class, 'NOPE'],
+            'argumentCount' => '1+',
+        ],
+        'EUROCONVERT' => [
+            'category' => Category::CATEGORY_ADDIN_AND_AUTOMATION,
+            'functionCall' => [Functions::class, 'DUMMY'],
+            'argumentCount' => '5',
+        ],
+        'REGISTER.ID' => [
+            'category' => Category::CATEGORY_ADDIN_AND_AUTOMATION,
+            'functionCall' => [Functions::class, 'NOPE'],
+            'argumentCount' => '2,3',
+        ],
+        'STOCKHISTORY' => [
+            'category' => Category::CATEGORY_FINANCIAL,
+            'functionCall' => [Functions::class, 'DUMMY'],
+            'argumentCount' => '2-11',
+        ],
     ];
 
     /**
@@ -2926,18 +2952,6 @@ class Calculation
         $this->debugLog = new Logger($this->cyclicReferenceStack);
         $this->branchPruner = new BranchPruner($this->branchPruningEnabled);
         self::$referenceHelper = ReferenceHelper::getInstance();
-    }
-
-    private static function loadLocales(): void
-    {
-        $localeFileDirectory = __DIR__ . '/locale/';
-        $localeFileNames = glob($localeFileDirectory . '*', GLOB_ONLYDIR) ?: [];
-        foreach ($localeFileNames as $filename) {
-            $filename = substr($filename, strlen($localeFileDirectory));
-            if ($filename != 'en') {
-                self::$validLocaleLanguages[] = $filename;
-            }
-        }
     }
 
     /**
@@ -3144,107 +3158,49 @@ class Calculation
         return self::$localeLanguage;
     }
 
-    private function getLocaleFile(string $localeDir, string $locale, string $language, string $file): string
-    {
-        $localeFileName = $localeDir . str_replace('_', DIRECTORY_SEPARATOR, $locale) .
-            DIRECTORY_SEPARATOR . $file;
-        if (!file_exists($localeFileName)) {
-            //    If there isn't a locale specific file, look for a language specific file
-            $localeFileName = $localeDir . $language . DIRECTORY_SEPARATOR . $file;
-            if (!file_exists($localeFileName)) {
-                throw new Exception('Locale file not found');
-            }
-        }
-
-        return $localeFileName;
-    }
-
     /**
      * Set the locale code.
      *
      * @param string $locale The locale to use for formula translation, eg: 'en_us'
      *
-     * @return bool
+     * @return boolean True on success
      */
     public function setLocale(string $locale)
     {
-        //    Identify our locale and language
-        $language = $locale = strtolower($locale);
-        if (strpos($locale, '_') !== false) {
-            [$language] = explode('_', $locale);
-        }
-        if (count(self::$validLocaleLanguages) == 1) {
-            self::loadLocales();
+        try {
+            $oLocaleObject = FormulaLocaleFactory::getLocaleObject($locale);
+        } catch (\Exception $ex) {
+            return false;
         }
 
-        //    Test whether we have any language data for this language (any locale)
-        if (in_array($language, self::$validLocaleLanguages, true)) {
-            //    initialise language/locale settings
-            self::$localeFunctions = [];
-            self::$localeArgumentSeparator = ',';
-            self::$localeBoolean = ['TRUE' => 'TRUE', 'FALSE' => 'FALSE', 'NULL' => 'NULL'];
+        // Initialise language/locale settings
+        self::$localeLanguage = $oLocaleObject->getSlug();
 
-            //    Default is US English, if user isn't requesting US english, then read the necessary data from the locale files
-            if ($locale !== 'en_us') {
-                $localeDir = implode(DIRECTORY_SEPARATOR, [__DIR__, 'locale', null]);
-                //    Search for a file with a list of function names for locale
-                try {
-                    $functionNamesFile = $this->getLocaleFile($localeDir, $locale, $language, 'functions');
-                } catch (Exception $e) {
-                    return false;
-                }
+        // Read the necessary data from the locale files
+        $aFunctions = $oLocaleObject->getFunctions();
 
-                //    Retrieve the list of locale or language specific function names
-                $localeFunctions = file($functionNamesFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) ?: [];
-                foreach ($localeFunctions as $localeFunction) {
-                    [$localeFunction] = explode('##', $localeFunction); //    Strip out comments
-                    if (strpos($localeFunction, '=') !== false) {
-                        [$fName, $lfName] = array_map('trim', explode('=', $localeFunction));
-                        if ((substr($fName, 0, 1) === '*' || isset(self::$phpSpreadsheetFunctions[$fName])) && ($lfName != '') && ($fName != $lfName)) {
-                            self::$localeFunctions[$fName] = $lfName;
-                        }
-                    }
-                }
-                //    Default the TRUE and FALSE constants to the locale names of the TRUE() and FALSE() functions
-                if (isset(self::$localeFunctions['TRUE'])) {
-                    self::$localeBoolean['TRUE'] = self::$localeFunctions['TRUE'];
-                }
-                if (isset(self::$localeFunctions['FALSE'])) {
-                    self::$localeBoolean['FALSE'] = self::$localeFunctions['FALSE'];
-                }
+        self::$localeFunctions = array_intersect_key($aFunctions, self::$phpSpreadsheetFunctions);
+        if (isset($aFunctions['*RC']))
+        {
+            // *RC is not a $phpSpreadsheetFunctions-listed function
+            self::$localeFunctions['*RC'] = $aFunctions['*RC'];
+        }
 
-                try {
-                    $configFile = $this->getLocaleFile($localeDir, $locale, $language, 'config');
-                } catch (Exception $e) {
-                    return false;
-                }
-
-                $localeSettings = file($configFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) ?: [];
-                foreach ($localeSettings as $localeSetting) {
-                    [$localeSetting] = explode('##', $localeSetting); //    Strip out comments
-                    if (strpos($localeSetting, '=') !== false) {
-                        [$settingName, $settingValue] = array_map('trim', explode('=', $localeSetting));
-                        $settingName = strtoupper($settingName);
-                        if ($settingValue !== '') {
-                            switch ($settingName) {
-                                case 'ARGUMENTSEPARATOR':
-                                    self::$localeArgumentSeparator = $settingValue;
-
-                                    break;
-                            }
-                        }
-                    }
-                }
+        foreach(self::$localeFunctions as $key => $function_name)
+        {
+            if (($function_name == '') || ($key == $function_name))
+            {
+                // Skip invalid or identical function names
+                unset(self::$localeFunctions[$key]);
             }
-
-            self::$functionReplaceFromExcel = self::$functionReplaceToExcel =
-            self::$functionReplaceFromLocale = self::$functionReplaceToLocale = null;
-            self::$localeLanguage = $locale;
-
-            return true;
         }
 
-        return false;
+        // Set boolean representation
+        self::$localeBoolean = $oLocaleObject->getBooleanRepresentation();
+        // Set argument separator
+        self::$localeArgumentSeparator = $oLocaleObject->getArgumentSeparator();
+
+        return true;
     }
 
     public static function translateSeparator(
@@ -3414,19 +3370,17 @@ class Calculation
 
     /**
      * @param string $function
-     *
      * @return string
      */
     public static function localeFunc($function)
     {
-        if (self::$localeLanguage !== 'en_us') {
-            $functionName = trim($function, '(');
-            if (isset(self::$localeFunctions[$functionName])) {
-                $brace = ($functionName != $function);
-                $function = self::$localeFunctions[$functionName];
-                if ($brace) {
-                    $function .= '(';
-                }
+        $functionName = trim($function, '(');
+        if (isset(self::$localeFunctions[$functionName]))
+        {
+            $brace = ($functionName != $function);
+            $function = self::$localeFunctions[$functionName];
+            if ($brace) {
+                $function .= '(';
             }
         }
 
