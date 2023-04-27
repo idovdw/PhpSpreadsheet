@@ -92,10 +92,15 @@ class Formatter extends BaseFormatter
         $aLocaleConfig = CurrentLocale::getLocaleConfiguration($format);
         $format = $aLocaleConfig['format'];
 
-        // Hide backslashes as 0x00, to prevent \\" from being interpreted as \"
-        // @workaround
-        $format = str_replace('\\\\', chr(0x00), $format);
-
+        // Make sure format has double quotes in two-fold; convert 
+        // multiplication of double quotes in a workaround using chr(0x00)
+        $format = preg_replace('/'.self::PREG_CONDITION_NONQUOTED.'\*"/', '*'.chr(0x00), $format);
+        if (substr_count($format, '"') % 2 != 0)
+        {
+            // Actually a format error
+            $format .= '"';
+        }
+        
         // Split the format for conditional formatting
         [$value, $format, $colors, $isText] = self::splitFormat($value, $format);
 
@@ -137,9 +142,6 @@ class Formatter extends BaseFormatter
             $value = self::unescapeText($value);
         }
         
-        // Replace hidden backslashes
-        $value = str_replace(chr(0x00), '\\\\', $value);
-
         // Additional formatting provided by callback function
         if (is_callable($callBack))
         {
@@ -180,7 +182,8 @@ class Formatter extends BaseFormatter
         if (is_string($value))
         {
             // Literal value, not to be formatted
-            return '"'.str_replace('"', '\"', $value).'"';
+            // Use chr(0x00) as stand-in for double quotes
+            return '"'.str_replace('"', chr(0x00), $value).'"';
         }
         
         if (!is_numeric($value))
@@ -419,7 +422,6 @@ class Formatter extends BaseFormatter
                 }
                 // Place a multiplication indicator
                 $char = substr($match[0], 1, 1);
-                $char = ($char == '"') ? '\"' : $char;
                 return '"'.self::MULTIPLICATION_TAG.$char.self::MULTIPLICATION_TAG.'"';
             }, $format);
 
@@ -458,7 +460,7 @@ class Formatter extends BaseFormatter
         );
         $length = strlen(implode('', $segments_final));
         $pad_lenth = (self::$valueCellWidth > $length) ? self::$valueCellWidth - $length : 2;
-        if ($match['repeat_char'] == '\\"')
+        if ($match['repeat_char'] == chr(0x00))
         {
             $match['repeat_char'] = '"';
         }
@@ -477,12 +479,13 @@ class Formatter extends BaseFormatter
      */
     protected static function unescapeText($string)
     {
-        // @todo
         $result = preg_replace_callback('/'.self::PREG_CONDITION_QUOTED.'/u', function($matches)
         {
-            return str_replace('\"', '"', substr($matches[0], 1, -1));
+            return substr($matches[0], 1, -1);
         }, $string);
 
+        $result = str_replace(chr(0x00), '"', $result);
+        
         return $result;
     }
 
