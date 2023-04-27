@@ -5,6 +5,7 @@ namespace PhpOffice\PhpSpreadsheet\Locale\Format;
 use PhpOffice\PhpSpreadsheet\Locale\FormatLocale;
 use PhpOffice\PhpSpreadsheet\Locale\LocaleLayout;
 
+
 class lang_pt_br extends FormatLocale
 {
     /**
@@ -15,27 +16,27 @@ class lang_pt_br extends FormatLocale
     /**
      * @var string The locale tag
      */
-    protected $tag = 'pt-br';
+    protected $tag = "pt-br";
 
     /**
      * @var string The currency code "R$"
      */
-    protected $currencyCode = 'R$';
+    protected $currencyCode = "R\$";
 
     /**
      * @var string The decimal separator
      */
-    protected $decimalSeparator = ',';
+    protected $decimalSeparator = ",";
 
     /**
      * @var string The thousands separator
      */
-    protected $thousandsSeparator = '.';
+    protected $thousandsSeparator = ".";
 
     /**
      * @var string The date separator
      */
-    protected $dateSeparator = '/';
+    protected $dateSeparator = "/";
 
     /**
      * @var string[] The numerals representation (0 up to 9)
@@ -51,24 +52,24 @@ class lang_pt_br extends FormatLocale
      */
     protected $weekdayNames = [
         // Full name
-        'full' => [
-            'segunda-feira',
-            'terça-feira',
-            'quarta-feira',
-            'quinta-feira',
-            'sexta-feira',
-            'sábado',
-            'domingo',
+        "full" => [
+            "segunda-feira",
+            "terça-feira",
+            "quarta-feira",
+            "quinta-feira",
+            "sexta-feira",
+            "sábado",
+            "domingo",
         ],
         // Short name
-        'short' => [
-            'seg',
-            'ter',
-            'qua',
-            'qui',
-            'sex',
-            'sáb',
-            'dom',
+        "short" => [
+            "seg",
+            "ter",
+            "qua",
+            "qui",
+            "sex",
+            "sáb",
+            "dom",
         ],
     ];
 
@@ -77,34 +78,34 @@ class lang_pt_br extends FormatLocale
      */
     protected $monthNames = [
         // Full name
-        'full' => [
-            'janeiro',
-            'fevereiro',
-            'março',
-            'abril',
-            'maio',
-            'junho',
-            'julho',
-            'agosto',
-            'setembro',
-            'outubro',
-            'novembro',
-            'dezembro',
+        "full" => [
+            "janeiro",
+            "fevereiro",
+            "março",
+            "abril",
+            "maio",
+            "junho",
+            "julho",
+            "agosto",
+            "setembro",
+            "outubro",
+            "novembro",
+            "dezembro",
         ],
         // Short name
-        'short' => [
-            'jan',
-            'fev',
-            'mar',
-            'abr',
-            'mai',
-            'jun',
-            'jul',
-            'ago',
-            'set',
-            'out',
-            'nov',
-            'dez',
+        "short" => [
+            "jan",
+            "fev",
+            "mar",
+            "abr",
+            "mai",
+            "jun",
+            "jul",
+            "ago",
+            "set",
+            "out",
+            "nov",
+            "dez",
         ],
     ];
 
@@ -112,18 +113,19 @@ class lang_pt_br extends FormatLocale
      * @var array<string,string> Replacement formats
      */
     protected $formatReplacements = [
-        'm/d/yyyy' => 'dd/mm/yyyy',
-        'd-mmm-yy' => 'dd/mmm/yy',
-        'd-mmm' => 'dd/mmm',
-        'mmm-yy' => 'mmm/yy',
-        'h:mm' => 'hh:mm',
-        'h:mm:ss' => 'hh:mm:ss',
-        'm/d/yyyy h:mm' => 'dd/mm/yyyy hh:mm',
-        '#,##0_);(#,##0)' => '#,##0;-#,##0',
-        '#,##0_);[Red](#,##0)' => '#,##0;[Red]-#,##0',
-        '#,##0.00_);(#,##0.00)' => '#,##0.00;-#,##0.00',
-        '#,##0.00_);[Red](#,##0.00)' => '#,##0.00;[Red]-#,##0.00',
-        '[$-F800]dddd, mmmm dd, yyyy' => '"{#######################}"',
-        '[$-F400]h:mm:ss AM/PM' => 'h:mm:ss',
+        "m/d/yyyy" => "dd/mm/yyyy",
+        "d-mmm-yy" => "dd/mmm/yy",
+        "d-mmm" => "dd/mmm",
+        "mmm-yy" => "mmm/yy",
+        "h:mm" => "hh:mm",
+        "h:mm:ss" => "hh:mm:ss",
+        "m/d/yyyy h:mm" => "dd/mm/yyyy hh:mm",
+        "#,##0_);(#,##0)" => "#,##0;-#,##0",
+        "#,##0_);[Red](#,##0)" => "#,##0;[Red]-#,##0",
+        "#,##0.00_);(#,##0.00)" => "#,##0.00;-#,##0.00",
+        "#,##0.00_);[Red](#,##0.00)" => "#,##0.00;[Red]-#,##0.00",
+        "[\$-F800]dddd, mmmm dd, yyyy" => "\"{#######################}\"",
+        "[\$-F400]h:mm:ss AM/PM" => "h:mm:ss",
     ];
+
 }

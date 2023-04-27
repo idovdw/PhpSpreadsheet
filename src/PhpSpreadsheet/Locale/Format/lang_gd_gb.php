@@ -5,6 +5,7 @@ namespace PhpOffice\PhpSpreadsheet\Locale\Format;
 use PhpOffice\PhpSpreadsheet\Locale\FormatLocale;
 use PhpOffice\PhpSpreadsheet\Locale\LocaleLayout;
 
+
 class lang_gd_gb extends FormatLocale
 {
     /**
@@ -15,27 +16,27 @@ class lang_gd_gb extends FormatLocale
     /**
      * @var string The locale tag
      */
-    protected $tag = 'gd-gb';
+    protected $tag = "gd-gb";
 
     /**
      * @var string The currency code "£"
      */
-    protected $currencyCode = '£';
+    protected $currencyCode = "£";
 
     /**
      * @var string The decimal separator
      */
-    protected $decimalSeparator = '.';
+    protected $decimalSeparator = ".";
 
     /**
      * @var string The thousands separator
      */
-    protected $thousandsSeparator = ',';
+    protected $thousandsSeparator = ",";
 
     /**
      * @var string The date separator
      */
-    protected $dateSeparator = '/';
+    protected $dateSeparator = "/";
 
     /**
      * @var string[] The numerals representation (0 up to 9)
@@ -51,24 +52,24 @@ class lang_gd_gb extends FormatLocale
      */
     protected $weekdayNames = [
         // Full name
-        'full' => [
-            'DiLuain',
+        "full" => [
+            "DiLuain",
             "DiM\u{E0}irt",
-            'DiCiadain',
-            'DiarDaoin',
-            'DihAoine',
-            'DiSathairne',
-            'DiDòmhnaich',
+            "DiCiadain",
+            "DiarDaoin",
+            "DihAoine",
+            "DiSathairne",
+            "DiDòmhnaich",
         ],
         // Short name
-        'short' => [
-            'DiL',
-            'DiM',
-            'DiC',
-            'Dia',
-            'Dih',
-            'DiS',
-            'DiD',
+        "short" => [
+            "DiL",
+            "DiM",
+            "DiC",
+            "Dia",
+            "Dih",
+            "DiS",
+            "DiD",
         ],
     ];
 
@@ -77,34 +78,35 @@ class lang_gd_gb extends FormatLocale
      */
     protected $monthNames = [
         // Full name
-        'full' => [
-            'Am Faoilleach',
-            'An Gearran',
+        "full" => [
+            "Am Faoilleach",
+            "An Gearran",
             "Am M\u{E0}rt",
-            'An Giblean',
-            'An Cèitean',
-            'An t-Ògmhios',
-            'An t-Iuchar',
-            'An Lùnastal',
-            'An t-Sultain',
+            "An Giblean",
+            "An Cèitean",
+            "An t-Ògmhios",
+            "An t-Iuchar",
+            "An Lùnastal",
+            "An t-Sultain",
             "An D\u{E0}mhair",
-            'An t-Samhain',
-            'An Dùbhlachd',
+            "An t-Samhain",
+            "An Dùbhlachd",
         ],
         // Short name
-        'short' => [
-            'Faoi',
-            'Gear',
+        "short" => [
+            "Faoi",
+            "Gear",
             "M\u{E0}rt",
-            'Gibl',
-            'Cèit',
-            'Ògmh',
-            'Iuch',
-            'Lùna',
-            'Sult',
+            "Gibl",
+            "Cèit",
+            "Ògmh",
+            "Iuch",
+            "Lùna",
+            "Sult",
             "D\u{E0}mh",
-            'Samh',
-            'Dùbh',
+            "Samh",
+            "Dùbh",
         ],
     ];
+
 }

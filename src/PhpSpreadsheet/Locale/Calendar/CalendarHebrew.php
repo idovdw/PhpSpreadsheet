@@ -4,6 +4,7 @@ namespace PhpOffice\PhpSpreadsheet\Locale\Calendar;
 
 use PhpOffice\PhpSpreadsheet\Locale\CalendarData;
 
+
 class CalendarHebrew extends CalendarData
 {
     /**
@@ -16,60 +17,63 @@ class CalendarHebrew extends CalendarData
      */
     protected $weekdayNames = [
         // Full names
-        'full' => [
-            'Yom Sheni',
-            'Yom Shlishi',
+        "full" => [
+            "Yom Sheni",
+            "Yom Shlishi",
             "Yom Revi'i",
-            'Yom Chamishi',
-            'Yom Shishi',
-            'Shabat',
-            'Yom Rishon',
+            "Yom Chamishi",
+            "Yom Shishi",
+            "Shabat",
+            "Yom Rishon",
         ],
         // Short names
-        'short' => [
-            'Yom Sheni',
-            'Yom Shlishi',
+        "short" => [
+            "Yom Sheni",
+            "Yom Shlishi",
             "Yom Revi'i",
-            'Yom Chamishi',
-            'Yom Shishi',
-            'Shabat',
-            'Yom Rishon',
+            "Yom Chamishi",
+            "Yom Shishi",
+            "Shabat",
+            "Yom Rishon",
         ],
     ];
-
+    
     /**
      * @var array[] Names of the months of the year
      */
     protected $monthNames = [
         // Full names
-        'full' => [
-            'Tishrei',
-            'Cheshvan',
-            'Kislev',
-            'Tevet',
-            'Shvat',
-            'Adar',
-            'AdarII',
-            'Nisan',
-            'Iyar',
-            'Sivan',
-            'Tamuz',
-            'Av',
+        "full" => [
+            "Tishrei",
+            "Cheshvan",
+            "Kislev",
+            "Tevet",
+            "Shvat",
+            "Adar",
+            "AdarII",
+            "Nisan",
+            "Iyar",
+            "Sivan",
+            "Tamuz",
+            "Av",
         ],
         // Short names
-        'short' => [
-            'Tishrei',
-            'Cheshvan',
-            'Kislev',
-            'Tevet',
-            'Shvat',
-            'Adar',
-            'AdarII',
-            'Nisan',
-            'Iyar',
-            'Sivan',
-            'Tamuz',
-            'Av',
+        "short" => [
+            "Tishrei",
+            "Cheshvan",
+            "Kislev",
+            "Tevet",
+            "Shvat",
+            "Adar",
+            "AdarII",
+            "Nisan",
+            "Iyar",
+            "Sivan",
+            "Tamuz",
+            "Av",
         ],
     ];
 }
+
+
+

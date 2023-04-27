@@ -5,6 +5,7 @@ namespace PhpOffice\PhpSpreadsheet\Locale\Format;
 use PhpOffice\PhpSpreadsheet\Locale\FormatLocale;
 use PhpOffice\PhpSpreadsheet\Locale\LocaleLayout;
 
+
 class lang_haw_us extends FormatLocale
 {
     /**
@@ -15,27 +16,27 @@ class lang_haw_us extends FormatLocale
     /**
      * @var string The locale tag
      */
-    protected $tag = 'haw-us';
+    protected $tag = "haw-us";
 
     /**
      * @var string The currency code "$"
      */
-    protected $currencyCode = '$';
+    protected $currencyCode = "\$";
 
     /**
      * @var string The decimal separator
      */
-    protected $decimalSeparator = '.';
+    protected $decimalSeparator = ".";
 
     /**
      * @var string The thousands separator
      */
-    protected $thousandsSeparator = ',';
+    protected $thousandsSeparator = ",";
 
     /**
      * @var string The date separator
      */
-    protected $dateSeparator = '/';
+    protected $dateSeparator = "/";
 
     /**
      * @var string[] The numerals representation (0 up to 9)
@@ -51,7 +52,7 @@ class lang_haw_us extends FormatLocale
      */
     protected $weekdayNames = [
         // Full name
-        'full' => [
+        "full" => [
             "Po\u{2BB}akahi",
             "Po\u{2BB}alua",
             "Po\u{2BB}akolu",
@@ -61,14 +62,14 @@ class lang_haw_us extends FormatLocale
             "L\u{101}pule",
         ],
         // Short name
-        'short' => [
-            'P1',
-            'P2',
-            'P3',
-            'P4',
-            'P5',
-            'P6',
-            'LP',
+        "short" => [
+            "P1",
+            "P2",
+            "P3",
+            "P4",
+            "P5",
+            "P6",
+            "LP",
         ],
     ];
 
@@ -77,34 +78,34 @@ class lang_haw_us extends FormatLocale
      */
     protected $monthNames = [
         // Full name
-        'full' => [
-            'Ianuali',
-            'Pepeluali',
-            'Malaki',
+        "full" => [
+            "Ianuali",
+            "Pepeluali",
+            "Malaki",
             "\u{2BB}Apelila",
-            'Mei',
-            'Iune',
-            'Iulai',
+            "Mei",
+            "Iune",
+            "Iulai",
             "\u{2BB}Aukake",
-            'Kepakemapa',
+            "Kepakemapa",
             "\u{2BB}Okakopa",
-            'Nowemapa',
-            'Kekemapa',
+            "Nowemapa",
+            "Kekemapa",
         ],
         // Short name
-        'short' => [
-            'Ian.',
-            'Pep.',
-            'Mal.',
+        "short" => [
+            "Ian.",
+            "Pep.",
+            "Mal.",
             "\u{2BB}Ap.",
-            'Mei',
-            'Iun.',
-            'Iul.',
+            "Mei",
+            "Iun.",
+            "Iul.",
             "\u{2BB}Au.",
-            'Kep.',
+            "Kep.",
             "\u{2BB}Ok.",
-            'Now.',
-            'Kek.',
+            "Now.",
+            "Kek.",
         ],
     ];
 
@@ -112,13 +113,14 @@ class lang_haw_us extends FormatLocale
      * @var array<string,string> Replacement formats
      */
     protected $formatReplacements = [
-        '$ #,##0;$ -#,##0' => '$ #,##0;$ -#,##0',
-        '$ #,##0;[Red]$ -#,##0' => '$ #,##0;[Red]$ -#,##0',
-        '$ #,##0.00;$ -#,##0.00' => '$ #,##0.00;$ -#,##0.00',
-        '$ #,##0.00;[Red]$ -#,##0.00' => '$ #,##0.00;[Red]$ -#,##0.00',
-        '_ $ * #,##0_ ;_ $ * -#,##0_ ;_ $ * "-"_ ;_ @_ ' => '_ $ * #,##0_ ;_ $ * -#,##0_ ;_ $ * "-"_ ;_ @_ ',
-        '_ $ * #,##0.00_ ;_ $ * -#,##0.00_ ;_ $ * "-"??_ ;_ @_ ' => '_ $ * #,##0.00_ ;_ $ * -#,##0.00_ ;_ $ * "-"??_ ;_ @_ ',
-        '[$-F800]dddd, mmmm dd, yyyy' => 'dddd"{, }"mmmm d"{, }"yyyy',
-        '[$-F400]h:mm:ss AM/PM' => 'h:mm:ss AM/PM',
+        "\$ #,##0;\$ -#,##0" => "\$ #,##0;\$ -#,##0",
+        "\$ #,##0;[Red]\$ -#,##0" => "\$ #,##0;[Red]\$ -#,##0",
+        "\$ #,##0.00;\$ -#,##0.00" => "\$ #,##0.00;\$ -#,##0.00",
+        "\$ #,##0.00;[Red]\$ -#,##0.00" => "\$ #,##0.00;[Red]\$ -#,##0.00",
+        "_ \$ * #,##0_ ;_ \$ * -#,##0_ ;_ \$ * \"-\"_ ;_ @_ " => "_ \$ * #,##0_ ;_ \$ * -#,##0_ ;_ \$ * \"-\"_ ;_ @_ ",
+        "_ \$ * #,##0.00_ ;_ \$ * -#,##0.00_ ;_ \$ * \"-\"??_ ;_ @_ " => "_ \$ * #,##0.00_ ;_ \$ * -#,##0.00_ ;_ \$ * \"-\"??_ ;_ @_ ",
+        "[\$-F800]dddd, mmmm dd, yyyy" => "dddd\"{, }\"mmmm d\"{, }\"yyyy",
+        "[\$-F400]h:mm:ss AM/PM" => "h:mm:ss AM/PM",
     ];
+
 }

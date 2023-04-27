@@ -5,6 +5,7 @@ namespace PhpOffice\PhpSpreadsheet\Locale\Format;
 use PhpOffice\PhpSpreadsheet\Locale\FormatLocale;
 use PhpOffice\PhpSpreadsheet\Locale\LocaleLayout;
 
+
 class lang_pa_in extends FormatLocale
 {
     /**
@@ -15,7 +16,7 @@ class lang_pa_in extends FormatLocale
     /**
      * @var string The locale tag
      */
-    protected $tag = 'pa-in';
+    protected $tag = "pa-in";
 
     /**
      * @var string The currency code "₹"
@@ -25,17 +26,17 @@ class lang_pa_in extends FormatLocale
     /**
      * @var string The decimal separator
      */
-    protected $decimalSeparator = '.';
+    protected $decimalSeparator = ".";
 
     /**
      * @var string The thousands separator
      */
-    protected $thousandsSeparator = ',';
+    protected $thousandsSeparator = ",";
 
     /**
      * @var string The date separator
      */
-    protected $dateSeparator = '/';
+    protected $dateSeparator = "/";
 
     /**
      * @var string[] The numerals representation (0 up to 9)
@@ -51,7 +52,7 @@ class lang_pa_in extends FormatLocale
      */
     protected $weekdayNames = [
         // Full name
-        'full' => [
+        "full" => [
             "\u{A38}\u{A4B}\u{A2E}\u{A35}\u{A3E}\u{A30}",
             "\u{A2E}\u{A70}\u{A17}\u{A32}\u{A35}\u{A3E}\u{A30}",
             "\u{A2C}\u{A41}\u{A71}\u{A27}\u{A35}\u{A3E}\u{A30}",
@@ -61,7 +62,7 @@ class lang_pa_in extends FormatLocale
             "\u{A10}\u{A24}\u{A35}\u{A3E}\u{A30}",
         ],
         // Short name
-        'short' => [
+        "short" => [
             "\u{A38}\u{A4B}\u{A2E}.",
             "\u{A2E}\u{A70}\u{A17}\u{A32}.",
             "\u{A2C}\u{A41}\u{A71}\u{A27}.",
@@ -77,7 +78,7 @@ class lang_pa_in extends FormatLocale
      */
     protected $monthNames = [
         // Full name
-        'full' => [
+        "full" => [
             "\u{A1C}\u{A28}\u{A35}\u{A30}\u{A40}",
             "\u{A5E}\u{A30}\u{A35}\u{A30}\u{A40}",
             "\u{A2E}\u{A3E}\u{A30}\u{A1A}",
@@ -92,7 +93,7 @@ class lang_pa_in extends FormatLocale
             "\u{A26}\u{A38}\u{A70}\u{A2C}\u{A30}",
         ],
         // Short name
-        'short' => [
+        "short" => [
             "\u{A1C}\u{A28}\u{A35}\u{A30}\u{A40}",
             "\u{A5E}\u{A30}\u{A35}\u{A30}\u{A40}",
             "\u{A2E}\u{A3E}\u{A30}\u{A1A}",
@@ -107,4 +108,5 @@ class lang_pa_in extends FormatLocale
             "\u{A26}\u{A38}\u{A70}\u{A2C}\u{A30}",
         ],
     ];
+
 }

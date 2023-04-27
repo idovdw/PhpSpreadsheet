@@ -5,6 +5,7 @@ namespace PhpOffice\PhpSpreadsheet\Locale\Format;
 use PhpOffice\PhpSpreadsheet\Locale\FormatLocale;
 use PhpOffice\PhpSpreadsheet\Locale\LocaleLayout;
 
+
 class lang_az_cyrl_az extends FormatLocale
 {
     /**
@@ -15,7 +16,7 @@ class lang_az_cyrl_az extends FormatLocale
     /**
      * @var string The locale tag
      */
-    protected $tag = 'az-cyrl-az';
+    protected $tag = "az-cyrl-az";
 
     /**
      * @var string The currency code "₼"
@@ -25,17 +26,17 @@ class lang_az_cyrl_az extends FormatLocale
     /**
      * @var string The decimal separator
      */
-    protected $decimalSeparator = ',';
+    protected $decimalSeparator = ",";
 
     /**
      * @var string The thousands separator
      */
-    protected $thousandsSeparator = '.';
+    protected $thousandsSeparator = ".";
 
     /**
      * @var string The date separator
      */
-    protected $dateSeparator = '.';
+    protected $dateSeparator = ".";
 
     /**
      * @var string[] The numerals representation (0 up to 9)
@@ -51,17 +52,17 @@ class lang_az_cyrl_az extends FormatLocale
      */
     protected $weekdayNames = [
         // Full name
-        'full' => [
-            "\u{431}\u{430}\u{437}\u{430}\u{440}\u{a0}\u{435}\u{440}\u{442}\u{4D9}\u{441}\u{438}",
-            "\u{447}\u{4D9}\u{440}\u{448}\u{4D9}\u{43D}\u{431}\u{4D9}\u{a0}\u{430}\u{445}\u{448}\u{430}\u{43C}\u{44B}",
+        "full" => [
+            "\u{431}\u{430}\u{437}\u{430}\u{440} \u{435}\u{440}\u{442}\u{4D9}\u{441}\u{438}",
+            "\u{447}\u{4D9}\u{440}\u{448}\u{4D9}\u{43D}\u{431}\u{4D9} \u{430}\u{445}\u{448}\u{430}\u{43C}\u{44B}",
             "\u{447}\u{4D9}\u{440}\u{448}\u{4D9}\u{43D}\u{431}\u{4D9}",
-            "\u{4B9}\u{4AF}\u{43C}\u{4D9}\u{a0}\u{430}\u{445}\u{448}\u{430}\u{43C}\u{44B}",
+            "\u{4B9}\u{4AF}\u{43C}\u{4D9} \u{430}\u{445}\u{448}\u{430}\u{43C}\u{44B}",
             "\u{4B9}\u{4AF}\u{43C}\u{4D9}",
             "\u{448}\u{4D9}\u{43D}\u{431}\u{4D9}",
             "\u{431}\u{430}\u{437}\u{430}\u{440}",
         ],
         // Short name
-        'short' => [
+        "short" => [
             "\u{411}\u{435}",
             "\u{427}\u{430}",
             "\u{427}",
@@ -77,7 +78,7 @@ class lang_az_cyrl_az extends FormatLocale
      */
     protected $monthNames = [
         // Full name
-        'full' => [
+        "full" => [
             "j\u{430}\u{43D}\u{432}\u{430}\u{440}",
             "\u{444}\u{435}\u{432}\u{440}\u{430}\u{43B}",
             "\u{43C}\u{430}\u{440}\u{442}",
@@ -92,7 +93,7 @@ class lang_az_cyrl_az extends FormatLocale
             "\u{434}\u{435}\u{43A}\u{430}\u{431}\u{440}",
         ],
         // Short name
-        'short' => [
+        "short" => [
             "\u{408}\u{430}\u{43D}",
             "\u{424}\u{435}\u{432}",
             "\u{41C}\u{430}\u{440}",
@@ -107,4 +108,5 @@ class lang_az_cyrl_az extends FormatLocale
             "\u{414}\u{435}\u{43A}",
         ],
     ];
+
 }

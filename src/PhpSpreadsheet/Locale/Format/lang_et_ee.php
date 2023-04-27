@@ -5,6 +5,7 @@ namespace PhpOffice\PhpSpreadsheet\Locale\Format;
 use PhpOffice\PhpSpreadsheet\Locale\FormatLocale;
 use PhpOffice\PhpSpreadsheet\Locale\LocaleLayout;
 
+
 class lang_et_ee extends FormatLocale
 {
     /**
@@ -15,7 +16,7 @@ class lang_et_ee extends FormatLocale
     /**
      * @var string The locale tag
      */
-    protected $tag = 'et-ee';
+    protected $tag = "et-ee";
 
     /**
      * @var string The currency code "€"
@@ -25,17 +26,17 @@ class lang_et_ee extends FormatLocale
     /**
      * @var string The decimal separator
      */
-    protected $decimalSeparator = ',';
+    protected $decimalSeparator = ",";
 
     /**
      * @var string The thousands separator
      */
-    protected $thousandsSeparator = "\u{a0}";
+    protected $thousandsSeparator = " ";
 
     /**
      * @var string The date separator
      */
-    protected $dateSeparator = '.';
+    protected $dateSeparator = ".";
 
     /**
      * @var string[] The numerals representation (0 up to 9)
@@ -51,24 +52,24 @@ class lang_et_ee extends FormatLocale
      */
     protected $weekdayNames = [
         // Full name
-        'full' => [
-            'esmaspäev',
-            'teisipäev',
-            'kolmapäev',
-            'neljapäev',
-            'reede',
-            'laupäev',
-            'pühapäev',
+        "full" => [
+            "esmaspäev",
+            "teisipäev",
+            "kolmapäev",
+            "neljapäev",
+            "reede",
+            "laupäev",
+            "pühapäev",
         ],
         // Short name
-        'short' => [
-            'E',
-            'T',
-            'K',
-            'N',
-            'R',
-            'L',
-            'P',
+        "short" => [
+            "E",
+            "T",
+            "K",
+            "N",
+            "R",
+            "L",
+            "P",
         ],
     ];
 
@@ -77,34 +78,35 @@ class lang_et_ee extends FormatLocale
      */
     protected $monthNames = [
         // Full name
-        'full' => [
-            'jaanuar',
-            'veebruar',
-            'märts',
-            'aprill',
-            'mai',
-            'juuni',
-            'juuli',
-            'august',
-            'september',
-            'oktoober',
-            'november',
-            'detsember',
+        "full" => [
+            "jaanuar",
+            "veebruar",
+            "märts",
+            "aprill",
+            "mai",
+            "juuni",
+            "juuli",
+            "august",
+            "september",
+            "oktoober",
+            "november",
+            "detsember",
         ],
         // Short name
-        'short' => [
-            'jaan',
-            'veebr',
-            'märts',
-            'apr',
-            'mai',
-            'juuni',
-            'juuli',
-            'aug',
-            'sept',
-            'okt',
-            'nov',
-            'dets',
+        "short" => [
+            "jaan",
+            "veebr",
+            "märts",
+            "apr",
+            "mai",
+            "juuni",
+            "juuli",
+            "aug",
+            "sept",
+            "okt",
+            "nov",
+            "dets",
         ],
     ];
+
 }

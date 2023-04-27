@@ -5,6 +5,7 @@ namespace PhpOffice\PhpSpreadsheet\Locale\Format;
 use PhpOffice\PhpSpreadsheet\Locale\FormatLocale;
 use PhpOffice\PhpSpreadsheet\Locale\LocaleLayout;
 
+
 class lang_la_va extends FormatLocale
 {
     /**
@@ -15,7 +16,7 @@ class lang_la_va extends FormatLocale
     /**
      * @var string The locale tag
      */
-    protected $tag = 'la-va';
+    protected $tag = "la-va";
 
     /**
      * @var string The currency code "€"
@@ -25,17 +26,17 @@ class lang_la_va extends FormatLocale
     /**
      * @var string The decimal separator
      */
-    protected $decimalSeparator = ',';
+    protected $decimalSeparator = ",";
 
     /**
      * @var string The thousands separator
      */
-    protected $thousandsSeparator = '.';
+    protected $thousandsSeparator = ".";
 
     /**
      * @var string The date separator
      */
-    protected $dateSeparator = '-';
+    protected $dateSeparator = "-";
 
     /**
      * @var string[] The numerals representation (0 up to 9)
@@ -51,24 +52,24 @@ class lang_la_va extends FormatLocale
      */
     protected $weekdayNames = [
         // Full name
-        'full' => [
-            'dies Lunae',
-            'dies Martis',
-            'dies Mercurii',
-            'dies Iovis',
-            'dies Veneris',
-            'dies Sabbati',
-            'Dominica',
+        "full" => [
+            "dies Lunae",
+            "dies Martis",
+            "dies Mercurii",
+            "dies Iovis",
+            "dies Veneris",
+            "dies Sabbati",
+            "Dominica",
         ],
         // Short name
-        'short' => [
-            'Lun',
-            'Mar',
-            'Mer',
-            'Iov',
-            'Ven',
-            'Sab',
-            'Dom',
+        "short" => [
+            "Lun",
+            "Mar",
+            "Mer",
+            "Iov",
+            "Ven",
+            "Sab",
+            "Dom",
         ],
     ];
 
@@ -77,34 +78,34 @@ class lang_la_va extends FormatLocale
      */
     protected $monthNames = [
         // Full name
-        'full' => [
-            'Ianuarius',
-            'Februarius',
-            'Martius',
-            'Aprilis',
-            'Maius',
-            'Iunius',
-            'Iulius',
-            'Augustus',
-            'September',
-            'October',
-            'November',
-            'December',
+        "full" => [
+            "Ianuarius",
+            "Februarius",
+            "Martius",
+            "Aprilis",
+            "Maius",
+            "Iunius",
+            "Iulius",
+            "Augustus",
+            "September",
+            "October",
+            "November",
+            "December",
         ],
         // Short name
-        'short' => [
-            'Ian',
-            'Feb',
-            'Mar',
-            'Apr',
-            'Mai',
-            'Iun',
-            'Iul',
-            'Aug',
-            'Sep',
-            'Oct',
-            'Nov',
-            'Dec',
+        "short" => [
+            "Ian",
+            "Feb",
+            "Mar",
+            "Apr",
+            "Mai",
+            "Iun",
+            "Iul",
+            "Aug",
+            "Sep",
+            "Oct",
+            "Nov",
+            "Dec",
         ],
     ];
 
@@ -112,13 +113,14 @@ class lang_la_va extends FormatLocale
      * @var array<string,string> Replacement formats
      */
     protected $formatReplacements = [
-        '$ #,##0;$ -#,##0' => '$ #,##0;$ -#,##0',
-        '$ #,##0;[Red]$ -#,##0' => '$ #,##0;[Red]$ -#,##0',
-        '$ #,##0.00;$ -#,##0.00' => '$ #,##0.00;$ -#,##0.00',
-        '$ #,##0.00;[Red]$ -#,##0.00' => '$ #,##0.00;[Red]$ -#,##0.00',
-        '_ $ * #,##0_ ;_ $ * -#,##0_ ;_ $ * "-"_ ;_ @_ ' => '_ $ * #,##0_ ;_ $ * -#,##0_ ;_ $ * "-"_ ;_ @_ ',
-        '_ $ * #,##0.00_ ;_ $ * -#,##0.00_ ;_ $ * "-"??_ ;_ @_ ' => '_ $ * #,##0.00_ ;_ $ * -#,##0.00_ ;_ $ * "-"??_ ;_ @_ ',
-        '[$-F800]dddd, mmmm dd, yyyy' => 'dddd"{, }"mmmm d"{, }"yyyy',
-        '[$-F400]h:mm:ss AM/PM' => 'h:mm:ss AM/PM',
+        "\$ #,##0;\$ -#,##0" => "\$ #,##0;\$ -#,##0",
+        "\$ #,##0;[Red]\$ -#,##0" => "\$ #,##0;[Red]\$ -#,##0",
+        "\$ #,##0.00;\$ -#,##0.00" => "\$ #,##0.00;\$ -#,##0.00",
+        "\$ #,##0.00;[Red]\$ -#,##0.00" => "\$ #,##0.00;[Red]\$ -#,##0.00",
+        "_ \$ * #,##0_ ;_ \$ * -#,##0_ ;_ \$ * \"-\"_ ;_ @_ " => "_ \$ * #,##0_ ;_ \$ * -#,##0_ ;_ \$ * \"-\"_ ;_ @_ ",
+        "_ \$ * #,##0.00_ ;_ \$ * -#,##0.00_ ;_ \$ * \"-\"??_ ;_ @_ " => "_ \$ * #,##0.00_ ;_ \$ * -#,##0.00_ ;_ \$ * \"-\"??_ ;_ @_ ",
+        "[\$-F800]dddd, mmmm dd, yyyy" => "dddd\"{, }\"mmmm d\"{, }\"yyyy",
+        "[\$-F400]h:mm:ss AM/PM" => "h:mm:ss AM/PM",
     ];
+
 }

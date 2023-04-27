@@ -5,6 +5,7 @@ namespace PhpOffice\PhpSpreadsheet\Locale\Format;
 use PhpOffice\PhpSpreadsheet\Locale\FormatLocale;
 use PhpOffice\PhpSpreadsheet\Locale\LocaleLayout;
 
+
 class lang_hr_hr extends FormatLocale
 {
     /**
@@ -15,27 +16,27 @@ class lang_hr_hr extends FormatLocale
     /**
      * @var string The locale tag
      */
-    protected $tag = 'hr-hr';
+    protected $tag = "hr-hr";
 
     /**
      * @var string The currency code "kn"
      */
-    protected $currencyCode = 'kn';
+    protected $currencyCode = "kn";
 
     /**
      * @var string The decimal separator
      */
-    protected $decimalSeparator = ',';
+    protected $decimalSeparator = ",";
 
     /**
      * @var string The thousands separator
      */
-    protected $thousandsSeparator = '.';
+    protected $thousandsSeparator = ".";
 
     /**
      * @var string The date separator
      */
-    protected $dateSeparator = '. ';
+    protected $dateSeparator = ". ";
 
     /**
      * @var string[] The numerals representation (0 up to 9)
@@ -51,24 +52,24 @@ class lang_hr_hr extends FormatLocale
      */
     protected $weekdayNames = [
         // Full name
-        'full' => [
-            'ponedjeljak',
-            'utorak',
-            'srijeda',
+        "full" => [
+            "ponedjeljak",
+            "utorak",
+            "srijeda",
             "\u{10D}etvrtak",
-            'petak',
-            'subota',
-            'nedjelja',
+            "petak",
+            "subota",
+            "nedjelja",
         ],
         // Short name
-        'short' => [
-            'pon',
-            'uto',
-            'sri',
+        "short" => [
+            "pon",
+            "uto",
+            "sri",
             "\u{10D}et",
-            'pet',
-            'sub',
-            'ned',
+            "pet",
+            "sub",
+            "ned",
         ],
     ];
 
@@ -77,34 +78,35 @@ class lang_hr_hr extends FormatLocale
      */
     protected $monthNames = [
         // Full name
-        'full' => [
+        "full" => [
             "sije\u{10D}anj",
             "velja\u{10D}a",
             "o\u{17E}ujak",
-            'travanj',
-            'svibanj',
-            'lipanj',
-            'srpanj',
-            'kolovoz',
-            'rujan',
-            'listopad',
-            'studeni',
-            'prosinac',
+            "travanj",
+            "svibanj",
+            "lipanj",
+            "srpanj",
+            "kolovoz",
+            "rujan",
+            "listopad",
+            "studeni",
+            "prosinac",
         ],
         // Short name
-        'short' => [
-            'sij',
-            'vlj',
+        "short" => [
+            "sij",
+            "vlj",
             "o\u{17E}u",
-            'tra',
-            'svi',
-            'lip',
-            'srp',
-            'kol',
-            'ruj',
-            'lis',
-            'stu',
-            'pro',
+            "tra",
+            "svi",
+            "lip",
+            "srp",
+            "kol",
+            "ruj",
+            "lis",
+            "stu",
+            "pro",
         ],
     ];
+
 }

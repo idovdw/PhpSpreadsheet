@@ -5,6 +5,7 @@ namespace PhpOffice\PhpSpreadsheet\Locale\Format;
 use PhpOffice\PhpSpreadsheet\Locale\FormatLocale;
 use PhpOffice\PhpSpreadsheet\Locale\LocaleLayout;
 
+
 class lang_prs_af extends FormatLocale
 {
     /**
@@ -15,27 +16,27 @@ class lang_prs_af extends FormatLocale
     /**
      * @var string The locale tag
      */
-    protected $tag = 'prs-af';
+    protected $tag = "prs-af";
 
     /**
      * @var string The currency code "AFN"
      */
-    protected $currencyCode = 'AFN';
+    protected $currencyCode = "AFN";
 
     /**
      * @var string The decimal separator
      */
-    protected $decimalSeparator = ',';
+    protected $decimalSeparator = ",";
 
     /**
      * @var string The thousands separator
      */
-    protected $thousandsSeparator = '.';
+    protected $thousandsSeparator = ".";
 
     /**
      * @var string The date separator
      */
-    protected $dateSeparator = '-';
+    protected $dateSeparator = "-";
 
     /**
      * @var string[] The numerals representation (0 up to 9)
@@ -51,7 +52,7 @@ class lang_prs_af extends FormatLocale
      */
     protected $weekdayNames = [
         // Full name
-        'full' => [
+        "full" => [
             "\u{62F}\u{648}\u{634}\u{646}\u{628}\u{647}",
             "\u{633}\u{647}\u{200C} \u{634}\u{646}\u{628}\u{647}",
             "\u{686}\u{647}\u{627}\u{631} \u{634}\u{646}\u{628}\u{647}",
@@ -61,7 +62,7 @@ class lang_prs_af extends FormatLocale
             "\u{6CC}\u{6A9}\u{634}\u{646}\u{628}\u{647}",
         ],
         // Short name
-        'short' => [
+        "short" => [
             "\u{62F}\u{648}\u{634}\u{646}\u{628}\u{647}",
             "\u{633}\u{647}\u{200C} \u{634}\u{646}\u{628}\u{647}",
             "\u{686}\u{647}\u{627}\u{631} \u{634}\u{646}\u{628}\u{647}",
@@ -77,7 +78,7 @@ class lang_prs_af extends FormatLocale
      */
     protected $monthNames = [
         // Full name
-        'full' => [
+        "full" => [
             "\u{62C}\u{62F}\u{6CC}",
             "\u{62F}\u{644}\u{648}",
             "\u{62D}\u{648}\u{62A}",
@@ -92,7 +93,7 @@ class lang_prs_af extends FormatLocale
             "\u{642}\u{648}\u{633}",
         ],
         // Short name
-        'short' => [
+        "short" => [
             "\u{62C}\u{62F}\u{6CC}",
             "\u{62F}\u{644}\u{648}",
             "\u{62D}\u{648}\u{62A}",
@@ -107,4 +108,5 @@ class lang_prs_af extends FormatLocale
             "\u{642}\u{648}\u{633}",
         ],
     ];
+
 }

@@ -4,6 +4,7 @@ namespace PhpOffice\PhpSpreadsheet\Locale\Calendar;
 
 use PhpOffice\PhpSpreadsheet\Locale\CalendarData;
 
+
 class CalendarIslamicCivil extends CalendarData
 {
     /**
@@ -16,24 +17,24 @@ class CalendarIslamicCivil extends CalendarData
      */
     protected $weekdayNames = [
         // Full name
-        'full' => [
-            'AlEthnien',
-            'AthThulatha',
+        "full" => [
+            "AlEthnien",
+            "AthThulatha",
             "AlArbia'a",
-            'AlKhamis',
-            'AlJumaa',
-            'AsSabt',
-            'AlAhad',
+            "AlKhamis",
+            "AlJumaa",
+            "AsSabt",
+            "AlAhad",
         ],
         // Short name
-        'short' => [
-            'AlEthnien',
-            'AthThulatha',
+        "short" => [
+            "AlEthnien",
+            "AthThulatha",
             "AlArbia'a",
-            'AlKhamis',
-            'AlJumaa',
-            'AsSabt',
-            'AlAhad',
+            "AlKhamis",
+            "AlJumaa",
+            "AsSabt",
+            "AlAhad",
         ],
     ];
 
@@ -42,34 +43,35 @@ class CalendarIslamicCivil extends CalendarData
      */
     protected $monthNames = [
         // Full name
-        'full' => [
-            'Muharram',
-            'Safar',
+        "full" => [
+            "Muharram",
+            "Safar",
             "Rabi' Awwal",
             "Rabi' Thani",
-            'Jamada El Oula',
-            'Jamada El Thaniah',
-            'Rajab',
+            "Jamada El Oula",
+            "Jamada El Thaniah",
+            "Rajab",
             "Sha'ban",
-            'Ramadan',
-            'Shawwal',
+            "Ramadan",
+            "Shawwal",
             "Thoul Ki'dah",
-            'Thoul Hijjah',
+            "Thoul Hijjah",
         ],
         // Short name
-        'short' => [
-            'Muharram',
-            'Safar',
+        "short" => [
+            "Muharram",
+            "Safar",
             "Rabi' Awwal",
             "Rabi' Thani",
-            'Jamada El Oula',
-            'Jamada El Thaniah',
-            'Rajab',
+            "Jamada El Oula",
+            "Jamada El Thaniah",
+            "Rajab",
             "Sha'ban",
-            'Ramadan',
-            'Shawwal',
+            "Ramadan",
+            "Shawwal",
             "Thoul Ki'dah",
-            'Thoul Hijjah',
+            "Thoul Hijjah",
         ],
     ];
+
 }

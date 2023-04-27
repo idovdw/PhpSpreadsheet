@@ -5,6 +5,7 @@ namespace PhpOffice\PhpSpreadsheet\Locale\Format;
 use PhpOffice\PhpSpreadsheet\Locale\FormatLocale;
 use PhpOffice\PhpSpreadsheet\Locale\LocaleLayout;
 
+
 class lang_gsw_fr extends FormatLocale
 {
     /**
@@ -15,7 +16,7 @@ class lang_gsw_fr extends FormatLocale
     /**
      * @var string The locale tag
      */
-    protected $tag = 'gsw-fr';
+    protected $tag = "gsw-fr";
 
     /**
      * @var string The currency code "€"
@@ -25,7 +26,7 @@ class lang_gsw_fr extends FormatLocale
     /**
      * @var string The decimal separator
      */
-    protected $decimalSeparator = '.';
+    protected $decimalSeparator = ".";
 
     /**
      * @var string The thousands separator
@@ -35,7 +36,7 @@ class lang_gsw_fr extends FormatLocale
     /**
      * @var string The date separator
      */
-    protected $dateSeparator = '.';
+    protected $dateSeparator = ".";
 
     /**
      * @var string[] The numerals representation (0 up to 9)
@@ -51,24 +52,24 @@ class lang_gsw_fr extends FormatLocale
      */
     protected $weekdayNames = [
         // Full name
-        'full' => [
-            'Manti',
-            'Zischti',
-            'Mettwuch',
-            'Dunnerschti',
-            'Friti',
+        "full" => [
+            "Manti",
+            "Zischti",
+            "Mettwuch",
+            "Dunnerschti",
+            "Friti",
             "S\u{E0}mschti",
-            'Sundi',
+            "Sundi",
         ],
         // Short name
-        'short' => [
-            'Ma.',
-            'Zi.',
-            'Me.',
-            'Du.',
-            'Fr.',
+        "short" => [
+            "Ma.",
+            "Zi.",
+            "Me.",
+            "Du.",
+            "Fr.",
             "S\u{E0}.",
-            'Su.',
+            "Su.",
         ],
     ];
 
@@ -77,34 +78,34 @@ class lang_gsw_fr extends FormatLocale
      */
     protected $monthNames = [
         // Full name
-        'full' => [
-            'Jänner',
-            'Feverje',
-            'März',
-            'Àpril',
-            'Mai',
-            'Jüni',
-            'Jüli',
-            'Augscht',
-            'September',
-            'Oktower',
-            'Nowember',
-            'Dezember',
+        "full" => [
+            "Jänner",
+            "Feverje",
+            "März",
+            "Àpril",
+            "Mai",
+            "Jüni",
+            "Jüli",
+            "Augscht",
+            "September",
+            "Oktower",
+            "Nowember",
+            "Dezember",
         ],
         // Short name
-        'short' => [
-            'Jän.',
-            'Fev.',
-            'März',
-            'Apr.',
-            'Mai',
-            'Jüni',
-            'Jüli',
-            'Aug.',
-            'Sept.',
-            'Okt.',
-            'Now.',
-            'Dez.',
+        "short" => [
+            "Jän.",
+            "Fev.",
+            "März",
+            "Apr.",
+            "Mai",
+            "Jüni",
+            "Jüli",
+            "Aug.",
+            "Sept.",
+            "Okt.",
+            "Now.",
+            "Dez.",
         ],
     ];
 
@@ -112,25 +113,26 @@ class lang_gsw_fr extends FormatLocale
      * @var array<string,string> Replacement formats
      */
     protected $formatReplacements = [
-        'm/d/yyyy' => 'dd/mm/yyyy',
-        'd-mmm-yy' => 'dd-mmm-yy',
-        'd-mmm' => 'dd-mmm',
-        'h:mm' => 'hh:mm',
-        'h:mm:ss' => 'hh:mm:ss',
-        'm/d/yyyy h:mm' => 'dd/mm/yyyy hh:mm',
-        '#,##0_);(#,##0)' => '#,##0;-#,##0',
-        '#,##0_);[Red](#,##0)' => '#,##0;[Red]-#,##0',
-        '#,##0.00_);(#,##0.00)' => '#,##0.00;-#,##0.00',
-        '#,##0.00_);[Red](#,##0.00)' => '#,##0.00;[Red]-#,##0.00',
-        '$ #,##0.00' => '$ #,##0.00',
-        '$ #,##0.00;[Red]$ #,##0.00' => '$ #,##0.00;[Red]$ #,##0.00',
-        '$ #,##0.00;$ -#,##0.00' => '$ #,##0.00;$ -#,##0.00',
-        '$ #,##0.00;[Red]$ -#,##0.00' => '$ #,##0.00;[Red]$ -#,##0.00',
-        '_ $ * #,##0_ ;_ $ * -#,##0_ ;_ $ * "-"_ ;_ @_ ' => '_ $ * #,##0_ ;_ $ * -#,##0_ ;_ $ * "-"_ ;_ @_ ',
-        '_ $ * #,##0.0_ ;_ $ * -#,##0.0_ ;_ $ * "-"?_ ;_ @_ ' => '_ $ * #,##0.0_ ;_ $ * -#,##0.0_ ;_ $ * "-"?_ ;_ @_ ',
-        '_ $ * #,##0.00_ ;_ $ * -#,##0.00_ ;_ $ * "-"??_ ;_ @_ ' => '_ $ * #,##0.00_ ;_ $ * -#,##0.00_ ;_ $ * "-"??_ ;_ @_ ',
-        '_ $ * #,##0.000_ ;_ $ * -#,##0.000_ ;_ $ * "-"???_ ;_ @_ ' => '_ $ * #,##0.000_ ;_ $ * -#,##0.000_ ;_ $ * "-"???_ ;_ @_ ',
-        '[$-F800]dddd, mmmm dd, yyyy' => 'dddd d mmmm yyyy',
-        '[$-F400]h:mm:ss AM/PM' => 'h:mm:ss',
+        "m/d/yyyy" => "dd/mm/yyyy",
+        "d-mmm-yy" => "dd-mmm-yy",
+        "d-mmm" => "dd-mmm",
+        "h:mm" => "hh:mm",
+        "h:mm:ss" => "hh:mm:ss",
+        "m/d/yyyy h:mm" => "dd/mm/yyyy hh:mm",
+        "#,##0_);(#,##0)" => "#,##0;-#,##0",
+        "#,##0_);[Red](#,##0)" => "#,##0;[Red]-#,##0",
+        "#,##0.00_);(#,##0.00)" => "#,##0.00;-#,##0.00",
+        "#,##0.00_);[Red](#,##0.00)" => "#,##0.00;[Red]-#,##0.00",
+        "\$ #,##0.00" => "\$ #,##0.00",
+        "\$ #,##0.00;[Red]\$ #,##0.00" => "\$ #,##0.00;[Red]\$ #,##0.00",
+        "\$ #,##0.00;\$ -#,##0.00" => "\$ #,##0.00;\$ -#,##0.00",
+        "\$ #,##0.00;[Red]\$ -#,##0.00" => "\$ #,##0.00;[Red]\$ -#,##0.00",
+        "_ \$ * #,##0_ ;_ \$ * -#,##0_ ;_ \$ * \"-\"_ ;_ @_ " => "_ \$ * #,##0_ ;_ \$ * -#,##0_ ;_ \$ * \"-\"_ ;_ @_ ",
+        "_ \$ * #,##0.0_ ;_ \$ * -#,##0.0_ ;_ \$ * \"-\"?_ ;_ @_ " => "_ \$ * #,##0.0_ ;_ \$ * -#,##0.0_ ;_ \$ * \"-\"?_ ;_ @_ ",
+        "_ \$ * #,##0.00_ ;_ \$ * -#,##0.00_ ;_ \$ * \"-\"??_ ;_ @_ " => "_ \$ * #,##0.00_ ;_ \$ * -#,##0.00_ ;_ \$ * \"-\"??_ ;_ @_ ",
+        "_ \$ * #,##0.000_ ;_ \$ * -#,##0.000_ ;_ \$ * \"-\"???_ ;_ @_ " => "_ \$ * #,##0.000_ ;_ \$ * -#,##0.000_ ;_ \$ * \"-\"???_ ;_ @_ ",
+        "[\$-F800]dddd, mmmm dd, yyyy" => "dddd d mmmm yyyy",
+        "[\$-F400]h:mm:ss AM/PM" => "h:mm:ss",
     ];
+
 }

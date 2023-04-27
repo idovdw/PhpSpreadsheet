@@ -5,6 +5,7 @@ namespace PhpOffice\PhpSpreadsheet\Locale\Format;
 use PhpOffice\PhpSpreadsheet\Locale\FormatLocale;
 use PhpOffice\PhpSpreadsheet\Locale\LocaleLayout;
 
+
 class lang_uz_cyrl_uz extends FormatLocale
 {
     /**
@@ -15,7 +16,7 @@ class lang_uz_cyrl_uz extends FormatLocale
     /**
      * @var string The locale tag
      */
-    protected $tag = 'uz-cyrl-uz';
+    protected $tag = "uz-cyrl-uz";
 
     /**
      * @var string The currency code "сўм"
@@ -25,17 +26,17 @@ class lang_uz_cyrl_uz extends FormatLocale
     /**
      * @var string The decimal separator
      */
-    protected $decimalSeparator = ',';
+    protected $decimalSeparator = ",";
 
     /**
      * @var string The thousands separator
      */
-    protected $thousandsSeparator = "\u{a0}";
+    protected $thousandsSeparator = " ";
 
     /**
      * @var string The date separator
      */
-    protected $dateSeparator = '/';
+    protected $dateSeparator = "/";
 
     /**
      * @var string[] The numerals representation (0 up to 9)
@@ -51,7 +52,7 @@ class lang_uz_cyrl_uz extends FormatLocale
      */
     protected $weekdayNames = [
         // Full name
-        'full' => [
+        "full" => [
             "\u{434}\u{443}\u{448}\u{430}\u{43D}\u{431}\u{430}",
             "\u{441}\u{435}\u{448}\u{430}\u{43D}\u{431}\u{430}",
             "\u{447}\u{43E}\u{440}\u{448}\u{430}\u{43D}\u{431}\u{430}",
@@ -61,7 +62,7 @@ class lang_uz_cyrl_uz extends FormatLocale
             "\u{44F}\u{43A}\u{448}\u{430}\u{43D}\u{431}\u{430}",
         ],
         // Short name
-        'short' => [
+        "short" => [
             "\u{434}\u{443}\u{448}",
             "\u{441}\u{435}\u{448}",
             "\u{447}\u{43E}\u{440}",
@@ -77,7 +78,7 @@ class lang_uz_cyrl_uz extends FormatLocale
      */
     protected $monthNames = [
         // Full name
-        'full' => [
+        "full" => [
             "\u{44F}\u{43D}\u{432}\u{430}\u{440}",
             "\u{444}\u{435}\u{432}\u{440}\u{430}\u{43B}",
             "\u{43C}\u{430}\u{440}\u{442}",
@@ -92,7 +93,7 @@ class lang_uz_cyrl_uz extends FormatLocale
             "\u{434}\u{435}\u{43A}\u{430}\u{431}\u{440}",
         ],
         // Short name
-        'short' => [
+        "short" => [
             "\u{44F}\u{43D}\u{432}",
             "\u{444}\u{435}\u{432}",
             "\u{43C}\u{430}\u{440}",
@@ -107,4 +108,5 @@ class lang_uz_cyrl_uz extends FormatLocale
             "\u{434}\u{435}\u{43A}",
         ],
     ];
+
 }

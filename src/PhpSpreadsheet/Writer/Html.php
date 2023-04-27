@@ -1293,7 +1293,8 @@ class Html extends BaseWriter
             //$formatCode = $worksheet->getParentOrThrow()->getCellXfByIndex($cell->getXfIndex())->getNumberFormat()->getFormatCode();
             $formatCode = $cell->getAppliedStyle()->getNumberFormat()->getFormatCode();
 
-            if ($formatCode !== null) {
+            if ($formatCode !== null) 
+            {
                 $cellData = NumberFormat::toFormattedString(
                     $origData ?? '',
                     $formatCode ?? NumberFormat::FORMAT_GENERAL,
@@ -1302,16 +1303,18 @@ class Html extends BaseWriter
 
                 // @ido @fix
                 // Convert spaces into visible spaces (avoid color tags)
-                if (null !== $cellData && (strpos($cellData, '  ') !== false)) {
-                    $cellData = preg_replace_callback(
-                        '/(^|>)(?<data>[^<]*)/i',
-                        function ($matches) {
-                            $matches['data'] = preg_replace_callback('/ {2,}/', function ($matches) {
+                if (!is_null($cellData) && (strpos($cellData, '  ') !== false))
+                {
+                    $cellData = preg_replace_callback("/(^|>)(?<data>[^<]*)/i",
+                        function($matches)
+                        {
+                            $matches['data'] = preg_replace_callback('/ {2,}/', function ($matches) 
+                            {
                                 // Use &thinsp; as &nbsp; hussles visible output in LTR mode
                                 return str_repeat('&thinsp;', strlen($matches[0]));
-                            }, $matches['data']);
+                            }, $matches['data']);                        
 
-                            return $matches[1] . $matches['data'];
+                            return $matches[1].$matches['data'];
                         },
                         $cellData
                     );

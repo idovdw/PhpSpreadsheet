@@ -5,6 +5,7 @@ namespace PhpOffice\PhpSpreadsheet\Locale\Format;
 use PhpOffice\PhpSpreadsheet\Locale\FormatLocale;
 use PhpOffice\PhpSpreadsheet\Locale\LocaleLayout;
 
+
 class lang_my_mm extends FormatLocale
 {
     /**
@@ -15,27 +16,27 @@ class lang_my_mm extends FormatLocale
     /**
      * @var string The locale tag
      */
-    protected $tag = 'my-mm';
+    protected $tag = "my-mm";
 
     /**
      * @var string The currency code "K"
      */
-    protected $currencyCode = 'K';
+    protected $currencyCode = "K";
 
     /**
      * @var string The decimal separator
      */
-    protected $decimalSeparator = '.';
+    protected $decimalSeparator = ".";
 
     /**
      * @var string The thousands separator
      */
-    protected $thousandsSeparator = ',';
+    protected $thousandsSeparator = ",";
 
     /**
      * @var string The date separator
      */
-    protected $dateSeparator = '-';
+    protected $dateSeparator = "-";
 
     /**
      * @var string[] The numerals representation (0 up to 9)
@@ -51,7 +52,7 @@ class lang_my_mm extends FormatLocale
      */
     protected $weekdayNames = [
         // Full name
-        'full' => [
+        "full" => [
             "\u{1010}\u{1014}\u{1004}\u{103A}\u{1039}\u{101C}\u{102C}",
             "\u{1021}\u{1004}\u{103A}\u{1039}\u{1002}\u{102B}",
             "\u{1017}\u{102F}\u{1012}\u{1039}\u{1013}\u{101F}\u{1030}\u{1038}",
@@ -61,7 +62,7 @@ class lang_my_mm extends FormatLocale
             "\u{1010}\u{1014}\u{1004}\u{103A}\u{1039}\u{1002}\u{1014}\u{103D}\u{1031}",
         ],
         // Short name
-        'short' => [
+        "short" => [
             "\u{1010}\u{1014}\u{1004}\u{103A}\u{1039}\u{101C}\u{102C}",
             "\u{1021}\u{1004}\u{103A}\u{1039}\u{1002}\u{102B}",
             "\u{1017}\u{102F}\u{1012}\u{1039}\u{1013}\u{101F}\u{1030}\u{1038}",
@@ -77,7 +78,7 @@ class lang_my_mm extends FormatLocale
      */
     protected $monthNames = [
         // Full name
-        'full' => [
+        "full" => [
             "\u{1007}\u{1014}\u{103A}\u{1014}\u{101D}\u{102B}\u{101B}\u{102E}",
             "\u{1016}\u{1031}\u{1016}\u{1031}\u{102C}\u{103A}\u{101D}\u{102B}\u{101B}\u{102E}",
             "\u{1019}\u{1010}\u{103A}",
@@ -92,7 +93,7 @@ class lang_my_mm extends FormatLocale
             "\u{1012}\u{102E}\u{1007}\u{1004}\u{103A}\u{1018}\u{102C}",
         ],
         // Short name
-        'short' => [
+        "short" => [
             "\u{1007}\u{1014}\u{103A}",
             "\u{1016}\u{1031}",
             "\u{1019}\u{1010}\u{103A}",
@@ -112,13 +113,14 @@ class lang_my_mm extends FormatLocale
      * @var array<string,string> Replacement formats
      */
     protected $formatReplacements = [
-        '$ #,##0;$ -#,##0' => '$ #,##0;$ -#,##0',
-        '$ #,##0;[Red]$ -#,##0' => '$ #,##0;[Red]$ -#,##0',
-        '$ #,##0.00;$ -#,##0.00' => '$ #,##0.00;$ -#,##0.00',
-        '$ #,##0.00;[Red]$ -#,##0.00' => '$ #,##0.00;[Red]$ -#,##0.00',
-        '_ $ * #,##0_ ;_ $ * -#,##0_ ;_ $ * "-"_ ;_ @_ ' => '_ $ * #,##0_ ;_ $ * -#,##0_ ;_ $ * "-"_ ;_ @_ ',
-        '_ $ * #,##0.00_ ;_ $ * -#,##0.00_ ;_ $ * "-"??_ ;_ @_ ' => '_ $ * #,##0.00_ ;_ $ * -#,##0.00_ ;_ $ * "-"??_ ;_ @_ ',
-        '[$-F800]dddd, mmmm dd, yyyy' => 'dddd"{, }"mmmm d"{, }"yyyy',
-        '[$-F400]h:mm:ss AM/PM' => 'h:mm:ss AM/PM',
+        "\$ #,##0;\$ -#,##0" => "\$ #,##0;\$ -#,##0",
+        "\$ #,##0;[Red]\$ -#,##0" => "\$ #,##0;[Red]\$ -#,##0",
+        "\$ #,##0.00;\$ -#,##0.00" => "\$ #,##0.00;\$ -#,##0.00",
+        "\$ #,##0.00;[Red]\$ -#,##0.00" => "\$ #,##0.00;[Red]\$ -#,##0.00",
+        "_ \$ * #,##0_ ;_ \$ * -#,##0_ ;_ \$ * \"-\"_ ;_ @_ " => "_ \$ * #,##0_ ;_ \$ * -#,##0_ ;_ \$ * \"-\"_ ;_ @_ ",
+        "_ \$ * #,##0.00_ ;_ \$ * -#,##0.00_ ;_ \$ * \"-\"??_ ;_ @_ " => "_ \$ * #,##0.00_ ;_ \$ * -#,##0.00_ ;_ \$ * \"-\"??_ ;_ @_ ",
+        "[\$-F800]dddd, mmmm dd, yyyy" => "dddd\"{, }\"mmmm d\"{, }\"yyyy",
+        "[\$-F400]h:mm:ss AM/PM" => "h:mm:ss AM/PM",
     ];
+
 }

@@ -4,6 +4,7 @@ namespace PhpOffice\PhpSpreadsheet\Locale\Calendar;
 
 use PhpOffice\PhpSpreadsheet\Locale\CalendarData;
 
+
 class CalendarGregorianArabic1 extends CalendarData
 {
     /**
@@ -16,7 +17,7 @@ class CalendarGregorianArabic1 extends CalendarData
      */
     protected $weekdayNames = [
         // Full name
-        'full' => [
+        "full" => [
             "\u{627}\u{644}\u{625}\u{62B}\u{646}\u{64A}\u{646}",
             "\u{627}\u{644}\u{62B}\u{644}\u{627}\u{62B}\u{627}\u{621}",
             "\u{627}\u{644}\u{623}\u{631}\u{628}\u{639}\u{627}\u{621}",
@@ -26,7 +27,7 @@ class CalendarGregorianArabic1 extends CalendarData
             "\u{627}\u{644}\u{623}\u{62D}\u{62F}",
         ],
         // Short name
-        'short' => [
+        "short" => [
             "\u{627}\u{644}\u{625}\u{62B}\u{646}\u{64A}\u{646}",
             "\u{627}\u{644}\u{62B}\u{644}\u{627}\u{62B}\u{627}\u{621}",
             "\u{627}\u{644}\u{623}\u{631}\u{628}\u{639}\u{627}\u{621}",
@@ -42,8 +43,8 @@ class CalendarGregorianArabic1 extends CalendarData
      */
     protected $monthNames = [
         // Full name
-        'full' => [
-            "\u{643}\u{627}\u{646}\u{648}\u{646}\u{a0}\u{627}\u{644}\u{62B}\u{627}\u{646}\u{64A}",
+        "full" => [
+            "\u{643}\u{627}\u{646}\u{648}\u{646} \u{627}\u{644}\u{62B}\u{627}\u{646}\u{64A}",
             "\u{634}\u{628}\u{627}\u{637}",
             "\u{622}\u{630}\u{627}\u{631}",
             "\u{646}\u{64A}\u{633}\u{627}\u{646}",
@@ -52,13 +53,13 @@ class CalendarGregorianArabic1 extends CalendarData
             "\u{62A}\u{645}\u{648}\u{632}",
             "\u{622}\u{628}",
             "\u{623}\u{64A}\u{644}\u{648}\u{644}",
-            "\u{62A}\u{634}\u{631}\u{64A}\u{646}\u{a0}\u{627}\u{644}\u{623}\u{648}\u{644}",
-            "\u{62A}\u{634}\u{631}\u{64A}\u{646}\u{a0}\u{627}\u{644}\u{62B}\u{627}\u{646}\u{64A}",
-            "\u{643}\u{627}\u{646}\u{648}\u{646}\u{a0}\u{627}\u{644}\u{623}\u{648}\u{644}",
+            "\u{62A}\u{634}\u{631}\u{64A}\u{646} \u{627}\u{644}\u{623}\u{648}\u{644}",
+            "\u{62A}\u{634}\u{631}\u{64A}\u{646} \u{627}\u{644}\u{62B}\u{627}\u{646}\u{64A}",
+            "\u{643}\u{627}\u{646}\u{648}\u{646} \u{627}\u{644}\u{623}\u{648}\u{644}",
         ],
         // Short name
-        'short' => [
-            "\u{643}\u{627}\u{646}\u{648}\u{646}\u{a0}\u{627}\u{644}\u{62B}\u{627}\u{646}\u{64A}",
+        "short" => [
+            "\u{643}\u{627}\u{646}\u{648}\u{646} \u{627}\u{644}\u{62B}\u{627}\u{646}\u{64A}",
             "\u{634}\u{628}\u{627}\u{637}",
             "\u{622}\u{630}\u{627}\u{631}",
             "\u{646}\u{64A}\u{633}\u{627}\u{646}",
@@ -67,9 +68,10 @@ class CalendarGregorianArabic1 extends CalendarData
             "\u{62A}\u{645}\u{648}\u{632}",
             "\u{622}\u{628}",
             "\u{623}\u{64A}\u{644}\u{648}\u{644}",
-            "\u{62A}\u{634}\u{631}\u{64A}\u{646}\u{a0}\u{627}\u{644}\u{623}\u{648}\u{644}",
-            "\u{62A}\u{634}\u{631}\u{64A}\u{646}\u{a0}\u{627}\u{644}\u{62B}\u{627}\u{646}\u{64A}",
-            "\u{643}\u{627}\u{646}\u{648}\u{646}\u{a0}\u{627}\u{644}\u{623}\u{648}\u{644}",
+            "\u{62A}\u{634}\u{631}\u{64A}\u{646} \u{627}\u{644}\u{623}\u{648}\u{644}",
+            "\u{62A}\u{634}\u{631}\u{64A}\u{646} \u{627}\u{644}\u{62B}\u{627}\u{646}\u{64A}",
+            "\u{643}\u{627}\u{646}\u{648}\u{646} \u{627}\u{644}\u{623}\u{648}\u{644}",
         ],
     ];
+
 }

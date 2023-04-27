@@ -5,6 +5,7 @@ namespace PhpOffice\PhpSpreadsheet\Locale\Format;
 use PhpOffice\PhpSpreadsheet\Locale\FormatLocale;
 use PhpOffice\PhpSpreadsheet\Locale\LocaleLayout;
 
+
 class lang_hy_am extends FormatLocale
 {
     /**
@@ -15,7 +16,7 @@ class lang_hy_am extends FormatLocale
     /**
      * @var string The locale tag
      */
-    protected $tag = 'hy-am';
+    protected $tag = "hy-am";
 
     /**
      * @var string The currency code "֏"
@@ -25,17 +26,17 @@ class lang_hy_am extends FormatLocale
     /**
      * @var string The decimal separator
      */
-    protected $decimalSeparator = ',';
+    protected $decimalSeparator = ",";
 
     /**
      * @var string The thousands separator
      */
-    protected $thousandsSeparator = "\u{a0}";
+    protected $thousandsSeparator = " ";
 
     /**
      * @var string The date separator
      */
-    protected $dateSeparator = '.';
+    protected $dateSeparator = ".";
 
     /**
      * @var string[] The numerals representation (0 up to 9)
@@ -51,7 +52,7 @@ class lang_hy_am extends FormatLocale
      */
     protected $weekdayNames = [
         // Full name
-        'full' => [
+        "full" => [
             "\u{535}\u{580}\u{56F}\u{578}\u{582}\u{577}\u{561}\u{562}\u{569}\u{56B}",
             "\u{535}\u{580}\u{565}\u{584}\u{577}\u{561}\u{562}\u{569}\u{56B}",
             "\u{549}\u{578}\u{580}\u{565}\u{584}\u{577}\u{561}\u{562}\u{569}\u{56B}",
@@ -61,7 +62,7 @@ class lang_hy_am extends FormatLocale
             "\u{53F}\u{56B}\u{580}\u{561}\u{56F}\u{56B}",
         ],
         // Short name
-        'short' => [
+        "short" => [
             "\u{535}\u{580}\u{56F}",
             "\u{535}\u{580}\u{584}",
             "\u{549}\u{580}\u{584}",
@@ -77,7 +78,7 @@ class lang_hy_am extends FormatLocale
      */
     protected $monthNames = [
         // Full name
-        'full' => [
+        "full" => [
             "\u{540}\u{578}\u{582}\u{576}\u{57E}\u{561}\u{580}",
             "\u{553}\u{565}\u{57F}\u{580}\u{57E}\u{561}\u{580}",
             "\u{544}\u{561}\u{580}\u{57F}",
@@ -92,7 +93,7 @@ class lang_hy_am extends FormatLocale
             "\u{534}\u{565}\u{56F}\u{57F}\u{565}\u{574}\u{562}\u{565}\u{580}",
         ],
         // Short name
-        'short' => [
+        "short" => [
             "\u{540}\u{576}\u{57E}",
             "\u{553}\u{57F}\u{57E}",
             "\u{544}\u{580}\u{57F}",
@@ -107,4 +108,5 @@ class lang_hy_am extends FormatLocale
             "\u{534}\u{56F}\u{57F}",
         ],
     ];
+
 }

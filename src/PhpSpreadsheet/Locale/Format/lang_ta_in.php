@@ -5,6 +5,7 @@ namespace PhpOffice\PhpSpreadsheet\Locale\Format;
 use PhpOffice\PhpSpreadsheet\Locale\FormatLocale;
 use PhpOffice\PhpSpreadsheet\Locale\LocaleLayout;
 
+
 class lang_ta_in extends FormatLocale
 {
     /**
@@ -15,7 +16,7 @@ class lang_ta_in extends FormatLocale
     /**
      * @var string The locale tag
      */
-    protected $tag = 'ta-in';
+    protected $tag = "ta-in";
 
     /**
      * @var string The currency code "₹"
@@ -25,12 +26,12 @@ class lang_ta_in extends FormatLocale
     /**
      * @var string The decimal separator
      */
-    protected $decimalSeparator = '.';
+    protected $decimalSeparator = ".";
 
     /**
      * @var string The thousands separator
      */
-    protected $thousandsSeparator = ',';
+    protected $thousandsSeparator = ",";
 
     /**
      * @var string The thousands format pattern
@@ -40,7 +41,7 @@ class lang_ta_in extends FormatLocale
     /**
      * @var string The date separator
      */
-    protected $dateSeparator = '-';
+    protected $dateSeparator = "-";
 
     /**
      * @var string[] The numerals representation (0 up to 9)
@@ -56,7 +57,7 @@ class lang_ta_in extends FormatLocale
      */
     protected $weekdayNames = [
         // Full name
-        'full' => [
+        "full" => [
             "\u{BA4}\u{BBF}\u{B99}\u{BCD}\u{B95}\u{BB3}\u{BCD}\u{B95}\u{BBF}\u{BB4}\u{BAE}\u{BC8}",
             "\u{B9A}\u{BC6}\u{BB5}\u{BCD}\u{BB5}\u{BBE}\u{BAF}\u{BCD}\u{B95}\u{BCD}\u{B95}\u{BBF}\u{BB4}\u{BAE}\u{BC8}",
             "\u{BAA}\u{BC1}\u{BA4}\u{BA9}\u{BCD}\u{B95}\u{BBF}\u{BB4}\u{BAE}\u{BC8}",
@@ -66,7 +67,7 @@ class lang_ta_in extends FormatLocale
             "\u{B9E}\u{BBE}\u{BAF}\u{BBF}\u{BB1}\u{BCD}\u{BB1}\u{BC1}\u{B95}\u{BCD}\u{B95}\u{BBF}\u{BB4}\u{BAE}\u{BC8}",
         ],
         // Short name
-        'short' => [
+        "short" => [
             "\u{BA4}\u{BBF}\u{B99}\u{BCD}\u{B95}\u{BB3}\u{BCD}",
             "\u{B9A}\u{BC6}\u{BB5}\u{BCD}\u{BB5}\u{BBE}\u{BAF}\u{BCD}",
             "\u{BAA}\u{BC1}\u{BA4}\u{BA9}\u{BCD}",
@@ -82,7 +83,7 @@ class lang_ta_in extends FormatLocale
      */
     protected $monthNames = [
         // Full name
-        'full' => [
+        "full" => [
             "\u{B9C}\u{BA9}\u{BB5}\u{BB0}\u{BBF}",
             "\u{BAA}\u{BBF}\u{BAA}\u{BCD}\u{BB0}\u{BB5}\u{BB0}\u{BBF}",
             "\u{BAE}\u{BBE}\u{BB0}\u{BCD}\u{B9A}\u{BCD}",
@@ -97,7 +98,7 @@ class lang_ta_in extends FormatLocale
             "\u{B9F}\u{BBF}\u{B9A}\u{BAE}\u{BCD}\u{BAA}\u{BB0}\u{BCD}",
         ],
         // Short name
-        'short' => [
+        "short" => [
             "\u{B9C}\u{BA9}\u{BB5}\u{BB0}\u{BBF}",
             "\u{BAA}\u{BBF}\u{BAA}\u{BCD}\u{BB0}\u{BB5}\u{BB0}\u{BBF}",
             "\u{BAE}\u{BBE}\u{BB0}\u{BCD}\u{B9A}\u{BCD}",
@@ -117,20 +118,21 @@ class lang_ta_in extends FormatLocale
      * @var array<string,string> Replacement formats
      */
     protected $formatReplacements = [
-        'm/d/yyyy' => 'dd/mm/yyyy',
-        'd-mmm-yy' => 'dd/mmm/yy',
-        'd-mmm' => 'dd/mmm',
-        'mmm-yy' => 'mmm/yy',
-        'h:mm' => 'hh:mm',
-        'h:mm:ss' => 'hh:mm:ss',
-        'm/d/yyyy h:mm' => 'dd/mm/yyyy hh:mm',
-        '#,##0_);(#,##0)' => '#,##0;-#,##0',
-        '#,##0_);[Red](#,##0)' => '#,##0;[Red]-#,##0',
-        '#,##0.00_);(#,##0.00)' => '#,##0.00;-#,##0.00',
-        '#,##0.00_);[Red](#,##0.00)' => '#,##0.00;[Red]-#,##0.00',
-        '_(* #,##0_);_(* (#,##0);_(* "-"_);_(@_)' => '_ * #,##0_ ;_ * -#,##0_ ;_ * "-"_ ;_ @_ ',
-        '_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)' => '_ * #,##0.00_ ;_ * -#,##0.00_ ;_ * "-"??_ ;_ @_ ',
-        '[$-F800]dddd, mmmm dd, yyyy' => 'dd mmm yyyy',
-        '[$-F400]h:mm:ss AM/PM' => 'h:mm:ss',
+        "m/d/yyyy" => "dd/mm/yyyy",
+        "d-mmm-yy" => "dd/mmm/yy",
+        "d-mmm" => "dd/mmm",
+        "mmm-yy" => "mmm/yy",
+        "h:mm" => "hh:mm",
+        "h:mm:ss" => "hh:mm:ss",
+        "m/d/yyyy h:mm" => "dd/mm/yyyy hh:mm",
+        "#,##0_);(#,##0)" => "#,##0;-#,##0",
+        "#,##0_);[Red](#,##0)" => "#,##0;[Red]-#,##0",
+        "#,##0.00_);(#,##0.00)" => "#,##0.00;-#,##0.00",
+        "#,##0.00_);[Red](#,##0.00)" => "#,##0.00;[Red]-#,##0.00",
+        "_(* #,##0_);_(* (#,##0);_(* \"-\"_);_(@_)" => "_ * #,##0_ ;_ * -#,##0_ ;_ * \"-\"_ ;_ @_ ",
+        "_(* #,##0.00_);_(* (#,##0.00);_(* \"-\"??_);_(@_)" => "_ * #,##0.00_ ;_ * -#,##0.00_ ;_ * \"-\"??_ ;_ @_ ",
+        "[\$-F800]dddd, mmmm dd, yyyy" => "dd mmm yyyy",
+        "[\$-F400]h:mm:ss AM/PM" => "h:mm:ss",
     ];
+
 }

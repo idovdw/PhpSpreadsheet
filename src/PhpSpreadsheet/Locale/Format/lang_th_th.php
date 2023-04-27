@@ -5,6 +5,7 @@ namespace PhpOffice\PhpSpreadsheet\Locale\Format;
 use PhpOffice\PhpSpreadsheet\Locale\FormatLocale;
 use PhpOffice\PhpSpreadsheet\Locale\LocaleLayout;
 
+
 class lang_th_th extends FormatLocale
 {
     /**
@@ -15,7 +16,7 @@ class lang_th_th extends FormatLocale
     /**
      * @var string The locale tag
      */
-    protected $tag = 'th-th';
+    protected $tag = "th-th";
 
     /**
      * @var string The currency code "฿"
@@ -25,17 +26,17 @@ class lang_th_th extends FormatLocale
     /**
      * @var string The decimal separator
      */
-    protected $decimalSeparator = '.';
+    protected $decimalSeparator = ".";
 
     /**
      * @var string The thousands separator
      */
-    protected $thousandsSeparator = ',';
+    protected $thousandsSeparator = ",";
 
     /**
      * @var string The date separator
      */
-    protected $dateSeparator = '/';
+    protected $dateSeparator = "/";
 
     /**
      * @var string[] The numerals representation (0 up to 9)
@@ -51,7 +52,7 @@ class lang_th_th extends FormatLocale
      */
     protected $weekdayNames = [
         // Full name
-        'full' => [
+        "full" => [
             "\u{E08}\u{E31}\u{E19}\u{E17}\u{E23}\u{E4C}",
             "\u{E2D}\u{E31}\u{E07}\u{E04}\u{E32}\u{E23}",
             "\u{E1E}\u{E38}\u{E18}",
@@ -61,7 +62,7 @@ class lang_th_th extends FormatLocale
             "\u{E2D}\u{E32}\u{E17}\u{E34}\u{E15}\u{E22}\u{E4C}",
         ],
         // Short name
-        'short' => [
+        "short" => [
             "\u{E08}.",
             "\u{E2D}.",
             "\u{E1E}.",
@@ -77,7 +78,7 @@ class lang_th_th extends FormatLocale
      */
     protected $monthNames = [
         // Full name
-        'full' => [
+        "full" => [
             "\u{E21}\u{E01}\u{E23}\u{E32}\u{E04}\u{E21}",
             "\u{E01}\u{E38}\u{E21}\u{E20}\u{E32}\u{E1E}\u{E31}\u{E19}\u{E18}\u{E4C}",
             "\u{E21}\u{E35}\u{E19}\u{E32}\u{E04}\u{E21}",
@@ -92,7 +93,7 @@ class lang_th_th extends FormatLocale
             "\u{E18}\u{E31}\u{E19}\u{E27}\u{E32}\u{E04}\u{E21}",
         ],
         // Short name
-        'short' => [
+        "short" => [
             "\u{E21}.\u{E04}.",
             "\u{E01}.\u{E1E}.",
             "\u{E21}\u{E35}.\u{E04}.",
@@ -112,13 +113,14 @@ class lang_th_th extends FormatLocale
      * @var array<string,string> Replacement formats
      */
     protected $formatReplacements = [
-        'm/d/yyyy' => 'd/m/yyyy',
-        'm/d/yyyy h:mm' => 'd/m/yyyy h:mm',
-        '#,##0_);(#,##0)' => '#,##0;-#,##0',
-        '#,##0_);[Red](#,##0)' => '#,##0;[Red]-#,##0',
-        '#,##0.00_);(#,##0.00)' => '#,##0.00;-#,##0.00',
-        '#,##0.00_);[Red](#,##0.00)' => '#,##0.00;[Red]-#,##0.00',
-        '[$-F800]dddd, mmmm dd, yyyy' => 'd mmmm yyyy',
-        '[$-F400]h:mm:ss AM/PM' => 'h:mm:ss',
+        "m/d/yyyy" => "d/m/yyyy",
+        "m/d/yyyy h:mm" => "d/m/yyyy h:mm",
+        "#,##0_);(#,##0)" => "#,##0;-#,##0",
+        "#,##0_);[Red](#,##0)" => "#,##0;[Red]-#,##0",
+        "#,##0.00_);(#,##0.00)" => "#,##0.00;-#,##0.00",
+        "#,##0.00_);[Red](#,##0.00)" => "#,##0.00;[Red]-#,##0.00",
+        "[\$-F800]dddd, mmmm dd, yyyy" => "d mmmm yyyy",
+        "[\$-F400]h:mm:ss AM/PM" => "h:mm:ss",
     ];
+
 }

@@ -5,6 +5,7 @@ namespace PhpOffice\PhpSpreadsheet\Locale\Format;
 use PhpOffice\PhpSpreadsheet\Locale\FormatLocale;
 use PhpOffice\PhpSpreadsheet\Locale\LocaleLayout;
 
+
 class lang_quz_bo extends FormatLocale
 {
     /**
@@ -15,27 +16,27 @@ class lang_quz_bo extends FormatLocale
     /**
      * @var string The locale tag
      */
-    protected $tag = 'quz-bo';
+    protected $tag = "quz-bo";
 
     /**
      * @var string The currency code "BOB"
      */
-    protected $currencyCode = 'BOB';
+    protected $currencyCode = "BOB";
 
     /**
      * @var string The decimal separator
      */
-    protected $decimalSeparator = ',';
+    protected $decimalSeparator = ",";
 
     /**
      * @var string The thousands separator
      */
-    protected $thousandsSeparator = '.';
+    protected $thousandsSeparator = ".";
 
     /**
      * @var string The date separator
      */
-    protected $dateSeparator = '-';
+    protected $dateSeparator = "-";
 
     /**
      * @var string[] The numerals representation (0 up to 9)
@@ -51,24 +52,24 @@ class lang_quz_bo extends FormatLocale
      */
     protected $weekdayNames = [
         // Full name
-        'full' => [
-            'killachaw',
-            'atipachaw',
-            'quyllurchaw',
+        "full" => [
+            "killachaw",
+            "atipachaw",
+            "quyllurchaw",
             "Ch' askachaw",
-            'Illapachaw',
+            "Illapachaw",
             "k'uychichaw",
-            'intichaw',
+            "intichaw",
         ],
         // Short name
-        'short' => [
-            'kil',
-            'ati',
-            'quy',
+        "short" => [
+            "kil",
+            "ati",
+            "quy",
             "Ch'",
-            'Ill',
+            "Ill",
             "k'u",
-            'int',
+            "int",
         ],
     ];
 
@@ -77,34 +78,35 @@ class lang_quz_bo extends FormatLocale
      */
     protected $monthNames = [
         // Full name
-        'full' => [
-            'Qulla puquy',
-            'Hatun puquy',
-            'Pauqar waray',
-            'ayriwa',
-            'Aymuray',
-            'Inti raymi',
-            'Anta Sitwa',
-            'Qhapaq Sitwa',
-            'Uma raymi',
-            'Kantaray',
+        "full" => [
+            "Qulla puquy",
+            "Hatun puquy",
+            "Pauqar waray",
+            "ayriwa",
+            "Aymuray",
+            "Inti raymi",
+            "Anta Sitwa",
+            "Qhapaq Sitwa",
+            "Uma raymi",
+            "Kantaray",
             "Ayamarq'a",
-            'Kapaq Raymi',
+            "Kapaq Raymi",
         ],
         // Short name
-        'short' => [
-            'Qul',
-            'Hat',
-            'Pau',
-            'ayr',
-            'Aym',
-            'Int',
-            'Ant',
-            'Qha',
-            'Uma',
-            'Kan',
-            'Aya',
-            'Kap',
+        "short" => [
+            "Qul",
+            "Hat",
+            "Pau",
+            "ayr",
+            "Aym",
+            "Int",
+            "Ant",
+            "Qha",
+            "Uma",
+            "Kan",
+            "Aya",
+            "Kap",
         ],
     ];
+
 }

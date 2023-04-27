@@ -5,6 +5,7 @@ namespace PhpOffice\PhpSpreadsheet\Locale\Format;
 use PhpOffice\PhpSpreadsheet\Locale\FormatLocale;
 use PhpOffice\PhpSpreadsheet\Locale\LocaleLayout;
 
+
 class lang_ug_cn extends FormatLocale
 {
     /**
@@ -15,7 +16,7 @@ class lang_ug_cn extends FormatLocale
     /**
      * @var string The locale tag
      */
-    protected $tag = 'ug-cn';
+    protected $tag = "ug-cn";
 
     /**
      * @var string The currency code "￥"
@@ -25,17 +26,17 @@ class lang_ug_cn extends FormatLocale
     /**
      * @var string The decimal separator
      */
-    protected $decimalSeparator = '.';
+    protected $decimalSeparator = ".";
 
     /**
      * @var string The thousands separator
      */
-    protected $thousandsSeparator = ',';
+    protected $thousandsSeparator = ",";
 
     /**
      * @var string The date separator
      */
-    protected $dateSeparator = '-';
+    protected $dateSeparator = "-";
 
     /**
      * @var string[] The numerals representation (0 up to 9)
@@ -51,7 +52,7 @@ class lang_ug_cn extends FormatLocale
      */
     protected $weekdayNames = [
         // Full name
-        'full' => [
+        "full" => [
             "\u{62F}\u{6C8}\u{634}\u{6D5}\u{646}\u{628}\u{6D5}",
             "\u{633}\u{6D5}\u{64A}\u{634}\u{6D5}\u{646}\u{628}\u{6D5}",
             "\u{686}\u{627}\u{631}\u{634}\u{6D5}\u{646}\u{628}\u{6D5}",
@@ -61,7 +62,7 @@ class lang_ug_cn extends FormatLocale
             "\u{64A}\u{6D5}\u{643}\u{634}\u{6D5}\u{646}\u{628}\u{6D5}",
         ],
         // Short name
-        'short' => [
+        "short" => [
             "\u{62F}\u{6C8}",
             "\u{633}\u{6D5}",
             "\u{686}\u{627}",
@@ -77,7 +78,7 @@ class lang_ug_cn extends FormatLocale
      */
     protected $monthNames = [
         // Full name
-        'full' => [
+        "full" => [
             "\u{64A}\u{627}\u{646}\u{6CB}\u{627}\u{631}",
             "\u{641}\u{6D0}\u{6CB}\u{631}\u{627}\u{644}",
             "\u{645}\u{627}\u{631}\u{62A}",
@@ -92,7 +93,7 @@ class lang_ug_cn extends FormatLocale
             "\u{62F}\u{6D0}\u{643}\u{627}\u{628}\u{649}\u{631}",
         ],
         // Short name
-        'short' => [
+        "short" => [
             "1-\u{626}\u{627}\u{64A}",
             "2-\u{626}\u{627}\u{64A}",
             "3-\u{626}\u{627}\u{64A}",
@@ -107,4 +108,5 @@ class lang_ug_cn extends FormatLocale
             "12-\u{626}\u{627}\u{64A}",
         ],
     ];
+
 }

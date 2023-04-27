@@ -5,6 +5,7 @@ namespace PhpOffice\PhpSpreadsheet\Calculation\DateTimeExcel;
 use Datetime;
 use PhpOffice\PhpSpreadsheet\Calculation\ArrayEnabled;
 use PhpOffice\PhpSpreadsheet\Calculation\Functions;
+use PhpOffice\PhpSpreadsheet\Calculation\Information\ExcelError;
 use PhpOffice\PhpSpreadsheet\Shared\Date as SharedDateHelper;
 
 class TimeValue
@@ -50,7 +51,7 @@ class TimeValue
             $timeValue = implode(':', $arraySplit);
         }
 
-        // @ido @fix!
+         // @ido @fix!
         $baseYear = SharedDateHelper::getExcelCalendar();
         $PHPDateArray = date_parse($timeValue);
         $retValue = Functions::VALUE();
@@ -66,7 +67,7 @@ class TimeValue
             } elseif ($retType === Functions::RETURNDATE_UNIX_TIMESTAMP) {
                 $retValue = (int) $phpDateValue = SharedDateHelper::excelToTimestamp($excelDateValue + 25569) - 3600;
             } else {
-                $retValue = new DateTime($baseYear . '-01-01 ' . $PHPDateArray['hour'] . ':' . $PHPDateArray['minute'] . ':' . $PHPDateArray['second']);
+                $retValue = new DateTime($baseYear.'-01-01 ' . $PHPDateArray['hour'] . ':' . $PHPDateArray['minute'] . ':' . $PHPDateArray['second']);
             }
         }
 

@@ -4,11 +4,13 @@ namespace PhpOffice\PhpSpreadsheet;
 
 use PhpOffice\PhpSpreadsheet\Chart\Renderer\IRenderer;
 use PhpOffice\PhpSpreadsheet\Collection\Memory;
-use PhpOffice\PhpSpreadsheet\Locale\CurrentLocale;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\SimpleCache\CacheInterface;
 use ReflectionClass;
+
+use PhpOffice\PhpSpreadsheet\Locale\CurrentLocale;
+
 
 class Settings
 {
@@ -46,6 +48,7 @@ class Settings
      */
     private static $requestFactory;
 
+
     /**
      * Set the locale tag to use for formula translations and any special formatting.
      *
@@ -66,10 +69,9 @@ class Settings
     }
 
     /**
-     * Retrieve the current locale tag.
-     *
-     * @param bool - Return the raw value (null if not set)
-     *
+     * Retrieve the current locale tag
+     * 
+     * @param boolean - Return the raw value (null if not set)
      * @return string - The locale tag (e.g. "fr-fr" or "pt-br" or "en-us")
      */
     public static function getLocale($raw = false): string
@@ -78,9 +80,9 @@ class Settings
     }
 
     /**
-     * Set the default locale "en-us".
+     * Set the default locale "en-us"
      */
-    public static function setDefaultLocale(): void
+    public static function setDefaultLocale()
     {
         CurrentLocale::setDefaultLocale();
     }

@@ -5,6 +5,7 @@ namespace PhpOffice\PhpSpreadsheet\Locale\Format;
 use PhpOffice\PhpSpreadsheet\Locale\FormatLocale;
 use PhpOffice\PhpSpreadsheet\Locale\LocaleLayout;
 
+
 class lang_af_za extends FormatLocale
 {
     /**
@@ -15,27 +16,27 @@ class lang_af_za extends FormatLocale
     /**
      * @var string The locale tag
      */
-    protected $tag = 'af-za';
+    protected $tag = "af-za";
 
     /**
      * @var string The currency code "R"
      */
-    protected $currencyCode = 'R';
+    protected $currencyCode = "R";
 
     /**
      * @var string The decimal separator
      */
-    protected $decimalSeparator = ',';
+    protected $decimalSeparator = ",";
 
     /**
      * @var string The thousands separator
      */
-    protected $thousandsSeparator = "\u{a0}";
+    protected $thousandsSeparator = " ";
 
     /**
      * @var string The date separator
      */
-    protected $dateSeparator = '-';
+    protected $dateSeparator = "-";
 
     /**
      * @var string[] The numerals representation (0 up to 9)
@@ -51,24 +52,24 @@ class lang_af_za extends FormatLocale
      */
     protected $weekdayNames = [
         // Full name
-        'full' => [
-            'Maandag',
-            'Dinsdag',
-            'Woensdag',
-            'Donderdag',
-            'Vrydag',
-            'Saterdag',
-            'Sondag',
+        "full" => [
+            "Maandag",
+            "Dinsdag",
+            "Woensdag",
+            "Donderdag",
+            "Vrydag",
+            "Saterdag",
+            "Sondag",
         ],
         // Short name
-        'short' => [
-            'Ma.',
-            'Di.',
-            'Wo.',
-            'Do.',
-            'Vr.',
-            'Sa.',
-            'So.',
+        "short" => [
+            "Ma.",
+            "Di.",
+            "Wo.",
+            "Do.",
+            "Vr.",
+            "Sa.",
+            "So.",
         ],
     ];
 
@@ -77,34 +78,35 @@ class lang_af_za extends FormatLocale
      */
     protected $monthNames = [
         // Full name
-        'full' => [
-            'Januarie',
-            'Februarie',
-            'Maart',
-            'April',
-            'Mei',
-            'Junie',
-            'Julie',
-            'Augustus',
-            'September',
-            'Oktober',
-            'November',
-            'Desember',
+        "full" => [
+            "Januarie",
+            "Februarie",
+            "Maart",
+            "April",
+            "Mei",
+            "Junie",
+            "Julie",
+            "Augustus",
+            "September",
+            "Oktober",
+            "November",
+            "Desember",
         ],
         // Short name
-        'short' => [
-            'Jan.',
-            'Feb.',
-            'Mrt.',
-            'Apr.',
-            'Mei',
-            'Jun.',
-            'Jul.',
-            'Aug.',
-            'Sep.',
-            'Okt.',
-            'Nov.',
-            'Des.',
+        "short" => [
+            "Jan.",
+            "Feb.",
+            "Mrt.",
+            "Apr.",
+            "Mei",
+            "Jun.",
+            "Jul.",
+            "Aug.",
+            "Sep.",
+            "Okt.",
+            "Nov.",
+            "Des.",
         ],
     ];
+
 }

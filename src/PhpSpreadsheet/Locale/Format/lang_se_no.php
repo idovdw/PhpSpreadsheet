@@ -5,6 +5,7 @@ namespace PhpOffice\PhpSpreadsheet\Locale\Format;
 use PhpOffice\PhpSpreadsheet\Locale\FormatLocale;
 use PhpOffice\PhpSpreadsheet\Locale\LocaleLayout;
 
+
 class lang_se_no extends FormatLocale
 {
     /**
@@ -15,27 +16,27 @@ class lang_se_no extends FormatLocale
     /**
      * @var string The locale tag
      */
-    protected $tag = 'se-no';
+    protected $tag = "se-no";
 
     /**
      * @var string The currency code "kr"
      */
-    protected $currencyCode = 'kr';
+    protected $currencyCode = "kr";
 
     /**
      * @var string The decimal separator
      */
-    protected $decimalSeparator = ',';
+    protected $decimalSeparator = ",";
 
     /**
      * @var string The thousands separator
      */
-    protected $thousandsSeparator = "\u{a0}";
+    protected $thousandsSeparator = " ";
 
     /**
      * @var string The date separator
      */
-    protected $dateSeparator = '-';
+    protected $dateSeparator = "-";
 
     /**
      * @var string[] The numerals representation (0 up to 9)
@@ -51,24 +52,24 @@ class lang_se_no extends FormatLocale
      */
     protected $weekdayNames = [
         // Full name
-        'full' => [
-            'vuossárga',
+        "full" => [
+            "vuossárga",
             "ma\u{14B}\u{14B}ebárga",
-            'gaskavahkku',
-            'duorasdat',
-            'bearjadat',
-            'lávvardat',
-            'sotnabeaivi',
+            "gaskavahkku",
+            "duorasdat",
+            "bearjadat",
+            "lávvardat",
+            "sotnabeaivi",
         ],
         // Short name
-        'short' => [
-            'vuos',
+        "short" => [
+            "vuos",
             "ma\u{14B}",
-            'gask',
-            'duor',
-            'bear',
-            'láv',
-            'sotn',
+            "gask",
+            "duor",
+            "bear",
+            "láv",
+            "sotn",
         ],
     ];
 
@@ -77,34 +78,35 @@ class lang_se_no extends FormatLocale
      */
     protected $monthNames = [
         // Full name
-        'full' => [
+        "full" => [
             "o\u{111}\u{111}ajagemánnu",
-            'guovvamánnu',
+            "guovvamánnu",
             "njuk\u{10D}amánnu",
             "cuo\u{14B}ománnu",
-            'miessemánnu',
-            'geassemánnu',
-            'suoidnemánnu',
-            'borgemánnu',
+            "miessemánnu",
+            "geassemánnu",
+            "suoidnemánnu",
+            "borgemánnu",
             "\u{10D}ak\u{10D}amánnu",
-            'golggotmánnu',
-            'skábmamánnu',
-            'juovlamánnu',
+            "golggotmánnu",
+            "skábmamánnu",
+            "juovlamánnu",
         ],
         // Short name
-        'short' => [
+        "short" => [
             "o\u{111}\u{111}j",
-            'guov',
-            'njuk',
+            "guov",
+            "njuk",
             "cuo\u{14B}",
-            'mies',
-            'geas',
-            'suoi',
-            'borg',
+            "mies",
+            "geas",
+            "suoi",
+            "borg",
             "\u{10D}ak\u{10D}",
-            'golg',
-            'skáb',
-            'juov',
+            "golg",
+            "skáb",
+            "juov",
         ],
     ];
+
 }

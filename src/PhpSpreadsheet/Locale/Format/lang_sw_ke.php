@@ -5,6 +5,7 @@ namespace PhpOffice\PhpSpreadsheet\Locale\Format;
 use PhpOffice\PhpSpreadsheet\Locale\FormatLocale;
 use PhpOffice\PhpSpreadsheet\Locale\LocaleLayout;
 
+
 class lang_sw_ke extends FormatLocale
 {
     /**
@@ -15,27 +16,27 @@ class lang_sw_ke extends FormatLocale
     /**
      * @var string The locale tag
      */
-    protected $tag = 'sw-ke';
+    protected $tag = "sw-ke";
 
     /**
      * @var string The currency code "Ksh"
      */
-    protected $currencyCode = 'Ksh';
+    protected $currencyCode = "Ksh";
 
     /**
      * @var string The decimal separator
      */
-    protected $decimalSeparator = '.';
+    protected $decimalSeparator = ".";
 
     /**
      * @var string The thousands separator
      */
-    protected $thousandsSeparator = ',';
+    protected $thousandsSeparator = ",";
 
     /**
      * @var string The date separator
      */
-    protected $dateSeparator = '/';
+    protected $dateSeparator = "/";
 
     /**
      * @var string[] The numerals representation (0 up to 9)
@@ -51,24 +52,24 @@ class lang_sw_ke extends FormatLocale
      */
     protected $weekdayNames = [
         // Full name
-        'full' => [
-            'Jumatatu',
-            'Jumanne',
-            'Jumatano',
-            'Alhamisi',
-            'Ijumaa',
-            'Jumamosi',
-            'Jumapili',
+        "full" => [
+            "Jumatatu",
+            "Jumanne",
+            "Jumatano",
+            "Alhamisi",
+            "Ijumaa",
+            "Jumamosi",
+            "Jumapili",
         ],
         // Short name
-        'short' => [
-            'Jtt',
-            'Jnn',
-            'Jtn',
-            'Alh',
-            'Ijm',
-            'Jms',
-            'Jpl',
+        "short" => [
+            "Jtt",
+            "Jnn",
+            "Jtn",
+            "Alh",
+            "Ijm",
+            "Jms",
+            "Jpl",
         ],
     ];
 
@@ -77,34 +78,35 @@ class lang_sw_ke extends FormatLocale
      */
     protected $monthNames = [
         // Full name
-        'full' => [
-            'Januari',
-            'Februari',
-            'Machi',
-            'Aprili',
-            'Mei',
-            'Juni',
-            'Julai',
-            'Agosti',
-            'Septemba',
-            'Oktoba',
-            'Novemba',
-            'Desemba',
+        "full" => [
+            "Januari",
+            "Februari",
+            "Machi",
+            "Aprili",
+            "Mei",
+            "Juni",
+            "Julai",
+            "Agosti",
+            "Septemba",
+            "Oktoba",
+            "Novemba",
+            "Desemba",
         ],
         // Short name
-        'short' => [
-            'Jan',
-            'Feb',
-            'Mac',
-            'Apr',
-            'Mei',
-            'Jun',
-            'Jul',
-            'Ago',
-            'Sep',
-            'Okt',
-            'Nov',
-            'Des',
+        "short" => [
+            "Jan",
+            "Feb",
+            "Mac",
+            "Apr",
+            "Mei",
+            "Jun",
+            "Jul",
+            "Ago",
+            "Sep",
+            "Okt",
+            "Nov",
+            "Des",
         ],
     ];
+
 }

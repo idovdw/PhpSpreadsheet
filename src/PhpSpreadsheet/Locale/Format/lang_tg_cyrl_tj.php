@@ -5,6 +5,7 @@ namespace PhpOffice\PhpSpreadsheet\Locale\Format;
 use PhpOffice\PhpSpreadsheet\Locale\FormatLocale;
 use PhpOffice\PhpSpreadsheet\Locale\LocaleLayout;
 
+
 class lang_tg_cyrl_tj extends FormatLocale
 {
     /**
@@ -15,7 +16,7 @@ class lang_tg_cyrl_tj extends FormatLocale
     /**
      * @var string The locale tag
      */
-    protected $tag = 'tg-cyrl-tj';
+    protected $tag = "tg-cyrl-tj";
 
     /**
      * @var string The currency code "сом."
@@ -25,17 +26,17 @@ class lang_tg_cyrl_tj extends FormatLocale
     /**
      * @var string The decimal separator
      */
-    protected $decimalSeparator = ',';
+    protected $decimalSeparator = ",";
 
     /**
      * @var string The thousands separator
      */
-    protected $thousandsSeparator = "\u{a0}";
+    protected $thousandsSeparator = " ";
 
     /**
      * @var string The date separator
      */
-    protected $dateSeparator = '/';
+    protected $dateSeparator = "/";
 
     /**
      * @var string[] The numerals representation (0 up to 9)
@@ -51,7 +52,7 @@ class lang_tg_cyrl_tj extends FormatLocale
      */
     protected $weekdayNames = [
         // Full name
-        'full' => [
+        "full" => [
             "\u{434}\u{443}\u{448}\u{430}\u{43D}\u{431}\u{435}",
             "\u{441}\u{435}\u{448}\u{430}\u{43D}\u{431}\u{435}",
             "\u{447}\u{43E}\u{440}\u{448}\u{430}\u{43D}\u{431}\u{435}",
@@ -61,7 +62,7 @@ class lang_tg_cyrl_tj extends FormatLocale
             "\u{42F}\u{43A}\u{448}\u{430}\u{43D}\u{431}\u{435}",
         ],
         // Short name
-        'short' => [
+        "short" => [
             "\u{434}\u{448}\u{431}",
             "\u{441}\u{448}\u{431}",
             "\u{447}\u{448}\u{431}",
@@ -77,7 +78,7 @@ class lang_tg_cyrl_tj extends FormatLocale
      */
     protected $monthNames = [
         // Full name
-        'full' => [
+        "full" => [
             "\u{44F}\u{43D}\u{432}\u{430}\u{440}",
             "\u{444}\u{435}\u{432}\u{440}\u{430}\u{43B}",
             "\u{43C}\u{430}\u{440}\u{442}",
@@ -92,7 +93,7 @@ class lang_tg_cyrl_tj extends FormatLocale
             "\u{434}\u{435}\u{43A}\u{430}\u{431}\u{440}",
         ],
         // Short name
-        'short' => [
+        "short" => [
             "\u{44F}\u{43D}\u{432}",
             "\u{444}\u{435}\u{432}",
             "\u{43C}\u{430}\u{440}",
@@ -112,13 +113,14 @@ class lang_tg_cyrl_tj extends FormatLocale
      * @var array<string,string> Replacement formats
      */
     protected $formatReplacements = [
-        '$ #,##0;$ -#,##0' => '$ #,##0;$ -#,##0',
-        '$ #,##0;[Red]$ -#,##0' => '$ #,##0;[Red]$ -#,##0',
-        '$ #,##0.00;$ -#,##0.00' => '$ #,##0.00;$ -#,##0.00',
-        '$ #,##0.00;[Red]$ -#,##0.00' => '$ #,##0.00;[Red]$ -#,##0.00',
-        '_ $ * #,##0_ ;_ $ * -#,##0_ ;_ $ * "-"_ ;_ @_ ' => '_ $ * #,##0_ ;_ $ * -#,##0_ ;_ $ * "-"_ ;_ @_ ',
-        '_ $ * #,##0.00_ ;_ $ * -#,##0.00_ ;_ $ * "-"??_ ;_ @_ ' => '_ $ * #,##0.00_ ;_ $ * -#,##0.00_ ;_ $ * "-"??_ ;_ @_ ',
-        '[$-F800]dddd, mmmm dd, yyyy' => 'dddd"{, }"mmmm d"{, }"yyyy',
-        '[$-F400]h:mm:ss AM/PM' => 'h:mm:ss AM/PM',
+        "\$ #,##0;\$ -#,##0" => "\$ #,##0;\$ -#,##0",
+        "\$ #,##0;[Red]\$ -#,##0" => "\$ #,##0;[Red]\$ -#,##0",
+        "\$ #,##0.00;\$ -#,##0.00" => "\$ #,##0.00;\$ -#,##0.00",
+        "\$ #,##0.00;[Red]\$ -#,##0.00" => "\$ #,##0.00;[Red]\$ -#,##0.00",
+        "_ \$ * #,##0_ ;_ \$ * -#,##0_ ;_ \$ * \"-\"_ ;_ @_ " => "_ \$ * #,##0_ ;_ \$ * -#,##0_ ;_ \$ * \"-\"_ ;_ @_ ",
+        "_ \$ * #,##0.00_ ;_ \$ * -#,##0.00_ ;_ \$ * \"-\"??_ ;_ @_ " => "_ \$ * #,##0.00_ ;_ \$ * -#,##0.00_ ;_ \$ * \"-\"??_ ;_ @_ ",
+        "[\$-F800]dddd, mmmm dd, yyyy" => "dddd\"{, }\"mmmm d\"{, }\"yyyy",
+        "[\$-F400]h:mm:ss AM/PM" => "h:mm:ss AM/PM",
     ];
+
 }

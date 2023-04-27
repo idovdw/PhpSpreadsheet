@@ -12,8 +12,6 @@ use PhpOffice\PhpSpreadsheet\Cell\Cell;
 use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
 use PhpOffice\PhpSpreadsheet\Cell\DataType;
 use PhpOffice\PhpSpreadsheet\DefinedName;
-use PhpOffice\PhpSpreadsheet\Locale\FormulaLocale;
-use PhpOffice\PhpSpreadsheet\Locale\FormulaLocaleFactory;
 use PhpOffice\PhpSpreadsheet\ReferenceHelper;
 use PhpOffice\PhpSpreadsheet\Shared;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
@@ -22,6 +20,10 @@ use ReflectionClassConstant;
 use ReflectionMethod;
 use ReflectionParameter;
 use Throwable;
+
+use PhpOffice\PhpSpreadsheet\Locale\FormulaLocaleFactory;
+use PhpOffice\PhpSpreadsheet\Locale\FormulaLocale;
+
 
 class Calculation
 {
@@ -197,6 +199,7 @@ class Calculation
      */
     private static $localeLanguage = 'en_us'; //    US English    (default locale)
 
+
     /**
      * Locale-specific argument separator for function arguments.
      *
@@ -218,8 +221,9 @@ class Calculation
         'NULL' => 'NULL',
     ];
 
+
     // @ido
-    public static function setVersionMode(string $version): void
+    public static function setVersionMode(string $version)
     {
         FormulaLocale::setVersionMode($version);
     }
@@ -3159,7 +3163,7 @@ class Calculation
      *
      * @param string $locale The locale to use for formula translation, eg: 'en_us'
      *
-     * @return bool True on success
+     * @return boolean True on success
      */
     public function setLocale(string $locale)
     {
@@ -3176,13 +3180,16 @@ class Calculation
         $aFunctions = $oLocaleObject->getFunctions();
 
         self::$localeFunctions = array_intersect_key($aFunctions, self::$phpSpreadsheetFunctions);
-        if (isset($aFunctions['*RC'])) {
+        if (isset($aFunctions['*RC']))
+        {
             // *RC is not a $phpSpreadsheetFunctions-listed function
             self::$localeFunctions['*RC'] = $aFunctions['*RC'];
         }
 
-        foreach (self::$localeFunctions as $key => $function_name) {
-            if (($function_name == '') || ($key == $function_name)) {
+        foreach(self::$localeFunctions as $key => $function_name)
+        {
+            if (($function_name == '') || ($key == $function_name))
+            {
                 // Skip invalid or identical function names
                 unset(self::$localeFunctions[$key]);
             }
@@ -3363,13 +3370,13 @@ class Calculation
 
     /**
      * @param string $function
-     *
      * @return string
      */
     public static function localeFunc($function)
     {
         $functionName = trim($function, '(');
-        if (isset(self::$localeFunctions[$functionName])) {
+        if (isset(self::$localeFunctions[$functionName]))
+        {
             $brace = ($functionName != $function);
             $function = self::$localeFunctions[$functionName];
             if ($brace) {

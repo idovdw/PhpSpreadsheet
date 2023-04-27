@@ -5,6 +5,7 @@ namespace PhpOffice\PhpSpreadsheet\Locale\Format;
 use PhpOffice\PhpSpreadsheet\Locale\FormatLocale;
 use PhpOffice\PhpSpreadsheet\Locale\LocaleLayout;
 
+
 class lang_be_by extends FormatLocale
 {
     /**
@@ -15,27 +16,27 @@ class lang_be_by extends FormatLocale
     /**
      * @var string The locale tag
      */
-    protected $tag = 'be-by';
+    protected $tag = "be-by";
 
     /**
      * @var string The currency code "Br"
      */
-    protected $currencyCode = 'Br';
+    protected $currencyCode = "Br";
 
     /**
      * @var string The decimal separator
      */
-    protected $decimalSeparator = ',';
+    protected $decimalSeparator = ",";
 
     /**
      * @var string The thousands separator
      */
-    protected $thousandsSeparator = "\u{a0}";
+    protected $thousandsSeparator = " ";
 
     /**
      * @var string The date separator
      */
-    protected $dateSeparator = '.';
+    protected $dateSeparator = ".";
 
     /**
      * @var string[] The numerals representation (0 up to 9)
@@ -51,7 +52,7 @@ class lang_be_by extends FormatLocale
      */
     protected $weekdayNames = [
         // Full name
-        'full' => [
+        "full" => [
             "\u{43F}\u{430}\u{43D}\u{44F}\u{434}\u{437}\u{435}\u{43B}\u{430}\u{43A}",
             "\u{430}\u{45E}\u{442}\u{43E}\u{440}\u{430}\u{43A}",
             "\u{441}\u{435}\u{440}\u{430}\u{434}\u{430}",
@@ -61,7 +62,7 @@ class lang_be_by extends FormatLocale
             "\u{43D}\u{44F}\u{434}\u{437}\u{435}\u{43B}\u{44F}",
         ],
         // Short name
-        'short' => [
+        "short" => [
             "\u{43F}\u{43D}",
             "\u{430}\u{45E}\u{442}",
             "\u{441}\u{440}",
@@ -77,7 +78,7 @@ class lang_be_by extends FormatLocale
      */
     protected $monthNames = [
         // Full name
-        'full' => [
+        "full" => [
             "\u{441}\u{442}\u{443}\u{434}\u{437}\u{435}\u{43D}\u{44C}",
             "\u{43B}\u{44E}\u{442}\u{44B}",
             "\u{441}\u{430}\u{43A}\u{430}\u{432}\u{456}\u{43A}",
@@ -92,7 +93,7 @@ class lang_be_by extends FormatLocale
             "\u{441}\u{43D}\u{435}\u{436}\u{430}\u{43D}\u{44C}",
         ],
         // Short name
-        'short' => [
+        "short" => [
             "\u{441}\u{442}\u{443}\u{434}\u{437}",
             "\u{43B}\u{44E}\u{442}",
             "\u{441}\u{430}\u{43A}",
@@ -107,4 +108,5 @@ class lang_be_by extends FormatLocale
             "\u{441}\u{43D}\u{435}\u{436}",
         ],
     ];
+
 }

@@ -5,6 +5,7 @@ namespace PhpOffice\PhpSpreadsheet\Locale\Format;
 use PhpOffice\PhpSpreadsheet\Locale\FormatLocale;
 use PhpOffice\PhpSpreadsheet\Locale\LocaleLayout;
 
+
 class lang_mk_mk extends FormatLocale
 {
     /**
@@ -15,7 +16,7 @@ class lang_mk_mk extends FormatLocale
     /**
      * @var string The locale tag
      */
-    protected $tag = 'mk-mk';
+    protected $tag = "mk-mk";
 
     /**
      * @var string The currency code "ден."
@@ -25,17 +26,17 @@ class lang_mk_mk extends FormatLocale
     /**
      * @var string The decimal separator
      */
-    protected $decimalSeparator = ',';
+    protected $decimalSeparator = ",";
 
     /**
      * @var string The thousands separator
      */
-    protected $thousandsSeparator = '.';
+    protected $thousandsSeparator = ".";
 
     /**
      * @var string The date separator
      */
-    protected $dateSeparator = '.';
+    protected $dateSeparator = ".";
 
     /**
      * @var string[] The numerals representation (0 up to 9)
@@ -51,7 +52,7 @@ class lang_mk_mk extends FormatLocale
      */
     protected $weekdayNames = [
         // Full name
-        'full' => [
+        "full" => [
             "\u{43F}\u{43E}\u{43D}\u{435}\u{434}\u{435}\u{43B}\u{43D}\u{438}\u{43A}",
             "\u{432}\u{442}\u{43E}\u{440}\u{43D}\u{438}\u{43A}",
             "\u{441}\u{440}\u{435}\u{434}\u{430}",
@@ -61,7 +62,7 @@ class lang_mk_mk extends FormatLocale
             "\u{43D}\u{435}\u{434}\u{435}\u{43B}\u{430}",
         ],
         // Short name
-        'short' => [
+        "short" => [
             "\u{43F}\u{43E}\u{43D}.",
             "\u{432}\u{442}\u{43E}.",
             "\u{441}\u{440}\u{435}.",
@@ -77,7 +78,7 @@ class lang_mk_mk extends FormatLocale
      */
     protected $monthNames = [
         // Full name
-        'full' => [
+        "full" => [
             "\u{458}\u{430}\u{43D}\u{443}\u{430}\u{440}\u{438}",
             "\u{444}\u{435}\u{432}\u{440}\u{443}\u{430}\u{440}\u{438}",
             "\u{43C}\u{430}\u{440}\u{442}",
@@ -92,7 +93,7 @@ class lang_mk_mk extends FormatLocale
             "\u{434}\u{435}\u{43A}\u{435}\u{43C}\u{432}\u{440}\u{438}",
         ],
         // Short name
-        'short' => [
+        "short" => [
             "\u{458}\u{430}\u{43D}.",
             "\u{444}\u{435}\u{432}.",
             "\u{43C}\u{430}\u{440}.",
@@ -107,4 +108,5 @@ class lang_mk_mk extends FormatLocale
             "\u{434}\u{435}\u{43A}.",
         ],
     ];
+
 }

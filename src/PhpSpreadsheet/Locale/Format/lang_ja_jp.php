@@ -5,6 +5,7 @@ namespace PhpOffice\PhpSpreadsheet\Locale\Format;
 use PhpOffice\PhpSpreadsheet\Locale\FormatLocale;
 use PhpOffice\PhpSpreadsheet\Locale\LocaleLayout;
 
+
 class lang_ja_jp extends FormatLocale
 {
     /**
@@ -15,27 +16,27 @@ class lang_ja_jp extends FormatLocale
     /**
      * @var string The locale tag
      */
-    protected $tag = 'ja-jp';
+    protected $tag = "ja-jp";
 
     /**
      * @var string The currency code "¥"
      */
-    protected $currencyCode = '¥';
+    protected $currencyCode = "¥";
 
     /**
      * @var string The decimal separator
      */
-    protected $decimalSeparator = '.';
+    protected $decimalSeparator = ".";
 
     /**
      * @var string The thousands separator
      */
-    protected $thousandsSeparator = ',';
+    protected $thousandsSeparator = ",";
 
     /**
      * @var string The date separator
      */
-    protected $dateSeparator = '/';
+    protected $dateSeparator = "/";
 
     /**
      * @var string[] The numerals representation (0 up to 9)
@@ -51,7 +52,7 @@ class lang_ja_jp extends FormatLocale
      */
     protected $weekdayNames = [
         // Full name
-        'full' => [
+        "full" => [
             "\u{6708}\u{66DC}\u{65E5}",
             "\u{706B}\u{66DC}\u{65E5}",
             "\u{6C34}\u{66DC}\u{65E5}",
@@ -61,7 +62,7 @@ class lang_ja_jp extends FormatLocale
             "\u{65E5}\u{66DC}\u{65E5}",
         ],
         // Short name
-        'short' => [
+        "short" => [
             "\u{6708}",
             "\u{706B}",
             "\u{6C34}",
@@ -77,7 +78,7 @@ class lang_ja_jp extends FormatLocale
      */
     protected $monthNames = [
         // Full name
-        'full' => [
+        "full" => [
             "1\u{6708}",
             "2\u{6708}",
             "3\u{6708}",
@@ -92,19 +93,19 @@ class lang_ja_jp extends FormatLocale
             "12\u{6708}",
         ],
         // Short name
-        'short' => [
-            '1',
-            '2',
-            '3',
-            '4',
-            '5',
-            '6',
-            '7',
-            '8',
-            '9',
-            '10',
-            '11',
-            '12',
+        "short" => [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
         ],
     ];
 
@@ -112,15 +113,16 @@ class lang_ja_jp extends FormatLocale
      * @var array<string,string> Replacement formats
      */
     protected $formatReplacements = [
-        'm/d/yyyy' => 'yyyy/mm/dd',
-        'd-mmm-yy' => 'dd-mmm-yy',
-        'd-mmm' => 'dd-mmm',
-        'm/d/yyyy h:mm' => 'yyyy/mm/dd h:mm',
-        '#,##0_);(#,##0)' => '#,##0;-#,##0',
-        '#,##0_);[Red](#,##0)' => '#,##0;[Red]-#,##0',
-        '#,##0.00_);(#,##0.00)' => '#,##0.00;-#,##0.00',
-        '#,##0.00_);[Red](#,##0.00)' => '#,##0.00;[Red]-#,##0.00',
-        '[$-F800]dddd, mmmm dd, yyyy' => "yyyy\"{\u{5E74}}\"mmmmd\"{\u{65E5}}\"",
-        '[$-F400]h:mm:ss AM/PM' => 'h:mm:ss',
+        "m/d/yyyy" => "yyyy/mm/dd",
+        "d-mmm-yy" => "dd-mmm-yy",
+        "d-mmm" => "dd-mmm",
+        "m/d/yyyy h:mm" => "yyyy/mm/dd h:mm",
+        "#,##0_);(#,##0)" => "#,##0;-#,##0",
+        "#,##0_);[Red](#,##0)" => "#,##0;[Red]-#,##0",
+        "#,##0.00_);(#,##0.00)" => "#,##0.00;-#,##0.00",
+        "#,##0.00_);[Red](#,##0.00)" => "#,##0.00;[Red]-#,##0.00",
+        "[\$-F800]dddd, mmmm dd, yyyy" => "yyyy\"{\u{5E74}}\"mmmmd\"{\u{65E5}}\"",
+        "[\$-F400]h:mm:ss AM/PM" => "h:mm:ss",
     ];
+
 }

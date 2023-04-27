@@ -4,6 +4,7 @@ namespace PhpOffice\PhpSpreadsheet\Locale\Calendar;
 
 use PhpOffice\PhpSpreadsheet\Locale\CalendarData;
 
+
 class CalendarIndian extends CalendarData
 {
     /**
@@ -16,24 +17,24 @@ class CalendarIndian extends CalendarData
      */
     protected $weekdayNames = [
         // Full name
-        'full' => [
-            'Somavara',
-            'Mangalvara',
-            'Budhavara',
-            'Guruvara',
-            'Sukravara',
-            'Sanivara',
-            'Ravivara',
+        "full" => [
+            "Somavara",
+            "Mangalvara",
+            "Budhavara",
+            "Guruvara",
+            "Sukravara",
+            "Sanivara",
+            "Ravivara",
         ],
         // Short name
-        'short' => [
-            'Som',
-            'Mangal',
-            'Budh',
-            'Guru',
-            'Sukra',
-            'Sani',
-            'Ravi',
+        "short" => [
+            "Som",
+            "Mangal",
+            "Budh",
+            "Guru",
+            "Sukra",
+            "Sani",
+            "Ravi",
         ],
     ];
 
@@ -42,34 +43,35 @@ class CalendarIndian extends CalendarData
      */
     protected $monthNames = [
         // Full name
-        'full' => [
-            'Chaitra',
-            'Vaisakha',
-            'Jyaistha',
-            'Asadha',
-            'Sravana',
-            'Bhadra',
-            'Asvina',
-            'Karthika',
-            'Agrahayana',
-            'Pausa',
-            'Magha',
-            'Phalguna',
+        "full" => [
+            "Chaitra",
+            "Vaisakha",
+            "Jyaistha",
+            "Asadha",
+            "Sravana",
+            "Bhadra",
+            "Asvina",
+            "Karthika",
+            "Agrahayana",
+            "Pausa",
+            "Magha",
+            "Phalguna",
         ],
         // Short name
-        'short' => [
-            'Chaitra',
-            'Vaisakha',
-            'Jyaistha',
-            'Asadha',
-            'Sravana',
-            'Bhadra',
-            'Asvina',
-            'Karthika',
-            'Agrahayana',
-            'Pausa',
-            'Magha',
-            'Phalguna',
+        "short" => [
+            "Chaitra",
+            "Vaisakha",
+            "Jyaistha",
+            "Asadha",
+            "Sravana",
+            "Bhadra",
+            "Asvina",
+            "Karthika",
+            "Agrahayana",
+            "Pausa",
+            "Magha",
+            "Phalguna",
         ],
     ];
+
 }

@@ -5,6 +5,7 @@ namespace PhpOffice\PhpSpreadsheet\Locale\Format;
 use PhpOffice\PhpSpreadsheet\Locale\FormatLocale;
 use PhpOffice\PhpSpreadsheet\Locale\LocaleLayout;
 
+
 class lang_si_lk extends FormatLocale
 {
     /**
@@ -15,7 +16,7 @@ class lang_si_lk extends FormatLocale
     /**
      * @var string The locale tag
      */
-    protected $tag = 'si-lk';
+    protected $tag = "si-lk";
 
     /**
      * @var string The currency code "රු."
@@ -25,17 +26,17 @@ class lang_si_lk extends FormatLocale
     /**
      * @var string The decimal separator
      */
-    protected $decimalSeparator = '.';
+    protected $decimalSeparator = ".";
 
     /**
      * @var string The thousands separator
      */
-    protected $thousandsSeparator = ',';
+    protected $thousandsSeparator = ",";
 
     /**
      * @var string The date separator
      */
-    protected $dateSeparator = '-';
+    protected $dateSeparator = "-";
 
     /**
      * @var string[] The numerals representation (0 up to 9)
@@ -51,7 +52,7 @@ class lang_si_lk extends FormatLocale
      */
     protected $weekdayNames = [
         // Full name
-        'full' => [
+        "full" => [
             "\u{DC3}\u{DB3}\u{DD4}\u{DAF}\u{DCF}",
             "\u{D85}\u{D9F}\u{DC4}\u{DBB}\u{DD4}\u{DC0}\u{DCF}\u{DAF}\u{DCF}",
             "\u{DB6}\u{DAF}\u{DCF}\u{DAF}\u{DCF}",
@@ -61,7 +62,7 @@ class lang_si_lk extends FormatLocale
             "\u{D89}\u{DBB}\u{DD2}\u{DAF}\u{DCF}",
         ],
         // Short name
-        'short' => [
+        "short" => [
             "\u{DC3}\u{DB3}\u{DD4}\u{DAF}\u{DCF}",
             "\u{D85}\u{D9F}\u{DC4}",
             "\u{DB6}\u{DAF}\u{DCF}\u{DAF}\u{DCF}",
@@ -77,7 +78,7 @@ class lang_si_lk extends FormatLocale
      */
     protected $monthNames = [
         // Full name
-        'full' => [
+        "full" => [
             "\u{DA2}\u{DB1}\u{DC0}\u{DCF}\u{DBB}\u{DD2}",
             "\u{DB4}\u{DD9}\u{DB6}\u{DBB}\u{DC0}\u{DCF}\u{DBB}\u{DD2}",
             "\u{DB8}\u{DCF}\u{DBB}\u{DCA}\u{DAD}\u{DD4}",
@@ -92,7 +93,7 @@ class lang_si_lk extends FormatLocale
             "\u{DAF}\u{DD9}\u{DC3}\u{DD0}\u{DB8}\u{DCA}\u{DB6}\u{DBB}\u{DCA}",
         ],
         // Short name
-        'short' => [
+        "short" => [
             "\u{DA2}\u{DB1}.",
             "\u{DB4}\u{DD9}\u{DB6}.",
             "\u{DB8}\u{DCF}\u{DBB}\u{DCA}\u{DAD}\u{DD4}.",
@@ -107,4 +108,5 @@ class lang_si_lk extends FormatLocale
             "\u{DAF}\u{DD9}\u{DC3}\u{DD0}.",
         ],
     ];
+
 }
