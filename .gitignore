@@ -13,4 +13,4 @@
 /site
 
 ## phpcs configuration
-##/.phpcs.xml.dist
+/.phpcs.xml.dist
