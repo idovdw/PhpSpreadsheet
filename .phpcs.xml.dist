@@ -14,7 +14,10 @@
     <!--
     For Windows use:
     <arg name="cache" value="C:\\Windows\\Temp\\.phpspreadsheet.phpcs-cache" />
+    
+    <arg name="cache" value="\tmp\.phpspreadsheet.phpcs-cache"/>
     --/>
+    
     <arg name="cache" value="\tmp\.phpspreadsheet.phpcs-cache"/>
     <arg name="colors"/>
     <arg value="np"/>
