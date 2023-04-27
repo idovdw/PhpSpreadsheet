@@ -5,7 +5,6 @@ namespace PhpOffice\PhpSpreadsheet\Locale\Format;
 use PhpOffice\PhpSpreadsheet\Locale\FormatLocale;
 use PhpOffice\PhpSpreadsheet\Locale\LocaleLayout;
 
-
 class lang_az_latn_az extends FormatLocale
 {
     /**
@@ -16,7 +15,7 @@ class lang_az_latn_az extends FormatLocale
     /**
      * @var string The locale tag
      */
-    protected $tag = "az-latn-az";
+    protected $tag = 'az-latn-az';
 
     /**
      * @var string The currency code "₼"
@@ -26,17 +25,17 @@ class lang_az_latn_az extends FormatLocale
     /**
      * @var string The decimal separator
      */
-    protected $decimalSeparator = ",";
+    protected $decimalSeparator = ',';
 
     /**
      * @var string The thousands separator
      */
-    protected $thousandsSeparator = ".";
+    protected $thousandsSeparator = '.';
 
     /**
      * @var string The date separator
      */
-    protected $dateSeparator = ".";
+    protected $dateSeparator = '.';
 
     /**
      * @var string[] The numerals representation (0 up to 9)
@@ -52,24 +51,24 @@ class lang_az_latn_az extends FormatLocale
      */
     protected $weekdayNames = [
         // Full name
-        "full" => [
+        'full' => [
             "bazarçert\u{259}si",
-            "ç\u{259}r\u{15F}\u{259}nb\u{259} ax\u{15F}am\u{131}",
+            "ç\u{259}r\u{15F}\u{259}nb\u{259}\u{a0}ax\u{15F}am\u{131}",
             "ç\u{259}r\u{15F}\u{259}nb\u{259}",
             "cüm\u{259} ax\u{15F}am\u{131}",
             "cüm\u{259}",
             "\u{15F}\u{259}nb\u{259}",
-            "bazar",
+            'bazar',
         ],
         // Short name
-        "short" => [
-            "B.E.",
-            "Ç.A.",
-            "Ç.",
-            "C.A.",
-            "C.",
+        'short' => [
+            'B.E.',
+            'Ç.A.',
+            'Ç.',
+            'C.A.',
+            'C.',
             "\u{15E}.",
-            "B.",
+            'B.',
         ],
     ];
 
@@ -78,35 +77,34 @@ class lang_az_latn_az extends FormatLocale
      */
     protected $monthNames = [
         // Full name
-        "full" => [
-            "yanvar",
-            "fevral",
-            "mart",
-            "aprel",
-            "may",
-            "iyun",
-            "iyul",
-            "avgust",
-            "sentyabr",
-            "oktyabr",
-            "noyabr",
-            "dekabr",
+        'full' => [
+            'yanvar',
+            'fevral',
+            'mart',
+            'aprel',
+            'may',
+            'iyun',
+            'iyul',
+            'avgust',
+            'sentyabr',
+            'oktyabr',
+            'noyabr',
+            'dekabr',
         ],
         // Short name
-        "short" => [
-            "yan",
-            "fev",
-            "mar",
-            "apr",
-            "may",
-            "iyn",
-            "iyl",
-            "avq",
-            "sen",
-            "okt",
-            "noy",
-            "dek",
+        'short' => [
+            'yan',
+            'fev',
+            'mar',
+            'apr',
+            'may',
+            'iyn',
+            'iyl',
+            'avq',
+            'sen',
+            'okt',
+            'noy',
+            'dek',
         ],
     ];
-
 }

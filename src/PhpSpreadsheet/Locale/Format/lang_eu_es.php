@@ -5,7 +5,6 @@ namespace PhpOffice\PhpSpreadsheet\Locale\Format;
 use PhpOffice\PhpSpreadsheet\Locale\FormatLocale;
 use PhpOffice\PhpSpreadsheet\Locale\LocaleLayout;
 
-
 class lang_eu_es extends FormatLocale
 {
     /**
@@ -16,7 +15,7 @@ class lang_eu_es extends FormatLocale
     /**
      * @var string The locale tag
      */
-    protected $tag = "eu-es";
+    protected $tag = 'eu-es';
 
     /**
      * @var string The currency code "€"
@@ -26,17 +25,17 @@ class lang_eu_es extends FormatLocale
     /**
      * @var string The decimal separator
      */
-    protected $decimalSeparator = ",";
+    protected $decimalSeparator = ',';
 
     /**
      * @var string The thousands separator
      */
-    protected $thousandsSeparator = ".";
+    protected $thousandsSeparator = '.';
 
     /**
      * @var string The date separator
      */
-    protected $dateSeparator = "/";
+    protected $dateSeparator = '/';
 
     /**
      * @var string[] The numerals representation (0 up to 9)
@@ -52,24 +51,24 @@ class lang_eu_es extends FormatLocale
      */
     protected $weekdayNames = [
         // Full name
-        "full" => [
-            "astelehena",
-            "asteartea",
-            "asteazkena",
-            "osteguna",
-            "ostirala",
-            "larunbata",
-            "igandea",
+        'full' => [
+            'astelehena',
+            'asteartea',
+            'asteazkena',
+            'osteguna',
+            'ostirala',
+            'larunbata',
+            'igandea',
         ],
         // Short name
-        "short" => [
-            "al.",
-            "ar.",
-            "az.",
-            "og.",
-            "or.",
-            "lr.",
-            "ig.",
+        'short' => [
+            'al.',
+            'ar.',
+            'az.',
+            'og.',
+            'or.',
+            'lr.',
+            'ig.',
         ],
     ];
 
@@ -78,35 +77,34 @@ class lang_eu_es extends FormatLocale
      */
     protected $monthNames = [
         // Full name
-        "full" => [
-            "urtarrila",
-            "otsaila",
-            "martxoa",
-            "apirila",
-            "maiatza",
-            "ekaina",
-            "uztaila",
-            "abuztua",
-            "iraila",
-            "urria",
-            "azaroa",
-            "abendua",
+        'full' => [
+            'urtarrila',
+            'otsaila',
+            'martxoa',
+            'apirila',
+            'maiatza',
+            'ekaina',
+            'uztaila',
+            'abuztua',
+            'iraila',
+            'urria',
+            'azaroa',
+            'abendua',
         ],
         // Short name
-        "short" => [
-            "urt.",
-            "ots.",
-            "mar.",
-            "api.",
-            "mai.",
-            "eka.",
-            "uzt.",
-            "abu.",
-            "ira.",
-            "urr.",
-            "aza.",
-            "abe.",
+        'short' => [
+            'urt.',
+            'ots.',
+            'mar.',
+            'api.',
+            'mai.',
+            'eka.',
+            'uzt.',
+            'abu.',
+            'ira.',
+            'urr.',
+            'aza.',
+            'abe.',
         ],
     ];
-
 }

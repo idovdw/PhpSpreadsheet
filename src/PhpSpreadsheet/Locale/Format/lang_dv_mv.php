@@ -5,7 +5,6 @@ namespace PhpOffice\PhpSpreadsheet\Locale\Format;
 use PhpOffice\PhpSpreadsheet\Locale\FormatLocale;
 use PhpOffice\PhpSpreadsheet\Locale\LocaleLayout;
 
-
 class lang_dv_mv extends FormatLocale
 {
     /**
@@ -16,27 +15,27 @@ class lang_dv_mv extends FormatLocale
     /**
      * @var string The locale tag
      */
-    protected $tag = "dv-mv";
+    protected $tag = 'dv-mv';
 
     /**
      * @var string The currency code "MVR"
      */
-    protected $currencyCode = "MVR";
+    protected $currencyCode = 'MVR';
 
     /**
      * @var string The decimal separator
      */
-    protected $decimalSeparator = ",";
+    protected $decimalSeparator = ',';
 
     /**
      * @var string The thousands separator
      */
-    protected $thousandsSeparator = ".";
+    protected $thousandsSeparator = '.';
 
     /**
      * @var string The date separator
      */
-    protected $dateSeparator = "-";
+    protected $dateSeparator = '-';
 
     /**
      * @var string[] The numerals representation (0 up to 9)
@@ -52,7 +51,7 @@ class lang_dv_mv extends FormatLocale
      */
     protected $weekdayNames = [
         // Full name
-        "full" => [
+        'full' => [
             "\u{780}\u{7AF}\u{789}\u{7A6}",
             "\u{787}\u{7A6}\u{782}\u{7B0}\u{78E}\u{7A7}\u{783}\u{7A6}",
             "\u{784}\u{7AA}\u{78B}\u{7A6}",
@@ -62,7 +61,7 @@ class lang_dv_mv extends FormatLocale
             "\u{787}\u{7A7}\u{78B}\u{7A9}\u{787}\u{7B0}\u{78C}\u{7A6}",
         ],
         // Short name
-        "short" => [
+        'short' => [
             "\u{780}\u{7AF}\u{789}\u{7A6}",
             "\u{787}\u{7A6}\u{782}\u{7B0}\u{78E}\u{7A7}\u{783}\u{7A6}",
             "\u{784}\u{7AA}\u{78B}\u{7A6}",
@@ -78,7 +77,7 @@ class lang_dv_mv extends FormatLocale
      */
     protected $monthNames = [
         // Full name
-        "full" => [
+        'full' => [
             "\u{796}\u{7A6}\u{782}\u{7A6}\u{788}\u{7A6}\u{783}\u{7A9}",
             "\u{78A}\u{7AC}\u{784}\u{7B0}\u{783}\u{7AA}\u{787}\u{7A6}\u{783}\u{7A9}",
             "\u{789}\u{7A7}\u{783}\u{797}\u{7B0}",
@@ -93,7 +92,7 @@ class lang_dv_mv extends FormatLocale
             "\u{791}\u{7A8}\u{790}\u{7AC}\u{789}\u{7B0}\u{784}\u{7A6}\u{783}",
         ],
         // Short name
-        "short" => [
+        'short' => [
             "\u{796}\u{7A6}\u{782}\u{7A6}\u{788}\u{7A6}\u{783}\u{7A9}",
             "\u{78A}\u{7AC}\u{784}\u{7B0}\u{783}\u{7AA}\u{787}\u{7A6}\u{783}\u{7A9}",
             "\u{789}\u{7A7}\u{783}\u{797}\u{7B0}",
@@ -113,14 +112,13 @@ class lang_dv_mv extends FormatLocale
      * @var array<string,string> Replacement formats
      */
     protected $formatReplacements = [
-        "\$ #,##0;\$ -#,##0" => "\$ #,##0;\$ -#,##0",
-        "\$ #,##0;[Red]\$ -#,##0" => "\$ #,##0;[Red]\$ -#,##0",
-        "\$ #,##0.00;\$ -#,##0.00" => "\$ #,##0.00;\$ -#,##0.00",
-        "\$ #,##0.00;[Red]\$ -#,##0.00" => "\$ #,##0.00;[Red]\$ -#,##0.00",
-        "_ \$ * #,##0_ ;_ \$ * -#,##0_ ;_ \$ * \"-\"_ ;_ @_ " => "_ \$ * #,##0_ ;_ \$ * -#,##0_ ;_ \$ * \"-\"_ ;_ @_ ",
-        "_ \$ * #,##0.00_ ;_ \$ * -#,##0.00_ ;_ \$ * \"-\"??_ ;_ @_ " => "_ \$ * #,##0.00_ ;_ \$ * -#,##0.00_ ;_ \$ * \"-\"??_ ;_ @_ ",
-        "[\$-F800]dddd, mmmm dd, yyyy" => "dddd\"{, }\"mmmm d\"{, }\"yyyy",
-        "[\$-F400]h:mm:ss AM/PM" => "h:mm:ss AM/PM",
+        '$ #,##0;$ -#,##0' => '$ #,##0;$ -#,##0',
+        '$ #,##0;[Red]$ -#,##0' => '$ #,##0;[Red]$ -#,##0',
+        '$ #,##0.00;$ -#,##0.00' => '$ #,##0.00;$ -#,##0.00',
+        '$ #,##0.00;[Red]$ -#,##0.00' => '$ #,##0.00;[Red]$ -#,##0.00',
+        '_ $ * #,##0_ ;_ $ * -#,##0_ ;_ $ * "-"_ ;_ @_ ' => '_ $ * #,##0_ ;_ $ * -#,##0_ ;_ $ * "-"_ ;_ @_ ',
+        '_ $ * #,##0.00_ ;_ $ * -#,##0.00_ ;_ $ * "-"??_ ;_ @_ ' => '_ $ * #,##0.00_ ;_ $ * -#,##0.00_ ;_ $ * "-"??_ ;_ @_ ',
+        '[$-F800]dddd, mmmm dd, yyyy' => 'dddd"{, }"mmmm d"{, }"yyyy',
+        '[$-F400]h:mm:ss AM/PM' => 'h:mm:ss AM/PM',
     ];
-
 }

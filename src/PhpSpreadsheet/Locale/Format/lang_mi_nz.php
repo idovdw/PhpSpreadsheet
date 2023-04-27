@@ -5,7 +5,6 @@ namespace PhpOffice\PhpSpreadsheet\Locale\Format;
 use PhpOffice\PhpSpreadsheet\Locale\FormatLocale;
 use PhpOffice\PhpSpreadsheet\Locale\LocaleLayout;
 
-
 class lang_mi_nz extends FormatLocale
 {
     /**
@@ -16,27 +15,27 @@ class lang_mi_nz extends FormatLocale
     /**
      * @var string The locale tag
      */
-    protected $tag = "mi-nz";
+    protected $tag = 'mi-nz';
 
     /**
      * @var string The currency code "$"
      */
-    protected $currencyCode = "\$";
+    protected $currencyCode = '$';
 
     /**
      * @var string The decimal separator
      */
-    protected $decimalSeparator = ".";
+    protected $decimalSeparator = '.';
 
     /**
      * @var string The thousands separator
      */
-    protected $thousandsSeparator = ",";
+    protected $thousandsSeparator = ',';
 
     /**
      * @var string The date separator
      */
-    protected $dateSeparator = "-";
+    protected $dateSeparator = '-';
 
     /**
      * @var string[] The numerals representation (0 up to 9)
@@ -52,7 +51,7 @@ class lang_mi_nz extends FormatLocale
      */
     protected $weekdayNames = [
         // Full name
-        "full" => [
+        'full' => [
             "R\u{101}hina",
             "R\u{101}t\u{16B}",
             "R\u{101}apa",
@@ -62,14 +61,14 @@ class lang_mi_nz extends FormatLocale
             "R\u{101}tapu",
         ],
         // Short name
-        "short" => [
-            "Hi",
+        'short' => [
+            'Hi',
             "T\u{16B}",
-            "Apa",
-            "Pa",
-            "Me",
-            "Ho",
-            "Ta",
+            'Apa',
+            'Pa',
+            'Me',
+            'Ho',
+            'Ta',
         ],
     ];
 
@@ -78,35 +77,34 @@ class lang_mi_nz extends FormatLocale
      */
     protected $monthNames = [
         // Full name
-        "full" => [
+        'full' => [
             "Kohit\u{101}tea",
-            "Huitanguru",
+            'Huitanguru',
             "Pout\u{16B}terangi",
             "Paengawh\u{101}wh\u{101}",
-            "Haratua",
-            "Pipiri",
+            'Haratua',
+            'Pipiri',
             "H\u{14D}ngongoi",
             "Hereturik\u{14D}k\u{101}",
-            "Mahuru",
+            'Mahuru',
             "Whiringa \u{101}-nuku",
             "Whiringa \u{101}-rangi",
-            "Hakihea",
+            'Hakihea',
         ],
         // Short name
-        "short" => [
-            "Kohi",
-            "Hui",
-            "Pou",
-            "Pae",
-            "Hara",
-            "Pipi",
+        'short' => [
+            'Kohi',
+            'Hui',
+            'Pou',
+            'Pae',
+            'Hara',
+            'Pipi',
             "H\u{14D}ngo",
-            "Here",
-            "Mahu",
-            "Nuku",
-            "Rangi",
-            "Haki",
+            'Here',
+            'Mahu',
+            'Nuku',
+            'Rangi',
+            'Haki',
         ],
     ];
-
 }

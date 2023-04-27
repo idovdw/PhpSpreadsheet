@@ -5,7 +5,6 @@ namespace PhpOffice\PhpSpreadsheet\Locale\Format;
 use PhpOffice\PhpSpreadsheet\Locale\FormatLocale;
 use PhpOffice\PhpSpreadsheet\Locale\LocaleLayout;
 
-
 class lang_es_es extends FormatLocale
 {
     /**
@@ -16,7 +15,7 @@ class lang_es_es extends FormatLocale
     /**
      * @var string The locale tag
      */
-    protected $tag = "es-es";
+    protected $tag = 'es-es';
 
     /**
      * @var string The currency code "€"
@@ -26,17 +25,17 @@ class lang_es_es extends FormatLocale
     /**
      * @var string The decimal separator
      */
-    protected $decimalSeparator = ",";
+    protected $decimalSeparator = ',';
 
     /**
      * @var string The thousands separator
      */
-    protected $thousandsSeparator = ".";
+    protected $thousandsSeparator = '.';
 
     /**
      * @var string The date separator
      */
-    protected $dateSeparator = "/";
+    protected $dateSeparator = '/';
 
     /**
      * @var string[] The numerals representation (0 up to 9)
@@ -52,24 +51,24 @@ class lang_es_es extends FormatLocale
      */
     protected $weekdayNames = [
         // Full name
-        "full" => [
-            "lunes",
-            "martes",
-            "miércoles",
-            "jueves",
-            "viernes",
-            "sábado",
-            "domingo",
+        'full' => [
+            'lunes',
+            'martes',
+            'miércoles',
+            'jueves',
+            'viernes',
+            'sábado',
+            'domingo',
         ],
         // Short name
-        "short" => [
-            "lu.",
-            "ma.",
-            "mi.",
-            "ju.",
-            "vi.",
-            "sá.",
-            "do.",
+        'short' => [
+            'lu.',
+            'ma.',
+            'mi.',
+            'ju.',
+            'vi.',
+            'sá.',
+            'do.',
         ],
     ];
 
@@ -78,34 +77,34 @@ class lang_es_es extends FormatLocale
      */
     protected $monthNames = [
         // Full name
-        "full" => [
-            "enero",
-            "febrero",
-            "marzo",
-            "abril",
-            "mayo",
-            "junio",
-            "julio",
-            "agosto",
-            "septiembre",
-            "octubre",
-            "noviembre",
-            "diciembre",
+        'full' => [
+            'enero',
+            'febrero',
+            'marzo',
+            'abril',
+            'mayo',
+            'junio',
+            'julio',
+            'agosto',
+            'septiembre',
+            'octubre',
+            'noviembre',
+            'diciembre',
         ],
         // Short name
-        "short" => [
-            "ene.",
-            "feb.",
-            "mar.",
-            "abr.",
-            "may.",
-            "jun.",
-            "jul.",
-            "ago.",
-            "sep.",
-            "oct.",
-            "nov.",
-            "dic.",
+        'short' => [
+            'ene.',
+            'feb.',
+            'mar.',
+            'abr.',
+            'may.',
+            'jun.',
+            'jul.',
+            'ago.',
+            'sep.',
+            'oct.',
+            'nov.',
+            'dic.',
         ],
     ];
 
@@ -115,23 +114,23 @@ class lang_es_es extends FormatLocale
     protected $weekdayNames_CL = [
         // Full name
         [
-            "lunes",
-            "martes",
-            "miércoles",
-            "jueves",
-            "viernes",
-            "sábado",
-            "domingo",
+            'lunes',
+            'martes',
+            'miércoles',
+            'jueves',
+            'viernes',
+            'sábado',
+            'domingo',
         ],
         // Short name
         [
-            "lu",
-            "ma",
-            "mi",
-            "ju",
-            "vi",
-            "sá",
-            "do",
+            'lu',
+            'ma',
+            'mi',
+            'ju',
+            'vi',
+            'sá',
+            'do',
         ],
     ];
 
@@ -141,33 +140,33 @@ class lang_es_es extends FormatLocale
     protected $monthNames_CL = [
         // Full name
         [
-            "enero",
-            "febrero",
-            "marzo",
-            "abril",
-            "mayo",
-            "junio",
-            "julio",
-            "agosto",
-            "septiembre",
-            "octubre",
-            "noviembre",
-            "diciembre",
+            'enero',
+            'febrero',
+            'marzo',
+            'abril',
+            'mayo',
+            'junio',
+            'julio',
+            'agosto',
+            'septiembre',
+            'octubre',
+            'noviembre',
+            'diciembre',
         ],
         // Short name
         [
-            "ene",
-            "feb",
-            "mar",
-            "abr",
-            "may",
-            "jun",
-            "jul",
-            "ago",
-            "sep",
-            "oct",
-            "nov",
-            "dic",
+            'ene',
+            'feb',
+            'mar',
+            'abr',
+            'may',
+            'jun',
+            'jul',
+            'ago',
+            'sep',
+            'oct',
+            'nov',
+            'dic',
         ],
     ];
 
@@ -175,24 +174,23 @@ class lang_es_es extends FormatLocale
      * @var array<string,string> Replacement formats
      */
     protected $formatReplacements = [
-        "m/d/yyyy" => "dd/mm/yyyy",
-        "d-mmm-yy" => "dd-mmm-yy",
-        "d-mmm" => "dd-mmm",
-        "m/d/yyyy h:mm" => "dd/mm/yyyy h:mm",
-        "#,##0_);(#,##0)" => "#,##0;-#,##0",
-        "#,##0_);[Red](#,##0)" => "#,##0;[Red]-#,##0",
-        "#,##0.00_);(#,##0.00)" => "#,##0.00;-#,##0.00",
-        "#,##0.00_);[Red](#,##0.00)" => "#,##0.00;[Red]-#,##0.00",
-        "\$ #,##0.00" => "\$ #,##0.00",
-        "\$ #,##0.00;[Red]\$ #,##0.00" => "\$ #,##0.00;[Red]\$ #,##0.00",
-        "\$ #,##0.00;\$ -#,##0.00" => "\$ #,##0.00;\$ -#,##0.00",
-        "\$ #,##0.00;[Red]\$ -#,##0.00" => "\$ #,##0.00;[Red]\$ -#,##0.00",
-        "_ \$ * #,##0_ ;_ \$ * -#,##0_ ;_ \$ * \"-\"_ ;_ @_ " => "_ \$ * #,##0_ ;_ \$ * -#,##0_ ;_ \$ * \"-\"_ ;_ @_ ",
-        "_ \$ * #,##0.0_ ;_ \$ * -#,##0.0_ ;_ \$ * \"-\"?_ ;_ @_ " => "_ \$ * #,##0.0_ ;_ \$ * -#,##0.0_ ;_ \$ * \"-\"?_ ;_ @_ ",
-        "_ \$ * #,##0.00_ ;_ \$ * -#,##0.00_ ;_ \$ * \"-\"??_ ;_ @_ " => "_ \$ * #,##0.00_ ;_ \$ * -#,##0.00_ ;_ \$ * \"-\"??_ ;_ @_ ",
-        "_ \$ * #,##0.000_ ;_ \$ * -#,##0.000_ ;_ \$ * \"-\"???_ ;_ @_ " => "_ \$ * #,##0.000_ ;_ \$ * -#,##0.000_ ;_ \$ * \"-\"???_ ;_ @_ ",
-        "[\$-F800]dddd, mmmm dd, yyyy" => "dddd\"{, }\"d\"{ de }\"mmmm\"{ de }\"yyyy",
-        "[\$-F400]h:mm:ss AM/PM" => "h:mm:ss",
+        'm/d/yyyy' => 'dd/mm/yyyy',
+        'd-mmm-yy' => 'dd-mmm-yy',
+        'd-mmm' => 'dd-mmm',
+        'm/d/yyyy h:mm' => 'dd/mm/yyyy h:mm',
+        '#,##0_);(#,##0)' => '#,##0;-#,##0',
+        '#,##0_);[Red](#,##0)' => '#,##0;[Red]-#,##0',
+        '#,##0.00_);(#,##0.00)' => '#,##0.00;-#,##0.00',
+        '#,##0.00_);[Red](#,##0.00)' => '#,##0.00;[Red]-#,##0.00',
+        '$ #,##0.00' => '$ #,##0.00',
+        '$ #,##0.00;[Red]$ #,##0.00' => '$ #,##0.00;[Red]$ #,##0.00',
+        '$ #,##0.00;$ -#,##0.00' => '$ #,##0.00;$ -#,##0.00',
+        '$ #,##0.00;[Red]$ -#,##0.00' => '$ #,##0.00;[Red]$ -#,##0.00',
+        '_ $ * #,##0_ ;_ $ * -#,##0_ ;_ $ * "-"_ ;_ @_ ' => '_ $ * #,##0_ ;_ $ * -#,##0_ ;_ $ * "-"_ ;_ @_ ',
+        '_ $ * #,##0.0_ ;_ $ * -#,##0.0_ ;_ $ * "-"?_ ;_ @_ ' => '_ $ * #,##0.0_ ;_ $ * -#,##0.0_ ;_ $ * "-"?_ ;_ @_ ',
+        '_ $ * #,##0.00_ ;_ $ * -#,##0.00_ ;_ $ * "-"??_ ;_ @_ ' => '_ $ * #,##0.00_ ;_ $ * -#,##0.00_ ;_ $ * "-"??_ ;_ @_ ',
+        '_ $ * #,##0.000_ ;_ $ * -#,##0.000_ ;_ $ * "-"???_ ;_ @_ ' => '_ $ * #,##0.000_ ;_ $ * -#,##0.000_ ;_ $ * "-"???_ ;_ @_ ',
+        '[$-F800]dddd, mmmm dd, yyyy' => 'dddd"{, }"d"{ de }"mmmm"{ de }"yyyy',
+        '[$-F400]h:mm:ss AM/PM' => 'h:mm:ss',
     ];
-
 }

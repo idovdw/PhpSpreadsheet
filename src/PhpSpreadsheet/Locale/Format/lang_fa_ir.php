@@ -5,7 +5,6 @@ namespace PhpOffice\PhpSpreadsheet\Locale\Format;
 use PhpOffice\PhpSpreadsheet\Locale\FormatLocale;
 use PhpOffice\PhpSpreadsheet\Locale\LocaleLayout;
 
-
 class lang_fa_ir extends FormatLocale
 {
     /**
@@ -16,7 +15,7 @@ class lang_fa_ir extends FormatLocale
     /**
      * @var string The locale tag
      */
-    protected $tag = "fa-ir";
+    protected $tag = 'fa-ir';
 
     /**
      * @var string The currency code "ریال"
@@ -36,7 +35,7 @@ class lang_fa_ir extends FormatLocale
     /**
      * @var string The date separator
      */
-    protected $dateSeparator = "/";
+    protected $dateSeparator = '/';
 
     /**
      * @var string[] The numerals representation (0 up to 9)
@@ -52,9 +51,9 @@ class lang_fa_ir extends FormatLocale
      */
     protected $weekdayNames = [
         // Full name
-        "full" => [
+        'full' => [
             "\u{62F}\u{648}\u{634}\u{646}\u{628}\u{647}",
-            "\u{633}\u{647} \u{634}\u{646}\u{628}\u{647}",
+            "\u{633}\u{647}\u{a0}\u{634}\u{646}\u{628}\u{647}",
             "\u{686}\u{647}\u{627}\u{631}\u{634}\u{646}\u{628}\u{647}",
             "\u{67E}\u{646}\u{62C}\u{634}\u{646}\u{628}\u{647}",
             "\u{62C}\u{645}\u{639}\u{647}",
@@ -62,9 +61,9 @@ class lang_fa_ir extends FormatLocale
             "\u{64A}\u{643}\u{634}\u{646}\u{628}\u{647}",
         ],
         // Short name
-        "short" => [
+        'short' => [
             "\u{62F}\u{648}\u{634}\u{646}\u{628}\u{647}",
-            "\u{633}\u{647} \u{634}\u{646}\u{628}\u{647}",
+            "\u{633}\u{647}\u{a0}\u{634}\u{646}\u{628}\u{647}",
             "\u{686}\u{647}\u{627}\u{631}\u{634}\u{646}\u{628}\u{647}",
             "\u{67E}\u{646}\u{62C}\u{634}\u{646}\u{628}\u{647}",
             "\u{62C}\u{645}\u{639}\u{647}",
@@ -78,7 +77,7 @@ class lang_fa_ir extends FormatLocale
      */
     protected $monthNames = [
         // Full name
-        "full" => [
+        'full' => [
             "\u{698}\u{627}\u{646}\u{648}\u{64A}\u{647}",
             "\u{641}\u{648}\u{631}\u{64A}\u{647}",
             "\u{645}\u{627}\u{631}\u{633}",
@@ -93,7 +92,7 @@ class lang_fa_ir extends FormatLocale
             "\u{62F}\u{633}\u{627}\u{645}\u{628}\u{631}",
         ],
         // Short name
-        "short" => [
+        'short' => [
             "\u{698}\u{627}\u{646}\u{648}\u{64A}\u{647}",
             "\u{641}\u{648}\u{631}\u{64A}\u{647}",
             "\u{645}\u{627}\u{631}\u{633}",
@@ -108,5 +107,4 @@ class lang_fa_ir extends FormatLocale
             "\u{62F}\u{633}\u{627}\u{645}\u{628}\u{631}",
         ],
     ];
-
 }

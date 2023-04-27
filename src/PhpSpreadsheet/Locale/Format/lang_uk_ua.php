@@ -5,7 +5,6 @@ namespace PhpOffice\PhpSpreadsheet\Locale\Format;
 use PhpOffice\PhpSpreadsheet\Locale\FormatLocale;
 use PhpOffice\PhpSpreadsheet\Locale\LocaleLayout;
 
-
 class lang_uk_ua extends FormatLocale
 {
     /**
@@ -16,7 +15,7 @@ class lang_uk_ua extends FormatLocale
     /**
      * @var string The locale tag
      */
-    protected $tag = "uk-ua";
+    protected $tag = 'uk-ua';
 
     /**
      * @var string The currency code "₴"
@@ -26,17 +25,17 @@ class lang_uk_ua extends FormatLocale
     /**
      * @var string The decimal separator
      */
-    protected $decimalSeparator = ",";
+    protected $decimalSeparator = ',';
 
     /**
      * @var string The thousands separator
      */
-    protected $thousandsSeparator = " ";
+    protected $thousandsSeparator = "\u{a0}";
 
     /**
      * @var string The date separator
      */
-    protected $dateSeparator = ".";
+    protected $dateSeparator = '.';
 
     /**
      * @var string[] The numerals representation (0 up to 9)
@@ -52,7 +51,7 @@ class lang_uk_ua extends FormatLocale
      */
     protected $weekdayNames = [
         // Full name
-        "full" => [
+        'full' => [
             "\u{43F}\u{43E}\u{43D}\u{435}\u{434}\u{456}\u{43B}\u{43E}\u{43A}",
             "\u{432}\u{456}\u{432}\u{442}\u{43E}\u{440}\u{43E}\u{43A}",
             "\u{441}\u{435}\u{440}\u{435}\u{434}\u{430}",
@@ -62,7 +61,7 @@ class lang_uk_ua extends FormatLocale
             "\u{43D}\u{435}\u{434}\u{456}\u{43B}\u{44F}",
         ],
         // Short name
-        "short" => [
+        'short' => [
             "\u{41F}\u{43D}",
             "\u{412}\u{442}",
             "\u{421}\u{440}",
@@ -78,7 +77,7 @@ class lang_uk_ua extends FormatLocale
      */
     protected $monthNames = [
         // Full name
-        "full" => [
+        'full' => [
             "\u{441}\u{456}\u{447}\u{435}\u{43D}\u{44C}",
             "\u{43B}\u{44E}\u{442}\u{438}\u{439}",
             "\u{431}\u{435}\u{440}\u{435}\u{437}\u{435}\u{43D}\u{44C}",
@@ -93,7 +92,7 @@ class lang_uk_ua extends FormatLocale
             "\u{433}\u{440}\u{443}\u{434}\u{435}\u{43D}\u{44C}",
         ],
         // Short name
-        "short" => [
+        'short' => [
             "\u{421}\u{456}\u{447}",
             "\u{41B}\u{44E}\u{442}",
             "\u{411}\u{435}\u{440}",
@@ -108,5 +107,4 @@ class lang_uk_ua extends FormatLocale
             "\u{413}\u{440}\u{443}",
         ],
     ];
-
 }

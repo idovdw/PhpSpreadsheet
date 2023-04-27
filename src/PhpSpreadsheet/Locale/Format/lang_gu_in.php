@@ -5,7 +5,6 @@ namespace PhpOffice\PhpSpreadsheet\Locale\Format;
 use PhpOffice\PhpSpreadsheet\Locale\FormatLocale;
 use PhpOffice\PhpSpreadsheet\Locale\LocaleLayout;
 
-
 class lang_gu_in extends FormatLocale
 {
     /**
@@ -16,7 +15,7 @@ class lang_gu_in extends FormatLocale
     /**
      * @var string The locale tag
      */
-    protected $tag = "gu-in";
+    protected $tag = 'gu-in';
 
     /**
      * @var string The currency code "₹"
@@ -26,17 +25,17 @@ class lang_gu_in extends FormatLocale
     /**
      * @var string The decimal separator
      */
-    protected $decimalSeparator = ".";
+    protected $decimalSeparator = '.';
 
     /**
      * @var string The thousands separator
      */
-    protected $thousandsSeparator = ",";
+    protected $thousandsSeparator = ',';
 
     /**
      * @var string The date separator
      */
-    protected $dateSeparator = "/";
+    protected $dateSeparator = '/';
 
     /**
      * @var string[] The numerals representation (0 up to 9)
@@ -52,7 +51,7 @@ class lang_gu_in extends FormatLocale
      */
     protected $weekdayNames = [
         // Full name
-        "full" => [
+        'full' => [
             "\u{AB8}\u{ACB}\u{AAE}\u{AB5}\u{ABE}\u{AB0}",
             "\u{AAE}\u{A82}\u{A97}\u{AB3}\u{AB5}\u{ABE}\u{AB0}",
             "\u{AAC}\u{AC1}\u{AA7}\u{AB5}\u{ABE}\u{AB0}",
@@ -62,7 +61,7 @@ class lang_gu_in extends FormatLocale
             "\u{AB0}\u{AB5}\u{ABF}\u{AB5}\u{ABE}\u{AB0}",
         ],
         // Short name
-        "short" => [
+        'short' => [
             "\u{AB8}\u{ACB}\u{AAE}",
             "\u{AAE}\u{A82}\u{A97}\u{AB3}",
             "\u{AAC}\u{AC1}\u{AA7}",
@@ -78,7 +77,7 @@ class lang_gu_in extends FormatLocale
      */
     protected $monthNames = [
         // Full name
-        "full" => [
+        'full' => [
             "\u{A9C}\u{ABE}\u{AA8}\u{ACD}\u{AAF}\u{AC1}\u{A86}\u{AB0}\u{AC0}",
             "\u{AAB}\u{AC7}\u{AAC}\u{ACD}\u{AB0}\u{AC1}\u{A86}\u{AB0}\u{AC0}",
             "\u{AAE}\u{ABE}\u{AB0}\u{ACD}\u{A9A}",
@@ -93,7 +92,7 @@ class lang_gu_in extends FormatLocale
             "\u{AA1}\u{ABF}\u{AB8}\u{AC7}\u{AAE}\u{ACD}\u{AAC}\u{AB0}",
         ],
         // Short name
-        "short" => [
+        'short' => [
             "\u{A9C}\u{ABE}\u{AA8}\u{ACD}\u{AAF}\u{AC1}",
             "\u{AAB}\u{AC7}\u{AAC}\u{ACD}\u{AB0}\u{AC1}",
             "\u{AAE}\u{ABE}\u{AB0}\u{ACD}\u{A9A}",
@@ -108,5 +107,4 @@ class lang_gu_in extends FormatLocale
             "\u{AA1}\u{ABF}\u{AB8}\u{AC7}",
         ],
     ];
-
 }

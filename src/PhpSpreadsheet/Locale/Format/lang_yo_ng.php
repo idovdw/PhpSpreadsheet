@@ -5,7 +5,6 @@ namespace PhpOffice\PhpSpreadsheet\Locale\Format;
 use PhpOffice\PhpSpreadsheet\Locale\FormatLocale;
 use PhpOffice\PhpSpreadsheet\Locale\LocaleLayout;
 
-
 class lang_yo_ng extends FormatLocale
 {
     /**
@@ -16,7 +15,7 @@ class lang_yo_ng extends FormatLocale
     /**
      * @var string The locale tag
      */
-    protected $tag = "yo-ng";
+    protected $tag = 'yo-ng';
 
     /**
      * @var string The currency code "₦"
@@ -26,17 +25,17 @@ class lang_yo_ng extends FormatLocale
     /**
      * @var string The decimal separator
      */
-    protected $decimalSeparator = ".";
+    protected $decimalSeparator = '.';
 
     /**
      * @var string The thousands separator
      */
-    protected $thousandsSeparator = ",";
+    protected $thousandsSeparator = ',';
 
     /**
      * @var string The date separator
      */
-    protected $dateSeparator = "/";
+    protected $dateSeparator = '/';
 
     /**
      * @var string[] The numerals representation (0 up to 9)
@@ -52,7 +51,7 @@ class lang_yo_ng extends FormatLocale
      */
     protected $weekdayNames = [
         // Full name
-        "full" => [
+        'full' => [
             "\u{1ECC}j\u{1ECD}\u{301} Ajé",
             "\u{1ECC}j\u{1ECD}\u{301} Ìs\u{1EB9}\u{301}gun",
             "\u{1ECC}j\u{1ECD}\u{301}rú",
@@ -62,14 +61,14 @@ class lang_yo_ng extends FormatLocale
             "\u{1ECC}j\u{1ECD}\u{301} Àìkú",
         ],
         // Short name
-        "short" => [
-            "Aj",
+        'short' => [
+            'Aj',
             "Ì\u{1E63}g",
             "\u{1ECC}jr",
             "\u{1ECC}jb",
             "\u{1EB8}t",
-            "Àbá",
-            "Àìk",
+            'Àbá',
+            'Àìk',
         ],
     ];
 
@@ -78,33 +77,33 @@ class lang_yo_ng extends FormatLocale
      */
     protected $monthNames = [
         // Full name
-        "full" => [
+        'full' => [
             "\u{1E62}\u{1EB9}\u{301}r\u{1EB9}\u{301}",
-            "Èrèlè",
+            'Èrèlè',
             "\u{1EB8}r\u{1EB9}\u{300}n\u{E0}",
-            "Ìgbé",
+            'Ìgbé',
             "\u{1EB8}\u{300}bibi",
-            "Òkúdu",
+            'Òkúdu',
             "Age\u{323}mo\u{323}",
-            "Ògún",
-            "Owewe",
+            'Ògún',
+            'Owewe',
             "\u{1ECC}\u{300}w\u{E0}r\u{E0}",
-            "Bélú",
+            'Bélú',
             "\u{1ECC}\u{300}p\u{1EB9}\u{300}",
         ],
         // Short name
-        "short" => [
+        'short' => [
             "\u{1E62}\u{1EB9}\u{301}",
-            "Èr",
+            'Èr',
             "\u{1EB8}r",
-            "Ìg",
+            'Ìg',
             "\u{1EB8}\u{300}b",
-            "Òk",
-            "Ag",
-            "Òg",
-            "Ow",
+            'Òk',
+            'Ag',
+            'Òg',
+            'Ow',
             "\u{1ECC}\u{300}w",
-            "Bé",
+            'Bé',
             "\u{1ECC}\u{300}p",
         ],
     ];
@@ -113,26 +112,25 @@ class lang_yo_ng extends FormatLocale
      * @var array<string,string> Replacement formats
      */
     protected $formatReplacements = [
-        "m/d/yyyy" => "dd/mm/yyyy",
-        "d-mmm-yy" => "dd-mmm-yy",
-        "d-mmm" => "dd-mmm",
-        "h:mm" => "hh:mm",
-        "h:mm:ss" => "hh:mm:ss",
-        "m/d/yyyy h:mm" => "dd/mm/yyyy hh:mm",
-        "#,##0_);(#,##0)" => "#,##0;-#,##0",
-        "#,##0_);[Red](#,##0)" => "#,##0;[Red]-#,##0",
-        "#,##0.00_);(#,##0.00)" => "#,##0.00;-#,##0.00",
-        "#,##0.00_);[Red](#,##0.00)" => "#,##0.00;[Red]-#,##0.00",
-        "\$ #,##0.00" => "\$ #,##0.00",
-        "\$ #,##0.00;[Red]\$ #,##0.00" => "\$ #,##0.00;[Red]\$ #,##0.00",
-        "\$ #,##0.00;\$ -#,##0.00" => "\$ #,##0.00;\$ -#,##0.00",
-        "\$ #,##0.00;[Red]\$ -#,##0.00" => "\$ #,##0.00;[Red]\$ -#,##0.00",
-        "_ \$ * #,##0_ ;_ \$ * -#,##0_ ;_ \$ * \"-\"_ ;_ @_ " => "_ \$ * #,##0_ ;_ \$ * -#,##0_ ;_ \$ * \"-\"_ ;_ @_ ",
-        "_ \$ * #,##0.0_ ;_ \$ * -#,##0.0_ ;_ \$ * \"-\"?_ ;_ @_ " => "_ \$ * #,##0.0_ ;_ \$ * -#,##0.0_ ;_ \$ * \"-\"?_ ;_ @_ ",
-        "_ \$ * #,##0.00_ ;_ \$ * -#,##0.00_ ;_ \$ * \"-\"??_ ;_ @_ " => "_ \$ * #,##0.00_ ;_ \$ * -#,##0.00_ ;_ \$ * \"-\"??_ ;_ @_ ",
-        "_ \$ * #,##0.000_ ;_ \$ * -#,##0.000_ ;_ \$ * \"-\"???_ ;_ @_ " => "_ \$ * #,##0.000_ ;_ \$ * -#,##0.000_ ;_ \$ * \"-\"???_ ;_ @_ ",
-        "[\$-F800]dddd, mmmm dd, yyyy" => "dddd d mmmm yyyy",
-        "[\$-F400]h:mm:ss AM/PM" => "h:mm:ss",
+        'm/d/yyyy' => 'dd/mm/yyyy',
+        'd-mmm-yy' => 'dd-mmm-yy',
+        'd-mmm' => 'dd-mmm',
+        'h:mm' => 'hh:mm',
+        'h:mm:ss' => 'hh:mm:ss',
+        'm/d/yyyy h:mm' => 'dd/mm/yyyy hh:mm',
+        '#,##0_);(#,##0)' => '#,##0;-#,##0',
+        '#,##0_);[Red](#,##0)' => '#,##0;[Red]-#,##0',
+        '#,##0.00_);(#,##0.00)' => '#,##0.00;-#,##0.00',
+        '#,##0.00_);[Red](#,##0.00)' => '#,##0.00;[Red]-#,##0.00',
+        '$ #,##0.00' => '$ #,##0.00',
+        '$ #,##0.00;[Red]$ #,##0.00' => '$ #,##0.00;[Red]$ #,##0.00',
+        '$ #,##0.00;$ -#,##0.00' => '$ #,##0.00;$ -#,##0.00',
+        '$ #,##0.00;[Red]$ -#,##0.00' => '$ #,##0.00;[Red]$ -#,##0.00',
+        '_ $ * #,##0_ ;_ $ * -#,##0_ ;_ $ * "-"_ ;_ @_ ' => '_ $ * #,##0_ ;_ $ * -#,##0_ ;_ $ * "-"_ ;_ @_ ',
+        '_ $ * #,##0.0_ ;_ $ * -#,##0.0_ ;_ $ * "-"?_ ;_ @_ ' => '_ $ * #,##0.0_ ;_ $ * -#,##0.0_ ;_ $ * "-"?_ ;_ @_ ',
+        '_ $ * #,##0.00_ ;_ $ * -#,##0.00_ ;_ $ * "-"??_ ;_ @_ ' => '_ $ * #,##0.00_ ;_ $ * -#,##0.00_ ;_ $ * "-"??_ ;_ @_ ',
+        '_ $ * #,##0.000_ ;_ $ * -#,##0.000_ ;_ $ * "-"???_ ;_ @_ ' => '_ $ * #,##0.000_ ;_ $ * -#,##0.000_ ;_ $ * "-"???_ ;_ @_ ',
+        '[$-F800]dddd, mmmm dd, yyyy' => 'dddd d mmmm yyyy',
+        '[$-F400]h:mm:ss AM/PM' => 'h:mm:ss',
     ];
-
 }

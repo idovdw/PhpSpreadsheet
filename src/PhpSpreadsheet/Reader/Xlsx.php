@@ -639,12 +639,10 @@ class Xlsx extends BaseReader
                                 // We shouldn't override any of the built-in MS Excel values (values below id 164)
                                 //  But there's a lot of naughty homebrew xlsx writers that do use "reserved" id values that aren't actually used
                                 //  So we make allowance for them rather than lose formatting masks
-                                $numFmtId = (int)$xf['numFmtId'];
-                                if (($numFmt === null) && ($numFmtId < 164))
-                                {
+                                $numFmtId = (int) $xf['numFmtId'];
+                                if (($numFmt === null) && ($numFmtId < 164)) {
                                     $builtInFmt = NumberFormat::builtInFormatCode($numFmtId);
-                                    if ($builtInFmt !== '')
-                                    {
+                                    if ($builtInFmt !== '') {
                                         // Allow override
                                         $numFmt = $builtInFmt;
                                     }

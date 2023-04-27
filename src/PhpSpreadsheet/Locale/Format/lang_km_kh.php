@@ -5,7 +5,6 @@ namespace PhpOffice\PhpSpreadsheet\Locale\Format;
 use PhpOffice\PhpSpreadsheet\Locale\FormatLocale;
 use PhpOffice\PhpSpreadsheet\Locale\LocaleLayout;
 
-
 class lang_km_kh extends FormatLocale
 {
     /**
@@ -16,7 +15,7 @@ class lang_km_kh extends FormatLocale
     /**
      * @var string The locale tag
      */
-    protected $tag = "km-kh";
+    protected $tag = 'km-kh';
 
     /**
      * @var string The currency code "៛"
@@ -26,17 +25,17 @@ class lang_km_kh extends FormatLocale
     /**
      * @var string The decimal separator
      */
-    protected $decimalSeparator = ",";
+    protected $decimalSeparator = ',';
 
     /**
      * @var string The thousands separator
      */
-    protected $thousandsSeparator = ".";
+    protected $thousandsSeparator = '.';
 
     /**
      * @var string The date separator
      */
-    protected $dateSeparator = "/";
+    protected $dateSeparator = '/';
 
     /**
      * @var string[] The numerals representation (0 up to 9)
@@ -52,7 +51,7 @@ class lang_km_kh extends FormatLocale
      */
     protected $weekdayNames = [
         // Full name
-        "full" => [
+        'full' => [
             "\u{1790}\u{17D2}\u{1784}\u{17C3}\u{1785}\u{17D0}\u{1793}\u{17D2}\u{1791}",
             "\u{1790}\u{17D2}\u{1784}\u{17C3}\u{17A2}\u{1784}\u{17D2}\u{1782}\u{17B6}\u{179A}",
             "\u{1790}\u{17D2}\u{1784}\u{17C3}\u{1796}\u{17BB}\u{1792}",
@@ -62,7 +61,7 @@ class lang_km_kh extends FormatLocale
             "\u{1790}\u{17D2}\u{1784}\u{17C3}\u{17A2}\u{17B6}\u{1791}\u{17B7}\u{178F}\u{17D2}\u{1799}",
         ],
         // Short name
-        "short" => [
+        'short' => [
             "\u{1785}.",
             "\u{17A2}.",
             "\u{1796}\u{17BB}",
@@ -78,7 +77,7 @@ class lang_km_kh extends FormatLocale
      */
     protected $monthNames = [
         // Full name
-        "full" => [
+        'full' => [
             "\u{1798}\u{1780}\u{179A}\u{17B6}",
             "\u{1780}\u{17BB}\u{1798}\u{17D2}\u{1797}\u{17C8}",
             "\u{1798}\u{17B7}\u{1793}\u{17B6}",
@@ -93,7 +92,7 @@ class lang_km_kh extends FormatLocale
             "\u{1792}\u{17D2}\u{1793}\u{17BC}",
         ],
         // Short name
-        "short" => [
+        'short' => [
             "\u{17E1}",
             "\u{17E2}",
             "\u{17E3}",
@@ -108,5 +107,4 @@ class lang_km_kh extends FormatLocale
             "\u{17E1}\u{17E2}",
         ],
     ];
-
 }

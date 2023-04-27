@@ -5,7 +5,6 @@ namespace PhpOffice\PhpSpreadsheet\Locale\Format;
 use PhpOffice\PhpSpreadsheet\Locale\FormatLocale;
 use PhpOffice\PhpSpreadsheet\Locale\LocaleLayout;
 
-
 class lang_ko_kr extends FormatLocale
 {
     /**
@@ -16,7 +15,7 @@ class lang_ko_kr extends FormatLocale
     /**
      * @var string The locale tag
      */
-    protected $tag = "ko-kr";
+    protected $tag = 'ko-kr';
 
     /**
      * @var string The currency code "₩"
@@ -26,17 +25,17 @@ class lang_ko_kr extends FormatLocale
     /**
      * @var string The decimal separator
      */
-    protected $decimalSeparator = ".";
+    protected $decimalSeparator = '.';
 
     /**
      * @var string The thousands separator
      */
-    protected $thousandsSeparator = ",";
+    protected $thousandsSeparator = ',';
 
     /**
      * @var string The date separator
      */
-    protected $dateSeparator = "-";
+    protected $dateSeparator = '-';
 
     /**
      * @var string[] The numerals representation (0 up to 9)
@@ -52,7 +51,7 @@ class lang_ko_kr extends FormatLocale
      */
     protected $weekdayNames = [
         // Full name
-        "full" => [
+        'full' => [
             "\u{C6D4}\u{C694}\u{C77C}",
             "\u{D654}\u{C694}\u{C77C}",
             "\u{C218}\u{C694}\u{C77C}",
@@ -62,7 +61,7 @@ class lang_ko_kr extends FormatLocale
             "\u{C77C}\u{C694}\u{C77C}",
         ],
         // Short name
-        "short" => [
+        'short' => [
             "\u{C6D4}",
             "\u{D654}",
             "\u{C218}",
@@ -78,7 +77,7 @@ class lang_ko_kr extends FormatLocale
      */
     protected $monthNames = [
         // Full name
-        "full" => [
+        'full' => [
             "1\u{C6D4}",
             "2\u{C6D4}",
             "3\u{C6D4}",
@@ -93,19 +92,19 @@ class lang_ko_kr extends FormatLocale
             "12\u{C6D4}",
         ],
         // Short name
-        "short" => [
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9",
-            "10",
-            "11",
-            "12",
+        'short' => [
+            '1',
+            '2',
+            '3',
+            '4',
+            '5',
+            '6',
+            '7',
+            '8',
+            '9',
+            '10',
+            '11',
+            '12',
         ],
     ];
 
@@ -113,17 +112,16 @@ class lang_ko_kr extends FormatLocale
      * @var array<string,string> Replacement formats
      */
     protected $formatReplacements = [
-        "m/d/yyyy" => "yyyy/mm/dd",
-        "d-mmm-yy" => "dd/mmm/yy",
-        "d-mmm" => "dd/mmm",
-        "mmm-yy" => "mmm/yy",
-        "m/d/yyyy h:mm" => "yyyy/mm/dd h:mm",
-        "#,##0_);(#,##0)" => "#,##0;-#,##0",
-        "#,##0_);[Red](#,##0)" => "#,##0;[Red]-#,##0",
-        "#,##0.00_);(#,##0.00)" => "#,##0.00;-#,##0.00",
-        "#,##0.00_);[Red](#,##0.00)" => "#,##0.00;[Red]-#,##0.00",
-        "[\$-F800]dddd, mmmm dd, yyyy" => "yyyy\"{\u{B144} }\"mmmm d\"{\u{C77C} }\"dddd",
-        "[\$-F400]h:mm:ss AM/PM" => "\"{\u{C624}\u{C804} }\"h:mm:ss",
+        'm/d/yyyy' => 'yyyy/mm/dd',
+        'd-mmm-yy' => 'dd/mmm/yy',
+        'd-mmm' => 'dd/mmm',
+        'mmm-yy' => 'mmm/yy',
+        'm/d/yyyy h:mm' => 'yyyy/mm/dd h:mm',
+        '#,##0_);(#,##0)' => '#,##0;-#,##0',
+        '#,##0_);[Red](#,##0)' => '#,##0;[Red]-#,##0',
+        '#,##0.00_);(#,##0.00)' => '#,##0.00;-#,##0.00',
+        '#,##0.00_);[Red](#,##0.00)' => '#,##0.00;[Red]-#,##0.00',
+        '[$-F800]dddd, mmmm dd, yyyy' => "yyyy\"{\u{B144} }\"mmmm d\"{\u{C77C} }\"dddd",
+        '[$-F400]h:mm:ss AM/PM' => "\"{\u{C624}\u{C804} }\"h:mm:ss",
     ];
-
 }

@@ -5,7 +5,6 @@ namespace PhpOffice\PhpSpreadsheet\Locale\Format;
 use PhpOffice\PhpSpreadsheet\Locale\FormatLocale;
 use PhpOffice\PhpSpreadsheet\Locale\LocaleLayout;
 
-
 class lang_sr_latn_cs extends FormatLocale
 {
     /**
@@ -16,27 +15,27 @@ class lang_sr_latn_cs extends FormatLocale
     /**
      * @var string The locale tag
      */
-    protected $tag = "sr-latn-cs";
+    protected $tag = 'sr-latn-cs';
 
     /**
      * @var string The currency code "CSD"
      */
-    protected $currencyCode = "CSD";
+    protected $currencyCode = 'CSD';
 
     /**
      * @var string The decimal separator
      */
-    protected $decimalSeparator = ",";
+    protected $decimalSeparator = ',';
 
     /**
      * @var string The thousands separator
      */
-    protected $thousandsSeparator = ".";
+    protected $thousandsSeparator = '.';
 
     /**
      * @var string The date separator
      */
-    protected $dateSeparator = ".";
+    protected $dateSeparator = '.';
 
     /**
      * @var string[] The numerals representation (0 up to 9)
@@ -52,24 +51,24 @@ class lang_sr_latn_cs extends FormatLocale
      */
     protected $weekdayNames = [
         // Full name
-        "full" => [
-            "ponedeljak",
-            "utorak",
-            "sreda",
+        'full' => [
+            'ponedeljak',
+            'utorak',
+            'sreda',
             "\u{10D}etvrtak",
-            "petak",
-            "subota",
-            "nedelja",
+            'petak',
+            'subota',
+            'nedelja',
         ],
         // Short name
-        "short" => [
-            "pon.",
-            "uto.",
-            "sre.",
+        'short' => [
+            'pon.',
+            'uto.',
+            'sre.',
             "\u{10D}et.",
-            "pet.",
-            "sub.",
-            "ned.",
+            'pet.',
+            'sub.',
+            'ned.',
         ],
     ];
 
@@ -78,35 +77,34 @@ class lang_sr_latn_cs extends FormatLocale
      */
     protected $monthNames = [
         // Full name
-        "full" => [
-            "januar",
-            "februar",
-            "mart",
-            "april",
-            "maj",
-            "jun",
-            "jul",
-            "avgust",
-            "septembar",
-            "oktobar",
-            "novembar",
-            "decembar",
+        'full' => [
+            'januar',
+            'februar',
+            'mart',
+            'april',
+            'maj',
+            'jun',
+            'jul',
+            'avgust',
+            'septembar',
+            'oktobar',
+            'novembar',
+            'decembar',
         ],
         // Short name
-        "short" => [
-            "jan.",
-            "feb.",
-            "mart",
-            "apr.",
-            "maj",
-            "jun",
-            "jul",
-            "avg.",
-            "sept.",
-            "okt.",
-            "nov.",
-            "dec.",
+        'short' => [
+            'jan.',
+            'feb.',
+            'mart',
+            'apr.',
+            'maj',
+            'jun',
+            'jul',
+            'avg.',
+            'sept.',
+            'okt.',
+            'nov.',
+            'dec.',
         ],
     ];
-
 }

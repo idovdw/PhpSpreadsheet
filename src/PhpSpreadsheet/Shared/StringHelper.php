@@ -4,7 +4,6 @@ namespace PhpOffice\PhpSpreadsheet\Shared;
 
 use PhpOffice\PhpSpreadsheet\Locale\CurrentLocale;
 
-
 class StringHelper
 {
     /**
@@ -56,7 +55,6 @@ class StringHelper
      */
     private static $iconvOptions = '//IGNORE//TRANSLIT';
 
-    
     /**
      * Build control characters array.
      */
@@ -642,9 +640,8 @@ class StringHelper
     public static function testStringAsNumeric($textValue)
     {
         // @fix @ido
-        if (preg_match('/([\d]+(\.[\d]+)?)/u', $textValue, $match))
-        {
-            return (float)$match[0];
+        if (preg_match('/([\d]+(\.[\d]+)?)/u', $textValue, $match)) {
+            return (float) $match[0];
         }
 
         return $textValue;

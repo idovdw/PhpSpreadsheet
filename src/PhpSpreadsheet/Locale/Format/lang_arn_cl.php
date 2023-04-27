@@ -5,7 +5,6 @@ namespace PhpOffice\PhpSpreadsheet\Locale\Format;
 use PhpOffice\PhpSpreadsheet\Locale\FormatLocale;
 use PhpOffice\PhpSpreadsheet\Locale\LocaleLayout;
 
-
 class lang_arn_cl extends FormatLocale
 {
     /**
@@ -16,27 +15,27 @@ class lang_arn_cl extends FormatLocale
     /**
      * @var string The locale tag
      */
-    protected $tag = "arn-cl";
+    protected $tag = 'arn-cl';
 
     /**
      * @var string The currency code "CLP"
      */
-    protected $currencyCode = "CLP";
+    protected $currencyCode = 'CLP';
 
     /**
      * @var string The decimal separator
      */
-    protected $decimalSeparator = ",";
+    protected $decimalSeparator = ',';
 
     /**
      * @var string The thousands separator
      */
-    protected $thousandsSeparator = ".";
+    protected $thousandsSeparator = '.';
 
     /**
      * @var string The date separator
      */
-    protected $dateSeparator = "-";
+    protected $dateSeparator = '-';
 
     /**
      * @var string[] The numerals representation (0 up to 9)
@@ -52,24 +51,24 @@ class lang_arn_cl extends FormatLocale
      */
     protected $weekdayNames = [
         // Full name
-        "full" => [
-            "Epu Ante",
-            "Kila Ante",
-            "Meli Ante",
-            "Kechu Ante",
-            "Cayu Ante",
-            "Regle Ante",
-            "Kiñe Ante",
+        'full' => [
+            'Epu Ante',
+            'Kila Ante',
+            'Meli Ante',
+            'Kechu Ante',
+            'Cayu Ante',
+            'Regle Ante',
+            'Kiñe Ante',
         ],
         // Short name
-        "short" => [
-            "Epu",
-            "Kila",
-            "Meli",
-            "Kechu",
-            "Cayu",
-            "Regle",
-            "Kiñe",
+        'short' => [
+            'Epu',
+            'Kila',
+            'Meli',
+            'Kechu',
+            'Cayu',
+            'Regle',
+            'Kiñe',
         ],
     ];
 
@@ -78,35 +77,34 @@ class lang_arn_cl extends FormatLocale
      */
     protected $monthNames = [
         // Full name
-        "full" => [
-            "Kiñe Tripantu",
-            "Epu",
-            "Kila",
-            "Meli",
-            "Kechu",
-            "Cayu",
-            "Regle",
-            "Purha",
-            "Aiya",
-            "Marhi",
-            "Marhi Kiñe",
-            "Marhi Epu",
+        'full' => [
+            'Kiñe Tripantu',
+            'Epu',
+            'Kila',
+            'Meli',
+            'Kechu',
+            'Cayu',
+            'Regle',
+            'Purha',
+            'Aiya',
+            'Marhi',
+            'Marhi Kiñe',
+            'Marhi Epu',
         ],
         // Short name
-        "short" => [
-            "Kiñe Tripantu",
-            "Epu",
-            "Kila",
-            "Meli",
-            "Kechu",
-            "Cayu",
-            "Regle",
-            "Purha",
-            "Aiya",
-            "Marhi",
-            "Marhi Kiñe",
-            "Marhi Epu",
+        'short' => [
+            'Kiñe Tripantu',
+            'Epu',
+            'Kila',
+            'Meli',
+            'Kechu',
+            'Cayu',
+            'Regle',
+            'Purha',
+            'Aiya',
+            'Marhi',
+            'Marhi Kiñe',
+            'Marhi Epu',
         ],
     ];
-
 }

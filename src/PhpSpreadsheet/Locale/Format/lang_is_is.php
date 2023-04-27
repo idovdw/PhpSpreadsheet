@@ -5,7 +5,6 @@ namespace PhpOffice\PhpSpreadsheet\Locale\Format;
 use PhpOffice\PhpSpreadsheet\Locale\FormatLocale;
 use PhpOffice\PhpSpreadsheet\Locale\LocaleLayout;
 
-
 class lang_is_is extends FormatLocale
 {
     /**
@@ -16,27 +15,27 @@ class lang_is_is extends FormatLocale
     /**
      * @var string The locale tag
      */
-    protected $tag = "is-is";
+    protected $tag = 'is-is';
 
     /**
      * @var string The currency code "ISK"
      */
-    protected $currencyCode = "ISK";
+    protected $currencyCode = 'ISK';
 
     /**
      * @var string The decimal separator
      */
-    protected $decimalSeparator = ",";
+    protected $decimalSeparator = ',';
 
     /**
      * @var string The thousands separator
      */
-    protected $thousandsSeparator = ".";
+    protected $thousandsSeparator = '.';
 
     /**
      * @var string The date separator
      */
-    protected $dateSeparator = ".";
+    protected $dateSeparator = '.';
 
     /**
      * @var string[] The numerals representation (0 up to 9)
@@ -52,24 +51,24 @@ class lang_is_is extends FormatLocale
      */
     protected $weekdayNames = [
         // Full name
-        "full" => [
-            "mánudagur",
+        'full' => [
+            'mánudagur',
             "\u{FE}riðjudagur",
-            "miðvikudagur",
-            "fimmtudagur",
-            "föstudagur",
-            "laugardagur",
-            "sunnudagur",
+            'miðvikudagur',
+            'fimmtudagur',
+            'föstudagur',
+            'laugardagur',
+            'sunnudagur',
         ],
         // Short name
-        "short" => [
-            "mán.",
+        'short' => [
+            'mán.',
             "\u{FE}ri.",
-            "mið.",
-            "fim.",
-            "fös.",
-            "lau.",
-            "sun.",
+            'mið.',
+            'fim.',
+            'fös.',
+            'lau.',
+            'sun.',
         ],
     ];
 
@@ -78,35 +77,34 @@ class lang_is_is extends FormatLocale
      */
     protected $monthNames = [
         // Full name
-        "full" => [
-            "janúar",
-            "febrúar",
-            "mars",
-            "apríl",
-            "maí",
-            "júní",
-            "júlí",
-            "ágúst",
-            "september",
-            "október",
-            "nóvember",
-            "desember",
+        'full' => [
+            'janúar',
+            'febrúar',
+            'mars',
+            'apríl',
+            'maí',
+            'júní',
+            'júlí',
+            'ágúst',
+            'september',
+            'október',
+            'nóvember',
+            'desember',
         ],
         // Short name
-        "short" => [
-            "jan.",
-            "feb.",
-            "mar.",
-            "apr.",
-            "maí",
-            "jún.",
-            "júl.",
-            "ágú.",
-            "sep.",
-            "okt.",
-            "nóv.",
-            "des.",
+        'short' => [
+            'jan.',
+            'feb.',
+            'mar.',
+            'apr.',
+            'maí',
+            'jún.',
+            'júl.',
+            'ágú.',
+            'sep.',
+            'okt.',
+            'nóv.',
+            'des.',
         ],
     ];
-
 }

@@ -10,11 +10,9 @@ use PhpOffice\PhpSpreadsheet\Calculation\Functions;
 use PhpOffice\PhpSpreadsheet\Cell\Cell;
 use PhpOffice\PhpSpreadsheet\Exception;
 use PhpOffice\PhpSpreadsheet\Exception as PhpSpreadsheetException;
+use PhpOffice\PhpSpreadsheet\Locale\CurrentLocale;
 use PhpOffice\PhpSpreadsheet\Shared\Date as SharedDate;
 use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
-
-use PhpOffice\PhpSpreadsheet\Locale\CurrentLocale;
-
 
 class Date
 {
@@ -233,7 +231,7 @@ class Date
         $seconds = round($partDay * 60);
 
         $microseconds = fmod(round($excelTimestamp * 86400, 7), 1) * 1000000;
-        
+
         if ($days >= 0) {
             $days = '+' . $days;
         }
@@ -517,46 +515,37 @@ class Date
     public static function monthStringToNumber($monthName)
     {
         // Months 1-12
-        if (preg_match('/^([1-9]|10|11|12)$/', $monthName))
-        {
+        if (preg_match('/^([1-9]|10|11|12)$/', $monthName)) {
             // Digits only
-            return intval($monthName);
-            }
-        
+            return (int) $monthName;
+        }
+
         // @fix @ido Use current locale
         $translations = CurrentLocale::getDateTranslations(true);
-        foreach($translations['months']['full'] as $monthIndex => $fullMonthName)
-        {
-            if (strcasecmp($monthName, $fullMonthName) == 0)
-            {
-                return $monthIndex+1;
+        foreach ($translations['months']['full'] as $monthIndex => $fullMonthName) {
+            if (strcasecmp($monthName, $fullMonthName) == 0) {
+                return $monthIndex + 1;
+            }
         }
-        }
-        foreach($translations['months']['short'] as $monthIndex => $shortMonthName)
-        {
-            if (strcasecmp($monthName, $shortMonthName) == 0)
-            {
-                return $monthIndex+1;
+        foreach ($translations['months']['short'] as $monthIndex => $shortMonthName) {
+            if (strcasecmp($monthName, $shortMonthName) == 0) {
+                return $monthIndex + 1;
             }
         }
 
         // @fix @ido Use en-us locale
         $translations = CurrentLocale::getDateTranslations('en-us');
-        foreach($translations['months']['full'] as $monthIndex => $fullMonthName)
-        {
-            if (strcasecmp($monthName, $fullMonthName) == 0)
-            {
-                return $monthIndex+1;
+        foreach ($translations['months']['full'] as $monthIndex => $fullMonthName) {
+            if (strcasecmp($monthName, $fullMonthName) == 0) {
+                return $monthIndex + 1;
             }
         }
-        foreach($translations['months']['short'] as $monthIndex => $shortMonthName)
-        {
-            if (strcasecmp($monthName, $shortMonthName) == 0)
-            {
-                return $monthIndex+1;
+        foreach ($translations['months']['short'] as $monthIndex => $shortMonthName) {
+            if (strcasecmp($monthName, $shortMonthName) == 0) {
+                return $monthIndex + 1;
             }
         }
-        
+
         return $monthName;
     }
 
@@ -573,7 +562,7 @@ class Date
         //$strippedDayValue = (str_replace(self::$numberSuffixes, '', $day));
         $strippedDayValue = preg_replace('/[^\d]/', '', $day);
         if (is_numeric($strippedDayValue)) {
-            return (int)$strippedDayValue;
+            return (int) $strippedDayValue;
         }
 
         return $day;

@@ -5,7 +5,6 @@ namespace PhpOffice\PhpSpreadsheet\Locale\Format;
 use PhpOffice\PhpSpreadsheet\Locale\FormatLocale;
 use PhpOffice\PhpSpreadsheet\Locale\LocaleLayout;
 
-
 class lang_kn_in extends FormatLocale
 {
     /**
@@ -16,7 +15,7 @@ class lang_kn_in extends FormatLocale
     /**
      * @var string The locale tag
      */
-    protected $tag = "kn-in";
+    protected $tag = 'kn-in';
 
     /**
      * @var string The currency code "₹"
@@ -26,17 +25,17 @@ class lang_kn_in extends FormatLocale
     /**
      * @var string The decimal separator
      */
-    protected $decimalSeparator = ".";
+    protected $decimalSeparator = '.';
 
     /**
      * @var string The thousands separator
      */
-    protected $thousandsSeparator = ",";
+    protected $thousandsSeparator = ',';
 
     /**
      * @var string The date separator
      */
-    protected $dateSeparator = "/";
+    protected $dateSeparator = '/';
 
     /**
      * @var string[] The numerals representation (0 up to 9)
@@ -52,7 +51,7 @@ class lang_kn_in extends FormatLocale
      */
     protected $weekdayNames = [
         // Full name
-        "full" => [
+        'full' => [
             "\u{CB8}\u{CCB}\u{CAE}\u{CB5}\u{CBE}\u{CB0}",
             "\u{CAE}\u{C82}\u{C97}\u{CB3}\u{CB5}\u{CBE}\u{CB0}",
             "\u{CAC}\u{CC1}\u{CA7}\u{CB5}\u{CBE}\u{CB0}",
@@ -62,7 +61,7 @@ class lang_kn_in extends FormatLocale
             "\u{CAD}\u{CBE}\u{CA8}\u{CC1}\u{CB5}\u{CBE}\u{CB0}",
         ],
         // Short name
-        "short" => [
+        'short' => [
             "\u{CB8}\u{CCB}\u{CAE}.",
             "\u{CAE}\u{C82}\u{C97}\u{CB3}.",
             "\u{CAC}\u{CC1}\u{CA7}.",
@@ -78,7 +77,7 @@ class lang_kn_in extends FormatLocale
      */
     protected $monthNames = [
         // Full name
-        "full" => [
+        'full' => [
             "\u{C9C}\u{CA8}\u{CB5}\u{CB0}\u{CBF}",
             "\u{CAB}\u{CC6}\u{CAC}\u{CCD}\u{CB0}\u{CB5}\u{CB0}\u{CBF}",
             "\u{CAE}\u{CBE}\u{CB0}\u{CCD}\u{C9A}\u{CCD}",
@@ -93,7 +92,7 @@ class lang_kn_in extends FormatLocale
             "\u{CA1}\u{CBF}\u{CB8}\u{CC6}\u{C82}\u{CAC}\u{CB0}\u{CCD}",
         ],
         // Short name
-        "short" => [
+        'short' => [
             "\u{C9C}\u{CA8}\u{CB5}\u{CB0}\u{CBF}",
             "\u{CAB}\u{CC6}\u{CAC}\u{CCD}\u{CB0}\u{CB5}\u{CB0}\u{CBF}",
             "\u{CAE}\u{CBE}\u{CB0}\u{CCD}\u{C9A}\u{CCD}",
@@ -108,5 +107,4 @@ class lang_kn_in extends FormatLocale
             "\u{CA1}\u{CBF}\u{CB8}\u{CC6}\u{C82}\u{CAC}\u{CB0}\u{CCD}",
         ],
     ];
-
 }

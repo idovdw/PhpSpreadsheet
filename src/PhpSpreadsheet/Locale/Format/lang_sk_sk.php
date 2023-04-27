@@ -5,7 +5,6 @@ namespace PhpOffice\PhpSpreadsheet\Locale\Format;
 use PhpOffice\PhpSpreadsheet\Locale\FormatLocale;
 use PhpOffice\PhpSpreadsheet\Locale\LocaleLayout;
 
-
 class lang_sk_sk extends FormatLocale
 {
     /**
@@ -16,7 +15,7 @@ class lang_sk_sk extends FormatLocale
     /**
      * @var string The locale tag
      */
-    protected $tag = "sk-sk";
+    protected $tag = 'sk-sk';
 
     /**
      * @var string The currency code "€"
@@ -26,17 +25,17 @@ class lang_sk_sk extends FormatLocale
     /**
      * @var string The decimal separator
      */
-    protected $decimalSeparator = ",";
+    protected $decimalSeparator = ',';
 
     /**
      * @var string The thousands separator
      */
-    protected $thousandsSeparator = " ";
+    protected $thousandsSeparator = "\u{a0}";
 
     /**
      * @var string The date separator
      */
-    protected $dateSeparator = ". ";
+    protected $dateSeparator = '. ';
 
     /**
      * @var string[] The numerals representation (0 up to 9)
@@ -52,24 +51,24 @@ class lang_sk_sk extends FormatLocale
      */
     protected $weekdayNames = [
         // Full name
-        "full" => [
-            "pondelok",
-            "utorok",
-            "streda",
+        'full' => [
+            'pondelok',
+            'utorok',
+            'streda',
             "\u{161}tvrtok",
-            "piatok",
-            "sobota",
+            'piatok',
+            'sobota',
             "nede\u{13E}a",
         ],
         // Short name
-        "short" => [
-            "po",
-            "ut",
-            "st",
+        'short' => [
+            'po',
+            'ut',
+            'st',
             "\u{161}t",
-            "pi",
-            "so",
-            "ne",
+            'pi',
+            'so',
+            'ne',
         ],
     ];
 
@@ -78,35 +77,34 @@ class lang_sk_sk extends FormatLocale
      */
     protected $monthNames = [
         // Full name
-        "full" => [
-            "január",
-            "február",
-            "marec",
-            "apríl",
-            "máj",
-            "jún",
-            "júl",
-            "august",
-            "september",
-            "október",
-            "november",
-            "december",
+        'full' => [
+            'január',
+            'február',
+            'marec',
+            'apríl',
+            'máj',
+            'jún',
+            'júl',
+            'august',
+            'september',
+            'október',
+            'november',
+            'december',
         ],
         // Short name
-        "short" => [
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9",
-            "10",
-            "11",
-            "12",
+        'short' => [
+            '1',
+            '2',
+            '3',
+            '4',
+            '5',
+            '6',
+            '7',
+            '8',
+            '9',
+            '10',
+            '11',
+            '12',
         ],
     ];
-
 }

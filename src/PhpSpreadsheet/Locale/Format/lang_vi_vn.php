@@ -5,7 +5,6 @@ namespace PhpOffice\PhpSpreadsheet\Locale\Format;
 use PhpOffice\PhpSpreadsheet\Locale\FormatLocale;
 use PhpOffice\PhpSpreadsheet\Locale\LocaleLayout;
 
-
 class lang_vi_vn extends FormatLocale
 {
     /**
@@ -16,7 +15,7 @@ class lang_vi_vn extends FormatLocale
     /**
      * @var string The locale tag
      */
-    protected $tag = "vi-vn";
+    protected $tag = 'vi-vn';
 
     /**
      * @var string The currency code "₫"
@@ -26,17 +25,17 @@ class lang_vi_vn extends FormatLocale
     /**
      * @var string The decimal separator
      */
-    protected $decimalSeparator = ",";
+    protected $decimalSeparator = ',';
 
     /**
      * @var string The thousands separator
      */
-    protected $thousandsSeparator = ".";
+    protected $thousandsSeparator = '.';
 
     /**
      * @var string The date separator
      */
-    protected $dateSeparator = "/";
+    protected $dateSeparator = '/';
 
     /**
      * @var string[] The numerals representation (0 up to 9)
@@ -52,7 +51,7 @@ class lang_vi_vn extends FormatLocale
      */
     protected $weekdayNames = [
         // Full name
-        "full" => [
+        'full' => [
             "Th\u{1B0}\u{301} Hai",
             "Th\u{1B0}\u{301} Ba",
             "Th\u{1B0}\u{301} T\u{1B0}",
@@ -62,14 +61,14 @@ class lang_vi_vn extends FormatLocale
             "Chu\u{309} Nhâ\u{323}t",
         ],
         // Short name
-        "short" => [
-            "T2",
-            "T3",
-            "T4",
-            "T5",
-            "T6",
-            "T7",
-            "CN",
+        'short' => [
+            'T2',
+            'T3',
+            'T4',
+            'T5',
+            'T6',
+            'T7',
+            'CN',
         ],
     ];
 
@@ -78,7 +77,7 @@ class lang_vi_vn extends FormatLocale
      */
     protected $monthNames = [
         // Full name
-        "full" => [
+        'full' => [
             "Tha\u{301}ng Giêng",
             "Tha\u{301}ng Hai",
             "Tha\u{301}ng Ba",
@@ -93,20 +92,19 @@ class lang_vi_vn extends FormatLocale
             "Tha\u{301}ng M\u{1B0}\u{1A1}\u{300}i Hai",
         ],
         // Short name
-        "short" => [
-            "Thg1",
-            "Thg2",
-            "Thg3",
-            "Thg4",
-            "Thg5",
-            "Thg6",
-            "Thg7",
-            "Thg8",
-            "Thg9",
-            "Thg10",
-            "Thg11",
-            "Thg12",
+        'short' => [
+            'Thg1',
+            'Thg2',
+            'Thg3',
+            'Thg4',
+            'Thg5',
+            'Thg6',
+            'Thg7',
+            'Thg8',
+            'Thg9',
+            'Thg10',
+            'Thg11',
+            'Thg12',
         ],
     ];
-
 }
