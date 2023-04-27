@@ -5,7 +5,6 @@ namespace PhpOffice\PhpSpreadsheet\Locale\Format;
 use PhpOffice\PhpSpreadsheet\Locale\FormatLocale;
 use PhpOffice\PhpSpreadsheet\Locale\LocaleLayout;
 
-
 class lang_sd_arab_pk extends FormatLocale
 {
     /**
@@ -16,12 +15,12 @@ class lang_sd_arab_pk extends FormatLocale
     /**
      * @var string The locale tag
      */
-    protected $tag = "sd-arab-pk";
+    protected $tag = 'sd-arab-pk';
 
     /**
      * @var string The currency code "Rs"
      */
-    protected $currencyCode = "Rs";
+    protected $currencyCode = 'Rs';
 
     /**
      * @var string The decimal separator
@@ -36,7 +35,7 @@ class lang_sd_arab_pk extends FormatLocale
     /**
      * @var string The date separator
      */
-    protected $dateSeparator = "-";
+    protected $dateSeparator = '-';
 
     /**
      * @var string[] The numerals representation (0 up to 9)
@@ -52,7 +51,7 @@ class lang_sd_arab_pk extends FormatLocale
      */
     protected $weekdayNames = [
         // Full name
-        "full" => [
+        'full' => [
             "\u{627}\u{6B1}\u{627}\u{631}\u{648}",
             "\u{627}\u{631}\u{628}\u{639}",
             "\u{62E}\u{645}\u{64A}\u{633}",
@@ -62,7 +61,7 @@ class lang_sd_arab_pk extends FormatLocale
             "\u{633}\u{648}\u{645}\u{631}",
         ],
         // Short name
-        "short" => [
+        'short' => [
             "\u{627}\u{6B1}",
             "\u{627}\u{631}",
             "\u{62E}\u{645}",
@@ -78,7 +77,7 @@ class lang_sd_arab_pk extends FormatLocale
      */
     protected $monthNames = [
         // Full name
-        "full" => [
+        'full' => [
             "\u{62C}\u{646}\u{648}\u{631}\u{64A}",
             "\u{641}\u{631}\u{648}\u{631}\u{64A}",
             "\u{645}\u{627}\u{631}\u{686}",
@@ -93,7 +92,7 @@ class lang_sd_arab_pk extends FormatLocale
             "\u{68A}\u{633}\u{645}\u{628}\u{631}",
         ],
         // Short name
-        "short" => [
+        'short' => [
             "\u{62C}\u{646}\u{648}\u{631}\u{64A}",
             "\u{641}\u{631}\u{648}\u{631}\u{64A}",
             "\u{645}\u{627}\u{631}\u{686}",
@@ -108,5 +107,4 @@ class lang_sd_arab_pk extends FormatLocale
             "\u{68A}\u{633}\u{645}\u{628}\u{631}",
         ],
     ];
-
 }

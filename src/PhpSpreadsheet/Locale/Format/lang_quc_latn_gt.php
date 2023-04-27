@@ -5,7 +5,6 @@ namespace PhpOffice\PhpSpreadsheet\Locale\Format;
 use PhpOffice\PhpSpreadsheet\Locale\FormatLocale;
 use PhpOffice\PhpSpreadsheet\Locale\LocaleLayout;
 
-
 class lang_quc_latn_gt extends FormatLocale
 {
     /**
@@ -16,27 +15,27 @@ class lang_quc_latn_gt extends FormatLocale
     /**
      * @var string The locale tag
      */
-    protected $tag = "quc-latn-gt";
+    protected $tag = 'quc-latn-gt';
 
     /**
      * @var string The currency code "GTQ"
      */
-    protected $currencyCode = "GTQ";
+    protected $currencyCode = 'GTQ';
 
     /**
      * @var string The decimal separator
      */
-    protected $decimalSeparator = ",";
+    protected $decimalSeparator = ',';
 
     /**
      * @var string The thousands separator
      */
-    protected $thousandsSeparator = ".";
+    protected $thousandsSeparator = '.';
 
     /**
      * @var string The date separator
      */
-    protected $dateSeparator = "-";
+    protected $dateSeparator = '-';
 
     /**
      * @var string[] The numerals representation (0 up to 9)
@@ -52,7 +51,7 @@ class lang_quc_latn_gt extends FormatLocale
      */
     protected $weekdayNames = [
         // Full name
-        "full" => [
+        'full' => [
             "kaq'ij",
             "oxq'ij",
             "kajq'ij",
@@ -62,7 +61,7 @@ class lang_quc_latn_gt extends FormatLocale
             "juq'ij",
         ],
         // Short name
-        "short" => [
+        'short' => [
             "kaq'",
             "oxq'",
             "kajq'",
@@ -78,7 +77,7 @@ class lang_quc_latn_gt extends FormatLocale
      */
     protected $monthNames = [
         // Full name
-        "full" => [
+        'full' => [
             "nab'e ik'",
             "ukab' ik'",
             "urox ik'",
@@ -93,20 +92,19 @@ class lang_quc_latn_gt extends FormatLocale
             "ukab'laj ik'",
         ],
         // Short name
-        "short" => [
+        'short' => [
             "nab'e",
             "ukab'",
-            "urox",
-            "ukaj",
-            "uro",
-            "uwaq",
-            "uwuq",
-            "uwajxaq",
+            'urox',
+            'ukaj',
+            'uro',
+            'uwaq',
+            'uwuq',
+            'uwajxaq',
             "ub'elej",
-            "ulaj",
-            "ujulaj",
+            'ulaj',
+            'ujulaj',
             "ukab'laj",
         ],
     ];
-
 }

@@ -5,7 +5,6 @@ namespace PhpOffice\PhpSpreadsheet\Locale\Format;
 use PhpOffice\PhpSpreadsheet\Locale\FormatLocale;
 use PhpOffice\PhpSpreadsheet\Locale\LocaleLayout;
 
-
 class lang_kok_in extends FormatLocale
 {
     /**
@@ -16,7 +15,7 @@ class lang_kok_in extends FormatLocale
     /**
      * @var string The locale tag
      */
-    protected $tag = "kok-in";
+    protected $tag = 'kok-in';
 
     /**
      * @var string The currency code "₹"
@@ -26,17 +25,17 @@ class lang_kok_in extends FormatLocale
     /**
      * @var string The decimal separator
      */
-    protected $decimalSeparator = ".";
+    protected $decimalSeparator = '.';
 
     /**
      * @var string The thousands separator
      */
-    protected $thousandsSeparator = ",";
+    protected $thousandsSeparator = ',';
 
     /**
      * @var string The date separator
      */
-    protected $dateSeparator = "-";
+    protected $dateSeparator = '-';
 
     /**
      * @var string[] The numerals representation (0 up to 9)
@@ -52,7 +51,7 @@ class lang_kok_in extends FormatLocale
      */
     protected $weekdayNames = [
         // Full name
-        "full" => [
+        'full' => [
             "\u{938}\u{94B}\u{92E}\u{93E}\u{930}",
             "\u{92E}\u{902}\u{917}\u{933}\u{93E}\u{930}",
             "\u{92C}\u{941}\u{927}\u{935}\u{93E}\u{930}",
@@ -62,7 +61,7 @@ class lang_kok_in extends FormatLocale
             "\u{906}\u{92F}\u{924}\u{93E}\u{930}",
         ],
         // Short name
-        "short" => [
+        'short' => [
             "\u{938}\u{94B}\u{92E}.",
             "\u{92E}\u{902}\u{917}\u{933}.",
             "\u{92C}\u{941}\u{927}.",
@@ -78,7 +77,7 @@ class lang_kok_in extends FormatLocale
      */
     protected $monthNames = [
         // Full name
-        "full" => [
+        'full' => [
             "\u{91C}\u{93E}\u{928}\u{947}\u{935}\u{93E}\u{930}\u{940}",
             "\u{92B}\u{947}\u{92C}\u{94D}\u{930}\u{941}\u{935}\u{93E}\u{930}\u{940}",
             "\u{92E}\u{93E}\u{930}\u{94D}\u{91A}",
@@ -93,7 +92,7 @@ class lang_kok_in extends FormatLocale
             "\u{921}\u{93F}\u{938}\u{947}\u{902}\u{92C}\u{930}",
         ],
         // Short name
-        "short" => [
+        'short' => [
             "\u{91C}\u{93E}\u{928}\u{947}",
             "\u{92B}\u{947}\u{92C}\u{94D}\u{930}\u{941}",
             "\u{92E}\u{93E}\u{930}\u{94D}\u{91A}",
@@ -108,5 +107,4 @@ class lang_kok_in extends FormatLocale
             "\u{921}\u{93F}\u{938}\u{947}\u{902}",
         ],
     ];
-
 }

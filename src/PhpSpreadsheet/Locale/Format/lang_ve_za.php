@@ -5,7 +5,6 @@ namespace PhpOffice\PhpSpreadsheet\Locale\Format;
 use PhpOffice\PhpSpreadsheet\Locale\FormatLocale;
 use PhpOffice\PhpSpreadsheet\Locale\LocaleLayout;
 
-
 class lang_ve_za extends FormatLocale
 {
     /**
@@ -16,27 +15,27 @@ class lang_ve_za extends FormatLocale
     /**
      * @var string The locale tag
      */
-    protected $tag = "ve-za";
+    protected $tag = 've-za';
 
     /**
      * @var string The currency code "ZAR"
      */
-    protected $currencyCode = "ZAR";
+    protected $currencyCode = 'ZAR';
 
     /**
      * @var string The decimal separator
      */
-    protected $decimalSeparator = ",";
+    protected $decimalSeparator = ',';
 
     /**
      * @var string The thousands separator
      */
-    protected $thousandsSeparator = ".";
+    protected $thousandsSeparator = '.';
 
     /**
      * @var string The date separator
      */
-    protected $dateSeparator = "-";
+    protected $dateSeparator = '-';
 
     /**
      * @var string[] The numerals representation (0 up to 9)
@@ -52,24 +51,24 @@ class lang_ve_za extends FormatLocale
      */
     protected $weekdayNames = [
         // Full name
-        "full" => [
-            "Musumbuluwo",
+        'full' => [
+            'Musumbuluwo',
             "\u{1E3C}avhuvhili",
             "\u{1E3C}avhuraru",
             "\u{1E3C}avhu\u{1E4B}a",
             "\u{1E3C}avhu\u{1E71}anu",
-            "Mugivhela",
-            "Swondaha",
+            'Mugivhela',
+            'Swondaha',
         ],
         // Short name
-        "short" => [
-            "Mus",
-            "Vhi",
-            "Rar",
+        'short' => [
+            'Mus',
+            'Vhi',
+            'Rar',
             "\u{1E4A}a",
             "\u{1E70}an",
-            "Mug",
-            "Swo",
+            'Mug',
+            'Swo',
         ],
     ];
 
@@ -78,34 +77,34 @@ class lang_ve_za extends FormatLocale
      */
     protected $monthNames = [
         // Full name
-        "full" => [
-            "Phando",
-            "Luhuhi",
+        'full' => [
+            'Phando',
+            'Luhuhi',
             "\u{1E70}hafamuhwe",
-            "Lambamai",
-            "Shundunthule",
-            "Fulwi",
-            "Fulwana",
+            'Lambamai',
+            'Shundunthule',
+            'Fulwi',
+            'Fulwana',
             "\u{1E70}hangule",
-            "Khubvumedzi",
-            "Tshimedzi",
+            'Khubvumedzi',
+            'Tshimedzi',
             "\u{1E3C}ara",
-            "Nyendavhusiku",
+            'Nyendavhusiku',
         ],
         // Short name
-        "short" => [
-            "Pha",
-            "Luh",
+        'short' => [
+            'Pha',
+            'Luh',
             "\u{1E70}hf",
-            "Lam",
-            "Shu",
-            "Lwi",
-            "Lwa",
+            'Lam',
+            'Shu',
+            'Lwi',
+            'Lwa',
             "\u{1E70}ha",
-            "Khu",
-            "Tsh",
+            'Khu',
+            'Tsh',
             "\u{1E3C}ar",
-            "Nye",
+            'Nye',
         ],
     ];
 
@@ -113,14 +112,13 @@ class lang_ve_za extends FormatLocale
      * @var array<string,string> Replacement formats
      */
     protected $formatReplacements = [
-        "\$ #,##0;\$ -#,##0" => "\$ #,##0;\$ -#,##0",
-        "\$ #,##0;[Red]\$ -#,##0" => "\$ #,##0;[Red]\$ -#,##0",
-        "\$ #,##0.00;\$ -#,##0.00" => "\$ #,##0.00;\$ -#,##0.00",
-        "\$ #,##0.00;[Red]\$ -#,##0.00" => "\$ #,##0.00;[Red]\$ -#,##0.00",
-        "_ \$ * #,##0_ ;_ \$ * -#,##0_ ;_ \$ * \"-\"_ ;_ @_ " => "_ \$ * #,##0_ ;_ \$ * -#,##0_ ;_ \$ * \"-\"_ ;_ @_ ",
-        "_ \$ * #,##0.00_ ;_ \$ * -#,##0.00_ ;_ \$ * \"-\"??_ ;_ @_ " => "_ \$ * #,##0.00_ ;_ \$ * -#,##0.00_ ;_ \$ * \"-\"??_ ;_ @_ ",
-        "[\$-F800]dddd, mmmm dd, yyyy" => "dddd\"{, }\"mmmm d\"{, }\"yyyy",
-        "[\$-F400]h:mm:ss AM/PM" => "h:mm:ss AM/PM",
+        '$ #,##0;$ -#,##0' => '$ #,##0;$ -#,##0',
+        '$ #,##0;[Red]$ -#,##0' => '$ #,##0;[Red]$ -#,##0',
+        '$ #,##0.00;$ -#,##0.00' => '$ #,##0.00;$ -#,##0.00',
+        '$ #,##0.00;[Red]$ -#,##0.00' => '$ #,##0.00;[Red]$ -#,##0.00',
+        '_ $ * #,##0_ ;_ $ * -#,##0_ ;_ $ * "-"_ ;_ @_ ' => '_ $ * #,##0_ ;_ $ * -#,##0_ ;_ $ * "-"_ ;_ @_ ',
+        '_ $ * #,##0.00_ ;_ $ * -#,##0.00_ ;_ $ * "-"??_ ;_ @_ ' => '_ $ * #,##0.00_ ;_ $ * -#,##0.00_ ;_ $ * "-"??_ ;_ @_ ',
+        '[$-F800]dddd, mmmm dd, yyyy' => 'dddd"{, }"mmmm d"{, }"yyyy',
+        '[$-F400]h:mm:ss AM/PM' => 'h:mm:ss AM/PM',
     ];
-
 }

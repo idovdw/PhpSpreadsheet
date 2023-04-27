@@ -5,7 +5,6 @@ namespace PhpOffice\PhpSpreadsheet\Locale\Format;
 use PhpOffice\PhpSpreadsheet\Locale\FormatLocale;
 use PhpOffice\PhpSpreadsheet\Locale\LocaleLayout;
 
-
 class lang_zh_cn extends FormatLocale
 {
     /**
@@ -16,27 +15,27 @@ class lang_zh_cn extends FormatLocale
     /**
      * @var string The locale tag
      */
-    protected $tag = "zh-cn";
+    protected $tag = 'zh-cn';
 
     /**
      * @var string The currency code "¥"
      */
-    protected $currencyCode = "¥";
+    protected $currencyCode = '¥';
 
     /**
      * @var string The decimal separator
      */
-    protected $decimalSeparator = ".";
+    protected $decimalSeparator = '.';
 
     /**
      * @var string The thousands separator
      */
-    protected $thousandsSeparator = ",";
+    protected $thousandsSeparator = ',';
 
     /**
      * @var string The date separator
      */
-    protected $dateSeparator = "/";
+    protected $dateSeparator = '/';
 
     /**
      * @var string[] The numerals representation (0 up to 9)
@@ -52,7 +51,7 @@ class lang_zh_cn extends FormatLocale
      */
     protected $weekdayNames = [
         // Full name
-        "full" => [
+        'full' => [
             "\u{661F}\u{671F}\u{4E00}",
             "\u{661F}\u{671F}\u{4E8C}",
             "\u{661F}\u{671F}\u{4E09}",
@@ -62,7 +61,7 @@ class lang_zh_cn extends FormatLocale
             "\u{661F}\u{671F}\u{65E5}",
         ],
         // Short name
-        "short" => [
+        'short' => [
             "\u{5468}\u{4E00}",
             "\u{5468}\u{4E8C}",
             "\u{5468}\u{4E09}",
@@ -78,7 +77,7 @@ class lang_zh_cn extends FormatLocale
      */
     protected $monthNames = [
         // Full name
-        "full" => [
+        'full' => [
             "\u{4E00}\u{6708}",
             "\u{4E8C}\u{6708}",
             "\u{4E09}\u{6708}",
@@ -93,7 +92,7 @@ class lang_zh_cn extends FormatLocale
             "\u{5341}\u{4E8C}\u{6708}",
         ],
         // Short name
-        "short" => [
+        'short' => [
             "1\u{6708}",
             "2\u{6708}",
             "3\u{6708}",
@@ -108,5 +107,4 @@ class lang_zh_cn extends FormatLocale
             "12\u{6708}",
         ],
     ];
-
 }

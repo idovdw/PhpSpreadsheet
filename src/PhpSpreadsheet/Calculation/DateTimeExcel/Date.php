@@ -94,16 +94,15 @@ class Date
     private static function getYear($year, int $baseYear): int
     {
         // @fix @ido
-        if (is_null($year))
-        {
+        if (null === $year) {
             throw new Exception(ExcelError::NAN());
         }
-        
-        $year = StringHelper::testStringAsNumeric((string)$year);
+
+        $year = StringHelper::testStringAsNumeric((string) $year);
         if (!is_numeric($year)) {
             throw new Exception(ExcelError::VALUE());
         }
-        $year = (int)$year;
+        $year = (int) $year;
 
         if ($year < ($baseYear - 1900)) {
             throw new Exception(ExcelError::NAN());
@@ -127,32 +126,28 @@ class Date
     private static function getMonth($month): int
     {
         // @fix @ido
-        if (is_null($month))
-        {
+        if (null === $month) {
             throw new Exception(ExcelError::VALUE());
         }
-        
-        if (is_int($month) || is_float($month))
-        {
-            $month = (int)$month;
-            if (($month < 1) || ($month > 12))
-            {
+
+        if (is_int($month) || is_float($month)) {
+            $month = (int) $month;
+            if (($month < 1) || ($month > 12)) {
                 throw new Exception(ExcelError::VALUE());
             }
+
             return $month;
         }
-        
+
         // Convert month name to integer
-        $month = SharedDateHelper::monthStringToNumber((string)$month);
-        if (is_int($month))
-        {
+        $month = SharedDateHelper::monthStringToNumber((string) $month);
+        if (is_int($month)) {
             return $month;
         }
-        
+
         $month = StringHelper::testStringAsNumeric($month);
-        $month = intval($month);
-        if (($month < 1) || ($month > 12))
-        {
+        $month = (int) $month;
+        if (($month < 1) || ($month > 12)) {
             throw new Exception(ExcelError::VALUE());
         }
 
@@ -167,32 +162,28 @@ class Date
     private static function getDay($day): int
     {
         // @fix @ido
-        if (is_null($day))
-        {
+        if (null === $day) {
             throw new Exception(ExcelError::VALUE());
         }
-        
-        if (is_int($day) || is_float($day))
-        {
-            $day = (int)$day;
-            if (($day < 1) || ($day > 31))
-            {
+
+        if (is_int($day) || is_float($day)) {
+            $day = (int) $day;
+            if (($day < 1) || ($day > 31)) {
                 throw new Exception(ExcelError::VALUE());
             }
+
             return $day;
         }
-        
+
         // Convert day name to integer
-        $day = SharedDateHelper::dayStringToNumber((string)$day);
-        if (is_int($day))
-        {
+        $day = SharedDateHelper::dayStringToNumber((string) $day);
+        if (is_int($day)) {
             return $day;
         }
 
         $day = StringHelper::testStringAsNumeric($day);
-        $day = intval($day);
-        if (($day < 1) || ($day > 31))
-        {
+        $day = (int) $day;
+        if (($day < 1) || ($day > 31)) {
             throw new Exception(ExcelError::VALUE());
         }
     }

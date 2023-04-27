@@ -4,7 +4,6 @@ namespace PhpOffice\PhpSpreadsheet\Locale\Calendar;
 
 use PhpOffice\PhpSpreadsheet\Locale\CalendarData;
 
-
 class CalendarGregorianKorean extends CalendarData
 {
     /**
@@ -17,7 +16,7 @@ class CalendarGregorianKorean extends CalendarData
      */
     protected $weekdayNames = [
         // Full name
-        "full" => [
+        'full' => [
             "\u{C6D4}\u{C694}\u{C77C}",
             "\u{D654}\u{C694}\u{C77C}",
             "\u{C218}\u{C694}\u{C77C}",
@@ -27,7 +26,7 @@ class CalendarGregorianKorean extends CalendarData
             "\u{C77C}\u{C694}\u{C77C}",
         ],
         // Short name
-        "short" => [
+        'short' => [
             "\u{C6D4}",
             "\u{D654}",
             "\u{C218}",
@@ -43,7 +42,7 @@ class CalendarGregorianKorean extends CalendarData
      */
     protected $monthNames = [
         // Full name
-        "full" => [
+        'full' => [
             "\u{C815}\u{C6D4}",
             "\u{C774}\u{C6D4}",
             "\u{C0BC}\u{C6D4}",
@@ -58,7 +57,7 @@ class CalendarGregorianKorean extends CalendarData
             "\u{C123}\u{B2EC}",
         ],
         // Short name
-        "short" => [
+        'short' => [
             "\u{C815}\u{C6D4}",
             "\u{C774}\u{C6D4}",
             "\u{C0BC}\u{C6D4}",
@@ -73,5 +72,4 @@ class CalendarGregorianKorean extends CalendarData
             "\u{C123}\u{B2EC}",
         ],
     ];
-
 }

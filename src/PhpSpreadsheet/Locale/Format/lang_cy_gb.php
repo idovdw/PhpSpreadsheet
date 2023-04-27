@@ -5,7 +5,6 @@ namespace PhpOffice\PhpSpreadsheet\Locale\Format;
 use PhpOffice\PhpSpreadsheet\Locale\FormatLocale;
 use PhpOffice\PhpSpreadsheet\Locale\LocaleLayout;
 
-
 class lang_cy_gb extends FormatLocale
 {
     /**
@@ -16,27 +15,27 @@ class lang_cy_gb extends FormatLocale
     /**
      * @var string The locale tag
      */
-    protected $tag = "cy-gb";
+    protected $tag = 'cy-gb';
 
     /**
      * @var string The currency code "£"
      */
-    protected $currencyCode = "£";
+    protected $currencyCode = '£';
 
     /**
      * @var string The decimal separator
      */
-    protected $decimalSeparator = ".";
+    protected $decimalSeparator = '.';
 
     /**
      * @var string The thousands separator
      */
-    protected $thousandsSeparator = ",";
+    protected $thousandsSeparator = ',';
 
     /**
      * @var string The date separator
      */
-    protected $dateSeparator = "/";
+    protected $dateSeparator = '/';
 
     /**
      * @var string[] The numerals representation (0 up to 9)
@@ -52,24 +51,24 @@ class lang_cy_gb extends FormatLocale
      */
     protected $weekdayNames = [
         // Full name
-        "full" => [
-            "Dydd Llun",
-            "Dydd Mawrth",
-            "Dydd Mercher",
-            "Dydd Iau",
-            "Dydd Gwener",
-            "Dydd Sadwrn",
-            "Dydd Sul",
+        'full' => [
+            'Dydd Llun',
+            'Dydd Mawrth',
+            'Dydd Mercher',
+            'Dydd Iau',
+            'Dydd Gwener',
+            'Dydd Sadwrn',
+            'Dydd Sul',
         ],
         // Short name
-        "short" => [
-            "Llun",
-            "Maw",
-            "Mer",
-            "Iau",
-            "Gwe",
-            "Sad",
-            "Sul",
+        'short' => [
+            'Llun',
+            'Maw',
+            'Mer',
+            'Iau',
+            'Gwe',
+            'Sad',
+            'Sul',
         ],
     ];
 
@@ -78,35 +77,34 @@ class lang_cy_gb extends FormatLocale
      */
     protected $monthNames = [
         // Full name
-        "full" => [
-            "Ionawr",
-            "Chwefror",
-            "Mawrth",
-            "Ebrill",
-            "Mai",
-            "Mehefin",
-            "Gorffennaf",
-            "Awst",
-            "Medi",
-            "Hydref",
-            "Tachwedd",
-            "Rhagfyr",
+        'full' => [
+            'Ionawr',
+            'Chwefror',
+            'Mawrth',
+            'Ebrill',
+            'Mai',
+            'Mehefin',
+            'Gorffennaf',
+            'Awst',
+            'Medi',
+            'Hydref',
+            'Tachwedd',
+            'Rhagfyr',
         ],
         // Short name
-        "short" => [
-            "Ion",
-            "Chwef",
-            "Maw",
-            "Ebr",
-            "Mai",
-            "Meh",
-            "Gorff",
-            "Awst",
-            "Medi",
-            "Hyd",
-            "Tach",
-            "Rhag",
+        'short' => [
+            'Ion',
+            'Chwef',
+            'Maw',
+            'Ebr',
+            'Mai',
+            'Meh',
+            'Gorff',
+            'Awst',
+            'Medi',
+            'Hyd',
+            'Tach',
+            'Rhag',
         ],
     ];
-
 }

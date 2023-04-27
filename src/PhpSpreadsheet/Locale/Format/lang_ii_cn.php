@@ -5,7 +5,6 @@ namespace PhpOffice\PhpSpreadsheet\Locale\Format;
 use PhpOffice\PhpSpreadsheet\Locale\FormatLocale;
 use PhpOffice\PhpSpreadsheet\Locale\LocaleLayout;
 
-
 class lang_ii_cn extends FormatLocale
 {
     /**
@@ -16,27 +15,27 @@ class lang_ii_cn extends FormatLocale
     /**
      * @var string The locale tag
      */
-    protected $tag = "ii-cn";
+    protected $tag = 'ii-cn';
 
     /**
      * @var string The currency code "¥"
      */
-    protected $currencyCode = "¥";
+    protected $currencyCode = '¥';
 
     /**
      * @var string The decimal separator
      */
-    protected $decimalSeparator = ".";
+    protected $decimalSeparator = '.';
 
     /**
      * @var string The thousands separator
      */
-    protected $thousandsSeparator = ",";
+    protected $thousandsSeparator = ',';
 
     /**
      * @var string The date separator
      */
-    protected $dateSeparator = "-";
+    protected $dateSeparator = '-';
 
     /**
      * @var string[] The numerals representation (0 up to 9)
@@ -52,7 +51,7 @@ class lang_ii_cn extends FormatLocale
      */
     protected $weekdayNames = [
         // Full name
-        "full" => [
+        'full' => [
             "\u{A18F}\u{A282}\u{A494}",
             "\u{A18F}\u{A282}\u{A44D}",
             "\u{A18F}\u{A282}\u{A315}",
@@ -62,7 +61,7 @@ class lang_ii_cn extends FormatLocale
             "\u{A46D}\u{A18F}\u{A44D}",
         ],
         // Short name
-        "short" => [
+        'short' => [
             "\u{A18F}\u{A494}",
             "\u{A18F}\u{A44D}",
             "\u{A18F}\u{A315}",
@@ -78,7 +77,7 @@ class lang_ii_cn extends FormatLocale
      */
     protected $monthNames = [
         // Full name
-        "full" => [
+        'full' => [
             "\u{A2CD}\u{A1AA}",
             "\u{A44D}\u{A1AA}",
             "\u{A315}\u{A1AA}",
@@ -93,7 +92,7 @@ class lang_ii_cn extends FormatLocale
             "\u{A2B0}\u{A44B}\u{A1AA}",
         ],
         // Short name
-        "short" => [
+        'short' => [
             "\u{A2CD}\u{A1AA}",
             "\u{A44D}\u{A1AA}",
             "\u{A315}\u{A1AA}",
@@ -108,5 +107,4 @@ class lang_ii_cn extends FormatLocale
             "\u{A2B0}\u{A44B}\u{A1AA}",
         ],
     ];
-
 }

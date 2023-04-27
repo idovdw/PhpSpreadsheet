@@ -5,7 +5,6 @@ namespace PhpOffice\PhpSpreadsheet\Locale\Format;
 use PhpOffice\PhpSpreadsheet\Locale\FormatLocale;
 use PhpOffice\PhpSpreadsheet\Locale\LocaleLayout;
 
-
 class lang_sr_cyrl_cs extends FormatLocale
 {
     /**
@@ -16,27 +15,27 @@ class lang_sr_cyrl_cs extends FormatLocale
     /**
      * @var string The locale tag
      */
-    protected $tag = "sr-cyrl-cs";
+    protected $tag = 'sr-cyrl-cs';
 
     /**
      * @var string The currency code "CSD"
      */
-    protected $currencyCode = "CSD";
+    protected $currencyCode = 'CSD';
 
     /**
      * @var string The decimal separator
      */
-    protected $decimalSeparator = ",";
+    protected $decimalSeparator = ',';
 
     /**
      * @var string The thousands separator
      */
-    protected $thousandsSeparator = ".";
+    protected $thousandsSeparator = '.';
 
     /**
      * @var string The date separator
      */
-    protected $dateSeparator = ".";
+    protected $dateSeparator = '.';
 
     /**
      * @var string[] The numerals representation (0 up to 9)
@@ -52,7 +51,7 @@ class lang_sr_cyrl_cs extends FormatLocale
      */
     protected $weekdayNames = [
         // Full name
-        "full" => [
+        'full' => [
             "\u{43F}\u{43E}\u{43D}\u{435}\u{434}\u{435}\u{459}\u{430}\u{43A}",
             "\u{443}\u{442}\u{43E}\u{440}\u{430}\u{43A}",
             "\u{441}\u{440}\u{435}\u{434}\u{430}",
@@ -62,7 +61,7 @@ class lang_sr_cyrl_cs extends FormatLocale
             "\u{43D}\u{435}\u{434}\u{435}\u{459}\u{430}",
         ],
         // Short name
-        "short" => [
+        'short' => [
             "\u{43F}\u{43E}\u{43D}.",
             "\u{443}\u{442}.",
             "\u{441}\u{440}.",
@@ -78,7 +77,7 @@ class lang_sr_cyrl_cs extends FormatLocale
      */
     protected $monthNames = [
         // Full name
-        "full" => [
+        'full' => [
             "\u{458}\u{430}\u{43D}\u{443}\u{430}\u{440}",
             "\u{444}\u{435}\u{431}\u{440}\u{443}\u{430}\u{440}",
             "\u{43C}\u{430}\u{440}\u{442}",
@@ -93,7 +92,7 @@ class lang_sr_cyrl_cs extends FormatLocale
             "\u{434}\u{435}\u{446}\u{435}\u{43C}\u{431}\u{430}\u{440}",
         ],
         // Short name
-        "short" => [
+        'short' => [
             "\u{458}\u{430}\u{43D}.",
             "\u{444}\u{435}\u{431}.",
             "\u{43C}\u{430}\u{440}\u{442}",
@@ -108,5 +107,4 @@ class lang_sr_cyrl_cs extends FormatLocale
             "\u{434}\u{435}\u{446}.",
         ],
     ];
-
 }

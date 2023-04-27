@@ -5,7 +5,6 @@ namespace PhpOffice\PhpSpreadsheet\Locale\Format;
 use PhpOffice\PhpSpreadsheet\Locale\FormatLocale;
 use PhpOffice\PhpSpreadsheet\Locale\LocaleLayout;
 
-
 class lang_ml_in extends FormatLocale
 {
     /**
@@ -16,7 +15,7 @@ class lang_ml_in extends FormatLocale
     /**
      * @var string The locale tag
      */
-    protected $tag = "ml-in";
+    protected $tag = 'ml-in';
 
     /**
      * @var string The currency code "₹"
@@ -26,17 +25,17 @@ class lang_ml_in extends FormatLocale
     /**
      * @var string The decimal separator
      */
-    protected $decimalSeparator = ".";
+    protected $decimalSeparator = '.';
 
     /**
      * @var string The thousands separator
      */
-    protected $thousandsSeparator = ",";
+    protected $thousandsSeparator = ',';
 
     /**
      * @var string The date separator
      */
-    protected $dateSeparator = "/";
+    protected $dateSeparator = '/';
 
     /**
      * @var string[] The numerals representation (0 up to 9)
@@ -52,7 +51,7 @@ class lang_ml_in extends FormatLocale
      */
     protected $weekdayNames = [
         // Full name
-        "full" => [
+        'full' => [
             "\u{D24}\u{D3F}\u{D19}\u{D4D}\u{D15}\u{D33}\u{D3E}\u{D34}\u{D4D}\u{200C}\u{D1A}",
             "\u{D1A}\u{D4A}\u{D35}\u{D4D}\u{D35}\u{D3E}\u{D34}\u{D4D}\u{D1A}",
             "\u{D2C}\u{D41}\u{D27}\u{D28}\u{D3E}\u{D34}\u{D4D}\u{200C}\u{D1A}",
@@ -62,7 +61,7 @@ class lang_ml_in extends FormatLocale
             "\u{D1E}\u{D3E}\u{D2F}\u{D31}\u{D3E}\u{D34}\u{D4D}\u{200C}\u{D1A}",
         ],
         // Short name
-        "short" => [
+        'short' => [
             "\u{D24}\u{D3F}\u{D19}\u{D4D}\u{D15}\u{D7E}",
             "\u{D1A}\u{D4A}\u{D35}\u{D4D}\u{D35}",
             "\u{D2C}\u{D41}\u{D27}\u{D7B}",
@@ -78,7 +77,7 @@ class lang_ml_in extends FormatLocale
      */
     protected $monthNames = [
         // Full name
-        "full" => [
+        'full' => [
             "\u{D1C}\u{D28}\u{D41}\u{D35}\u{D30}\u{D3F}",
             "\u{D2B}\u{D46}\u{D2C}\u{D4D}\u{D30}\u{D41}\u{D35}\u{D30}\u{D3F}",
             "\u{D2E}\u{D3E}\u{D30}\u{D4D}\u{200D}\u{200C}\u{D1A}\u{D4D}\u{D1A}\u{D4D}",
@@ -93,7 +92,7 @@ class lang_ml_in extends FormatLocale
             "\u{D21}\u{D3F}\u{D38}\u{D02}\u{D2C}\u{D30}\u{D4D}\u{200D}",
         ],
         // Short name
-        "short" => [
+        'short' => [
             "\u{D1C}\u{D28}\u{D41}",
             "\u{D2B}\u{D46}\u{D2C}\u{D4D}\u{D30}\u{D41}",
             "\u{D2E}\u{D3E}\u{D7C}",
@@ -108,5 +107,4 @@ class lang_ml_in extends FormatLocale
             "\u{D21}\u{D3F}\u{D38}\u{D02}",
         ],
     ];
-
 }

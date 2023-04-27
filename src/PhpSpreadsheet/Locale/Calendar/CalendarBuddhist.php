@@ -4,7 +4,6 @@ namespace PhpOffice\PhpSpreadsheet\Locale\Calendar;
 
 use PhpOffice\PhpSpreadsheet\Locale\CalendarData;
 
-
 class CalendarBuddhist extends CalendarData
 {
     /**
@@ -17,7 +16,7 @@ class CalendarBuddhist extends CalendarData
      */
     protected $weekdayNames = [
         // Full name
-        "full" => [
+        'full' => [
             "\u{E08}\u{E31}\u{E19}\u{E17}\u{E23}\u{E4C}",
             "\u{E2D}\u{E31}\u{E07}\u{E04}\u{E32}\u{E23}",
             "\u{E1E}\u{E38}\u{E18}",
@@ -27,7 +26,7 @@ class CalendarBuddhist extends CalendarData
             "\u{E2D}\u{E32}\u{E17}\u{E34}\u{E15}\u{E22}\u{E4C}",
         ],
         // Short name
-        "short" => [
+        'short' => [
             "\u{E08}.",
             "\u{E2D}.",
             "\u{E1E}.",
@@ -43,7 +42,7 @@ class CalendarBuddhist extends CalendarData
      */
     protected $monthNames = [
         // Full name
-        "full" => [
+        'full' => [
             "\u{E21}\u{E01}\u{E23}\u{E32}\u{E04}\u{E21}",
             "\u{E01}\u{E38}\u{E21}\u{E20}\u{E32}\u{E1E}\u{E31}\u{E19}\u{E18}\u{E4C}",
             "\u{E21}\u{E35}\u{E19}\u{E32}\u{E04}\u{E21}",
@@ -58,7 +57,7 @@ class CalendarBuddhist extends CalendarData
             "\u{E18}\u{E31}\u{E19}\u{E27}\u{E32}\u{E04}\u{E21}",
         ],
         // Short name
-        "short" => [
+        'short' => [
             "\u{E21}.\u{E04}.",
             "\u{E01}.\u{E1E}.",
             "\u{E21}\u{E35}.\u{E04}.",
@@ -73,5 +72,4 @@ class CalendarBuddhist extends CalendarData
             "\u{E18}.\u{E04}.",
         ],
     ];
-
 }

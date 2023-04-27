@@ -5,7 +5,6 @@ namespace PhpOffice\PhpSpreadsheet\Locale\Format;
 use PhpOffice\PhpSpreadsheet\Locale\FormatLocale;
 use PhpOffice\PhpSpreadsheet\Locale\LocaleLayout;
 
-
 class lang_tt_ru extends FormatLocale
 {
     /**
@@ -16,7 +15,7 @@ class lang_tt_ru extends FormatLocale
     /**
      * @var string The locale tag
      */
-    protected $tag = "tt-ru";
+    protected $tag = 'tt-ru';
 
     /**
      * @var string The currency code "₽"
@@ -26,17 +25,17 @@ class lang_tt_ru extends FormatLocale
     /**
      * @var string The decimal separator
      */
-    protected $decimalSeparator = ",";
+    protected $decimalSeparator = ',';
 
     /**
      * @var string The thousands separator
      */
-    protected $thousandsSeparator = " ";
+    protected $thousandsSeparator = "\u{a0}";
 
     /**
      * @var string The date separator
      */
-    protected $dateSeparator = ".";
+    protected $dateSeparator = '.';
 
     /**
      * @var string[] The numerals representation (0 up to 9)
@@ -52,7 +51,7 @@ class lang_tt_ru extends FormatLocale
      */
     protected $weekdayNames = [
         // Full name
-        "full" => [
+        'full' => [
             "\u{434}\u{4AF}\u{448}\u{4D9}\u{43C}\u{431}\u{435}",
             "\u{441}\u{438}\u{448}\u{4D9}\u{43C}\u{431}\u{435}",
             "\u{447}\u{4D9}\u{440}\u{448}\u{4D9}\u{43C}\u{431}\u{435}",
@@ -62,7 +61,7 @@ class lang_tt_ru extends FormatLocale
             "\u{44F}\u{43A}\u{448}\u{4D9}\u{43C}\u{431}\u{435}",
         ],
         // Short name
-        "short" => [
+        'short' => [
             "\u{434}\u{4AF}\u{448}.",
             "\u{441}\u{438}\u{448}.",
             "\u{447}\u{4D9}\u{440}\u{448}.",
@@ -78,7 +77,7 @@ class lang_tt_ru extends FormatLocale
      */
     protected $monthNames = [
         // Full name
-        "full" => [
+        'full' => [
             "\u{433}\u{44B}\u{439}\u{43D}\u{432}\u{430}\u{440}",
             "\u{444}\u{435}\u{432}\u{440}\u{430}\u{43B}\u{44C}",
             "\u{43C}\u{430}\u{440}\u{442}",
@@ -93,7 +92,7 @@ class lang_tt_ru extends FormatLocale
             "\u{434}\u{435}\u{43A}\u{430}\u{431}\u{440}\u{44C}",
         ],
         // Short name
-        "short" => [
+        'short' => [
             "\u{433}\u{44B}\u{439}\u{43D}.",
             "\u{444}\u{435}\u{432}.",
             "\u{43C}\u{430}\u{440}.",
@@ -108,5 +107,4 @@ class lang_tt_ru extends FormatLocale
             "\u{434}\u{435}\u{43A}.",
         ],
     ];
-
 }

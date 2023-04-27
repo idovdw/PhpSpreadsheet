@@ -4,7 +4,6 @@ namespace PhpOffice\PhpSpreadsheet\Locale\Calendar;
 
 use PhpOffice\PhpSpreadsheet\Locale\CalendarData;
 
-
 class CalendarPersian extends CalendarData
 {
     /**
@@ -17,24 +16,24 @@ class CalendarPersian extends CalendarData
      */
     protected $weekdayNames = [
         // Full name
-        "full" => [
-            "Doshanbeh",
-            "Seshanbeh",
+        'full' => [
+            'Doshanbeh',
+            'Seshanbeh',
             "Chah\u{101}rshanbeh",
-            "Panjshanbeh",
+            'Panjshanbeh',
             "Jom'eh",
-            "shanbeh",
-            "Yekshanbeh",
+            'shanbeh',
+            'Yekshanbeh',
         ],
         // Short name
-        "short" => [
-            "Doshanbeh",
-            "Seshanbeh",
+        'short' => [
+            'Doshanbeh',
+            'Seshanbeh',
             "Chah\u{101}rshanbeh",
-            "Panjshanbeh",
+            'Panjshanbeh',
             "Jom'eh",
-            "shanbeh",
-            "Yekshanbeh",
+            'shanbeh',
+            'Yekshanbeh',
         ],
     ];
 
@@ -43,35 +42,34 @@ class CalendarPersian extends CalendarData
      */
     protected $monthNames = [
         // Full name
-        "full" => [
-            "Farvardin",
-            "Ordibehesht",
+        'full' => [
+            'Farvardin',
+            'Ordibehesht',
             "Khord\u{101}d",
-            "Tir",
+            'Tir',
             "Mord\u{101}d",
-            "Shahrivar",
-            "Mehr",
+            'Shahrivar',
+            'Mehr',
             "\u{1FB9}ban",
             "\u{1FB9}zar",
-            "Day",
+            'Day',
             "Bahm\u{101}n",
-            "Esfand",
+            'Esfand',
         ],
         // Short name
-        "short" => [
-            "Farvardin",
-            "Ordibehesht",
+        'short' => [
+            'Farvardin',
+            'Ordibehesht',
             "Khord\u{101}d",
-            "Tir",
+            'Tir',
             "Mord\u{101}d",
-            "Shahrivar",
-            "Mehr",
+            'Shahrivar',
+            'Mehr',
             "\u{1FB9}ban",
             "\u{1FB9}zar",
-            "Day",
+            'Day',
             "Bahm\u{101}n",
-            "Esfand",
+            'Esfand',
         ],
     ];
-
 }

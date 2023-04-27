@@ -5,7 +5,6 @@ namespace PhpOffice\PhpSpreadsheet\Locale\Format;
 use PhpOffice\PhpSpreadsheet\Locale\FormatLocale;
 use PhpOffice\PhpSpreadsheet\Locale\LocaleLayout;
 
-
 class lang_ka_ge extends FormatLocale
 {
     /**
@@ -16,7 +15,7 @@ class lang_ka_ge extends FormatLocale
     /**
      * @var string The locale tag
      */
-    protected $tag = "ka-ge";
+    protected $tag = 'ka-ge';
 
     /**
      * @var string The currency code "₾"
@@ -26,17 +25,17 @@ class lang_ka_ge extends FormatLocale
     /**
      * @var string The decimal separator
      */
-    protected $decimalSeparator = ",";
+    protected $decimalSeparator = ',';
 
     /**
      * @var string The thousands separator
      */
-    protected $thousandsSeparator = " ";
+    protected $thousandsSeparator = "\u{a0}";
 
     /**
      * @var string The date separator
      */
-    protected $dateSeparator = ".";
+    protected $dateSeparator = '.';
 
     /**
      * @var string[] The numerals representation (0 up to 9)
@@ -52,7 +51,7 @@ class lang_ka_ge extends FormatLocale
      */
     protected $weekdayNames = [
         // Full name
-        "full" => [
+        'full' => [
             "\u{10DD}\u{10E0}\u{10E8}\u{10D0}\u{10D1}\u{10D0}\u{10D7}\u{10D8}",
             "\u{10E1}\u{10D0}\u{10DB}\u{10E8}\u{10D0}\u{10D1}\u{10D0}\u{10D7}\u{10D8}",
             "\u{10DD}\u{10D7}\u{10EE}\u{10E8}\u{10D0}\u{10D1}\u{10D0}\u{10D7}\u{10D8}",
@@ -62,7 +61,7 @@ class lang_ka_ge extends FormatLocale
             "\u{10D9}\u{10D5}\u{10D8}\u{10E0}\u{10D0}",
         ],
         // Short name
-        "short" => [
+        'short' => [
             "\u{10DD}\u{10E0}\u{10E8}.",
             "\u{10E1}\u{10D0}\u{10DB}\u{10E8}.",
             "\u{10DD}\u{10D7}\u{10EE}\u{10E8}.",
@@ -78,7 +77,7 @@ class lang_ka_ge extends FormatLocale
      */
     protected $monthNames = [
         // Full name
-        "full" => [
+        'full' => [
             "\u{10D8}\u{10D0}\u{10DC}\u{10D5}\u{10D0}\u{10E0}\u{10D8}",
             "\u{10D7}\u{10D4}\u{10D1}\u{10D4}\u{10E0}\u{10D5}\u{10D0}\u{10DA}\u{10D8}",
             "\u{10DB}\u{10D0}\u{10E0}\u{10E2}\u{10D8}",
@@ -93,7 +92,7 @@ class lang_ka_ge extends FormatLocale
             "\u{10D3}\u{10D4}\u{10D9}\u{10D4}\u{10DB}\u{10D1}\u{10D4}\u{10E0}\u{10D8}",
         ],
         // Short name
-        "short" => [
+        'short' => [
             "\u{10D8}\u{10D0}\u{10DC}",
             "\u{10D7}\u{10D4}\u{10D1}",
             "\u{10DB}\u{10D0}\u{10E0}",
@@ -108,5 +107,4 @@ class lang_ka_ge extends FormatLocale
             "\u{10D3}\u{10D4}\u{10D9}",
         ],
     ];
-
 }

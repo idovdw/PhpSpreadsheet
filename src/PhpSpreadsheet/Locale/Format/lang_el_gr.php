@@ -5,7 +5,6 @@ namespace PhpOffice\PhpSpreadsheet\Locale\Format;
 use PhpOffice\PhpSpreadsheet\Locale\FormatLocale;
 use PhpOffice\PhpSpreadsheet\Locale\LocaleLayout;
 
-
 class lang_el_gr extends FormatLocale
 {
     /**
@@ -16,7 +15,7 @@ class lang_el_gr extends FormatLocale
     /**
      * @var string The locale tag
      */
-    protected $tag = "el-gr";
+    protected $tag = 'el-gr';
 
     /**
      * @var string The currency code "€"
@@ -26,17 +25,17 @@ class lang_el_gr extends FormatLocale
     /**
      * @var string The decimal separator
      */
-    protected $decimalSeparator = ",";
+    protected $decimalSeparator = ',';
 
     /**
      * @var string The thousands separator
      */
-    protected $thousandsSeparator = ".";
+    protected $thousandsSeparator = '.';
 
     /**
      * @var string The date separator
      */
-    protected $dateSeparator = "/";
+    protected $dateSeparator = '/';
 
     /**
      * @var string[] The numerals representation (0 up to 9)
@@ -52,7 +51,7 @@ class lang_el_gr extends FormatLocale
      */
     protected $weekdayNames = [
         // Full name
-        "full" => [
+        'full' => [
             "\u{394}\u{3B5}\u{3C5}\u{3C4}\u{3AD}\u{3C1}\u{3B1}",
             "\u{3A4}\u{3C1}\u{3AF}\u{3C4}\u{3B7}",
             "\u{3A4}\u{3B5}\u{3C4}\u{3AC}\u{3C1}\u{3C4}\u{3B7}",
@@ -62,7 +61,7 @@ class lang_el_gr extends FormatLocale
             "\u{39A}\u{3C5}\u{3C1}\u{3B9}\u{3B1}\u{3BA}\u{3AE}",
         ],
         // Short name
-        "short" => [
+        'short' => [
             "\u{394}\u{3B5}\u{3C5}",
             "\u{3A4}\u{3C1}\u{3B9}",
             "\u{3A4}\u{3B5}\u{3C4}",
@@ -78,7 +77,7 @@ class lang_el_gr extends FormatLocale
      */
     protected $monthNames = [
         // Full name
-        "full" => [
+        'full' => [
             "\u{399}\u{3B1}\u{3BD}\u{3BF}\u{3C5}\u{3AC}\u{3C1}\u{3B9}\u{3BF}\u{3C2}",
             "\u{3A6}\u{3B5}\u{3B2}\u{3C1}\u{3BF}\u{3C5}\u{3AC}\u{3C1}\u{3B9}\u{3BF}\u{3C2}",
             "\u{39C}\u{3AC}\u{3C1}\u{3C4}\u{3B9}\u{3BF}\u{3C2}",
@@ -93,7 +92,7 @@ class lang_el_gr extends FormatLocale
             "\u{394}\u{3B5}\u{3BA}\u{3AD}\u{3BC}\u{3B2}\u{3C1}\u{3B9}\u{3BF}\u{3C2}",
         ],
         // Short name
-        "short" => [
+        'short' => [
             "\u{399}\u{3B1}\u{3BD}",
             "\u{3A6}\u{3B5}\u{3B2}",
             "\u{39C}\u{3B1}\u{3C1}",
@@ -108,5 +107,4 @@ class lang_el_gr extends FormatLocale
             "\u{394}\u{3B5}\u{3BA}",
         ],
     ];
-
 }

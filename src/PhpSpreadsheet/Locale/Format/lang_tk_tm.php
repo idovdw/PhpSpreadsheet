@@ -5,7 +5,6 @@ namespace PhpOffice\PhpSpreadsheet\Locale\Format;
 use PhpOffice\PhpSpreadsheet\Locale\FormatLocale;
 use PhpOffice\PhpSpreadsheet\Locale\LocaleLayout;
 
-
 class lang_tk_tm extends FormatLocale
 {
     /**
@@ -16,27 +15,27 @@ class lang_tk_tm extends FormatLocale
     /**
      * @var string The locale tag
      */
-    protected $tag = "tk-tm";
+    protected $tag = 'tk-tm';
 
     /**
      * @var string The currency code "TMT"
      */
-    protected $currencyCode = "TMT";
+    protected $currencyCode = 'TMT';
 
     /**
      * @var string The decimal separator
      */
-    protected $decimalSeparator = ",";
+    protected $decimalSeparator = ',';
 
     /**
      * @var string The thousands separator
      */
-    protected $thousandsSeparator = " ";
+    protected $thousandsSeparator = "\u{a0}";
 
     /**
      * @var string The date separator
      */
-    protected $dateSeparator = ".";
+    protected $dateSeparator = '.';
 
     /**
      * @var string[] The numerals representation (0 up to 9)
@@ -52,24 +51,24 @@ class lang_tk_tm extends FormatLocale
      */
     protected $weekdayNames = [
         // Full name
-        "full" => [
+        'full' => [
             "Du\u{15F}enbe",
             "Si\u{15F}enbe",
             "Çar\u{15F}enbe",
             "Pen\u{15F}enbe",
-            "Anna",
+            'Anna',
             "\u{15E}enbe",
             "Ýek\u{15F}enbe",
         ],
         // Short name
-        "short" => [
-            "Db",
-            "Sb",
-            "Çb",
-            "Pb",
-            "An",
+        'short' => [
+            'Db',
+            'Sb',
+            'Çb',
+            'Pb',
+            'An',
             "\u{15E}b",
-            "Ýb",
+            'Ýb',
         ],
     ];
 
@@ -78,35 +77,34 @@ class lang_tk_tm extends FormatLocale
      */
     protected $monthNames = [
         // Full name
-        "full" => [
-            "Ýanwar",
-            "Fewral",
-            "Mart",
-            "Aprel",
+        'full' => [
+            'Ýanwar',
+            'Fewral',
+            'Mart',
+            'Aprel',
             "Ma\u{FD}",
             "l\u{FD}un",
             "l\u{FD}ul",
-            "Awgust",
+            'Awgust',
             "Sent\u{FD}abr",
             "Okt\u{FD}abr",
             "No\u{FD}abr",
-            "Dekabr",
+            'Dekabr',
         ],
         // Short name
-        "short" => [
-            "Ýan",
-            "Few",
-            "Mart",
-            "Apr",
+        'short' => [
+            'Ýan',
+            'Few',
+            'Mart',
+            'Apr',
             "Ma\u{FD}",
             "l\u{FD}un",
             "l\u{FD}ul",
-            "Awg",
-            "Sen",
-            "Okt",
+            'Awg',
+            'Sen',
+            'Okt',
             "No\u{FD}",
-            "Dek",
+            'Dek',
         ],
     ];
-
 }

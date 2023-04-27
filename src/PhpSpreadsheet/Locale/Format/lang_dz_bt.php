@@ -5,7 +5,6 @@ namespace PhpOffice\PhpSpreadsheet\Locale\Format;
 use PhpOffice\PhpSpreadsheet\Locale\FormatLocale;
 use PhpOffice\PhpSpreadsheet\Locale\LocaleLayout;
 
-
 class lang_dz_bt extends FormatLocale
 {
     /**
@@ -16,27 +15,27 @@ class lang_dz_bt extends FormatLocale
     /**
      * @var string The locale tag
      */
-    protected $tag = "dz-bt";
+    protected $tag = 'dz-bt';
 
     /**
      * @var string The currency code "Nu."
      */
-    protected $currencyCode = "Nu.";
+    protected $currencyCode = 'Nu.';
 
     /**
      * @var string The decimal separator
      */
-    protected $decimalSeparator = ".";
+    protected $decimalSeparator = '.';
 
     /**
      * @var string The thousands separator
      */
-    protected $thousandsSeparator = ",";
+    protected $thousandsSeparator = ',';
 
     /**
      * @var string The date separator
      */
-    protected $dateSeparator = "-";
+    protected $dateSeparator = '-';
 
     /**
      * @var string[] The numerals representation (0 up to 9)
@@ -52,7 +51,7 @@ class lang_dz_bt extends FormatLocale
      */
     protected $weekdayNames = [
         // Full name
-        "full" => [
+        'full' => [
             "\u{F42}\u{F5F}\u{F60}\u{F0B}\u{F58}\u{F72}\u{F42}\u{F0B}\u{F51}\u{F58}\u{F62}\u{F0B}",
             "\u{F42}\u{F5F}\u{F60}\u{F0B}\u{F63}\u{FB7}\u{F42}\u{F0B}\u{F54}\u{F0B}",
             "\u{F42}\u{F5F}\u{F60}\u{F0B}\u{F55}\u{F74}\u{F62}\u{F0B}\u{F56}\u{F74}\u{F0B}",
@@ -62,7 +61,7 @@ class lang_dz_bt extends FormatLocale
             "\u{F42}\u{F5F}\u{F60}\u{F0B}\u{F5F}\u{FB3}\u{F0B}\u{F56}\u{F0B}",
         ],
         // Short name
-        "short" => [
+        'short' => [
             "\u{F58}\u{F72}\u{F62}\u{F0B}",
             "\u{F63}\u{FB7}\u{F42}\u{F0B}",
             "\u{F55}\u{F74}\u{F62}\u{F0B}",
@@ -78,7 +77,7 @@ class lang_dz_bt extends FormatLocale
      */
     protected $monthNames = [
         // Full name
-        "full" => [
+        'full' => [
             "\u{F66}\u{FA4}\u{FB1}\u{F72}\u{F0B}\u{F5F}\u{FB3}\u{F0B}\u{F51}\u{F44}\u{F54}\u{F0B}",
             "\u{F66}\u{FA4}\u{FB1}\u{F72}\u{F0B}\u{F5F}\u{FB3}\u{F0B}\u{F42}\u{F49}\u{F72}\u{F66}\u{F0B}\u{F54}\u{F0B}",
             "\u{F66}\u{FA4}\u{FB1}\u{F72}\u{F0B}\u{F5F}\u{FB3}\u{F0B}\u{F42}\u{F66}\u{F74}\u{F58}\u{F0B}\u{F54}\u{F0B}",
@@ -93,7 +92,7 @@ class lang_dz_bt extends FormatLocale
             "\u{F66}\u{FA4}\u{FB1}\u{F72}\u{F0B}\u{F5F}\u{FB3}\u{F0B}\u{F56}\u{F45}\u{F74}\u{F0B}\u{F42}\u{F49}\u{F72}\u{F66}\u{F0B}\u{F54}\u{F0B}",
         ],
         // Short name
-        "short" => [
+        'short' => [
             "\u{F5F}\u{FB3}\u{F0B}\u{F21}",
             "\u{F5F}\u{FB3}\u{F0B}\u{F22}",
             "\u{F5F}\u{FB3}\u{F0B}\u{F23}",
@@ -113,14 +112,13 @@ class lang_dz_bt extends FormatLocale
      * @var array<string,string> Replacement formats
      */
     protected $formatReplacements = [
-        "\$ #,##0;\$ -#,##0" => "\$ #,##0;\$ -#,##0",
-        "\$ #,##0;[Red]\$ -#,##0" => "\$ #,##0;[Red]\$ -#,##0",
-        "\$ #,##0.00;\$ -#,##0.00" => "\$ #,##0.00;\$ -#,##0.00",
-        "\$ #,##0.00;[Red]\$ -#,##0.00" => "\$ #,##0.00;[Red]\$ -#,##0.00",
-        "_ \$ * #,##0_ ;_ \$ * -#,##0_ ;_ \$ * \"-\"_ ;_ @_ " => "_ \$ * #,##0_ ;_ \$ * -#,##0_ ;_ \$ * \"-\"_ ;_ @_ ",
-        "_ \$ * #,##0.00_ ;_ \$ * -#,##0.00_ ;_ \$ * \"-\"??_ ;_ @_ " => "_ \$ * #,##0.00_ ;_ \$ * -#,##0.00_ ;_ \$ * \"-\"??_ ;_ @_ ",
-        "[\$-F800]dddd, mmmm dd, yyyy" => "dddd\"{, }\"mmmm d\"{, }\"yyyy",
-        "[\$-F400]h:mm:ss AM/PM" => "h:mm:ss AM/PM",
+        '$ #,##0;$ -#,##0' => '$ #,##0;$ -#,##0',
+        '$ #,##0;[Red]$ -#,##0' => '$ #,##0;[Red]$ -#,##0',
+        '$ #,##0.00;$ -#,##0.00' => '$ #,##0.00;$ -#,##0.00',
+        '$ #,##0.00;[Red]$ -#,##0.00' => '$ #,##0.00;[Red]$ -#,##0.00',
+        '_ $ * #,##0_ ;_ $ * -#,##0_ ;_ $ * "-"_ ;_ @_ ' => '_ $ * #,##0_ ;_ $ * -#,##0_ ;_ $ * "-"_ ;_ @_ ',
+        '_ $ * #,##0.00_ ;_ $ * -#,##0.00_ ;_ $ * "-"??_ ;_ @_ ' => '_ $ * #,##0.00_ ;_ $ * -#,##0.00_ ;_ $ * "-"??_ ;_ @_ ',
+        '[$-F800]dddd, mmmm dd, yyyy' => 'dddd"{, }"mmmm d"{, }"yyyy',
+        '[$-F400]h:mm:ss AM/PM' => 'h:mm:ss AM/PM',
     ];
-
 }

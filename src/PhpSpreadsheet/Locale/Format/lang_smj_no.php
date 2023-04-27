@@ -5,7 +5,6 @@ namespace PhpOffice\PhpSpreadsheet\Locale\Format;
 use PhpOffice\PhpSpreadsheet\Locale\FormatLocale;
 use PhpOffice\PhpSpreadsheet\Locale\LocaleLayout;
 
-
 class lang_smj_no extends FormatLocale
 {
     /**
@@ -16,27 +15,27 @@ class lang_smj_no extends FormatLocale
     /**
      * @var string The locale tag
      */
-    protected $tag = "smj-no";
+    protected $tag = 'smj-no';
 
     /**
      * @var string The currency code "NOK"
      */
-    protected $currencyCode = "NOK";
+    protected $currencyCode = 'NOK';
 
     /**
      * @var string The decimal separator
      */
-    protected $decimalSeparator = ",";
+    protected $decimalSeparator = ',';
 
     /**
      * @var string The thousands separator
      */
-    protected $thousandsSeparator = ".";
+    protected $thousandsSeparator = '.';
 
     /**
      * @var string The date separator
      */
-    protected $dateSeparator = "-";
+    protected $dateSeparator = '-';
 
     /**
      * @var string[] The numerals representation (0 up to 9)
@@ -52,24 +51,24 @@ class lang_smj_no extends FormatLocale
      */
     protected $weekdayNames = [
         // Full name
-        "full" => [
-            "mánnodahka",
-            "dijstahka",
-            "gasskavahkko",
-            "duorastahka",
-            "bierjjedahka",
-            "lávvodahka",
-            "sådnåbiejvve",
+        'full' => [
+            'mánnodahka',
+            'dijstahka',
+            'gasskavahkko',
+            'duorastahka',
+            'bierjjedahka',
+            'lávvodahka',
+            'sådnåbiejvve',
         ],
         // Short name
-        "short" => [
-            "mán",
-            "dis",
-            "gas",
-            "duor",
-            "bier",
-            "láv",
-            "såd",
+        'short' => [
+            'mán',
+            'dis',
+            'gas',
+            'duor',
+            'bier',
+            'láv',
+            'såd',
         ],
     ];
 
@@ -78,35 +77,34 @@ class lang_smj_no extends FormatLocale
      */
     protected $monthNames = [
         // Full name
-        "full" => [
-            "ådåjakmánno",
-            "guovvamánno",
-            "sjnjuktjamánno",
-            "vuoratjismánno",
-            "moarmesmánno",
-            "biehtsemánno",
-            "sjnjilltjamánno",
-            "bårggemánno",
-            "ragátmánno",
-            "gålgådismánno",
-            "basádismánno",
-            "javllamánno",
+        'full' => [
+            'ådåjakmánno',
+            'guovvamánno',
+            'sjnjuktjamánno',
+            'vuoratjismánno',
+            'moarmesmánno',
+            'biehtsemánno',
+            'sjnjilltjamánno',
+            'bårggemánno',
+            'ragátmánno',
+            'gålgådismánno',
+            'basádismánno',
+            'javllamánno',
         ],
         // Short name
-        "short" => [
-            "ådåj",
-            "guov",
-            "snju",
-            "vuor",
-            "moar",
-            "bieh",
-            "snji",
-            "bårg",
-            "ragá",
-            "gålg",
-            "basá",
-            "javl",
+        'short' => [
+            'ådåj',
+            'guov',
+            'snju',
+            'vuor',
+            'moar',
+            'bieh',
+            'snji',
+            'bårg',
+            'ragá',
+            'gålg',
+            'basá',
+            'javl',
         ],
     ];
-
 }

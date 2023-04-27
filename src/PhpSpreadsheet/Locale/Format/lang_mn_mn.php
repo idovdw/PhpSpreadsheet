@@ -5,7 +5,6 @@ namespace PhpOffice\PhpSpreadsheet\Locale\Format;
 use PhpOffice\PhpSpreadsheet\Locale\FormatLocale;
 use PhpOffice\PhpSpreadsheet\Locale\LocaleLayout;
 
-
 class lang_mn_mn extends FormatLocale
 {
     /**
@@ -16,7 +15,7 @@ class lang_mn_mn extends FormatLocale
     /**
      * @var string The locale tag
      */
-    protected $tag = "mn-mn";
+    protected $tag = 'mn-mn';
 
     /**
      * @var string The currency code "₮"
@@ -26,17 +25,17 @@ class lang_mn_mn extends FormatLocale
     /**
      * @var string The decimal separator
      */
-    protected $decimalSeparator = ".";
+    protected $decimalSeparator = '.';
 
     /**
      * @var string The thousands separator
      */
-    protected $thousandsSeparator = ",";
+    protected $thousandsSeparator = ',';
 
     /**
      * @var string The date separator
      */
-    protected $dateSeparator = ".";
+    protected $dateSeparator = '.';
 
     /**
      * @var string[] The numerals representation (0 up to 9)
@@ -52,7 +51,7 @@ class lang_mn_mn extends FormatLocale
      */
     protected $weekdayNames = [
         // Full name
-        "full" => [
+        'full' => [
             "\u{434}\u{430}\u{432}\u{430}\u{430}",
             "\u{43C}\u{44F}\u{433}\u{43C}\u{430}\u{440}",
             "\u{43B}\u{445}\u{430}\u{433}\u{432}\u{430}",
@@ -62,7 +61,7 @@ class lang_mn_mn extends FormatLocale
             "\u{43D}\u{44F}\u{43C}",
         ],
         // Short name
-        "short" => [
+        'short' => [
             "\u{414}\u{430}",
             "\u{41C}\u{44F}",
             "\u{41B}\u{445}\u{430}",
@@ -78,7 +77,7 @@ class lang_mn_mn extends FormatLocale
      */
     protected $monthNames = [
         // Full name
-        "full" => [
+        'full' => [
             "\u{41D}\u{44D}\u{433}\u{434}\u{4AF}\u{433}\u{44D}\u{44D}\u{440} \u{441}\u{430}\u{440}",
             "\u{425}\u{43E}\u{451}\u{440}\u{434}\u{443}\u{433}\u{430}\u{430}\u{440} \u{441}\u{430}\u{440}",
             "\u{413}\u{443}\u{440}\u{430}\u{432}\u{434}\u{443}\u{433}\u{430}\u{430}\u{440} \u{441}\u{430}\u{440}",
@@ -93,7 +92,7 @@ class lang_mn_mn extends FormatLocale
             "\u{410}\u{440}\u{432}\u{430}\u{43D} \u{445}\u{43E}\u{451}\u{440}\u{434}\u{443}\u{433}\u{430}\u{430}\u{440} \u{441}\u{430}\u{440}",
         ],
         // Short name
-        "short" => [
+        'short' => [
             "1-\u{440} \u{441}\u{430}\u{440}",
             "2-\u{440} \u{441}\u{430}\u{440}",
             "3-\u{440} \u{441}\u{430}\u{440}",
@@ -108,5 +107,4 @@ class lang_mn_mn extends FormatLocale
             "12-\u{440} \u{441}\u{430}\u{440}",
         ],
     ];
-
 }

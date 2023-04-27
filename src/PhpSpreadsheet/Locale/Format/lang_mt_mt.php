@@ -5,7 +5,6 @@ namespace PhpOffice\PhpSpreadsheet\Locale\Format;
 use PhpOffice\PhpSpreadsheet\Locale\FormatLocale;
 use PhpOffice\PhpSpreadsheet\Locale\LocaleLayout;
 
-
 class lang_mt_mt extends FormatLocale
 {
     /**
@@ -16,7 +15,7 @@ class lang_mt_mt extends FormatLocale
     /**
      * @var string The locale tag
      */
-    protected $tag = "mt-mt";
+    protected $tag = 'mt-mt';
 
     /**
      * @var string The currency code "€"
@@ -26,17 +25,17 @@ class lang_mt_mt extends FormatLocale
     /**
      * @var string The decimal separator
      */
-    protected $decimalSeparator = ".";
+    protected $decimalSeparator = '.';
 
     /**
      * @var string The thousands separator
      */
-    protected $thousandsSeparator = ",";
+    protected $thousandsSeparator = ',';
 
     /**
      * @var string The date separator
      */
-    protected $dateSeparator = "/";
+    protected $dateSeparator = '/';
 
     /**
      * @var string[] The numerals representation (0 up to 9)
@@ -52,23 +51,23 @@ class lang_mt_mt extends FormatLocale
      */
     protected $weekdayNames = [
         // Full name
-        "full" => [
-            "It-Tnejn",
-            "It-Tlieta",
+        'full' => [
+            'It-Tnejn',
+            'It-Tlieta',
             "L-Erbg\u{127}a",
             "Il-\u{126}amis",
             "Il-\u{120}img\u{127}a",
-            "Is-Sibt",
+            'Is-Sibt',
             "Il-\u{126}add",
         ],
         // Short name
-        "short" => [
-            "Tne",
-            "Tli",
-            "Erb",
+        'short' => [
+            'Tne',
+            'Tli',
+            'Erb',
             "\u{126}am",
             "\u{120}im",
-            "Sib",
+            'Sib',
             "\u{126}ad",
         ],
     ];
@@ -78,35 +77,34 @@ class lang_mt_mt extends FormatLocale
      */
     protected $monthNames = [
         // Full name
-        "full" => [
-            "Jannar",
-            "Frar",
-            "Marzu",
-            "April",
-            "Mejju",
+        'full' => [
+            'Jannar',
+            'Frar',
+            'Marzu',
+            'April',
+            'Mejju',
             "\u{120}unju",
-            "Lulju",
-            "Awwissu",
-            "Settembru",
-            "Ottubru",
-            "Novembru",
+            'Lulju',
+            'Awwissu',
+            'Settembru',
+            'Ottubru',
+            'Novembru',
             "Di\u{10B}embru",
         ],
         // Short name
-        "short" => [
-            "Jan",
-            "Fra",
-            "Mar",
-            "Apr",
-            "Mej",
+        'short' => [
+            'Jan',
+            'Fra',
+            'Mar',
+            'Apr',
+            'Mej',
             "\u{120}un",
-            "Lul",
-            "Aww",
-            "Set",
-            "Ott",
-            "Nov",
+            'Lul',
+            'Aww',
+            'Set',
+            'Ott',
+            'Nov',
             "Di\u{10B}",
         ],
     ];
-
 }

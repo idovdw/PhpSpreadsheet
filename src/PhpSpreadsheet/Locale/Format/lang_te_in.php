@@ -5,7 +5,6 @@ namespace PhpOffice\PhpSpreadsheet\Locale\Format;
 use PhpOffice\PhpSpreadsheet\Locale\FormatLocale;
 use PhpOffice\PhpSpreadsheet\Locale\LocaleLayout;
 
-
 class lang_te_in extends FormatLocale
 {
     /**
@@ -16,7 +15,7 @@ class lang_te_in extends FormatLocale
     /**
      * @var string The locale tag
      */
-    protected $tag = "te-in";
+    protected $tag = 'te-in';
 
     /**
      * @var string The currency code "₹"
@@ -26,17 +25,17 @@ class lang_te_in extends FormatLocale
     /**
      * @var string The decimal separator
      */
-    protected $decimalSeparator = ".";
+    protected $decimalSeparator = '.';
 
     /**
      * @var string The thousands separator
      */
-    protected $thousandsSeparator = ",";
+    protected $thousandsSeparator = ',';
 
     /**
      * @var string The date separator
      */
-    protected $dateSeparator = "-";
+    protected $dateSeparator = '-';
 
     /**
      * @var string[] The numerals representation (0 up to 9)
@@ -52,7 +51,7 @@ class lang_te_in extends FormatLocale
      */
     protected $weekdayNames = [
         // Full name
-        "full" => [
+        'full' => [
             "\u{C38}\u{C4B}\u{C2E}\u{C35}\u{C3E}\u{C30}\u{C02}",
             "\u{C2E}\u{C02}\u{C17}\u{C33}\u{C35}\u{C3E}\u{C30}\u{C02}",
             "\u{C2C}\u{C41}\u{C27}\u{C35}\u{C3E}\u{C30}\u{C02}",
@@ -62,7 +61,7 @@ class lang_te_in extends FormatLocale
             "\u{C06}\u{C26}\u{C3F}\u{C35}\u{C3E}\u{C30}\u{C02}",
         ],
         // Short name
-        "short" => [
+        'short' => [
             "\u{C38}\u{C4B}\u{C2E}",
             "\u{C2E}\u{C02}\u{C17}\u{C33}",
             "\u{C2C}\u{C41}\u{C27}",
@@ -78,7 +77,7 @@ class lang_te_in extends FormatLocale
      */
     protected $monthNames = [
         // Full name
-        "full" => [
+        'full' => [
             "\u{C1C}\u{C28}\u{C35}\u{C30}\u{C3F}",
             "\u{C2B}\u{C3F}\u{C2C}\u{C4D}\u{C30}\u{C35}\u{C30}\u{C3F}",
             "\u{C2E}\u{C3E}\u{C30}\u{C4D}\u{C1A}\u{C3F}",
@@ -93,7 +92,7 @@ class lang_te_in extends FormatLocale
             "\u{C21}\u{C3F}\u{C38}\u{C46}\u{C02}\u{C2C}\u{C30}\u{C4D}",
         ],
         // Short name
-        "short" => [
+        'short' => [
             "\u{C1C}\u{C28}",
             "\u{C2B}\u{C3F}\u{C2C}\u{C4D}\u{C30}",
             "\u{C2E}\u{C3E}\u{C30}\u{C4D}\u{C1A}\u{C3F}",
@@ -108,5 +107,4 @@ class lang_te_in extends FormatLocale
             "\u{C21}\u{C3F}\u{C38}\u{C46}\u{C02}",
         ],
     ];
-
 }

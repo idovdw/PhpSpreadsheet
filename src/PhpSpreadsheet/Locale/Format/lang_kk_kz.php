@@ -5,7 +5,6 @@ namespace PhpOffice\PhpSpreadsheet\Locale\Format;
 use PhpOffice\PhpSpreadsheet\Locale\FormatLocale;
 use PhpOffice\PhpSpreadsheet\Locale\LocaleLayout;
 
-
 class lang_kk_kz extends FormatLocale
 {
     /**
@@ -16,7 +15,7 @@ class lang_kk_kz extends FormatLocale
     /**
      * @var string The locale tag
      */
-    protected $tag = "kk-kz";
+    protected $tag = 'kk-kz';
 
     /**
      * @var string The currency code "₸"
@@ -26,17 +25,17 @@ class lang_kk_kz extends FormatLocale
     /**
      * @var string The decimal separator
      */
-    protected $decimalSeparator = ",";
+    protected $decimalSeparator = ',';
 
     /**
      * @var string The thousands separator
      */
-    protected $thousandsSeparator = " ";
+    protected $thousandsSeparator = "\u{a0}";
 
     /**
      * @var string The date separator
      */
-    protected $dateSeparator = ".";
+    protected $dateSeparator = '.';
 
     /**
      * @var string[] The numerals representation (0 up to 9)
@@ -52,7 +51,7 @@ class lang_kk_kz extends FormatLocale
      */
     protected $weekdayNames = [
         // Full name
-        "full" => [
+        'full' => [
             "\u{434}\u{4AF}\u{439}\u{441}\u{435}\u{43D}\u{431}\u{456}",
             "\u{441}\u{435}\u{439}\u{441}\u{435}\u{43D}\u{431}\u{456}",
             "\u{441}\u{4D9}\u{440}\u{441}\u{435}\u{43D}\u{431}\u{456}",
@@ -62,7 +61,7 @@ class lang_kk_kz extends FormatLocale
             "\u{436}\u{435}\u{43A}\u{441}\u{435}\u{43D}\u{431}\u{456}",
         ],
         // Short name
-        "short" => [
+        'short' => [
             "\u{434}\u{4AF}\u{439}",
             "\u{441}\u{435}\u{439}",
             "\u{441}\u{4D9}\u{440}",
@@ -78,7 +77,7 @@ class lang_kk_kz extends FormatLocale
      */
     protected $monthNames = [
         // Full name
-        "full" => [
+        'full' => [
             "\u{49A}\u{430}\u{4A3}\u{442}\u{430}\u{440}",
             "\u{410}\u{49B}\u{43F}\u{430}\u{43D}",
             "\u{41D}\u{430}\u{443}\u{440}\u{44B}\u{437}",
@@ -93,7 +92,7 @@ class lang_kk_kz extends FormatLocale
             "\u{416}\u{435}\u{43B}\u{442}\u{43E}\u{49B}\u{441}\u{430}\u{43D}",
         ],
         // Short name
-        "short" => [
+        'short' => [
             "\u{49B}\u{430}\u{4A3}",
             "\u{430}\u{49B}\u{43F}",
             "\u{43D}\u{430}\u{443}",
@@ -108,5 +107,4 @@ class lang_kk_kz extends FormatLocale
             "\u{436}\u{435}\u{43B}",
         ],
     ];
-
 }

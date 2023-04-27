@@ -11,7 +11,11 @@
 
     <arg name="report-width" value="200"/>
     <arg name="parallel" value="80"/>
-    <arg name="cache" value="/tmp/.phpspreadsheet.phpcs-cache"/>
+    <!--
+    For Windows use:
+    <arg name="cache" value="C:\\Windows\\Temp\\.phpspreadsheet.phpcs-cache" />
+    --/>
+    <arg name="cache" value="\tmp\.phpspreadsheet.phpcs-cache"/>
     <arg name="colors"/>
     <arg value="np"/>
 

@@ -5,7 +5,6 @@ namespace PhpOffice\PhpSpreadsheet\Locale\Format;
 use PhpOffice\PhpSpreadsheet\Locale\FormatLocale;
 use PhpOffice\PhpSpreadsheet\Locale\LocaleLayout;
 
-
 class lang_as_in extends FormatLocale
 {
     /**
@@ -16,7 +15,7 @@ class lang_as_in extends FormatLocale
     /**
      * @var string The locale tag
      */
-    protected $tag = "as-in";
+    protected $tag = 'as-in';
 
     /**
      * @var string The currency code "₹"
@@ -26,17 +25,17 @@ class lang_as_in extends FormatLocale
     /**
      * @var string The decimal separator
      */
-    protected $decimalSeparator = ".";
+    protected $decimalSeparator = '.';
 
     /**
      * @var string The thousands separator
      */
-    protected $thousandsSeparator = ",";
+    protected $thousandsSeparator = ',';
 
     /**
      * @var string The date separator
      */
-    protected $dateSeparator = "-";
+    protected $dateSeparator = '-';
 
     /**
      * @var string[] The numerals representation (0 up to 9)
@@ -52,7 +51,7 @@ class lang_as_in extends FormatLocale
      */
     protected $weekdayNames = [
         // Full name
-        "full" => [
+        'full' => [
             "\u{9B8}\u{9CB}\u{9AE}\u{9AC}\u{9BE}\u{9F0}",
             "\u{9AE}\u{999}\u{9CD}\u{997}\u{9B2}\u{9AC}\u{9BE}\u{9F0}",
             "\u{9AC}\u{9C1}\u{9A7}\u{9AC}\u{9BE}\u{9F0}",
@@ -62,7 +61,7 @@ class lang_as_in extends FormatLocale
             "\u{9F0}\u{9AC}\u{9BF}\u{9AC}\u{9BE}\u{9F0}",
         ],
         // Short name
-        "short" => [
+        'short' => [
             "\u{9B8}\u{9CB}\u{9AE}.",
             "\u{9AE}\u{999}\u{9CD}\u{997}\u{9B2}.",
             "\u{9AC}\u{9C1}\u{9A7}.",
@@ -78,7 +77,7 @@ class lang_as_in extends FormatLocale
      */
     protected $monthNames = [
         // Full name
-        "full" => [
+        'full' => [
             "\u{99C}\u{9BE}\u{9A8}\u{9C1}\u{9F1}\u{9BE}\u{9F0}\u{9C0}",
             "\u{9AB}\u{9C7}\u{9AC}\u{9CD}\u{9B0}\u{9C1}\u{9F1}\u{9BE}\u{9F0}\u{9C0}",
             "\u{9AE}\u{9BE}\u{9B0}\u{9CD}\u{99A}",
@@ -93,7 +92,7 @@ class lang_as_in extends FormatLocale
             "\u{9A1}\u{9BF}\u{99A}\u{9C7}\u{9AE}\u{9CD}\u{9AC}\u{9F0}",
         ],
         // Short name
-        "short" => [
+        'short' => [
             "\u{99C}\u{9BE}\u{9A8}\u{9C1}",
             "\u{9AB}\u{9C7}\u{9AC}\u{9CD}\u{9B0}\u{9C1}",
             "\u{9AE}\u{9BE}\u{9B0}\u{9CD}\u{99A}",
@@ -108,5 +107,4 @@ class lang_as_in extends FormatLocale
             "\u{9A1}\u{9BF}\u{99A}\u{9C7}",
         ],
     ];
-
 }

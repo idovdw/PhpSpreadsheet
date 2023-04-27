@@ -5,7 +5,6 @@ namespace PhpOffice\PhpSpreadsheet\Locale\Format;
 use PhpOffice\PhpSpreadsheet\Locale\FormatLocale;
 use PhpOffice\PhpSpreadsheet\Locale\LocaleLayout;
 
-
 class lang_or_in extends FormatLocale
 {
     /**
@@ -16,7 +15,7 @@ class lang_or_in extends FormatLocale
     /**
      * @var string The locale tag
      */
-    protected $tag = "or-in";
+    protected $tag = 'or-in';
 
     /**
      * @var string The currency code "₹"
@@ -26,17 +25,17 @@ class lang_or_in extends FormatLocale
     /**
      * @var string The decimal separator
      */
-    protected $decimalSeparator = ".";
+    protected $decimalSeparator = '.';
 
     /**
      * @var string The thousands separator
      */
-    protected $thousandsSeparator = ",";
+    protected $thousandsSeparator = ',';
 
     /**
      * @var string The date separator
      */
-    protected $dateSeparator = "/";
+    protected $dateSeparator = '/';
 
     /**
      * @var string[] The numerals representation (0 up to 9)
@@ -52,7 +51,7 @@ class lang_or_in extends FormatLocale
      */
     protected $weekdayNames = [
         // Full name
-        "full" => [
+        'full' => [
             "\u{B38}\u{B47}\u{B3E}\u{B2E}\u{B2C}\u{B3E}\u{B30}",
             "\u{B2E}\u{B19}\u{B4D}\u{B17}\u{B33}\u{B2C}\u{B3E}\u{B30}",
             "\u{B2C}\u{B41}\u{B27}\u{B2C}\u{B3E}\u{B30}",
@@ -62,7 +61,7 @@ class lang_or_in extends FormatLocale
             "\u{B30}\u{B2C}\u{B3F}\u{B2C}\u{B3E}\u{B30}",
         ],
         // Short name
-        "short" => [
+        'short' => [
             "\u{B38}\u{B47}\u{B3E}\u{B2E}.",
             "\u{B2E}\u{B19}\u{B4D}\u{B17}\u{B33}.",
             "\u{B2C}\u{B41}\u{B27}.",
@@ -78,7 +77,7 @@ class lang_or_in extends FormatLocale
      */
     protected $monthNames = [
         // Full name
-        "full" => [
+        'full' => [
             "\u{B1C}\u{B3E}\u{B28}\u{B41}\u{B5F}\u{B3E}\u{B30}\u{B40}",
             "\u{B2B}\u{B47}\u{B2C}\u{B43}\u{B06}\u{B30}\u{B40}",
             "\u{B2E}\u{B3E}\u{B30}\u{B4D}\u{B1A}\u{B4D}\u{B1A}",
@@ -93,7 +92,7 @@ class lang_or_in extends FormatLocale
             "\u{B21}\u{B3F}\u{B38}\u{B47}\u{B2E}\u{B4D}\u{B2C}\u{B30}",
         ],
         // Short name
-        "short" => [
+        'short' => [
             "\u{B1C}\u{B3E}\u{B28}\u{B41}\u{B5F}\u{B3E}\u{B30}\u{B40}",
             "\u{B2B}\u{B47}\u{B2C}\u{B43}\u{B06}\u{B30}\u{B40}",
             "\u{B2E}\u{B3E}\u{B30}\u{B4D}\u{B1A}\u{B4D}\u{B1A}",
@@ -108,5 +107,4 @@ class lang_or_in extends FormatLocale
             "\u{B21}\u{B3F}\u{B38}\u{B47}\u{B2E}\u{B4D}\u{B2C}\u{B30}",
         ],
     ];
-
 }

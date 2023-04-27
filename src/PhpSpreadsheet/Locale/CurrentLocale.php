@@ -2,11 +2,11 @@
 
 namespace PhpOffice\PhpSpreadsheet\Locale;
 
+use Exception;
 use PhpOffice\PhpSpreadsheet\Calculation\Calculation;
 
-
 /**
- * Current locale (proxy class to format and formula locale)
+ * Current locale (proxy class to format and formula locale).
  */
 class CurrentLocale
 {
@@ -15,47 +15,46 @@ class CurrentLocale
      */
     protected static $oFormatLocale;
 
-
     /**
-     * Set the current locale (both format and calculation)
+     * Set the current locale (both format and calculation).
      *
      * @param string $locale_tag The locale tag (e.g. 'id', 'pt-br', 'en_us')
-     * @return boolean Calculation locale is set
-     * @throws \Exception Unable to load locale
+     *
+     * @throws Exception Unable to load locale
+     *
+     * @return bool Calculation locale is set
      */
     public static function setLocale(string $locale_tag)
     {
         self::$oFormatLocale = null;
         $oFormatLocale = FormatLocaleFactory::getLocaleObjectFromTag($locale_tag);
-        if (empty($oFormatLocale))
-        {
-            throw new \Exception('Unable to load locale "'.$locale_tag.'" (for format)');
+        if (empty($oFormatLocale)) {
+            throw new Exception('Unable to load locale "' . $locale_tag . '" (for format)');
         }
         self::$oFormatLocale = $oFormatLocale;
         $locale_tag = $oFormatLocale->getTag();
 
         $result = Calculation::getInstance()->setLocale($locale_tag);
-        if (!$result)
-        {
+        if (!$result) {
             self::$oFormatLocale = null;
-            throw new \Exception('Unable to load locale "'.$locale_tag.'" (for calculation)');
+
+            throw new Exception('Unable to load locale "' . $locale_tag . '" (for calculation)');
         }
 
         return $result;
     }
 
     /**
-     * Retrieve the current locale tag
+     * Retrieve the current locale tag.
      *
-     * @param boolean - Return the raw value (null if not set)
+     * @param bool - Return the raw value (null if not set)
+     *
      * @return string - The locale tag (e.g. "fr-fr" or "pt-br" or "en-us")
      */
     public static function getLocale($raw = false): string
     {
-        if (!isset(self::$oFormatLocale))
-        {
-            if ($raw)
-            {
+        if (!isset(self::$oFormatLocale)) {
+            if ($raw) {
                 return null;
             }
 
@@ -67,22 +66,21 @@ class CurrentLocale
     }
 
     /**
-     * Set the default locale "en-us"
+     * Set the default locale "en-us".
      */
-    public static function setDefaultLocale()
+    public static function setDefaultLocale(): void
     {
         self::setLocale(FormatLocaleFactory::DEFAULT_LOCALE_TAG);
     }
 
     /**
-     * Retrieve the current FormatLocale instance
+     * Retrieve the current FormatLocale instance.
      *
      * @return FormatLocale The current locale
      */
     public static function getFormatInstance(): FormatLocale
     {
-        if (!isset(self::$oFormatLocale))
-        {
+        if (!isset(self::$oFormatLocale)) {
             // Set default locale
             self::setDefaultLocale();
         }
@@ -91,7 +89,7 @@ class CurrentLocale
     }
 
     /**
-     * Retrieve the current FormulaLocale instance
+     * Retrieve the current FormulaLocale instance.
      *
      * @return FormulaLocale The current locale
      */
@@ -99,13 +97,14 @@ class CurrentLocale
     {
         $locale = Calculation::getInstance()->getLocale();
         $oLocaleObject = FormulaLocaleFactory::getLocaleObject($locale);
+
         return $oLocaleObject;
     }
 
     /**
-     * Set format to overrule the cell locale (always use the current locale)
+     * Set format to overrule the cell locale (always use the current locale).
      *
-     * @param boolean $overrule Overrule the locale specifications
+     * @param bool $overrule Overrule the locale specifications
      */
     public static function setOverruleCellLocale(bool $overrule = true): void
     {
@@ -113,9 +112,10 @@ class CurrentLocale
     }
 
     /**
-     * Extract locale configuration (LCID code, DbNum#, NatNum# settings)
+     * Extract locale configuration (LCID code, DbNum#, NatNum# settings).
      *
      * @param string $format The full format string
+     *
      * @return array The locale format configuration (lcid, lcids, dbnum,
      * natnum, sysdate, systime and format)
      */
@@ -123,9 +123,9 @@ class CurrentLocale
     {
         return self::getFormatInstance()->getLocaleConfiguration($format);
     }
-    
+
     /**
-     * Retrieve the LCID
+     * Retrieve the LCID.
      *
      * @return int The LCID
      */
@@ -135,7 +135,7 @@ class CurrentLocale
     }
 
     /**
-     * Retrieve the locale tag
+     * Retrieve the locale tag.
      *
      * @return string The locale tag (e.g. "pt-br")
      */
@@ -143,9 +143,9 @@ class CurrentLocale
     {
         return self::getFormatInstance()->getTag();
     }
-    
+
     /**
-     * Retrieve the locale slug
+     * Retrieve the locale slug.
      *
      * @return string The locale slug (e.g. "en_us")
      */
@@ -155,7 +155,7 @@ class CurrentLocale
     }
 
     /**
-     * Retrieve the language code of this locale
+     * Retrieve the language code of this locale.
      *
      * @return string The first characters of the locale tag
      */
@@ -188,15 +188,15 @@ class CurrentLocale
     }
 
     /**
-     * Get the numerals types (number representation of 0 up to 9)
+     * Get the numerals types (number representation of 0 up to 9).
      *
      * @return string[] The numbers representation (e.g. 'arabic')
      */
     public static function getNumerals(): array
     {
         return self::getFormatInstance()->getNumerals();
-    }    
-    
+    }
+
     /**
      * Set the decimal separator. Only used by NumberFormat::toFormattedString()
      * to format output by \PhpOffice\PhpSpreadsheet\Writer\Html and
@@ -244,17 +244,17 @@ class CurrentLocale
     }
 
     /**
-     * Retrieve the thousands format pattern
-     * 
+     * Retrieve the thousands format pattern.
+     *
      * @return int Thousands format pattern
      */
     public static function getThousandsFormatPattern()
     {
         return self::getFormatInstance()->getThousandsFormatPattern();
     }
-    
+
     /**
-     * Set the date separator
+     * Set the date separator.
      *
      * @param string $separator Character for date separator
      */
@@ -264,7 +264,7 @@ class CurrentLocale
     }
 
     /**
-     * Retrieve the date separator (e.g. '/','-','.')
+     * Retrieve the date separator (e.g. '/','-','.').
      *
      * @return string The date separator
      */
@@ -274,54 +274,56 @@ class CurrentLocale
     }
 
     /**
-     * Retrieve date translation specification
+     * Retrieve date translation specification.
      *
-     * @param array|true|false $aLocaleConfig Locale format configuration; true uses
+     * @param array|false|true $aLocaleConfig Locale format configuration; true uses
      * current locale. False uses the default locale ('en-us')
+     *
      * @return array The date translations (days, months, language)
      */
     public static function getDateTranslations($aLocaleConfig): array
     {
-        if ($aLocaleConfig === true)
-        {
+        if ($aLocaleConfig === true) {
             return self::getFormatInstance()->getDateTranslations();
         }
 
-        if ($aLocaleConfig === false)
-        {
+        if ($aLocaleConfig === false) {
             $oFormatLocale = FormatLocaleFactory::getLocaleObjectFromTag(FormatLocaleFactory::DEFAULT_LOCALE_TAG);
+
             return $oFormatLocale->getDateTranslations();
         }
-        
+
         return $aLocaleConfig['date_locale']->getDateTranslations();
     }
-    
+
     /**
-     * Translate format string to locale specific format
+     * Translate format string to locale specific format.
      *
      * @param string $format The full format string (including locale code(s))
      * @param array $aLocaleConfig The locale format configuration
+     *
      * @return string The altered format, if applicable
      */
     public static function translateFormatString($format, $aLocaleConfig): string
     {
         return $aLocaleConfig['locale']->translateFormatString($format, $aLocaleConfig);
     }
-    
+
     /**
-     * Perform the transliteration based upon the locale format configuration
-     * 
+     * Perform the transliteration based upon the locale format configuration.
+     *
      * @param string $value The formatted value
      * @param array $aLocaleConfig The locale format configuration
+     *
      * @return string The altered value, if applicable
      */
     public static function performTransliteration($value, $aLocaleConfig): string
     {
         return $aLocaleConfig['locale']->performTransliteration($value, $aLocaleConfig);
     }
-    
+
     /**
-     * Get built-in format code string
+     * Get built-in format code string.
      *
      * @param int $index The format ID (0 - 163)
      *
@@ -333,26 +335,26 @@ class CurrentLocale
     }
 
     /**
-     * Get built-in format code ID (index)
+     * Get built-in format code ID (index).
      *
      * @param string $formatCode The format code e.g. "General", "d-mmm-yy"
      *
-     * @return int|false The built-in format code ID; false if not found.
+     * @return false|int the built-in format code ID; false if not found
      */
     public static function builtInFormatCodeID($formatCode)
     {
         return self::getFormatInstance()->builtInFormatCodeID($formatCode);
     }
-    
+
     /**
-     * Retrieve international configuration value
-     * 
-     * @param string|int $key The settings key
+     * Retrieve international configuration value.
+     *
+     * @param int|string $key The settings key
+     *
      * @return The international setting; null if not found
      */
     public static function getInternational($key)
     {
         return self::getFormulaInstance()->getInternational($key);
     }
-    
 }
