@@ -235,9 +235,9 @@ class NumberFormat extends Supervisor
             if (is_int($this->builtInFormatCodeID)) {
                 $formatCodeCurrent = CurrentLocale::getBuiltInFormatCodeString($this->builtInFormatCodeID);
                 if (($formatCodeCurrent == '') || ($formatCode != $formatCodeCurrent)) {
+                    // Swap only if format codes are not identical
                     $this->builtInFormatCodeID = CurrentLocale::getBuiltInFormatCodeID($formatCode);
                 }
-            // Leave format code ID intact; don't swap if format codes are identical
             } else {
                 $this->builtInFormatCodeID = CurrentLocale::getBuiltInFormatCodeID($formatCode);
             }

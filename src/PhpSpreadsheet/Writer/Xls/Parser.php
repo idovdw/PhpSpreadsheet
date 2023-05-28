@@ -1219,21 +1219,23 @@ class Parser
             $this->advance();
 
             return $result;
-        // If it's an error code
         } elseif (preg_match('/^#[A-Z0\\/]{3,5}[!?]{1}$/', $this->currentToken) || $this->currentToken == '#N/A') {
+            // If it's an error code
             $result = $this->createTree($this->currentToken, 'ptgErr', '');
             $this->advance();
 
             return $result;
-        // If it's a negative value
         } elseif ($this->currentToken == '-') {
+            // If it's a negative value
+
             // catch "-" Term
             $this->advance();
             $result2 = $this->expression();
 
             return $this->createTree('ptgUminus', $result2, '');
-        // If it's a positive value
         } elseif ($this->currentToken == '+') {
+            // If it's a positive value
+
             // catch "+" Term
             $this->advance();
             $result2 = $this->expression();

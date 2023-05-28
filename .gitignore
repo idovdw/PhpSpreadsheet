@@ -11,6 +11,3 @@
 
 ## mkdocs output
 /site
-
-## phpcs configuration
-.phpcs.xml.dist

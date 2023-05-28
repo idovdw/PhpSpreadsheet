@@ -643,9 +643,9 @@ class Workbook extends BIFFwriter
 
                 // store the DEFINEDNAME record
                 $chunk .= $this->writeData($this->writeDefinedNameBiff8(pack('C', 0x07), $formulaData, $i + 1, true));
-
-            // (exclusive) either repeatColumns or repeatRows
             } elseif ($sheetSetup->isColumnsToRepeatAtLeftSet() || $sheetSetup->isRowsToRepeatAtTopSet()) {
+                // (exclusive) either repeatColumns or repeatRows
+
                 // Columns to repeat
                 if ($sheetSetup->isColumnsToRepeatAtLeftSet()) {
                     $repeat = $sheetSetup->getColumnsToRepeatAtLeft();
@@ -1109,9 +1109,9 @@ class Workbook extends BIFFwriter
 
                         // and start new record data block where we start writing the string
                         $recordData = '';
-
-                    // 2. space remaining is greater than or equal to minimum space needed
                     } else {
+                        // 2. space remaining is greater than or equal to minimum space needed
+
                         // initialize effective remaining space, for Unicode strings this may need to be reduced by 1, see below
                         $effective_space_remaining = $space_remaining;
 
