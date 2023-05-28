@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org).
 - Font/Effects/Theme support for Chart Data Labels and Axis. [PR #3476](https://github.com/PHPOffice/PhpSpreadsheet/pull/3476)
 - Font Themes support. [PR #3486](https://github.com/PHPOffice/PhpSpreadsheet/pull/3486)
 - Ability to Ignore Cell Errors in Excel. [Issue #1141](https://github.com/PHPOffice/PhpSpreadsheet/issues/1141) [PR #3508](https://github.com/PHPOffice/PhpSpreadsheet/pull/3508)
+- Extended locale support for formatting and calculation. Support for date calendars other than Gregorian. [Issue #3538](https://github.com/PHPOffice/PhpSpreadsheet/issues/3538)
 
 ### Changed
 
@@ -22,14 +23,21 @@ and this project adheres to [Semantic Versioning](https://semver.org).
 - Memory and speed optimisations for Read Filters with Xlsx Files and Shared Formulae. [PR #3474](https://github.com/PHPOffice/PhpSpreadsheet/pull/3474)
 - Allow `CellRange` and `CellAddress` objects for the `range` argument in the `rangeToArray()` method. [PR #3494](https://github.com/PHPOffice/PhpSpreadsheet/pull/3494)
 - Stock charts will now read and reproduce `upDownBars` and subsidiary tags; these were previously ignored on read and hard-coded on write. [PR #3515](https://github.com/PHPOffice/PhpSpreadsheet/pull/3515)
+- NumberFormatting will return Excel-like formatted results, including multiplication and number transliteration.
+- Default format is en-US; the date, thousands and decimal separator are now determined primarily by the locale.
+- PhpOffice\PhpSpreadsheet\Style\NumberFormat\FractionFormatter now generates Excel-like results.
+- PhpOffice\PhpSpreadsheet\Calculation\DateTimeExcel\TimeValue::fromString() now handles 1904-year support for DateTime.
+- Functions can now be specified as NLS (no longer supported), NOPE (will not be supported), besides DUMMY.
+- Html writer will now show multiple spaces as multiple thin spaces (instead of a single space).
 
 ### Deprecated
 
-- Nothing
+- PhpOffice\PhpSpreadsheet\Style\NumberFormat\NumberFormatter::f2s(), due to precision loss.
+- PhpOffice\PhpSpreadsheet\Style\NumberFormat\NumberFormatter::floatStringConvertScientific(), due to precision loss.
 
 ### Removed
 
-- Nothing
+- PhpSpreadsheet/Calculation/locale files and test generating the config/functions files.
 
 ### Fixed
 
