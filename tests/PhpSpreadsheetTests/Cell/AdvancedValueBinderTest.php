@@ -5,7 +5,7 @@ namespace PhpOffice\PhpSpreadsheetTests\Cell;
 use PhpOffice\PhpSpreadsheet\Cell\AdvancedValueBinder;
 use PhpOffice\PhpSpreadsheet\Cell\Cell;
 use PhpOffice\PhpSpreadsheet\Cell\IValueBinder;
-use PhpOffice\PhpSpreadsheet\Settings;
+use PhpOffice\PhpSpreadsheet\Shared\Locale\CurrentLocale;
 use PhpOffice\PhpSpreadsheet\Shared\StringHelper;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PHPUnit\Framework\TestCase;
@@ -15,41 +15,27 @@ class AdvancedValueBinderTest extends TestCase
     const AVB_PRECISION = 1.0E-8;
 
     /**
-     * @var string
-     */
-    private $currencyCode;
-
-    /**
-     * @var string
-     */
-    private $decimalSeparator;
-
-    /**
-     * @var string
-     */
-    private $thousandsSeparator;
-
-    /**
      * @var IValueBinder
      */
     private $valueBinder;
 
     protected function setUp(): void
     {
-        Settings::setLocale('en_US');
-        $this->currencyCode = StringHelper::getCurrencyCode();
-        $this->decimalSeparator = StringHelper::getDecimalSeparator();
-        $this->thousandsSeparator = StringHelper::getThousandsSeparator();
+        // Preserve current locale
+        CurrentLocale::preserveState();
+
+        CurrentLocale::setDefaultLocale();
+
         $this->valueBinder = Cell::getValueBinder();
         Cell::setValueBinder(new AdvancedValueBinder());
     }
 
     protected function tearDown(): void
     {
-        StringHelper::setCurrencyCode($this->currencyCode);
-        StringHelper::setDecimalSeparator($this->decimalSeparator);
-        StringHelper::setThousandsSeparator($this->thousandsSeparator);
         Cell::setValueBinder($this->valueBinder);
+
+        // Restore current locale
+        CurrentLocale::restoreState();
     }
 
     public function testNullValue(): void
@@ -87,7 +73,7 @@ class AdvancedValueBinderTest extends TestCase
     {
         $spreadsheet = new Spreadsheet();
         $sheet = $spreadsheet->getActiveSheet();
-        Settings::setLocale('nl_NL');
+        CurrentLocale::setLocale('nl_NL');
 
         $sheet->getCell('A1')->setValue('Waar');
         self::assertTrue($sheet->getCell('A1')->getValue());

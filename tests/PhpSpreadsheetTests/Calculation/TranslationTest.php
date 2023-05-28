@@ -2,9 +2,10 @@
 
 namespace PhpOffice\PhpSpreadsheetTests\Calculation;
 
+use Exception;
 use PhpOffice\PhpSpreadsheet\Calculation\Calculation;
 use PhpOffice\PhpSpreadsheet\Calculation\Functions;
-use PhpOffice\PhpSpreadsheet\Settings;
+use PhpOffice\PhpSpreadsheet\Shared\Locale\CurrentLocale;
 use PHPUnit\Framework\TestCase;
 
 class TranslationTest extends TestCase
@@ -19,23 +20,24 @@ class TranslationTest extends TestCase
      */
     private $returnDate;
 
-    /** @var string */
-    private $locale;
-
     protected function setUp(): void
     {
         $this->compatibilityMode = Functions::getCompatibilityMode();
         $this->returnDate = Functions::getReturnDateType();
         Functions::setCompatibilityMode(Functions::COMPATIBILITY_EXCEL);
         Functions::setReturnDateType(Functions::RETURNDATE_EXCEL);
-        $this->locale = Settings::getLocale();
+
+        // Preserve current locale
+        CurrentLocale::preserveState();
     }
 
     protected function tearDown(): void
     {
         Functions::setCompatibilityMode($this->compatibilityMode);
         Functions::setReturnDateType($this->returnDate);
-        Settings::setLocale($this->locale);
+
+        // Restore current locale
+        CurrentLocale::restoreState();
     }
 
     /**
@@ -43,9 +45,10 @@ class TranslationTest extends TestCase
      */
     public function testTranslation(string $expectedResult, string $locale, string $formula): void
     {
-        $validLocale = Settings::setLocale($locale);
-        if (!$validLocale) {
-            self::markTestSkipped("Unable to set locale to {$locale}");
+        try {
+            CurrentLocale::setLocale($locale);
+        } catch (Exception $ex) {
+            self::markTestSkipped('Unable to set locale "' . $locale . '" for locale-specific test');
         }
 
         $translatedFormula = Calculation::getInstance()->_translateFormulaToLocale($formula);

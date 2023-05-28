@@ -60,6 +60,12 @@ class DocumentGenerator
         if ($functionCall === [Functions::class, 'DUMMY']) {
             return '**Not yet Implemented**';
         }
+        if ($functionCall === [Functions::class, 'NLS']) {
+            return '**No longer supported**';
+        }
+        if ($functionCall === [Functions::class, 'NOPE']) {
+            return '**Not supported**';
+        }
         if (is_array($functionCall)) {
             return "\\{$functionCall[0]}::{$functionCall[1]}";
         }

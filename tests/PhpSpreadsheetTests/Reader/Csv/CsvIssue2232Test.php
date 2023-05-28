@@ -6,7 +6,7 @@ use PhpOffice\PhpSpreadsheet\Cell\Cell;
 use PhpOffice\PhpSpreadsheet\Cell\IValueBinder;
 use PhpOffice\PhpSpreadsheet\Cell\StringValueBinder;
 use PhpOffice\PhpSpreadsheet\Reader\Csv;
-use PhpOffice\PhpSpreadsheet\Settings;
+use PhpOffice\PhpSpreadsheet\Shared\Locale\CurrentLocale;
 use PHPUnit\Framework\TestCase;
 
 class CsvIssue2232Test extends TestCase
@@ -16,19 +16,20 @@ class CsvIssue2232Test extends TestCase
      */
     private $valueBinder;
 
-    /** @var string */
-    private $locale;
-
     protected function setUp(): void
     {
         $this->valueBinder = Cell::getValueBinder();
-        $this->locale = Settings::getLocale();
+
+        // Preserve current locale
+        CurrentLocale::preserveState();
     }
 
     protected function tearDown(): void
     {
         Cell::setValueBinder($this->valueBinder);
-        Settings::setLocale($this->locale);
+
+        // Restore current locale
+        CurrentLocale::restoreState();
     }
 
     /**
@@ -83,7 +84,7 @@ class CsvIssue2232Test extends TestCase
             Cell::setValueBinder($binder);
         }
 
-        Settings::setLocale('fr');
+        CurrentLocale::setLocale('fr');
 
         $reader = new Csv();
         $filename = 'tests/data/Reader/CSV/issue.2232.csv';

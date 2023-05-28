@@ -2,7 +2,7 @@
 
 namespace PhpOffice\PhpSpreadsheet\Shared;
 
-use PhpOffice\PhpSpreadsheet\Locale\CurrentLocale;
+use PhpOffice\PhpSpreadsheet\Shared\Locale\CurrentLocale;
 
 class StringHelper
 {
@@ -19,27 +19,6 @@ class StringHelper
      * @var array
      */
     private static $SYLKCharacters = [];
-
-    /**
-     * Decimal separator.
-     *
-     * @var ?string
-     */
-    private static $decimalSeparator;
-
-    /**
-     * Thousands separator.
-     *
-     * @var ?string
-     */
-    private static $thousandsSeparator;
-
-    /**
-     * Currency code.
-     *
-     * @var string
-     */
-    private static $currencyCode;
 
     /**
      * Is iconv extension avalable?
@@ -551,7 +530,6 @@ class StringHelper
      */
     public static function getDecimalSeparator(): string
     {
-        // @ido @fix
         return CurrentLocale::getDecimalSeparator();
     }
 
@@ -639,8 +617,11 @@ class StringHelper
      */
     public static function testStringAsNumeric($textValue)
     {
-        // @fix @ido
-        if (preg_match('/([\d]+(\.[\d]+)?)/u', $textValue, $match)) {
+        if (is_numeric($textValue)) {
+            return $textValue;
+        }
+
+        if (preg_match('/(\-?[\d]+(\.[\d]+)?)/u', $textValue, $match)) {
             return (float) $match[0];
         }
 

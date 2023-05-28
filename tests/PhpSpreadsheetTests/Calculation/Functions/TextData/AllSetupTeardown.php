@@ -5,7 +5,7 @@ namespace PhpOffice\PhpSpreadsheetTests\Calculation\Functions\TextData;
 use PhpOffice\PhpSpreadsheet\Calculation\Exception as CalcException;
 use PhpOffice\PhpSpreadsheet\Calculation\Functions;
 use PhpOffice\PhpSpreadsheet\Cell\DataType;
-use PhpOffice\PhpSpreadsheet\Settings;
+use PhpOffice\PhpSpreadsheet\Shared\Locale\CurrentLocale;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use PHPUnit\Framework\TestCase;
@@ -16,11 +16,6 @@ class AllSetupTeardown extends TestCase
      * @var string
      */
     private $compatibilityMode;
-
-    /**
-     * @var string
-     */
-    private $locale;
 
     /**
      * @var ?Spreadsheet
@@ -34,14 +29,19 @@ class AllSetupTeardown extends TestCase
 
     protected function setUp(): void
     {
-        $this->locale = Settings::getLocale();
+        // Preserve current locale
+        CurrentLocale::preserveState();
+
         $this->compatibilityMode = Functions::getCompatibilityMode();
     }
 
     protected function tearDown(): void
     {
         Functions::setCompatibilityMode($this->compatibilityMode);
-        Settings::setLocale($this->locale);
+
+        // Restore current locale
+        CurrentLocale::restoreState();
+
         $this->sheet = null;
         if ($this->spreadsheet !== null) {
             $this->spreadsheet->disconnectWorksheets();

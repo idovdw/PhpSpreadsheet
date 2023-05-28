@@ -2,9 +2,10 @@
 
 namespace PhpOffice\PhpSpreadsheetTests\Calculation\Functions\TextData;
 
+use Exception;
 use PhpOffice\PhpSpreadsheet\Calculation\Calculation;
 use PhpOffice\PhpSpreadsheet\Calculation\Functions;
-use PhpOffice\PhpSpreadsheet\Settings;
+use PhpOffice\PhpSpreadsheet\Shared\Locale\CurrentLocale;
 
 class RightTest extends AllSetupTeardown
 {
@@ -48,9 +49,10 @@ class RightTest extends AllSetupTeardown
      */
     public function testLowerWithLocaleBoolean($expectedResult, $locale, $value, $characters): void
     {
-        $newLocale = Settings::setLocale($locale);
-        if ($newLocale === false) {
-            self::markTestSkipped('Unable to set locale for locale-specific test');
+        try {
+            CurrentLocale::setLocale($locale);
+        } catch (Exception $ex) {
+            self::markTestSkipped('Unable to set locale "' . $locale . '" for locale-specific test');
         }
 
         $sheet = $this->getSheet();

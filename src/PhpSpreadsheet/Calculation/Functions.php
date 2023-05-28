@@ -131,7 +131,6 @@ class Functions
     }
 
     /**
-     * @ido
      * NLS: No Longer Supported.
      *
      * @return string #No Longer Supported
@@ -142,8 +141,7 @@ class Functions
     }
 
     /**
-     * @ido
-     * NOPE: Will not be supported
+     * NOPE: Will not be supported.
      *
      * @return string #Not Supported
      */

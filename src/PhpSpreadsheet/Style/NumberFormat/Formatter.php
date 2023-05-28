@@ -2,8 +2,8 @@
 
 namespace PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 
-use PhpOffice\PhpSpreadsheet\Locale\CurrentLocale;
-use PhpOffice\PhpSpreadsheet\Locale\LocaleLayout;
+use PhpOffice\PhpSpreadsheet\Shared\Locale\CurrentLocale;
+use PhpOffice\PhpSpreadsheet\Shared\Locale\LocaleLayout;
 use PhpOffice\PhpSpreadsheet\Style\Color;
 use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 
@@ -32,13 +32,33 @@ class Formatter extends BaseFormatter
     /**
      * Detect date/time format.
      */
-    protected const PREG_DETECT_DATETIME_FORMAT = '/' . self::PREG_CONDITION_NONQUOTED . '((\[[hms][hms]?\]\:?)|[hmsdy])/miu';
+    protected const PREG_DETECT_DATETIME_FORMAT = '/' . self::PREG_CONDITION_NONQUOTED . '((\[[hms][hms]?\]\:?)|[hmsdy])/iu';
+
+    /**
+     * Detect numeric format.
+     */
+    protected const PREG_DETECT_NUMERIC_FORMAT = '/' . self::PREG_CONDITION_NONQUOTED . '[#\?,]/iu';
+
+    /**
+     * Detect format conditions.
+     */
+    protected const PREG_DETECT_FORMAT_CONDITIONS = '/' . self::PREG_CONDITION_NONQUOTED . '\[(>|>=|<|<=|=|<>)([+-]?\d+([.]\d+)?)\]/u';
+
+    /**
+     * Detect numeric format colors.
+     */
+    protected const PREG_DETECT_FORMAT_COLORS = '/' . self::PREG_CONDITION_NONQUOTED . '\\[color[\s]*(\d+)\\]/iu';
 
     /**
      * @var int the estimate maximum number of characters in a value (used
      *              for padding with multiplication string
      */
     protected static $valueCellWidth = 34;
+
+    /**
+     * @var bool|int Overrule the thousands format pattern if applicable
+     */
+    protected static $overruleThousandsFormatPattern = false;
 
     /**
      * @var bool Replace the digits for the locale representation
@@ -69,6 +89,32 @@ class Formatter extends BaseFormatter
     }
 
     /**
+     * Set the standard thousands format pattern; false for default.
+     *
+     * Use:
+     * * FormatLocale::THOUSANDS_FORMAT_NONE = 0:    '###############'
+     * * FormatLocale::THOUSANDS_FORMAT_REGULAR = 1: '###,###,###,###,###'
+     * * FormatLocale::THOUSANDS_FORMAT_KILO = 2:    '############,###'
+     * * FormatLocale::THOUSANDS_FORMAT_HECTO = 3:   '##,##,##,##,##,##,###'
+     *
+     * @param bool|int $overruleThousandsFormatPattern The thousands format; false will not overrule
+     */
+    public static function setOverruleThousandsFormatPattern($overruleThousandsFormatPattern): void
+    {
+        self::$overruleThousandsFormatPattern = is_bool($overruleThousandsFormatPattern) ? $overruleThousandsFormatPattern : (int) $overruleThousandsFormatPattern;
+    }
+
+    /**
+     * Get the standard thousands format pattern.
+     *
+     * @return bool|int The thousands format; false will not overrule
+     */
+    public static function getOverruleThousandsFormatPattern()
+    {
+        return self::$overruleThousandsFormatPattern;
+    }
+
+    /**
      * Convert a value in a pre-defined format to a PHP string.
      *
      * @param mixed $value Value to format
@@ -81,7 +127,7 @@ class Formatter extends BaseFormatter
     public static function toFormattedString($value, $format, $callBack = null)
     {
         // Prevent processing null value
-        $value = null === $value ? '' : $value;
+        $value = ($value === null) ? '' : $value;
 
         // Extract locale configuration (LCID code, DbNum#, NatNum# settings)
         $aLocaleConfig = CurrentLocale::getLocaleConfiguration($format);
@@ -89,7 +135,7 @@ class Formatter extends BaseFormatter
 
         // Make sure format has double quotes in two-fold; convert
         // multiplication of double quotes in a workaround using chr(0x00)
-        $format = preg_replace('/' . self::PREG_CONDITION_NONQUOTED . '\*"/', '*' . chr(0x00), $format);
+        $format = (string) preg_replace('/' . self::PREG_CONDITION_NONQUOTED . '\*"/u', '*' . chr(0x00), $format);
         if (substr_count($format, '"') % 2 != 0) {
             // Actually a format error
             $format .= '"';
@@ -99,10 +145,15 @@ class Formatter extends BaseFormatter
         [$value, $format, $colors, $isText] = self::splitFormat($value, $format);
 
         // For 'General' format code, numbers are rounded like Excel
-        $format = self::processGeneralTextFormat($value, $format, $aLocaleConfig, 7, true);
+        $format = self::processGeneralTextFormat($value, $format, $aLocaleConfig);
+        if (is_bool($format)) {
+            // Boolean value
+            // @todo When to translate? (Not to be translated in CSV?)
+            return $format ? 'TRUE' : 'FALSE';
+        }
 
         // Convert escaped characters to quoted strings, e.g. (\T to "T")
-        $format = preg_replace('/' . self::PREG_CONDITION_NONQUOTED . '(\\\(.))/', '"${2}"', $format);
+        $format = (string) preg_replace('/' . self::PREG_CONDITION_NONQUOTED . '(\\\(.))/u', '"${2}"', $format);
 
         // Replace underscores by spaces
         $format = self::formatProcessUnderscores($format);
@@ -114,10 +165,10 @@ class Formatter extends BaseFormatter
         // formatted string
         if ($isText || !preg_match('/' . self::PREG_CONDITION_NONQUOTED . '.+/', $format)) {
             $value = $format;
-        } else {
+        } elseif (is_numeric($value)) {
             // Check for date/time characters (not inside quotes)
             // Example: '[h]:mm:ss;@'
-            if (preg_match(self::PREG_DETECT_DATETIME_FORMAT, $format, $matches)) {
+            if (preg_match(self::PREG_DETECT_DATETIME_FORMAT, $format) && !preg_match(self::PREG_DETECT_NUMERIC_FORMAT, $format)) {
                 // Date/time format
                 $value = DateFormatter::format($value, $format, $aLocaleConfig);
             } else {
@@ -152,28 +203,38 @@ class Formatter extends BaseFormatter
     /**
      * Check if format is 'General' or '@'; specific number formats apply.
      *
-     * @param float $value The value
+     * @param  bool|float|int|string $value The value
      * @param string $format The format string
      * @param array $aLocaleConfig Locale format configuration
-     * @param int $precision The number of decimal digits
-     * @param bool $allowScientific Allow scientific representation
      *
-     * @return string The altered format
+     * @return bool|string The altered format
      */
-    protected static function processGeneralTextFormat($value, $format, $aLocaleConfig, $precision, $allowScientific = true): string
+    protected static function processGeneralTextFormat(&$value, $format, $aLocaleConfig)
     {
         // For 'General' format code, we round numbers like Excel
-        if (
-            ($format !== NumberFormat::FORMAT_GENERAL) &&
-            !preg_match('/' . self::PREG_CONDITION_NONQUOTED . NumberFormat::FORMAT_TEXT . '/u', $format)
-        ) {
+        $applyGeneralFormat = ($format === NumberFormat::FORMAT_GENERAL);
+        $applyTextFormat = !$applyGeneralFormat && preg_match('/' . self::PREG_CONDITION_NONQUOTED . NumberFormat::FORMAT_TEXT . '/u', $format);
+        if (!$applyGeneralFormat && !$applyTextFormat) {
             return $format;
         }
 
-        if (is_string($value)) {
+        if ($applyTextFormat || is_string($value)) {
             // Literal value, not to be formatted
             // Use chr(0x00) as stand-in for double quotes
-            return '"' . str_replace('"', chr(0x00), $value) . '"';
+            $result = '"' . str_replace('"', chr(0x00), (string) $value) . '"';
+            if ($applyTextFormat && is_string($value)) {
+                // Replace '@' for the value
+                // Deliberately set $value, to ensure correct output
+                $value = (string) preg_replace('/' . self::PREG_CONDITION_NONQUOTED . NumberFormat::FORMAT_TEXT . '/u', $result, $format);
+
+                return $value;
+            }
+
+            return $result;
+        }
+
+        if ($applyGeneralFormat && is_bool($value)) {
+            return $value;
         }
 
         if (!is_numeric($value)) {
@@ -184,23 +245,32 @@ class Formatter extends BaseFormatter
             return '0';
         }
 
-        $exponent = log10($value);
-        if (is_nan($exponent) || (abs($exponent) > $precision)) {
-            if ($allowScientific) {
-                // Apply scientific representation
-                $format = '0.#####E+00';
-            } else {
-                // Digits only
-                $format = '0';
-                if ($exponent < 0) {
-                    $format = '0.' . str_repeat('#', abs($exponent));
-                }
+        $exponent = floor(log10(abs($value)));
+        if (!is_nan($exponent) && (($exponent > 10) || ($exponent <= -10))) {
+            // Apply scientific representation
+            $format = '0.#####E+00';
+        } elseif (is_nan($exponent)) {
+            // Digits only
+            $format = '0';
+            if ($exponent < 0) {
+                $format = '0.' . str_repeat('#', (int) -$exponent);
             }
         } else {
-            if (is_int($value) || ($precision < 1)) {
+            if (is_int($value)) {
                 $format = '0';
             } else {
-                $format = '0.0' . str_repeat('#', $precision - 2);
+                $format = '0.0';
+                $exponent = (int) $exponent;
+                if ($exponent > 0) {
+                    $format = str_repeat('0', $exponent) . $format;
+                    if (10 - ($exponent + 2) > 0) {
+                        $format .= str_repeat('#', 10 - ($exponent + 2));
+                    }
+                } else {
+                    if (10 - (2 - $exponent) > 0) {
+                        $format .= str_repeat('#', 2 - $exponent);
+                    }
+                }
             }
         }
 
@@ -229,34 +299,45 @@ class Formatter extends BaseFormatter
     protected static function splitFormat($value, $format)
     {
         // Set regular expression conditions
-        static $preg_detect_named_colors;
-        if (!isset($preg_detect_named_colors)) {
-            $preg_detect_named_colors = '/' . self::PREG_CONDITION_NONQUOTED . '\\[(' . implode('|', Color::NAMED_COLORS) . ')\\]/mui';
+        static $PREG_DETECT_NAMED_COLORS;
+        if (!isset($PREG_DETECT_NAMED_COLORS)) {
+            $PREG_DETECT_NAMED_COLORS = '/' . self::PREG_CONDITION_NONQUOTED . '\\[(' . implode('|', Color::NAMED_COLORS) . ')\\]/mui';
         }
-        $preg_detect_conditions = '/' . self::PREG_CONDITION_NONQUOTED . '\[(>|>=|<|<=|=|<>)([+-]?\d+([.]\d+)?)\]/';
 
         // Get the sections, there can be up to four sections, separated with
         // a semi-colon (but only if not a quoted literal)
         $sections = preg_split('/' . self::PREG_CONDITION_NONQUOTED . ';/u', $format, 4);
-
-        // Detect colors, operands and values
-        $condition_values = [0, 0, 0];
-        $condition_operands = ['', '', ''];
-        $condition_operands_default = ['>', '<', '='];
-        $colors = ['', '', '', ''];
+        if ($sections === false) {
+            $sections = [$format];
+        }
 
         $isText = false;
         $section_choice = false;
         $section_count = count($sections);
+
+        // Detect colors, operands and values
+        $colors = ['', '', '', ''];
+        $condition_values = [0, 0, 0];
+        $condition_operands = ['', '', ''];
+        $condition_operands_default = ['>', '<', '='];
+        if ($section_count == 2) {
+            $condition_operands_default = ['>=', '<'];
+        }
+
         foreach ($sections as $pos => &$section) {
-            if (preg_match($preg_detect_named_colors, $section, $matches)) {
+            if (preg_match($PREG_DETECT_NAMED_COLORS, $section, $matches)) {
                 $colors[$pos] = $matches[0];
-                $section = preg_replace($preg_detect_named_colors, '', $section);
+                $section = (string) preg_replace($PREG_DETECT_NAMED_COLORS, '', $section);
+            } else {
+                if (preg_match(self::PREG_DETECT_FORMAT_COLORS, $section, $matches)) {
+                    $colors[$pos] = (int) $matches[1];
+                    $section = (string) preg_replace(self::PREG_DETECT_FORMAT_COLORS, '', $section);
+                }
             }
-            if (preg_match($preg_detect_conditions, $section, $matches)) {
+            if (preg_match(self::PREG_DETECT_FORMAT_CONDITIONS, $section, $matches)) {
                 $condition_operands[$pos] = $matches[1];
                 $condition_values[$pos] = $matches[2];
-                $section = preg_replace($preg_detect_conditions, '', $section);
+                $section = (string) preg_replace(self::PREG_DETECT_FORMAT_CONDITIONS, '', $section);
             }
 
             if ($section_count == 4) {
@@ -286,6 +367,11 @@ class Formatter extends BaseFormatter
 
                 break;
             }
+
+            if ($pos == $section_count - 1) {
+                // Maximum position and not yet selected
+                $section_choice = $pos;
+            }
         }
 
         if ($section_choice === false) {
@@ -303,9 +389,9 @@ class Formatter extends BaseFormatter
     /**
      * Apply the split format values/conditions comparison.
      *
-     * @param float $value The value
+     * @param mixed $value The value
      * @param string $condition The logical condition
-     * @param float $compare_value The value to compare with
+     * @param mixed $compare_value The value to compare with
      * @param string $default_condition The default condition, in case no condition is provided
      *
      * @return bool The comparison result
@@ -355,9 +441,9 @@ class Formatter extends BaseFormatter
      */
     protected static function formatProcessUnderscores($format)
     {
-        $format = preg_replace_callback('/' . self::PREG_CONDITION_NONQUOTED . '\_+.?/u', function ($match) {
+        $format = (string) preg_replace_callback('/' . self::PREG_CONDITION_NONQUOTED . '\_+.?/u', function ($match) {
             $length = strlen($match[0]);
-            $char = substr($match[0], -1);
+            $char = mb_substr($match[0], -1);
             if ($char != '_') {
                 --$length;
             } else {
@@ -370,7 +456,7 @@ class Formatter extends BaseFormatter
                 $char = '';
             }
 
-            return '"' . str_repeat(' ', $length) . '"' . $char;
+            return '"' . str_repeat(' ', (int) $length) . '"' . $char;
         }, $format);
 
         return $format;
@@ -389,13 +475,13 @@ class Formatter extends BaseFormatter
             // Only the last occurance of `/\*\*/` or `/\*./` in the format.
             $match_count = count($matches[0]);
             $pos_count = 0;
-            $format = preg_replace_callback(self::PREG_DETECT_MULTIPLICATION, function ($match) use (&$match_count, &$pos_count, &$format) {
+            $format = (string) preg_replace_callback(self::PREG_DETECT_MULTIPLICATION, function ($match) use (&$match_count, &$pos_count) {
                 ++$pos_count;
                 if ($pos_count < $match_count) {
                     return $match[0];
                 }
                 // Place a multiplication indicator
-                $char = substr($match[0], 1, 1);
+                $char = mb_substr($match[0], 1, 1);
 
                 return '"' . self::MULTIPLICATION_TAG . $char . self::MULTIPLICATION_TAG . '"';
             }, $format);
@@ -429,6 +515,9 @@ class Formatter extends BaseFormatter
 
         // Retrieve text segments
         $segments = preg_split(self::PREG_SPLIT_MULTIPLICATION_TAG, $format, 2);
+        if ($segments === false) {
+            $segments = [$format, ''];
+        }
         $segments_final = [
             0 => self::unescapeText($segments[0]),
             1 => self::unescapeText($segments[1]),
@@ -454,7 +543,7 @@ class Formatter extends BaseFormatter
      */
     protected static function unescapeText($string)
     {
-        $result = preg_replace_callback('/' . self::PREG_CONDITION_QUOTED . '/u', function ($matches) {
+        $result = (string) preg_replace_callback('/' . self::PREG_CONDITION_QUOTED . '/u', function ($matches) {
             return substr($matches[0], 1, -1);
         }, $string);
 
@@ -479,7 +568,7 @@ class Formatter extends BaseFormatter
 
         $digits = LocaleLayout::getDigits($aLocaleConfig['numerals']);
 
-        $string = preg_replace_callback('/[0-9]/', function ($matches) use ($digits) {
+        $string = (string) preg_replace_callback('/[0-9]/', function ($matches) use ($digits) {
             return $digits[(int) ($matches[0])];
         }, $string);
 

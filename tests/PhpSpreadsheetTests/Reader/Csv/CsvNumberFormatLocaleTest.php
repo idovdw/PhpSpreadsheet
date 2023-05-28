@@ -2,8 +2,10 @@
 
 namespace PhpOffice\PhpSpreadsheetTests\Reader\Csv;
 
+use Exception;
 use PhpOffice\PhpSpreadsheet\Cell\DataType;
 use PhpOffice\PhpSpreadsheet\Reader\Csv;
+use PhpOffice\PhpSpreadsheet\Shared\Locale\CurrentLocale;
 use PHPUnit\Framework\TestCase;
 
 class CsvNumberFormatLocaleTest extends TestCase
@@ -12,11 +14,6 @@ class CsvNumberFormatLocaleTest extends TestCase
      * @var bool
      */
     private $localeAdjusted;
-
-    /**
-     * @var false|string
-     */
-    private $currentLocale;
 
     /**
      * @var string
@@ -30,15 +27,18 @@ class CsvNumberFormatLocaleTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->currentLocale = setlocale(LC_ALL, '0');
+        // Preserve current locale
+        CurrentLocale::preserveState();
 
-        if (!setlocale(LC_ALL, 'de_DE.UTF-8', 'deu_deu')) {
+        try {
+            CurrentLocale::setLocale('de_DE');
+            $this->localeAdjusted = true;
+        } catch (Exception $ex) {
+            // Unable to set the locale
             $this->localeAdjusted = false;
 
             return;
         }
-
-        $this->localeAdjusted = true;
 
         $this->filename = 'tests/data/Reader/CSV/NumberFormatTest.de.csv';
         $this->csvReader = new Csv();
@@ -46,9 +46,8 @@ class CsvNumberFormatLocaleTest extends TestCase
 
     protected function tearDown(): void
     {
-        if ($this->localeAdjusted && is_string($this->currentLocale)) {
-            setlocale(LC_ALL, $this->currentLocale);
-        }
+        // Restore current locale
+        CurrentLocale::restoreState();
     }
 
     /**

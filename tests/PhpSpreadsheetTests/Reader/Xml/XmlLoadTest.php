@@ -4,9 +4,8 @@ namespace PhpOffice\PhpSpreadsheetTests\Reader\Xml;
 
 use DateTimeZone;
 use PhpOffice\PhpSpreadsheet\Reader\Xml;
-use PhpOffice\PhpSpreadsheet\Settings;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
-use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Shared\Locale\CurrentLocale;
 use PHPUnit\Framework\TestCase;
 
 class XmlLoadTest extends TestCase
@@ -14,12 +13,10 @@ class XmlLoadTest extends TestCase
     /** @var ?Spreadsheet */
     private $spreadsheet;
 
-    /** @var string */
-    private $locale;
-
     protected function setUp(): void
     {
-        $this->locale = Settings::getLocale();
+        // Preserve current locale
+        CurrentLocale::preserveState();
     }
 
     protected function tearDown(): void
@@ -28,17 +25,20 @@ class XmlLoadTest extends TestCase
             $this->spreadsheet->disconnectWorksheets();
             $this->spreadsheet = null;
         }
-        Settings::setLocale($this->locale);
+
+        // Restore current locale
+        CurrentLocale::restoreState();
     }
 
     public function testLoadEnglish(): void
     {
+        CurrentLocale::setLocale('en');
         $this->xtestLoad();
     }
 
     public function testLoadFrench(): void
     {
-        Settings::setLocale('fr');
+        CurrentLocale::setLocale('fr');
         $this->xtestLoad();
     }
 

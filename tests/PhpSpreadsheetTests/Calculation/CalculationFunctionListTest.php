@@ -4,6 +4,7 @@ namespace PhpOffice\PhpSpreadsheetTests\Calculation;
 
 use PhpOffice\PhpSpreadsheet\Calculation\Calculation;
 use PhpOffice\PhpSpreadsheet\Calculation\Functions;
+use PhpOffice\PhpSpreadsheet\Shared\Locale\CurrentLocale;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PHPUnit\Framework\TestCase;
 
@@ -14,24 +15,21 @@ class CalculationFunctionListTest extends TestCase
      */
     private $compatibilityMode;
 
-    /**
-     * @var string
-     */
-    private $locale;
-
     protected function setUp(): void
     {
+        // Preserve current locale
+        CurrentLocale::preserveState();
+
         $this->compatibilityMode = Functions::getCompatibilityMode();
-        $calculation = Calculation::getInstance();
-        $this->locale = $calculation->getLocale();
         Functions::setCompatibilityMode(Functions::COMPATIBILITY_EXCEL);
     }
 
     protected function tearDown(): void
     {
         Functions::setCompatibilityMode($this->compatibilityMode);
-        $calculation = Calculation::getInstance();
-        $calculation->setLocale($this->locale);
+
+        // Restore current locale
+        CurrentLocale::restoreState();
     }
 
     /**

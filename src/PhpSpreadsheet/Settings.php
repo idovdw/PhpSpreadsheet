@@ -4,7 +4,7 @@ namespace PhpOffice\PhpSpreadsheet;
 
 use PhpOffice\PhpSpreadsheet\Chart\Renderer\IRenderer;
 use PhpOffice\PhpSpreadsheet\Collection\Memory;
-use PhpOffice\PhpSpreadsheet\Locale\CurrentLocale;
+use PhpOffice\PhpSpreadsheet\Shared\Locale\CurrentLocale;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\SimpleCache\CacheInterface;
@@ -58,7 +58,6 @@ class Settings
         try {
             $locale_result = CurrentLocale::setLocale($locale_tag);
         } catch (\Exception $ex) {
-            throw $ex;
             $locale_result = false;
         }
 
@@ -68,13 +67,11 @@ class Settings
     /**
      * Retrieve the current locale tag.
      *
-     * @param bool - Return the raw value (null if not set)
-     *
-     * @return string - The locale tag (e.g. "fr-fr" or "pt-br" or "en-us")
+     * @return string The locale tag (e.g. "fr-fr" or "pt-br" or "en-us")
      */
-    public static function getLocale($raw = false): string
+    public static function getLocale(): string
     {
-        return CurrentLocale::getLocale($raw);
+        return CurrentLocale::getLocale();
     }
 
     /**

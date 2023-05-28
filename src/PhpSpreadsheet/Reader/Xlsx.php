@@ -635,13 +635,13 @@ class Xlsx extends BaseReader
                                     }
                                 }
 
-                                // @ido @fix: Don't call NumberFormat::builtInFormatCode twice.
+                                // Call NumberFormat::getBuiltInFormatCodeString only once.
                                 // We shouldn't override any of the built-in MS Excel values (values below id 164)
                                 //  But there's a lot of naughty homebrew xlsx writers that do use "reserved" id values that aren't actually used
                                 //  So we make allowance for them rather than lose formatting masks
                                 $numFmtId = (int) $xf['numFmtId'];
                                 if (($numFmt === null) && ($numFmtId < 164)) {
-                                    $builtInFmt = NumberFormat::builtInFormatCode($numFmtId);
+                                    $builtInFmt = NumberFormat::getBuiltInFormatCodeString($numFmtId);
                                     if ($builtInFmt !== '') {
                                         // Allow override
                                         $numFmt = $builtInFmt;
@@ -679,7 +679,7 @@ class Xlsx extends BaseReader
                                 if (isset($tmpNumFmt['formatCode'])) {
                                     $numFmt = (string) $tmpNumFmt['formatCode'];
                                 } elseif ((int) $xf['numFmtId'] < 165) {
-                                    $numFmt = NumberFormat::builtInFormatCode((int) $xf['numFmtId']);
+                                    $numFmt = NumberFormat::getBuiltInFormatCodeString((int) $xf['numFmtId']);
                                 }
                             }
 
@@ -746,7 +746,6 @@ class Xlsx extends BaseReader
                             }
                         }
                     }
-
                     // Set protection
                     $this->readProtection($excel, $xmlWorkbook);
 

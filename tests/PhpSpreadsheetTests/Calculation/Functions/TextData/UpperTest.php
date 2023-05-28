@@ -2,8 +2,9 @@
 
 namespace PhpOffice\PhpSpreadsheetTests\Calculation\Functions\TextData;
 
+use Exception;
 use PhpOffice\PhpSpreadsheet\Calculation\Calculation;
-use PhpOffice\PhpSpreadsheet\Settings;
+use PhpOffice\PhpSpreadsheet\Shared\Locale\CurrentLocale;
 
 class UpperTest extends AllSetupTeardown
 {
@@ -41,10 +42,12 @@ class UpperTest extends AllSetupTeardown
      */
     public function testLowerWithLocaleBoolean($expectedResult, $locale, $value): void
     {
-        $newLocale = Settings::setLocale($locale);
-        if ($newLocale === false) {
-            self::markTestSkipped('Unable to set locale for locale-specific test');
+        try {
+            CurrentLocale::setLocale($locale);
+        } catch (Exception $ex) {
+            self::markTestSkipped('Unable to set locale "' . $locale . '" for locale-specific test');
         }
+
         $sheet = $this->getSheet();
         $this->setCell('A1', $value);
         $sheet->getCell('B1')->setValue('=UPPER(A1)');

@@ -133,6 +133,11 @@ class DocumentGeneratorTest extends TestCase
                     Excel Function           | PhpSpreadsheet Function
                     -------------------------|--------------------------------------
 
+                    ## CATEGORY_ADDIN_AND_AUTOMATION
+
+                    Excel Function           | PhpSpreadsheet Function
+                    -------------------------|--------------------------------------
+
                     ## CATEGORY_UNCATEGORISED
 
                     Excel Function           | PhpSpreadsheet Function

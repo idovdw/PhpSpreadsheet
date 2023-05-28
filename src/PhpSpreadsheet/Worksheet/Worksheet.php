@@ -3065,7 +3065,7 @@ class Worksheet implements IComparable
                 $columnRef = $returnCellRef ? $col : ++$c;
                 //    Using getCell() will create a new cell if it doesn't already exist. We don't want that to happen
                 //        so we test and retrieve directly against cellCollection
-                $cell = $this->cellCollection->get("{$col}{$row}");
+                $cell = $this->cellCollection->get($col . $row);
                 $returnValue[$rowRef][$columnRef] = $nullValue;
                 if ($cell !== null) {
                     $returnValue[$rowRef][$columnRef] = $this->cellToArray($cell, $calculateFormulas, $formatData, $nullValue);

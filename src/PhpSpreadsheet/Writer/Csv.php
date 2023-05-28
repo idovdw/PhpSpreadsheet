@@ -304,7 +304,7 @@ class Csv extends BaseWriter
             if ($enclosure) {
                 // If enclosure is not required, use enclosure only if
                 // element contains newline, delimiter, or enclosure.
-                if (!$this->enclosureRequired && strpbrk($element, "$delimiter$enclosure\n") === false) {
+                if (!$this->enclosureRequired && strpbrk($element, $delimiter . $enclosure . "\n") === false) {
                     $enclosure = '';
                 } else {
                     $element = str_replace($enclosure, $enclosure . $enclosure, $element);

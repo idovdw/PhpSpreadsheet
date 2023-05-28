@@ -2,23 +2,25 @@
 
 namespace PhpOffice\PhpSpreadsheetTests\Calculation\Functions\LookupRef;
 
+use Exception;
 use PhpOffice\PhpSpreadsheet\Calculation\Functions;
-use PhpOffice\PhpSpreadsheet\Settings;
+use PhpOffice\PhpSpreadsheet\Shared\Locale\CurrentLocale;
 
 class IndirectInternationalTest extends AllSetupTeardown
 {
-    /** @var string */
-    private $locale;
-
     protected function setUp(): void
     {
         parent::setUp();
-        $this->locale = Settings::getLocale();
+
+        // Preserve current locale
+        CurrentLocale::preserveState();
     }
 
     protected function tearDown(): void
     {
-        Settings::setLocale($this->locale);
+        // Restore current locale
+        CurrentLocale::restoreState();
+
         // CompatibilityMode is restored in parent
         parent::tearDown();
     }
@@ -28,8 +30,12 @@ class IndirectInternationalTest extends AllSetupTeardown
      */
     public function testR1C1International(string $locale): void
     {
-        Settings::setLocale($locale);
-        $sameAsEnglish = ['en', 'xx', 'ru', 'tr', 'cs', 'pl'];
+        if ($locale == 'xx') {
+            // Expect an exception
+            $this->expectException(Exception::class);
+        }
+        CurrentLocale::setLocale($locale);
+        $sameAsEnglish = ['en', 'xx', 'ru', 'tr', 'cs'];
         $sheet = $this->getSheet();
         $sheet->getCell('C1')->setValue('text');
         $sheet->getCell('A2')->setValue('en');
@@ -49,7 +55,7 @@ class IndirectInternationalTest extends AllSetupTeardown
         $sheet->getCell('A9')->setValue('tr');
         $sheet->getCell('B9')->setValue('=INDIRECT("R1C3", false)');
         $sheet->getCell('A10')->setValue('pl');
-        $sheet->getCell('B10')->setValue('=INDIRECT("R1C3", false)');
+        $sheet->getCell('B10')->setValue('=INDIRECT("W1K3", false)');
         $maxRow = $sheet->getHighestRow();
         for ($row = 2; $row <= $maxRow; ++$row) {
             $rowLocale = $sheet->getCell("A$row")->getValue();
@@ -58,7 +64,7 @@ class IndirectInternationalTest extends AllSetupTeardown
             } else {
                 $expectedResult = ($locale === $sheet->getCell("A$row")->getValue()) ? 'text' : '#REF!';
             }
-            self::assertSame($expectedResult, $sheet->getCell("B$row")->getCalculatedValue(), "Locale $locale error in cell B$row $rowLocale");
+            self::assertSame($expectedResult, $sheet->getCell("B$row")->getCalculatedValue(), 'Locale "' . $locale . '" error in cell B' . $row . ' "' . $rowLocale . '".');
         }
     }
 
@@ -82,7 +88,7 @@ class IndirectInternationalTest extends AllSetupTeardown
      */
     public function testRelativeInternational(string $locale, string $cell, string $relative): void
     {
-        Settings::setLocale($locale);
+        CurrentLocale::setLocale($locale);
         $sheet = $this->getSheet();
         $sheet->getCell('C3')->setValue('text');
         $sheet->getCell($cell)->setValue("=INDIRECT(\"$relative\", false)");
@@ -112,7 +118,7 @@ class IndirectInternationalTest extends AllSetupTeardown
             $expected2 = '#REF!';
             $expected1 = 'text';
         }
-        Settings::setLocale('fr');
+        CurrentLocale::setLocale('fr');
         $sheet = $this->getSheet();
         $sheet->getCell('C3')->setValue('text');
         $sheet->getCell('A1')->setValue('=INDIRECT("R3C3", false)');

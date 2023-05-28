@@ -2,7 +2,7 @@
 
 namespace PhpOffice\PhpSpreadsheet\Calculation\DateTimeExcel;
 
-use Datetime;
+use DateTime;
 use PhpOffice\PhpSpreadsheet\Calculation\ArrayEnabled;
 use PhpOffice\PhpSpreadsheet\Calculation\Functions;
 use PhpOffice\PhpSpreadsheet\Shared\Date as SharedDateHelper;
@@ -50,15 +50,13 @@ class TimeValue
             $timeValue = implode(':', $arraySplit);
         }
 
-        // @ido @fix!
         $baseYear = SharedDateHelper::getExcelCalendar();
         $PHPDateArray = date_parse($timeValue);
         $retValue = Functions::VALUE();
         if (($PHPDateArray !== false) && ($PHPDateArray['error_count'] == 0)) {
-            // @ido @fix!
             // OpenOffice-specific code removed - it works just like Excel
             // $excelDateValue = SharedDateHelper::formattedPHPToExcel(1900, 1, 1, $PHPDateArray['hour'], $PHPDateArray['minute'], $PHPDateArray['second']) - 1;
-            $excelDateValue = SharedDateHelper::formattedPHPToExcel($baseYear, 1, 1, $PHPDateArray['hour'], $PHPDateArray['minute'], $PHPDateArray['second']);
+            $excelDateValue = SharedDateHelper::formattedPHPToExcel($baseYear, 1, 1, $PHPDateArray['hour'], $PHPDateArray['minute'], $PHPDateArray['second']) - 1;
 
             $retType = Functions::getReturnDateType();
             if ($retType === Functions::RETURNDATE_EXCEL) {

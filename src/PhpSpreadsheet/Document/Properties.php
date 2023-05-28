@@ -166,12 +166,14 @@ class Properties
     private static function intOrFloatTimestamp($timestamp)
     {
         if ($timestamp === null) {
-            $timestamp = (float) (new DateTime())->format('U');
+            $timestamp = (float) (new DateTime('now'))->format('U');
         } elseif (is_string($timestamp)) {
             if (is_numeric($timestamp)) {
                 $timestamp = (float) $timestamp;
             } else {
-                $timestamp = (string) preg_replace('/[.][0-9]*$/', '', $timestamp);
+                // Remove milliseconds
+                $timestamp = (string) preg_replace('/[\.][0-9]*$/', '', $timestamp);
+                // Convert month/day spaces into '0'
                 $timestamp = (string) preg_replace('/^(\\d{4})- (\\d)/', '$1-0$2', $timestamp);
                 $timestamp = (string) preg_replace('/^(\\d{4}-\\d{2})- (\\d)/', '$1-0$2', $timestamp);
                 $timestamp = (float) (new DateTime($timestamp))->format('U');

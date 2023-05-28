@@ -3,7 +3,6 @@
 namespace PhpOffice\PhpSpreadsheetTests\Document;
 
 use DateTime;
-use DateTimeZone;
 use PhpOffice\PhpSpreadsheet\Document\Properties;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
 use PHPUnit\Framework\TestCase;
@@ -178,7 +177,7 @@ class PropertiesTest extends TestCase
         self::assertSame($expectedType, $this->properties->getCustomPropertyType($propertyName));
         $result = $this->properties->getCustomPropertyValue($propertyName);
         if ($expectedType === Properties::PROPERTY_TYPE_DATE) {
-            $result = Date::formattedDateTimeFromTimestamp("$result", 'Y-m-d', new DateTimeZone('UTC'));
+            $result = Date::formattedDateTimeFromTimestamp((string) $result, 'Y-m-d');
         }
         self::assertSame($expectedValue, $result);
     }

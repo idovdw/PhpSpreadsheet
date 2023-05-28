@@ -2,23 +2,25 @@
 
 namespace PhpOffice\PhpSpreadsheetTests\Calculation\Functions\LookupRef;
 
+use Exception;
 use PhpOffice\PhpSpreadsheet\Calculation\Functions;
-use PhpOffice\PhpSpreadsheet\Settings;
+use PhpOffice\PhpSpreadsheet\Shared\Locale\CurrentLocale;
 
 class AddressInternationalTest extends AllSetupTeardown
 {
-    /** @var string */
-    private $locale;
-
     protected function setUp(): void
     {
         parent::setUp();
-        $this->locale = Settings::getLocale();
+
+        // Preserve current locale
+        CurrentLocale::preserveState();
     }
 
     protected function tearDown(): void
     {
-        Settings::setLocale($this->locale);
+        // Restore current locale
+        CurrentLocale::restoreState();
+
         // CompatibilityMode is restored in parent
         parent::tearDown();
     }
@@ -28,9 +30,17 @@ class AddressInternationalTest extends AllSetupTeardown
      */
     public function testR1C1International(string $locale, string $r, string $c): void
     {
-        if ($locale !== '') {
-            Settings::setLocale($locale);
+        if ($locale == 'xx') {
+            // Expect an exception
+            $this->expectException(Exception::class);
         }
+
+        if ($locale == '') {
+            CurrentLocale::setDefaultLocale();
+        } else {
+            CurrentLocale::setLocale($locale);
+        }
+
         $sheet = $this->getSheet();
         $sheet->getCell('A1')->setValue('=LEFT(ADDRESS(1,1,1,0),1)');
         $sheet->getCell('A2')->setValue('=MID(ADDRESS(1,1,1,0),3,1)');
@@ -49,7 +59,7 @@ class AddressInternationalTest extends AllSetupTeardown
             'Spanish' => ['es', 'F', 'C'],
             'Bulgarian' => ['bg', 'R', 'C'],
             'Czech' => ['cs', 'R', 'C'], // maybe should be R/S
-            'Polish' => ['pl', 'R', 'C'], // maybe should be W/K
+            'Polish' => ['pl', 'W', 'K'],
             'Turkish' => ['tr', 'R', 'C'],
         ];
     }
@@ -60,7 +70,7 @@ class AddressInternationalTest extends AllSetupTeardown
     public function testCompatibilityInternational(string $compatibilityMode, string $r, string $c): void
     {
         Functions::setCompatibilityMode($compatibilityMode);
-        Settings::setLocale('de');
+        CurrentLocale::setLocale('de');
         $sheet = $this->getSheet();
         $sheet->getCell('A1')->setValue('=LEFT(ADDRESS(1,1,1,0),1)');
         $sheet->getCell('A2')->setValue('=MID(ADDRESS(1,1,1,0),3,1)');

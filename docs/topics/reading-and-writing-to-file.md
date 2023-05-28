@@ -687,9 +687,8 @@ If the worksheet you are exporting contains numbers with decimal or
 thousands separators then you should think about what characters you
 want to use for those before doing the export.
 
-By default PhpSpreadsheet looks up in the server's locale settings to
-decide what characters to use. But to avoid problems it is recommended
-to set the characters explicitly as shown below.
+By default PhpSpreadsheet uses the locale settings for en-US. You can override
+these settings by setting the separators explicitly.
 
 English users will want to use this before doing the export:
 
@@ -698,7 +697,7 @@ English users will want to use this before doing the export:
 \PhpOffice\PhpSpreadsheet\Shared\StringHelper::setThousandsSeparator(',');
 ```
 
-German users will want to use the opposite values.
+German users may want to use the opposite values.
 
 ```php
 \PhpOffice\PhpSpreadsheet\Shared\StringHelper::setDecimalSeparator(',');

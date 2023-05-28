@@ -393,10 +393,10 @@ class Csv extends BaseReader
         while (is_array($rowData)) {
             $noOutputYet = true;
             $columnLetter = 'A';
-            foreach ($rowData as $rowDatum) {
-                $this->convertBoolean($rowDatum, $preserveBooleanString);
-                $numberFormatMask = $this->convertFormattedNumber($rowDatum);
-                if (($rowDatum !== '' || $this->preserveNullString) && $this->readFilter->readCell($columnLetter, $currentRow)) {
+            foreach ($rowData as $rowData) {
+                $this->convertBoolean($rowData, $preserveBooleanString);
+                $numberFormatMask = $this->convertFormattedNumber($rowData);
+                if (($rowData !== '' || $this->preserveNullString) && $this->readFilter->readCell($columnLetter, $currentRow)) {
                     if ($this->contiguous) {
                         if ($noOutputYet) {
                             $noOutputYet = false;
@@ -410,7 +410,7 @@ class Csv extends BaseReader
                         ->getNumberFormat()
                         ->setFormatCode($numberFormatMask);
                     // Set cell value
-                    $sheet->getCell($columnLetter . $outRow)->setValue($rowDatum);
+                    $sheet->getCell($columnLetter . $outRow)->setValue($rowData);
                 }
                 ++$columnLetter;
             }
@@ -430,48 +430,69 @@ class Csv extends BaseReader
     /**
      * Convert string true/false to boolean, and null to null-string.
      *
-     * @param mixed $rowDatum
+     * @param mixed $rowData
      */
-    private function convertBoolean(&$rowDatum, bool $preserveBooleanString): void
+    private function convertBoolean(&$rowData, bool $preserveBooleanString): void
     {
-        if (is_string($rowDatum) && !$preserveBooleanString) {
-            if (strcasecmp(Calculation::getTRUE(), $rowDatum) === 0 || strcasecmp('true', $rowDatum) === 0) {
-                $rowDatum = true;
-            } elseif (strcasecmp(Calculation::getFALSE(), $rowDatum) === 0 || strcasecmp('false', $rowDatum) === 0) {
-                $rowDatum = false;
+        if (is_string($rowData) && !$preserveBooleanString) {
+            if (strcasecmp(Calculation::getTRUE(), $rowData) === 0 || strcasecmp('true', $rowData) === 0) {
+                $rowData = true;
+            } elseif (strcasecmp(Calculation::getFALSE(), $rowData) === 0 || strcasecmp('false', $rowData) === 0) {
+                $rowData = false;
             }
         } else {
-            $rowDatum = $rowDatum ?? '';
+            $rowData = $rowData ?? '';
         }
     }
 
     /**
      * Convert numeric strings to int or float values.
      *
-     * @param mixed $rowDatum
+     * @param mixed $rowData
      */
-    private function convertFormattedNumber(&$rowDatum): string
+    private function convertFormattedNumber(&$rowData): string
     {
         $numberFormatMask = NumberFormat::FORMAT_GENERAL;
-        if ($this->castFormattedNumberToNumeric === true && is_string($rowDatum)) {
-            $numeric = str_replace(
+        if ($this->castFormattedNumberToNumeric === true && is_string($rowData)) {
+            $dec_sep = StringHelper::getDecimalSeparator();
+            $replacements = [
                 [StringHelper::getThousandsSeparator(), StringHelper::getDecimalSeparator()],
                 ['', '.'],
-                $rowDatum
+            ];
+
+            // Add extra common thousand separators
+            // (Only if decimal separator is not a comma)
+            if (!in_array(',', $replacements[0])) {
+                array_unshift($replacements[0], ',');
+                array_unshift($replacements[1], '');
+            }
+            if (!in_array('.', $replacements[0])) {
+                array_unshift($replacements[0], '.');
+                array_unshift($replacements[1], '');
+            }
+            if (!in_array(' ', $replacements[0])) {
+                array_unshift($replacements[0], ' ');
+                array_unshift($replacements[1], '');
+            }
+
+            $numeric = str_replace(
+                $replacements[0],
+                $replacements[1],
+                $rowData
             );
 
             if (is_numeric($numeric)) {
-                $decimalPos = strpos($rowDatum, StringHelper::getDecimalSeparator());
+                $decimalPos = strpos($rowData, StringHelper::getDecimalSeparator());
                 if ($this->preserveNumericFormatting === true) {
-                    $numberFormatMask = (strpos($rowDatum, StringHelper::getThousandsSeparator()) !== false)
+                    $numberFormatMask = (strpos($rowData, StringHelper::getThousandsSeparator()) !== false)
                         ? '#,##0' : '0';
                     if ($decimalPos !== false) {
-                        $decimals = strlen($rowDatum) - $decimalPos - 1;
+                        $decimals = strlen($rowData) - $decimalPos - 1;
                         $numberFormatMask .= '.' . str_repeat('0', min($decimals, 6));
                     }
                 }
 
-                $rowDatum = ($decimalPos !== false) ? (float) $numeric : (int) $numeric;
+                $rowData = ($decimalPos !== false) ? (float) $numeric : (int) $numeric;
             }
         }
 

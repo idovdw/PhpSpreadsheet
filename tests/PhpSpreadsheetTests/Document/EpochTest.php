@@ -32,18 +32,19 @@ class EpochTest extends AbstractFunctional
         $sheet = $spreadsheet->getActiveSheet();
         $sheet->getCell('A1')->setValue(1);
         $spreadsheet->getProperties()->setCreated($timestamp);
-        $timestamp2 = preg_replace('/1-/', '2-', $timestamp);
+        $timestamp2 = (string) preg_replace('/1-/', '2-', $timestamp);
         self::AssertNotEquals($timestamp, $timestamp2);
         $spreadsheet->getProperties()->setModified($timestamp2);
-        $timestamp3 = preg_replace('/1-/', '3-', $timestamp);
+        $timestamp3 = (string) preg_replace('/1-/', '3-', $timestamp);
+        $dt = new DateTime($timestamp3);
         self::AssertNotEquals($timestamp, $timestamp3);
         self::AssertNotEquals($timestamp2, $timestamp3);
         $spreadsheet->getProperties()->setCustomProperty('cprop', $timestamp3, 'd');
         $reloadedSpreadsheet = $this->writeAndReload($spreadsheet, $format);
         $created = $reloadedSpreadsheet->getProperties()->getCreated();
-        $dt1 = DateTime::createFromFormat('U', "$created");
+        $dt1 = DateTime::createFromFormat('U', '' . $created);
         $modified = $reloadedSpreadsheet->getProperties()->getModified();
-        $dt2 = DateTime::createFromFormat('U', "$modified");
+        $dt2 = DateTime::createFromFormat('U', '' . $modified);
         if ($dt1 === false || $dt2 === false) {
             self::fail('Invalid timestamp for created or modified');
         } else {
@@ -56,7 +57,7 @@ class EpochTest extends AbstractFunctional
             if (!is_numeric($cprop)) {
                 self::fail('Cannot find custom property');
             } else {
-                $dt3 = DateTime::createFromFormat('U', "$cprop");
+                $dt3 = DateTime::createFromFormat('U', '' . $cprop);
                 if ($dt3 === false) {
                     self::fail('Invalid timestamp for custom property');
                 } else {

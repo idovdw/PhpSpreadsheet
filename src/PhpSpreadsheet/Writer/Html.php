@@ -438,6 +438,9 @@ class Html extends BaseWriter
      */
     public function generateSheetData()
     {
+        // Keep track of selected cells to restore start conditions
+        $selectedSheet = $this->spreadsheet->getActiveSheetIndex();
+
         $sheets = $this->generateSheetPrep();
 
         // Construct HTML
@@ -446,6 +449,9 @@ class Html extends BaseWriter
         // Loop all sheets
         $sheetId = 0;
         foreach ($sheets as $sheet) {
+            // Keep track of selected cells to restore start conditions
+            $selectedCells = $sheet->getSelectedCells();
+
             // Write table header
             $html .= $this->generateTableHeader($sheet);
 
@@ -490,9 +496,16 @@ class Html extends BaseWriter
                 }
             }
 
+            // Workaround: Selected cells are overwritten by Worksheet::getStyle().
+            $sheet->setSelectedCells($selectedCells);
+
             // Next sheet
             ++$sheetId;
         }
+
+        // Restore start condition: Active sheet overwritten by
+        // Cell::getCalculatedValue
+        $this->spreadsheet->setActiveSheetIndex($selectedSheet);
 
         return $html;
     }
@@ -1289,24 +1302,23 @@ class Html extends BaseWriter
             $this->generateRowCellDataValueRich($cell, $cellData);
         } else {
             $origData = $this->preCalculateFormulas ? $cell->getCalculatedValue() : $cell->getValue();
-            // @ido @fix Conditional formatting: getAppliedStyle
-            //$formatCode = $worksheet->getParentOrThrow()->getCellXfByIndex($cell->getXfIndex())->getNumberFormat()->getFormatCode();
+
+            // Support conditional formatting: use getAppliedStyle
             $formatCode = $cell->getAppliedStyle()->getNumberFormat()->getFormatCode();
 
             if ($formatCode !== null) {
                 $cellData = NumberFormat::toFormattedString(
                     $origData ?? '',
-                    $formatCode ?? NumberFormat::FORMAT_GENERAL,
+                    $formatCode,
                     [$this, 'formatColor']
                 );
 
-                // @ido @fix
                 // Convert spaces into visible spaces (avoid color tags)
                 if (null !== $cellData && (strpos($cellData, '  ') !== false)) {
-                    $cellData = preg_replace_callback(
+                    $cellData = (string) preg_replace_callback(
                         '/(^|>)(?<data>[^<]*)/i',
                         function ($matches) {
-                            $matches['data'] = preg_replace_callback('/ {2,}/', function ($matches) {
+                            $matches['data'] = (string) preg_replace_callback('/ {2,}/', function ($matches) {
                                 // Use &thinsp; as &nbsp; hussles visible output in LTR mode
                                 return str_repeat('&thinsp;', strlen($matches[0]));
                             }, $matches['data']);

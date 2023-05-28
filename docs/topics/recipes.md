@@ -387,6 +387,17 @@ if (!$validLocale) {
 }
 ```
 
+Alternatively:
+```php
+$locale = 'ru';
+try {
+    $strCalculationLocale = \PhpOffice\PhpSpreadsheet\Shared\Locale\CurrentLocale::setLocale($locale_tag);
+} catch (\Exception $ex) {
+    echo $ex->getMessage()."<br />\n";
+}
+```
+
+
 If Russian language files aren't available, the `setLocale()` method
 will return an error, and English settings will be used throughout.
 
@@ -411,26 +422,12 @@ $spreadsheet->getActiveSheet()->setCellValue('B8',$internalFormula);
 Currently, formula translation only translates the function names, the
 constants TRUE and FALSE, and the function argument separators. Cell addressing using R1C1 formatting is not supported.
 
-At present, the following locale settings are supported:
+At present all LCID related locales are supported, having an LCID code that is 
+other than 0x1000. 
 
-Language             |                      | Locale Code
----------------------|----------------------|-------------
-Czech                | Ceština              | cs
-Danish               | Dansk                | da
-German               | Deutsch              | de
-Spanish              | Español              | es
-Finnish              | Suomi                | fi
-French               | Français             | fr
-Hungarian            | Magyar               | hu
-Italian              | Italiano             | it
-Dutch                | Nederlands           | nl
-Norwegian            | Norsk Bokmål         | nb
-Polish               | Jezyk polski         | pl
-Portuguese           | Português            | pt
-Brazilian Portuguese | Português Brasileiro | pt_br
-Russian              | русский язык         | ru
-Swedish              | Svenska              | sv
-Turkish              | Türkçe               | tr
+See https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-lcid/70feba9f-294e-491e-b6eb-56532684c37f as of page 31.
+You can also look in PhpSpreadsheet\Shared\Locale\Format for all supported format locales and 
+PhpSpreadsheet\Shared\Locale\Formula for the calculation locales.
 
 ## Write a newline character "\n" in a cell (ALT+"Enter")
 

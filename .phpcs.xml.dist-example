@@ -19,7 +19,7 @@
     <arg name="cache" value="\tmp\.phpspreadsheet.phpcs-cache"/>
     
     Rename this file to .phpcs.xml.dist
-    --/>
+    -->
     <arg name="cache" value="\tmp\.phpspreadsheet.phpcs-cache"/>
     <arg name="colors"/>
     <arg value="np"/>

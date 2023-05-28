@@ -60,7 +60,6 @@ class RetainSelectedCellsTest extends AbstractFunctional
             ->setCellValue('C3', '=SIN(9)');
         $sheet->setSelectedCell('C2');
         $spreadsheet->setActiveSheetIndex(1);
-
         $reloaded = $this->writeAndReload($spreadsheet, $format);
         self::assertEquals('A3', $spreadsheet->getSheet(0)->getSelectedCells());
         self::assertEquals('B1', $spreadsheet->getSheet(1)->getSelectedCells());

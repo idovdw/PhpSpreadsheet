@@ -2,8 +2,8 @@
 
 namespace PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 
-use PhpOffice\PhpSpreadsheet\Locale\CurrentLocale;
-use PhpOffice\PhpSpreadsheet\Locale\FormatLocale;
+use PhpOffice\PhpSpreadsheet\Shared\Locale\CurrentLocale;
+use PhpOffice\PhpSpreadsheet\Shared\Locale\FormatLocale;
 use PhpOffice\PhpSpreadsheet\Shared\StringHelper;
 
 abstract class BaseNumberFormatter extends BaseFormatter
@@ -30,15 +30,30 @@ abstract class BaseNumberFormatter extends BaseFormatter
     protected const PREG_DETECT_DIGITPLACEHOLDERS = '/' . self::PREG_CONDITION_NONQUOTED . '[#\?0]+/u';
 
     /**
+     * Detect scaling behind decimals.
+     */
+    protected const PREG_DETECT_DECIMALS_SCALING = '/' . self::PREG_CONDITION_NONQUOTED . '[0-9,\?#][\.,]*/u';
+
+    /**
+     * Detect scaling behind integer/placeholder.
+     */
+    protected const PREG_DETECT_INTEGER_SCALING = '/' . self::PREG_CONDITION_NONQUOTED . '[0-9,\?#][,]*(?:"[^"]*")*$/u';
+
+    /**
+     * Detect scientific number notation.
+     */
+    protected const PREG_DETECT_SCIENTIFIC_VALUE = '/^[+\-]?[1-9]([\.][0-9]+)?[E][+\-]?[0-9]+$/iu';
+
+    /**
      * Format a value as number.
      *
      * @param mixed $value The value
      * @param string $format The format string
-     * @param bool $apply_scale Apply value scaling by ,,,-formatsuffix
+     * @param bool $applyScale Apply value scaling by ,,,-formatsuffix
      *
      * @return string The formatted value
      */
-    protected static function formatValueAsNumber($value, $format, $apply_scale = true): string
+    protected static function formatValueAsNumber($value, string $format, $applyScale = true): string
     {
         // Check percentages
         $format = self::formatPercentage($value, $format);
@@ -49,7 +64,7 @@ abstract class BaseNumberFormatter extends BaseFormatter
         // Process negative value: set sign
         $format = self::formatNegativeValue($value, $format);
 
-        return self::formatProcessNumber($value, $format, $apply_scale, self::FORMAT_ADD_DECIMAL_TRUE);
+        return self::formatProcessNumber($value, $format, $applyScale, self::FORMAT_ADD_DECIMAL_TRUE);
     }
 
     /**
@@ -57,50 +72,53 @@ abstract class BaseNumberFormatter extends BaseFormatter
      *
      * @param mixed $value The value
      * @param string $format The format string
-     * @param bool $apply_scale Apply value scaling by ,,,-formatsuffix
+     * @param bool $applyScale Apply value scaling by ,,,-formatsuffix
      * @param int $useDecimalPoint Add decimal point
      *
      * @return string The value format (integer, or integer.decimal)
      * The format is still containing quoted text.
      */
-    protected static function formatProcessNumber($value, $format, $apply_scale = true, $useDecimalPoint = self::FORMAT_ADD_DECIMAL_OPTIONAL): string
+    protected static function formatProcessNumber($value, $format, $applyScale = true, $useDecimalPoint = self::FORMAT_ADD_DECIMAL_OPTIONAL): string
     {
         // Split the text into an integer and decimal part.
         // Treat them separately. The integer part can hold thousands
         $format_segments = preg_split('/' . self::PREG_CONDITION_NONQUOTED . '(?<!\\.)\\./u', $format, 2);
-        $format_integer = $format_segments[0];
         $format_decimal = '';
-        if (isset($format_segments[1])) {
-            $format_decimal = $format_segments[1];
+
+        if (!$format_segments) {
+            $format_integer = $format;
+        } else {
+            $format_integer = $format_segments[0];
+            if (isset($format_segments[1])) {
+                $format_decimal = $format_segments[1];
+            }
         }
 
         $scale = 1;
-        if ($apply_scale) {
+        if ($applyScale) {
             // Scale thousands, millions,...
             // This is indicated by a number of commas after the last digit placeholder.
             // Number of commas in decimal part plus the number of commas at the
-            // end of the integer part. Example "#," = 1 or "0,.,0,," = 3
+            // end of the integer part. Example '#,' = 1 or '0,.,0,,' = 3
             $scale = 0;
-            $preg_condition_decimal_scale = '/' . self::PREG_CONDITION_NONQUOTED . '[0-9,\#][\.,]*/u';
-            if (preg_match_all($preg_condition_decimal_scale, $format_decimal, $matches)) {
+            if (preg_match_all(self::PREG_DETECT_DECIMALS_SCALING, $format_decimal, $matches)) {
                 $match_count = count($matches[0]);
                 $scale += substr_count(end($matches[0]), ',');
                 $pos_count = 0;
-                $format_decimal = preg_replace_callback($preg_condition_decimal_scale, function ($match) use (&$match_count, &$pos_count) {
+                $format_decimal = (string) preg_replace_callback(self::PREG_DETECT_DECIMALS_SCALING, function ($match) use (&$match_count, &$pos_count) {
                     ++$pos_count;
                     // Strip the scale indicators
                     return ($pos_count == $match_count) ? str_replace(',', '', $match[0]) : $match[0];
                 }, $format_decimal);
             }
-            $preg_condition_integer_scale = '/' . self::PREG_CONDITION_NONQUOTED . '[0-9,\#][,]*$/u';
-            if (preg_match_all($preg_condition_integer_scale, $format_integer, $matches)) {
+            if (preg_match_all(self::PREG_DETECT_INTEGER_SCALING, $format_integer, $matches)) {
                 $match_count = count($matches[0]);
                 $scale += substr_count(end($matches[0]), ',');
                 $pos_count = 0;
-                $format_integer = preg_replace_callback($preg_condition_integer_scale, function ($match) use (&$match_count, &$pos_count) {
+                $format_integer = (string) preg_replace_callback(self::PREG_DETECT_INTEGER_SCALING, function ($match) use (&$match_count, &$pos_count) {
                     ++$pos_count;
                     // Strip the scale indicators
-                    return ($pos_count == $match_count) ? str_replace(',', '', $match[0]) : $match[0];
+                    return ($pos_count == $match_count) ? preg_replace('/' . self::PREG_CONDITION_NONQUOTED . '(,)/', '', $match[0]) : $match[0];
                 }, $format_integer);
             }
             $scale = ($scale == 0) ? 1 : 1000 ** $scale;
@@ -110,7 +128,7 @@ abstract class BaseNumberFormatter extends BaseFormatter
         // This is indicated by a comma enclosed by a digit placeholder:
         //   '#,#' or '0,0' or a mix
         $useThousands = false;
-        $format_integer = preg_replace_callback('/' . self::PREG_CONDITION_NONQUOTED . '[#0\?],[\?#0]?/u', function ($matches) use (&$useThousands) {
+        $format_integer = (string) preg_replace_callback('/' . self::PREG_CONDITION_NONQUOTED . '[#0\?],[\?#0]?/u', function ($matches) use (&$useThousands) {
             $useThousands = true;
             // Remove the thousands separator
             return str_replace(',', '', $matches[0]);
@@ -118,15 +136,12 @@ abstract class BaseNumberFormatter extends BaseFormatter
 
         // Multiple decimal separators will be treated as literals
         $dec_sign = StringHelper::getDecimalSeparator();
-        $format_decimal = preg_replace_callback('/' . self::PREG_CONDITION_NONQUOTED . '\.+/u', function ($matches) use ($dec_sign) {
-            return '"' . str_repeat($dec_sign, strlen('' . $matches[0])) . '"';
+        $format_decimal = (string) preg_replace_callback('/' . self::PREG_CONDITION_NONQUOTED . '\.+/u', function ($matches) use ($dec_sign) {
+            return '"' . str_repeat($dec_sign, strlen($matches[0])) . '"';
         }, $format_decimal);
 
         if (is_string($value)) {
-            // Convert into a rounded float, to keep precision
-            $aValue = explode('.', $value);
-            $value = (float) $value;
-            $value = round($value, (isset($aValue[1]) ? strlen($aValue[1]) : 0));
+            $value = self::convertStringValueToFloat($value);
         }
 
         // Scale number
@@ -137,7 +152,6 @@ abstract class BaseNumberFormatter extends BaseFormatter
         if (preg_match_all(self::PREG_DETECT_DIGITPLACEHOLDERS, $format_decimal, $matches)) {
             $precision = strlen(implode('', $matches[0]));
         }
-
         $value = self::floatToString($value, $precision, '.');
 
         // Spread out numbers over the available 0#?
@@ -190,18 +204,18 @@ abstract class BaseNumberFormatter extends BaseFormatter
      */
     protected static function spreadNumber($value_part, $format_number, $boolReverse = false, $useDecimalPoint = self::FORMAT_ADD_DECIMAL_FALSE, $useThousands = false, $formatZeros = self::FORMAT_ZEROS_STRIP_RIGHT, $scale = 1): string
     {
-        $preg_condition_digits = '/' . self::PREG_CONDITION_NONQUOTED . '[0\?#]/u';
-        $preg_condition_digits_multiple = '/' . self::PREG_CONDITION_NONQUOTED . '[0\?#]+/u';
+        $PREG_CONDITION_digits = '/' . self::PREG_CONDITION_NONQUOTED . '[0\?#]/u';
+        $PREG_CONDITION_digits_multiple = '/' . self::PREG_CONDITION_NONQUOTED . '[0\?#]+/u';
         $positions = 0;
         $chunk_count = 0;
         $format_number_digits = '';
-        if (preg_match_all($preg_condition_digits_multiple, $format_number, $matches)) {
+        if (preg_match_all($PREG_CONDITION_digits_multiple, $format_number, $matches)) {
             $format_number_digits = implode('', $matches[0]);
             $chunk_count = count($matches[0]);
             $positions = strlen($format_number_digits);
         }
 
-        $value_part = '' . $value_part;
+        $value_part = (string) $value_part;
         switch ($formatZeros) {
             case self::FORMAT_ZEROS_NOTOUCH:
                 // Do nothing
@@ -213,7 +227,7 @@ abstract class BaseNumberFormatter extends BaseFormatter
                 break;
             case self::FORMAT_ZEROS_SINGLE:
                 // Use a single zero
-                $value_part = preg_replace('/[0]+$/u', '0', $value_part);
+                $value_part = (string) preg_replace('/[0]+$/u', '0', $value_part);
 
                 break;
             case self::FORMAT_ZEROS_STRIP_LEFT:
@@ -232,10 +246,19 @@ abstract class BaseNumberFormatter extends BaseFormatter
         if ($boolReverse) {
             // Reverse value and format
             $value_part = strrev($value_part);
-            $format_number = self::mb_strrev($format_number);
+            $format_number = self::mbStrRev($format_number);
         }
 
-        $thousands_pattern = $useThousands ? CurrentLocale::getThousandsFormatPattern() : false;
+        // Determine the thousands format pattern
+        $thousands_pattern = $useThousands ? CurrentLocale::getThousandsFormatPattern() : FormatLocale::THOUSANDS_FORMAT_NONE;
+        if ($thousands_pattern != FormatLocale::THOUSANDS_FORMAT_NONE) {
+            $thousands_pattern_overrule = Formatter::getOverruleThousandsFormatPattern();
+            if ($thousands_pattern_overrule !== false) {
+                // Allow overrule
+                $thousands_pattern = $thousands_pattern_overrule;
+            }
+        }
+
         switch ($thousands_pattern) {
             case FormatLocale::THOUSANDS_FORMAT_REGULAR:
                 // Number with thousands sign
@@ -252,6 +275,14 @@ abstract class BaseNumberFormatter extends BaseFormatter
 
                 // Position thousand separator after every cluster of digits
                 $format_number = self::applyThousandsNumberFormatHecto($format_number, $value_part, 2, ($scale !== 1000), $chunk_count);
+
+                break;
+
+            case FormatLocale::THOUSANDS_FORMAT_KILO:
+                // Follow pattern '############,###'
+
+                // Position thousand separator after first cluster of 3 digits
+                $format_number = self::applyThousandsNumberFormatKilo($format_number, $value_part, $chunk_count);
 
                 break;
 
@@ -278,7 +309,7 @@ abstract class BaseNumberFormatter extends BaseFormatter
         }
 
         if ($boolReverse) {
-            $format_number = self::mb_strrev($format_number);
+            $format_number = self::mbStrRev($format_number);
         }
 
         return $format_number;
@@ -292,15 +323,15 @@ abstract class BaseNumberFormatter extends BaseFormatter
      *
      * @return string The altered format
      */
-    protected static function formatPercentage(&$value, $format): string
+    protected static function formatPercentage(&$value, string $format): string
     {
         if (preg_match_all('/' . self::PREG_CONDITION_NONQUOTED . '[%]+/u', $format, $matches)) {
             // Use of percentages; apply scaling
             $scale = strlen(implode('', $matches[0]));
-            $value = $value * (100 ** $scale);
+            $value = (float) $value * (100 ** $scale);
 
             // Percentage signs will be treated as literals
-            $format = preg_replace('/' . self::PREG_CONDITION_NONQUOTED . '[%]+/u', '"$0"', $format);
+            $format = (string) preg_replace('/' . self::PREG_CONDITION_NONQUOTED . '[%]+/u', '"$0"', $format);
         }
 
         return $format;
@@ -317,10 +348,10 @@ abstract class BaseNumberFormatter extends BaseFormatter
     protected static function formatLiteralizeContent($format): string
     {
         // Replace all escaped characters into quotes
-        $format = preg_replace_callback('/' . self::PREG_CONDITION_NONQUOTED . '[^"#,\.0-9\?]+/u', function ($matches) {
+        $format = (string) preg_replace_callback('/' . self::PREG_CONDITION_NONQUOTED . '[^",\.0-9\?#]+/u', function ($matches) {
             // Unescape text
-            $matches[0] = preg_replace_callback('/\\\\[^"]/u', function ($match) {
-                return ($match[0] == '\\\\') ? $match[0] : substr($match[0], 1);
+            $matches[0] = (string) preg_replace_callback('/\\\\[.]/u', function ($match) {
+                return ($match[0] == '\\\\') ? $match[0] : mb_substr($match[0], 1);
             }, $matches[0]);
 
             // Surround the matched substring with double quotes
@@ -378,13 +409,16 @@ abstract class BaseNumberFormatter extends BaseFormatter
      *
      * @return string The string representation of the floating point number
      */
-    protected static function floatToString($value, $precision = -1, $decimal_sign = '.'): string
+    protected static function floatToString($value, int $precision = -1, string $decimal_sign = '.'): string
     {
         if ($precision < 0) {
-            $precision = ini_get('precision', PHP_FLOAT_DIG);
+            $precision = (int) ini_get('precision');
+            if ($precision == 0) {
+                $precision = PHP_FLOAT_DIG;
+            }
         }
 
-        return number_format($value, $precision, $decimal_sign, '');
+        return number_format($value, (int) $precision, $decimal_sign, '');
     }
 
     /**
@@ -398,9 +432,14 @@ abstract class BaseNumberFormatter extends BaseFormatter
     public static function formatNegativeValue(&$value, $format): string
     {
         if (is_string($value)) {
-            if (substr($value, 0, 1) == '-') {
-                $format = '"-"' . $format;
+            // Prevent appearance of '-0'
+            if (preg_match('/^\-(0+\.?|(\.0+)?)$/', $value)) {
                 $value = substr($value, 1);
+            } else {
+                if (substr($value, 0, 1) == '-') {
+                    $format = '"-"' . $format;
+                    $value = substr($value, 1);
+                }
             }
         } else {
             if ($value < 0) {
@@ -413,14 +452,14 @@ abstract class BaseNumberFormatter extends BaseFormatter
     }
 
     /**
-     * Perform a multi-byte string reverse.
+     * Perform a multi-byte string reverse (mb_strrev).
      *
      * @param string $string The raw string
      *
      * @return string the reversed string, with respect to multibyte
      * unicode characters
      */
-    protected static function mb_strrev($string)
+    protected static function mbStrRev($string)
     {
         preg_match_all('/./us', $string, $match);
 
@@ -467,7 +506,7 @@ abstract class BaseNumberFormatter extends BaseFormatter
     {
         // Number without thousands sign
         $iterations = 0;
-        $format_number = preg_replace_callback(self::PREG_DETECT_DIGITPLACEHOLDERS, function ($match) use (&$value_part, &$iterations, $chunk_count) {
+        $format_number = (string) preg_replace_callback(self::PREG_DETECT_DIGITPLACEHOLDERS, function ($match) use (&$value_part, &$iterations, $chunk_count) {
             ++$iterations;
             $value_part_len = strlen($value_part);
             $match_length = strlen($match[0]);
@@ -492,7 +531,7 @@ abstract class BaseNumberFormatter extends BaseFormatter
 
             if ($match_length > 0) {
                 // All digits are claimed. Now return zero, space or ''.
-                $strReplace .= preg_replace(['/\?/', '/#/'], [' ', ''], $match[0]);
+                $strReplace .= (string) preg_replace(['/\?/', '/#/'], [' ', ''], $match[0]);
             }
 
             return $strReplace;
@@ -519,7 +558,7 @@ abstract class BaseNumberFormatter extends BaseFormatter
         $pos_count = 0;
         $iterations = 0;
         $thousands_sign = StringHelper::getThousandsSeparator();
-        $format_number = preg_replace_callback(self::PREG_DETECT_DIGITPLACEHOLDERS, function ($match) use (&$pos_count, &$value_part, $thousands_sign, &$cluster_size, $chunk_count, &$iterations) {
+        $format_number = (string) preg_replace_callback(self::PREG_DETECT_DIGITPLACEHOLDERS, function ($match) use (&$pos_count, &$value_part, $thousands_sign, &$cluster_size, $chunk_count, &$iterations) {
             ++$iterations;
             $strReplace = '';
 
@@ -559,6 +598,7 @@ abstract class BaseNumberFormatter extends BaseFormatter
      * @param string $format_number The number format string
      * @param string $value_part The value (or part of it) to be spread
      * @param int $cluster_size The cluster size (e.g. 3)
+     * @param bool $offset_start Apply offset start (scale <> 1000)
      * @param int $chunk_count The number of iterations (chunks of digit
      * placeholders)
      *
@@ -570,7 +610,7 @@ abstract class BaseNumberFormatter extends BaseFormatter
         $iterations = 0;
         $thousands_sign = StringHelper::getThousandsSeparator();
         $cluster_offset = $offset_start ? $cluster_size + 1 : 0;
-        $format_number = preg_replace_callback(self::PREG_DETECT_DIGITPLACEHOLDERS, function ($match) use (&$pos_count, &$value_part, $thousands_sign, &$cluster_size, $cluster_offset, &$offset_start, $chunk_count, &$iterations) {
+        $format_number = (string) preg_replace_callback(self::PREG_DETECT_DIGITPLACEHOLDERS, function ($match) use (&$pos_count, &$value_part, $thousands_sign, &$cluster_size, $cluster_offset, &$offset_start, $chunk_count, &$iterations) {
             ++$iterations;
             $strReplace = '';
             if ($offset_start) {
@@ -621,5 +661,75 @@ abstract class BaseNumberFormatter extends BaseFormatter
         }, $format_number);
 
         return $format_number;
+    }
+
+    /**
+     * Spread number with thousands sign, after first cluster of 3 digits.
+     *
+     * Follow pattern '############,###'
+     *
+     * @param string $format_number The number format string
+     * @param string $value_part The value (or part of it) to be spread
+     * @param int $chunk_count The number of iterations (chunks of digit
+     * placeholders)
+     *
+     * @return string The altered number format
+     */
+    protected static function applyThousandsNumberFormatKilo($format_number, $value_part, $chunk_count)
+    {
+        $pos_count = 0;
+        $iterations = 0;
+        $thousands_sign = StringHelper::getThousandsSeparator();
+        $format_number = (string) preg_replace_callback(self::PREG_DETECT_DIGITPLACEHOLDERS, function ($match) use (&$pos_count, &$value_part, $thousands_sign, $chunk_count, &$iterations) {
+            ++$iterations;
+            $strReplace = '';
+
+            // Use single cluster of 3 placeholders
+            foreach (str_split($match[0]) as $char) {
+                ++$pos_count;
+                $thousand_pos = ($pos_count == 4);
+
+                if (strlen($value_part) > 0) {
+                    $char = substr($value_part, 0, 1);
+                    $value_part = substr($value_part, 1);
+                }
+                $strReplace .= self::processPlaceholder($char, $thousand_pos, $thousands_sign);
+            }
+
+            if (($iterations == $chunk_count) && (strlen($value_part) > 0)) {
+                // Last step; add all remaining value content
+                foreach (str_split($value_part) as $char) {
+                    ++$pos_count;
+                    $thousand_pos = ($pos_count == 4);
+                    $strReplace .= ($thousand_pos ? $thousands_sign : '') . $char;
+                }
+            }
+
+            return $strReplace;
+        }, $format_number);
+
+        return $format_number;
+    }
+
+    /**
+     * Convert string value to float.
+     *
+     * @param string $value The string value
+     *
+     * @return float Converted float value
+     */
+    public static function convertStringValueToFloat(string $value): float
+    {
+        $aValue = explode('.', $value);
+        if (preg_match(self::PREG_DETECT_SCIENTIFIC_VALUE, $value)) {
+            // Maintain scientific value
+            $value = (float) $value;
+        } else {
+            // Convert into a rounded float, to keep precision
+            $value = (float) $value;
+            $value = round($value, (isset($aValue[1]) ? strlen($aValue[1]) : 0));
+        }
+
+        return $value;
     }
 }

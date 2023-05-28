@@ -91,7 +91,7 @@ class HtmlNumberFormatTest extends Functional\AbstractFunctional
         $tds = $rows[3]->getElementsByTagName('td');
         self::assertCount(1, $tds);
         $spans = $tds[0]->getElementsByTagName('span');
-        self::assertCount(0, $spans);
+        self::assertCount(1, $spans);
         self::assertEquals('<br>', $tds[0]->textContent);
 
         $this->writeAndReload($spreadsheet, 'Html');
@@ -101,10 +101,10 @@ class HtmlNumberFormatTest extends Functional\AbstractFunctional
     {
         $spreadsheet = new Spreadsheet();
         $sheet = $spreadsheet->getActiveSheet();
-        $sheet->setCellValue('A1', -50);
-        $sheet->setCellValue('A2', 3000.75);
-        $sheet->setCellValue('A3', 0);
-        $sheet->setCellValue('A4', 3000.25);
+        $sheet->setCellValue('A1', -50);     // Red
+        $sheet->setCellValue('A2', 3000.75); // Blue
+        $sheet->setCellValue('A3', 0);       // No color
+        $sheet->setCellValue('A4', 3000.25); // No color
         $fmt = '[Blue][>=3000.5]$#,##0.00;[Red][<0]$#,##0.00;$#,##0.00';
         $sheet->getStyle('A1:A4')->getNumberFormat()->setFormatCode($fmt);
 
@@ -177,7 +177,9 @@ class HtmlNumberFormatTest extends Functional\AbstractFunctional
 
         $tds = $rows[0]->getElementsByTagName('td');
         $nbsp = html_entity_decode('&nbsp;', Settings::htmlEntityFlags());
-        self::assertEquals($expectedResult, str_replace($nbsp, ' ', $tds[0]->textContent));
+        $thinsp = html_entity_decode('&thinsp;', Settings::htmlEntityFlags());
+        $compareResult = preg_replace('/' . preg_quote($nbsp) . '|' . preg_quote($thinsp) . '/iu', ' ', $tds[0]->textContent);
+        self::assertEquals($expectedResult, $compareResult);
 
         $this->writeAndReload($spreadsheet, 'Html');
     }

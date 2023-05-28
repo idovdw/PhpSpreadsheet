@@ -2,7 +2,7 @@
 
 namespace PhpOffice\PhpSpreadsheet\Style;
 
-use PhpOffice\PhpSpreadsheet\Locale\CurrentLocale;
+use PhpOffice\PhpSpreadsheet\Shared\Locale\CurrentLocale;
 
 class NumberFormat extends Supervisor
 {
@@ -168,8 +168,6 @@ class NumberFormat extends Supervisor
     }
 
     /**
-     * @ido @fix
-     *
      * Apply styles from array.
      *
      * <code>
@@ -211,7 +209,7 @@ class NumberFormat extends Supervisor
             return $this->getSharedComponent()->getFormatCode();
         }
         if (is_int($this->builtInFormatCodeID)) {
-            return CurrentLocale::builtInFormatCode($this->builtInFormatCodeID);
+            return CurrentLocale::getBuiltInFormatCodeString($this->builtInFormatCodeID);
         }
 
         return $this->formatCode;
@@ -235,13 +233,13 @@ class NumberFormat extends Supervisor
         } else {
             $this->formatCode = $formatCode;
             if (is_int($this->builtInFormatCodeID)) {
-                $formatCodeCurrent = CurrentLocale::builtInFormatCode($this->builtInFormatCodeID);
+                $formatCodeCurrent = CurrentLocale::getBuiltInFormatCodeString($this->builtInFormatCodeID);
                 if (($formatCodeCurrent == '') || ($formatCode != $formatCodeCurrent)) {
-                    $this->builtInFormatCodeID = CurrentLocale::builtInFormatCodeID($formatCode);
+                    $this->builtInFormatCodeID = CurrentLocale::getBuiltInFormatCodeID($formatCode);
                 }
             // Leave format code ID intact; don't swap if format codes are identical
             } else {
-                $this->builtInFormatCodeID = CurrentLocale::builtInFormatCodeID($formatCode);
+                $this->builtInFormatCodeID = CurrentLocale::getBuiltInFormatCodeID($formatCode);
             }
         }
 
@@ -264,7 +262,6 @@ class NumberFormat extends Supervisor
     }
 
     /**
-     * @ido @fix
      * Set Built-In Format Code.
      *
      * @param int $formatCodeID Format code ID (0 - 163)
@@ -274,11 +271,11 @@ class NumberFormat extends Supervisor
     public function setBuiltInFormatCode($formatCodeID)
     {
         if ($this->isSupervisor) {
-            $styleArray = $this->getStyleArray(['formatCode' => CurrentLocale::builtInFormatCode($formatCodeID), 'builtInFormatCode' => $formatCodeID]);
+            $styleArray = $this->getStyleArray(['formatCode' => CurrentLocale::getBuiltInFormatCodeString($formatCodeID), 'builtInFormatCode' => $formatCodeID]);
             $this->getActiveSheet()->getStyle($this->getSelectedCells())->applyFromArray($styleArray);
         } else {
             $this->builtInFormatCodeID = $formatCodeID;
-            $this->formatCode = CurrentLocale::builtInFormatCode($formatCodeID);
+            $this->formatCode = CurrentLocale::getBuiltInFormatCodeString($formatCodeID);
         }
 
         return $this;
@@ -287,23 +284,27 @@ class NumberFormat extends Supervisor
     /**
      * Get built-in format code.
      *
+     * @param int $intFormatCodeID The built-in format code ID
+     *
      * @return string
      */
-    public static function builtInFormatCode($intFormatCodeID)
+    public static function getBuiltInFormatCodeString(int $intFormatCodeID)
     {
-        return CurrentLocale::builtInFormatCode($intFormatCodeID);
+        return CurrentLocale::getBuiltInFormatCodeString($intFormatCodeID);
     }
 
     /**
      * Get built-in format code ID.
      *
-     * @deprecated: Use CurrentLocale::builtInFormatCodeID($formatCode)
+     * @deprecated: Use CurrentLocale::getBuiltInFormatCodeID($formatCode)
+     *
+     * @param string $formatCode The format code string
      *
      * @return false|int
      */
-    public static function builtInFormatCodeIndex($formatCodeIndex)
+    public static function getBuiltInFormatCodeID($formatCode)
     {
-        return CurrentLocale::builtInFormatCodeID($formatCode);
+        return CurrentLocale::getBuiltInFormatCodeID($formatCode);
     }
 
     /**

@@ -161,14 +161,14 @@ class Slk extends BaseReader
 
             $dataType = array_shift($rowData);
             if ($dataType == 'B') {
-                foreach ($rowData as $rowDatum) {
-                    switch ($rowDatum[0]) {
+                foreach ($rowData as $row) {
+                    switch ($row[0]) {
                         case 'X':
-                            $columnIndex = (int) substr($rowDatum, 1) - 1;
+                            $columnIndex = (int) substr($row, 1) - 1;
 
                             break;
                         case 'Y':
-                            $rowIndex = substr($rowDatum, 1);
+                            $rowIndex = substr($row, 1);
 
                             break;
                     }
@@ -466,17 +466,17 @@ class Slk extends BaseReader
         $this->processPFinal($spreadsheet, $formatArray);
     }
 
-    private function processPColors(string $rowDatum, array &$formatArray): void
+    private function processPColors(string $rowData, array &$formatArray): void
     {
-        if (preg_match('/L([1-9]\\d*)/', $rowDatum, $matches)) {
+        if (preg_match('/L([1-9]\\d*)/', $rowData, $matches)) {
             $fontColor = $matches[1] % 8;
             $formatArray['font']['color']['argb'] = self::COLOR_ARRAY[$fontColor];
         }
     }
 
-    private function processPFontStyles(string $rowDatum, array &$formatArray): void
+    private function processPFontStyles(string $rowData, array &$formatArray): void
     {
-        $styleSettings = substr($rowDatum, 1);
+        $styleSettings = substr($rowData, 1);
         $iMax = strlen($styleSettings);
         for ($i = 0; $i < $iMax; ++$i) {
             if (array_key_exists($styleSettings[$i], self::FONT_STYLE_MAPPINGS)) {
@@ -556,12 +556,12 @@ class Slk extends BaseReader
 
     private function columnRowFromRowData(array $rowData, string &$column, string &$row): void
     {
-        foreach ($rowData as $rowDatum) {
-            $char0 = $rowDatum[0];
+        foreach ($rowData as $rowCell) {
+            $char0 = $rowCell[0];
             if ($char0 === 'X' || $char0 == 'C') {
-                $column = substr($rowDatum, 1);
+                $column = substr($rowCell, 1);
             } elseif ($char0 === 'Y' || $char0 == 'R') {
-                $row = substr($rowDatum, 1);
+                $row = substr($rowCell, 1);
             }
         }
     }

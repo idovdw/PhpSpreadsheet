@@ -44,13 +44,9 @@ class Meta extends WriterPart
         $objWriter->writeElement('meta:initial-creator', $spreadsheet->getProperties()->getCreator());
         $objWriter->writeElement('dc:creator', $spreadsheet->getProperties()->getCreator());
         $created = $spreadsheet->getProperties()->getCreated();
-        $date = Date::dateTimeFromTimestamp("$created");
-        $date->setTimeZone(Date::getDefaultOrLocalTimeZone());
-        $objWriter->writeElement('meta:creation-date', $date->format(DATE_W3C));
+        $objWriter->writeElement('meta:creation-date', Date::utcDateTimeFromTimestamp((string) $created));
         $created = $spreadsheet->getProperties()->getModified();
-        $date = Date::dateTimeFromTimestamp("$created");
-        $date->setTimeZone(Date::getDefaultOrLocalTimeZone());
-        $objWriter->writeElement('dc:date', $date->format(DATE_W3C));
+        $objWriter->writeElement('dc:date', Date::utcDateTimeFromTimestamp((string) $created));
         $objWriter->writeElement('dc:title', $spreadsheet->getProperties()->getTitle());
         $objWriter->writeElement('dc:description', $spreadsheet->getProperties()->getDescription());
         $objWriter->writeElement('dc:subject', $spreadsheet->getProperties()->getSubject());
@@ -106,8 +102,7 @@ class Meta extends WriterPart
                     break;
                 case Properties::PROPERTY_TYPE_DATE:
                     $objWriter->writeAttribute('meta:value-type', 'date');
-                    $dtobj = Date::dateTimeFromTimestamp($propertyValue ?? 0);
-                    $objWriter->writeRawData($dtobj->format(DATE_W3C));
+                    $objWriter->writeRawData(Date::utcDateTimeFromTimestamp((string) ($propertyValue ?? 0)));
 
                     break;
                 default:

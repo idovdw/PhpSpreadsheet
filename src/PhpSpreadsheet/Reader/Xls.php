@@ -2191,7 +2191,7 @@ class Xls extends BaseReader
             if (isset($this->formats[$numberFormatIndex])) {
                 // then we have user-defined format code
                 $numberFormat = ['formatCode' => $this->formats[$numberFormatIndex]];
-            } elseif (($code = NumberFormat::builtInFormatCode($numberFormatIndex)) !== '') {
+            } elseif (($code = NumberFormat::getBuiltInFormatCodeString($numberFormatIndex)) !== '') {
                 // then we have built-in format code
                 $numberFormat = ['formatCode' => $code];
             } else {

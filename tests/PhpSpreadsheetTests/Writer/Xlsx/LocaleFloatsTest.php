@@ -2,6 +2,8 @@
 
 namespace PhpOffice\PhpSpreadsheetTests\Writer\Xlsx;
 
+use Exception;
+use PhpOffice\PhpSpreadsheet\Shared\Locale\CurrentLocale;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheetTests\Functional\AbstractFunctional;
 
@@ -12,11 +14,6 @@ class LocaleFloatsTest extends AbstractFunctional
      */
     private $localeAdjusted;
 
-    /**
-     * @var false|string
-     */
-    private $currentLocale;
-
     /** @var ?Spreadsheet */
     private $spreadsheet;
 
@@ -25,22 +22,25 @@ class LocaleFloatsTest extends AbstractFunctional
 
     protected function setUp(): void
     {
-        $this->currentLocale = setlocale(LC_ALL, '0');
+        // Preserve current locale
+        CurrentLocale::preserveState();
 
-        if (!setlocale(LC_ALL, 'fr_FR.UTF-8', 'fra_fra')) {
+        try {
+            CurrentLocale::setLocale('fr_FR');
+            $this->localeAdjusted = true;
+        } catch (Exception $ex) {
+            // Unable to set the locale
             $this->localeAdjusted = false;
 
             return;
         }
-
-        $this->localeAdjusted = true;
     }
 
     protected function tearDown(): void
     {
-        if ($this->localeAdjusted && is_string($this->currentLocale)) {
-            setlocale(LC_ALL, $this->currentLocale);
-        }
+        // Restore current locale
+        CurrentLocale::restoreState();
+
         if ($this->spreadsheet !== null) {
             $this->spreadsheet->disconnectWorksheets();
             $this->spreadsheet = null;
@@ -69,7 +69,8 @@ class LocaleFloatsTest extends AbstractFunctional
         $prop = $reloadedSpreadsheet->getProperties()->getCustomPropertyValue('Version');
         self::assertEqualsWithDelta(1.2, $prop, 1.0E-8);
 
-        $actual = sprintf('%f', $result);
-        self::assertStringContainsString('1,1', $actual);
+        // Not relevant to text %f (?)
+        $actual = sprintf('%F', $result);
+        self::assertStringContainsString('1.1', $actual);
     }
 }

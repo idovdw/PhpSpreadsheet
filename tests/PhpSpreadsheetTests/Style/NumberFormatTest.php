@@ -4,7 +4,7 @@ namespace PhpOffice\PhpSpreadsheetTests\Style;
 
 use PhpOffice\PhpSpreadsheet\Shared\StringHelper;
 use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
-use PhpOffice\PhpSpreadsheet\Style\NumberFormat\NumberFormatter;
+use PhpOffice\PhpSpreadsheet\Style\NumberFormat\Formatter;
 use PHPUnit\Framework\TestCase;
 
 class NumberFormatTest extends TestCase
@@ -107,30 +107,30 @@ class NumberFormatTest extends TestCase
     /**
      * @dataProvider providerNoScientific
      */
-    public function testNoScientific(string $expectedResult, string $numericString): void
+    public function testNoScientific(string $expectedResult, string $numericString, string $format): void
     {
-        $result = NumberFormatter::floatStringConvertScientific($numericString);
+        $result = Formatter::toFormattedString($numericString, $format);
         self::assertSame($expectedResult, $result);
     }
 
     public static function providerNoScientific(): array
     {
         return [
-            'large number' => ['92' . str_repeat('0', 16), '9.2E+17'],
-            'no decimal portion' => ['16', '1.6E1'],
-            'retain decimal 0 if supplied in string' => ['16.0', '1.60E1'],
-            'exponent 0' => ['2.3', '2.3E0'],
-            'whole and decimal' => ['16.5', '1.65E1'],
-            'plus signs' => ['165000', '+1.65E+5'],
-            'e2 one decimal' => ['489.7', '4.897E2'],
-            'e2 no decimal' => ['-489', '-4.89E2'],
-            'e2 fill units position' => ['480', '4.8E+2'],
-            'no scientific notation' => ['3.14159', '3.14159'],
-            'non-zero in first decimal' => ['0.165', '1.65E-1'],
-            'one leading zero in decimal' => ['0.0165', '1.65E-2'],
-            'four leading zeros in decimal' => ['-0.0000165', '-1.65E-5'],
-            'small number' => ['0.' . str_repeat('0', 16) . '1', '1E-17'],
-            'very small number' => ['0.' . str_repeat('0', 69) . '1', '1E-70'],
+            'large number' => ['92' . str_repeat('0', 16), '9.2E+17', '0'],
+            'no decimal portion' => ['16', '1.6E1', '0'],
+            'retain decimal 0 if supplied in string' => ['16.0', '1.60E1', '0.0'],
+            'exponent 0' => ['2.3', '2.3E0', '0.0'],
+            'whole and decimal' => ['16.5', '1.65E1', '0.0'],
+            'plus signs' => ['165000', '+1.65E+5', '0'],
+            'e2 one decimal' => ['489.7', '4.897E2', '0.0'],
+            'e2 no decimal' => ['-489', '-4.89E2', '0'],
+            'e2 fill units position' => ['480', '4.8E+2', '0'],
+            'no scientific notation' => ['3.14159', '3.14159', '0.00000'],
+            'non-zero in first decimal' => ['0.165', '1.65E-1', '0.000'],
+            'one leading zero in decimal' => ['0.0165', '1.65E-2', '0.0000'],
+            'four leading zeros in decimal' => ['-0.0000165', '-1.65E-5', '0.0000000'],
+            'small number' => ['0.' . str_repeat('0', 16) . '1', '1E-17', '0.0' . str_repeat('0', 16)],
+            'very small number' => ['0.' . str_repeat('0', 69) . '1', '1E-70', '0.0' . str_repeat('0', 69)],
         ];
     }
 }

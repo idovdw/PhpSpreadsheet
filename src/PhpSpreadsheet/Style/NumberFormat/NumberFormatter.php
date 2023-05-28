@@ -23,19 +23,14 @@ class NumberFormatter extends BaseNumberFormatter
      * @param mixed $value The value
      * $param string $format The format string
      *
-     * @return The formatted value
+     * @return string The formatted value
      */
     public static function format($value, string $format): string
     {
-        if (!is_numeric($value)) {
-            return $value;
-        }
-
         $dec_sign = StringHelper::getDecimalSeparator();
         if ($format == NumberFormat::FORMAT_GENERAL) {
             // Return number, straightforward
-            $precision = 20;
-            $value = self::floatToString($value, $precision, $dec_sign);
+            $value = self::floatToString($value, PHP_FLOAT_DIG, $dec_sign);
             $value = rtrim($value, '0');
             $value = rtrim($value, $dec_sign);
 
@@ -43,18 +38,15 @@ class NumberFormatter extends BaseNumberFormatter
         }
 
         // Convert currency marker for actual currency code
-        if (preg_match('/' . self::PREG_CONDITION_NONQUOTED . '\[\$([^\-]*)\]/u', $format, $match)) {
+        if (preg_match('/' . self::PREG_CONDITION_NONQUOTED . '\[\$([^\]]*)\]/u', $format, $match)) {
             // Currency or Accounting
-            $current_currency = StringHelper::getCurrencyCode();
-            $format = preg_replace_callback('/' . self::PREG_CONDITION_NONQUOTED . '\[\$([^\]]*)\]/u', function ($match) use ($current_currency) {
+            $currentCurrencyCode = StringHelper::getCurrencyCode();
+            $format = (string) preg_replace_callback('/' . self::PREG_CONDITION_NONQUOTED . '\[\$([^\]]*)\]/u', function ($match) use ($currentCurrencyCode) {
                 [$currencyCode] = explode('-', $match[1]);
                 // Currency codes will be treated like literals
-                return ($currencyCode == '') ? '"' . $current_currency . '"' : '"' . $currencyCode . '"';
+                return ($currencyCode == '') ? '"' . $currentCurrencyCode . '"' : '"' . $currencyCode . '"';
             }, $format);
         }
-
-        // Remove locale codes [$-###]
-        $format = preg_replace('/' . self::PREG_CONDITION_NONQUOTED . '\[\$\-.*\]/u', '', $format);
 
         // Check fractions
         if (preg_match_all(self::PREG_DETECT_FRACTIONS, $format, $matches)) {
@@ -68,8 +60,11 @@ class NumberFormatter extends BaseNumberFormatter
 
         // Check scientific
         if (preg_match(self::PREG_DETECT_SCIENTIFIC, $format, $matches)) {
-            $sign = preg_replace('/[^+\-]/u', '', $matches[0]);
+            $sign = (string) preg_replace('/[^+\-]/u', '', $matches[0]);
             $format_segments = preg_split(self::PREG_DETECT_SCIENTIFIC, $format, 2);
+            if (!$format_segments) {
+                $format_segments = [$format, ''];
+            }
 
             return self::formatScientific($value, $format_segments[0], $sign, $format_segments[1]);
         }
@@ -100,10 +95,17 @@ class NumberFormatter extends BaseNumberFormatter
 
         // Determine the format segments
         $format_segments = preg_split('/' . self::PREG_CONDITION_NONQUOTED . '(?<!\\.)\\./u', $format_number, 2);
-        $format_segments = [
-            'integer' => $format_segments[0],
-            'decimal' => isset($format_segments[1]) ? '.' . $format_segments[1] : '',
-        ];
+        if (!$format_segments) {
+            $format_segments = [
+                'integer' => $format_number,
+                'decimal' => '',
+            ];
+        } else {
+            $format_segments = [
+                'integer' => $format_segments[0],
+                'decimal' => isset($format_segments[1]) ? '.' . $format_segments[1] : '',
+            ];
+        }
         $format_segments['power'] = $format_power;
 
         $placeholders_implicit = 0;
@@ -131,7 +133,7 @@ class NumberFormatter extends BaseNumberFormatter
             }
         }
 
-        $displacement = $placeholders - 1;
+        $displacement = (int) $placeholders - 1;
         if ($displacement == 0) {
             // Do not change value
             $aScientific['value'] = $aScientific['integer'] . '.' . $aScientific['decimal'];
@@ -166,7 +168,7 @@ class NumberFormatter extends BaseNumberFormatter
     }
 
     /**
-     * @deprecated Function no longer used. Loss of precision.
+     * @deprecated Function no longer used. Reason: loss of precision.
      */
     public static function f2s(float $f): string
     {
@@ -174,7 +176,7 @@ class NumberFormatter extends BaseNumberFormatter
     }
 
     /**
-     * @deprecated Function no longer used. Loss of precision.
+     * @deprecated Function no longer used. Reason: loss of precision.
      */
     public static function floatStringConvertScientific(string $s): string
     {
@@ -182,7 +184,7 @@ class NumberFormatter extends BaseNumberFormatter
         //  optional sign, single digit 1-9,
         //    decimal point and digits (allowed to be omitted),
         //    E (e permitted), optional sign, one or more digits
-        if (preg_match('/^([+-])?([1-9])([.]([0-9]+))?[eE]([+-]?[0-9]+)$/u', $s, $matches) === 1) {
+        if (preg_match('/^([+-])?([1-9])([.]([0-9]+))?[E]([+-]?[0-9]+)$/iu', $s, $matches) === 1) {
             $exponent = (int) $matches[5];
             $sign = ($matches[1] === '-') ? '-' : '';
             if ($exponent >= 0) {

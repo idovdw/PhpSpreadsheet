@@ -93,7 +93,6 @@ class Date
      */
     private static function getYear($year, int $baseYear): int
     {
-        // @fix @ido
         if (null === $year) {
             throw new Exception(ExcelError::NAN());
         }
@@ -125,18 +124,12 @@ class Date
      */
     private static function getMonth($month): int
     {
-        // @fix @ido
         if (null === $month) {
             throw new Exception(ExcelError::VALUE());
         }
 
         if (is_int($month) || is_float($month)) {
-            $month = (int) $month;
-            if (($month < 1) || ($month > 12)) {
-                throw new Exception(ExcelError::VALUE());
-            }
-
-            return $month;
+            return (int) $month;
         }
 
         // Convert month name to integer
@@ -146,12 +139,11 @@ class Date
         }
 
         $month = StringHelper::testStringAsNumeric($month);
-        $month = (int) $month;
-        if (($month < 1) || ($month > 12)) {
+        if (!is_numeric($month)) {
             throw new Exception(ExcelError::VALUE());
         }
 
-        return $month;
+        return (int) $month;
     }
 
     /**
@@ -161,18 +153,12 @@ class Date
      */
     private static function getDay($day): int
     {
-        // @fix @ido
         if (null === $day) {
             throw new Exception(ExcelError::VALUE());
         }
 
         if (is_int($day) || is_float($day)) {
-            $day = (int) $day;
-            if (($day < 1) || ($day > 31)) {
-                throw new Exception(ExcelError::VALUE());
-            }
-
-            return $day;
+            return (int) $day;
         }
 
         // Convert day name to integer
@@ -182,10 +168,11 @@ class Date
         }
 
         $day = StringHelper::testStringAsNumeric($day);
-        $day = (int) $day;
-        if (($day < 1) || ($day > 31)) {
+        if (!is_numeric($day)) {
             throw new Exception(ExcelError::VALUE());
         }
+
+        return (int) $day;
     }
 
     private static function adjustYearMonth(int &$year, int &$month, int $baseYear): void

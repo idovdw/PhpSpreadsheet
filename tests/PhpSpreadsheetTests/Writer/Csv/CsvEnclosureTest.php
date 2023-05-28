@@ -51,7 +51,7 @@ class CsvEnclosureTest extends Functional\AbstractFunctional
         $expected = '';
         foreach (self::CELL_VALUES as $key => $value) {
             self::assertEquals($value, $sheet->getCell($key)->getValue());
-            $expected .= "$enclosure$value$enclosure$delimiter";
+            $expected .= $enclosure . $value . $enclosure . $delimiter;
         }
         self::assertEquals($expected, $filedata);
         $spreadsheet->disconnectWorksheets();
@@ -85,7 +85,7 @@ class CsvEnclosureTest extends Functional\AbstractFunctional
         $expected = '';
         foreach (self::CELL_VALUES as $key => $value) {
             self::assertEquals($value, $sheet->getCell($key)->getValue());
-            $expected .= "$enclosure$value$enclosure$delimiter";
+            $expected .= $enclosure . $value . $enclosure . $delimiter;
         }
         self::assertEquals($expected, $filedata);
         $spreadsheet->disconnectWorksheets();
@@ -117,7 +117,7 @@ class CsvEnclosureTest extends Functional\AbstractFunctional
         $expected = '';
         foreach (self::CELL_VALUES as $key => $value) {
             self::assertEquals($value, $sheet->getCell($key)->getValue());
-            $expected .= "$value$delimiter";
+            $expected .= $value . $delimiter;
         }
         self::assertEquals($expected, $filedata);
         $spreadsheet->disconnectWorksheets();
@@ -149,12 +149,13 @@ class CsvEnclosureTest extends Functional\AbstractFunctional
             'D5' => 0,
         ];
         $calcc3 = '30.88';
-        $expected1 = '2020-06-03,"has,separator",has;non-separator,"has""enclosure"';
-        $expected2 = 'has space,"has' . "\n" . 'newline",,15.44';
-        $expected3 = ' leadingspace,trailingspace ,' . $calcc3 . ',",leadingcomma"';
-        $expected4 = '"trailingquote""",unused,unused,unused';
-        $expected5 = 'FALSE,TRUE,,0';
-        $expectedfile = "$expected1\n$expected2\n$expected3\n$expected4\n$expected5\n";
+        $expected = [];
+        $expected[] = '2020-06-03,"has,separator",has;non-separator,"has""enclosure"';
+        $expected[] = 'has space,"has' . "\n" . 'newline",,15.44';
+        $expected[] = ' leadingspace,trailingspace ,' . $calcc3 . ',",leadingcomma"';
+        $expected[] = '"trailingquote""",unused,unused,unused';
+        $expected[] = 'FALSE,TRUE,,0';
+        $expectedfile = implode("\n", $expected) . "\n";
         $delimiter = ',';
         $enclosure = '"';
         $spreadsheet = new Spreadsheet();
@@ -176,7 +177,8 @@ class CsvEnclosureTest extends Functional\AbstractFunctional
         unlink($filename);
         $sheet = $newspreadsheet->getActiveSheet();
         foreach ($cellValues2 as $key => $value) {
-            self::assertEquals(($key === 'C3') ? $calcc3 : $value, $sheet->getCell($key)->getValue(), "Failure for cell $key");
+            $value_compare = ($key === 'C3') ? $calcc3 : $value;
+            self::assertEquals($value_compare, $sheet->getCell($key)->getValue(), 'Failure for cell ' . $key);
         }
         self::assertEquals($expectedfile, $filedata);
         $spreadsheet->disconnectWorksheets();
@@ -208,12 +210,13 @@ class CsvEnclosureTest extends Functional\AbstractFunctional
             'D5' => 0,
         ];
         $calcc3 = '30.88';
-        $expected1 = '"2020-06-03","has,separator","has;non-separator","has""enclosure"';
-        $expected2 = '"has space","has' . "\n" . 'newline","","15.44"';
-        $expected3 = '" leadingspace","trailingspace ","' . $calcc3 . '",",leadingcomma"';
-        $expected4 = '"trailingquote""","unused","unused","unused"';
-        $expected5 = '"FALSE","TRUE","","0"';
-        $expectedfile = "$expected1\n$expected2\n$expected3\n$expected4\n$expected5\n";
+        $expected = [];
+        $expected[] = '"2020-06-03","has,separator","has;non-separator","has""enclosure"';
+        $expected[] = '"has space","has' . "\n" . 'newline","","15.44"';
+        $expected[] = '" leadingspace","trailingspace ","' . $calcc3 . '",",leadingcomma"';
+        $expected[] = '"trailingquote""","unused","unused","unused"';
+        $expected[] = '"FALSE","TRUE","","0"';
+        $expectedfile = implode("\n", $expected) . "\n";
         $delimiter = ',';
         $enclosure = '"';
         $spreadsheet = new Spreadsheet();
@@ -235,7 +238,8 @@ class CsvEnclosureTest extends Functional\AbstractFunctional
         unlink($filename);
         $sheet = $newspreadsheet->getActiveSheet();
         foreach ($cellValues2 as $key => $value) {
-            self::assertEquals(($key === 'C3') ? $calcc3 : $value, $sheet->getCell($key)->getValue(), "Failure for cell $key");
+            $value_compare = ($key === 'C3') ? $calcc3 : $value;
+            self::assertEquals($value_compare, $sheet->getCell($key)->getValue(), 'Failure for cell ' . $key);
         }
         self::assertEquals($expectedfile, $filedata);
         $spreadsheet->disconnectWorksheets();

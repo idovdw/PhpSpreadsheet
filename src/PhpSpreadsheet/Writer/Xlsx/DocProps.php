@@ -141,16 +141,14 @@ class DocProps extends WriterPart
         $objWriter->startElement('dcterms:created');
         $objWriter->writeAttribute('xsi:type', 'dcterms:W3CDTF');
         $created = $spreadsheet->getProperties()->getCreated();
-        $date = Date::dateTimeFromTimestamp("$created");
-        $objWriter->writeRawData($date->format(DATE_W3C));
+        $objWriter->writeRawData(Date::utcDateTimeFromTimestamp((string) $created));
         $objWriter->endElement();
 
         // dcterms:modified
         $objWriter->startElement('dcterms:modified');
         $objWriter->writeAttribute('xsi:type', 'dcterms:W3CDTF');
         $created = $spreadsheet->getProperties()->getModified();
-        $date = Date::dateTimeFromTimestamp("$created");
-        $objWriter->writeRawData($date->format(DATE_W3C));
+        $objWriter->writeRawData(Date::utcDateTimeFromTimestamp((string) $created));
         $objWriter->endElement();
 
         // dc:title
@@ -226,8 +224,7 @@ class DocProps extends WriterPart
                     break;
                 case Properties::PROPERTY_TYPE_DATE:
                     $objWriter->startElement('vt:filetime');
-                    $date = Date::dateTimeFromTimestamp("$propertyValue");
-                    $objWriter->writeRawData($date->format(DATE_W3C));
+                    $objWriter->writeRawData(Date::utcDateTimeFromTimestamp((string) $propertyValue));
                     $objWriter->endElement();
 
                     break;

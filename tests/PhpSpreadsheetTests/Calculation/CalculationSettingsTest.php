@@ -4,6 +4,8 @@ namespace PhpOffice\PhpSpreadsheetTests\Calculation;
 
 use PhpOffice\PhpSpreadsheet\Calculation\Calculation;
 use PhpOffice\PhpSpreadsheet\Calculation\Functions;
+use PhpOffice\PhpSpreadsheet\Shared\Locale\CurrentLocale;
+use PhpOffice\PhpSpreadsheet\Shared\Locale\FormulaLocaleFactory;
 use PHPUnit\Framework\TestCase;
 
 class CalculationSettingsTest extends TestCase
@@ -13,24 +15,21 @@ class CalculationSettingsTest extends TestCase
      */
     private $compatibilityMode;
 
-    /**
-     * @var string
-     */
-    private $locale;
-
     protected function setUp(): void
     {
+        // Preserve current locale
+        CurrentLocale::preserveState();
+
         $this->compatibilityMode = Functions::getCompatibilityMode();
-        $calculation = Calculation::getInstance();
-        $this->locale = $calculation->getLocale();
         Functions::setCompatibilityMode(Functions::COMPATIBILITY_EXCEL);
     }
 
     protected function tearDown(): void
     {
         Functions::setCompatibilityMode($this->compatibilityMode);
-        $calculation = Calculation::getInstance();
-        $calculation->setLocale($this->locale);
+
+        // Restore current locale
+        CurrentLocale::restoreState();
     }
 
     /**
@@ -44,33 +43,24 @@ class CalculationSettingsTest extends TestCase
         self::assertTrue($calculation->setLocale($locale));
     }
 
-    public function testInvalidLocaleReturnsFalse(): void
+    public function testInvalidLocaleSetsEnUSLocale(): void
     {
         $calculation = Calculation::getInstance();
-        self::assertFalse($calculation->setLocale('xx'));
+        $calculation->setLocale('xx');
+        // Invalid locale no longer returns false
+        $locale = $calculation->getLocale();
+        self::assertTrue($locale == 'en_us');
     }
 
     public static function providerCanLoadAllSupportedLocales(): array
     {
-        return [
-            ['bg'],
-            ['cs'],
-            ['da'],
-            ['de'],
-            ['en_us'],
-            ['es'],
-            ['fi'],
-            ['fr'],
-            ['hu'],
-            ['it'],
-            ['nl'],
-            ['nb'],
-            ['pl'],
-            ['pt'],
-            ['pt_br'],
-            ['ru'],
-            ['sv'],
-            ['tr'],
-        ];
+        $aSupportedTags = FormulaLocaleFactory::getSupportedLocaleTags();
+
+        $aProvidedTests = [];
+        foreach ($aSupportedTags as $tag) {
+            $aProvidedTests[] = [$tag];
+        }
+
+        return $aProvidedTests;
     }
 }

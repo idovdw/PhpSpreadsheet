@@ -51,10 +51,10 @@ class TextTest extends AllSetupTeardown
     public static function providerTextArray(): array
     {
         return [
-            'row vector' => [[['123.75%', '1 19/80']], '1.2375', '{"0.00%", "0 ??/???"}'],
+            'row vector' => [[['123.75%', '1 19/ 80']], '1.2375', '{"0.00%", "0 ??/???"}'],
             'matrix vector' => [
                 [
-                    ['$ -1,234.57', '(1,234.57)'],
+                    ['-$ 1,234.57', '(1,234.57)'],
                     ['$ 9,876.54', '9,876.54'],
                 ],
                 '{-1234.5678; 9876.5432}',

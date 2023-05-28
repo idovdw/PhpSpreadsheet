@@ -10,15 +10,15 @@ use PhpOffice\PhpSpreadsheet\Calculation\Functions;
 use PhpOffice\PhpSpreadsheet\Cell\Cell;
 use PhpOffice\PhpSpreadsheet\Exception;
 use PhpOffice\PhpSpreadsheet\Exception as PhpSpreadsheetException;
-use PhpOffice\PhpSpreadsheet\Locale\CurrentLocale;
 use PhpOffice\PhpSpreadsheet\Shared\Date as SharedDate;
+use PhpOffice\PhpSpreadsheet\Shared\Locale\CurrentLocale;
 use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 
 class Date
 {
     /** constants */
-    const CALENDAR_WINDOWS_1900 = 1900; //    Base date of 1st Jan 1900 = 1.0
-    const CALENDAR_MAC_1904 = 1904; //    Base date of 2nd Jan 1904 = 1.0
+    const CALENDAR_WINDOWS_1900 = 1900; // Base date of 1st Jan 1900 = 1.0
+    const CALENDAR_MAC_1904 = 1904; //     Base date of 2nd Jan 1904 = 1.0
 
     /**
      * Names of the months of the year, indexed by shortname
@@ -515,12 +515,12 @@ class Date
     public static function monthStringToNumber($monthName)
     {
         // Months 1-12
-        if (preg_match('/^([1-9]|10|11|12)$/', $monthName)) {
+        if (preg_match('/^([\-]?[0-9]+)$/', $monthName)) {
             // Digits only
             return (int) $monthName;
         }
 
-        // @fix @ido Use current locale
+        // Use current locale
         $translations = CurrentLocale::getDateTranslations(true);
         foreach ($translations['months']['full'] as $monthIndex => $fullMonthName) {
             if (strcasecmp($monthName, $fullMonthName) == 0) {
@@ -533,8 +533,8 @@ class Date
             }
         }
 
-        // @fix @ido Use en-us locale
-        $translations = CurrentLocale::getDateTranslations('en-us');
+        // Use 'en-us' locale
+        $translations = CurrentLocale::getDateTranslations(false);
         foreach ($translations['months']['full'] as $monthIndex => $fullMonthName) {
             if (strcasecmp($monthName, $fullMonthName) == 0) {
                 return $monthIndex + 1;
@@ -558,10 +558,10 @@ class Date
      */
     public static function dayStringToNumber($day)
     {
-        // @fix @ido Allow any kind of text; get digits only
-        //$strippedDayValue = (str_replace(self::$numberSuffixes, '', $day));
-        $strippedDayValue = preg_replace('/[^\d]/', '', $day);
+        // Allow any kind of text; get digits only
+        $strippedDayValue = preg_replace('/[^0-9]/', '', $day);
         if (is_numeric($strippedDayValue)) {
+            // Integer value
             return (int) $strippedDayValue;
         }
 
@@ -574,6 +574,25 @@ class Date
         $dtobj->setTimeZone($timeZone ?? self::getDefaultOrLocalTimezone());
 
         return $dtobj;
+    }
+
+    /**
+     * Retrieve DateTime object from unix timestamp.
+     *
+     * Somehow DateTime formatting gets mixed up when mixing timezones and
+     * DATE_W3C format. The dates become not interchangeable (deviation of
+     * seconds, even days)!
+     *
+     * @param string $timestamp Timestamp
+     * @param null|DateTimeZone $timeZone Optional timezone
+     *
+     * @return string Date formatted like "2005-08-15T15:52:01+00:00"
+     */
+    public static function utcDateTimeFromTimestamp(string $timestamp, ?DateTimeZone $timeZone = null): string
+    {
+        $date = DateTime::createFromFormat('U', $timestamp, $timeZone) ?: new DateTime('now', $timeZone);
+
+        return $date->format(DATE_W3C);
     }
 
     public static function formattedDateTimeFromTimestamp(string $date, string $format, ?DateTimeZone $timeZone = null): string
