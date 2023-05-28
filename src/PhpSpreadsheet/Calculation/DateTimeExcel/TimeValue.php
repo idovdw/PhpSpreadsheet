@@ -5,6 +5,7 @@ namespace PhpOffice\PhpSpreadsheet\Calculation\DateTimeExcel;
 use DateTime;
 use PhpOffice\PhpSpreadsheet\Calculation\ArrayEnabled;
 use PhpOffice\PhpSpreadsheet\Calculation\Functions;
+use PhpOffice\PhpSpreadsheet\Calculation\Information\ExcelError;
 use PhpOffice\PhpSpreadsheet\Shared\Date as SharedDateHelper;
 
 class TimeValue
@@ -39,6 +40,11 @@ class TimeValue
     {
         if (is_array($timeValue)) {
             return self::evaluateSingleArgumentArray([self::class, __FUNCTION__], $timeValue);
+        }
+
+        // try to parse as time iff there is at least one digit
+        if (is_string($timeValue) && preg_match('/\\d/', $timeValue) !== 1) {
+            return ExcelError::VALUE();
         }
 
         $timeValue = trim($timeValue ?? '', '"');

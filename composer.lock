@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d7335563825d618e364a1fc01a852baf",
+    "content-hash": "06031132b41198f02eff4f6289d43ae2",
     "packages": [
         {
             "name": "ezyang/htmlpurifier",
@@ -1321,6 +1321,7 @@
         },
         {
             "name": "mpdf/mpdf",
+<<<<<<< HEAD
             "version": "v8.1.6",
             "source": {
                 "type": "git",
@@ -1331,6 +1332,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/mpdf/mpdf/zipball/146c7c1dfd21c826b9d5bbfe3c15e52fd933c90f",
                 "reference": "146c7c1dfd21c826b9d5bbfe3c15e52fd933c90f",
+=======
+            "version": "v8.1.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mpdf/mpdf.git",
+                "reference": "c264ce27af0d794ecd04e201b7e37a06b8a9d720"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mpdf/mpdf/zipball/c264ce27af0d794ecd04e201b7e37a06b8a9d720",
+                "reference": "c264ce27af0d794ecd04e201b7e37a06b8a9d720",
+>>>>>>> 5615247ae5b532ebdcb20e612595c2951846ea9d
                 "shasum": ""
             },
             "require": {
@@ -1394,6 +1407,7 @@
                     "type": "custom"
                 }
             ],
+<<<<<<< HEAD
             "time": "2023-05-03T19:36:43+00:00"
         },
         {
@@ -1439,6 +1453,9 @@
                 "source": "https://github.com/mpdf/psr-log-aware-trait/tree/v3.0.0"
             },
             "time": "2023-05-03T06:19:36+00:00"
+=======
+            "time": "2023-04-04T15:06:48+00:00"
+>>>>>>> 5615247ae5b532ebdcb20e612595c2951846ea9d
         },
         {
             "name": "myclabs/deep-copy",
@@ -1807,6 +1824,63 @@
             "time": "2022-09-06T12:16:56+00:00"
         },
         {
+<<<<<<< HEAD
+=======
+            "name": "php-http/message-factory",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-http/message-factory.git",
+                "reference": "4d8778e1c7d405cbb471574821c1ff5b68cc8f57"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-http/message-factory/zipball/4d8778e1c7d405cbb471574821c1ff5b68cc8f57",
+                "reference": "4d8778e1c7d405cbb471574821c1ff5b68cc8f57",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4",
+                "psr/http-message": "^1.0 || ^2.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Http\\Message\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Márk Sági-Kazár",
+                    "email": "mark.sagikazar@gmail.com"
+                }
+            ],
+            "description": "Factory interfaces for PSR-7 HTTP Message",
+            "homepage": "http://php-http.org",
+            "keywords": [
+                "factory",
+                "http",
+                "message",
+                "stream",
+                "uri"
+            ],
+            "support": {
+                "issues": "https://github.com/php-http/message-factory/issues",
+                "source": "https://github.com/php-http/message-factory/tree/1.1.0"
+            },
+            "time": "2023-04-14T14:16:17+00:00"
+        },
+        {
+>>>>>>> 5615247ae5b532ebdcb20e612595c2951846ea9d
             "name": "phpcompatibility/php-compatibility",
             "version": "9.3.5",
             "source": {
@@ -1870,6 +1944,7 @@
         },
         {
             "name": "phpstan/phpstan",
+<<<<<<< HEAD
             "version": "1.10.15",
             "source": {
                 "type": "git",
@@ -1880,6 +1955,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/phpstan/phpstan/zipball/762c4dac4da6f8756eebb80e528c3a47855da9bd",
                 "reference": "762c4dac4da6f8756eebb80e528c3a47855da9bd",
+=======
+            "version": "1.10.14",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpstan/phpstan.git",
+                "reference": "d232901b09e67538e5c86a724be841bea5768a7c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/d232901b09e67538e5c86a724be841bea5768a7c",
+                "reference": "d232901b09e67538e5c86a724be841bea5768a7c",
+>>>>>>> 5615247ae5b532ebdcb20e612595c2951846ea9d
                 "shasum": ""
             },
             "require": {
@@ -1928,7 +2015,11 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< HEAD
             "time": "2023-05-09T15:28:01+00:00"
+=======
+            "time": "2023-04-19T13:47:27+00:00"
+>>>>>>> 5615247ae5b532ebdcb20e612595c2951846ea9d
         },
         {
             "name": "phpstan/phpstan-phpunit",
@@ -2302,6 +2393,7 @@
         },
         {
             "name": "phpunit/phpunit",
+<<<<<<< HEAD
             "version": "9.6.8",
             "source": {
                 "type": "git",
@@ -2312,6 +2404,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/17d621b3aff84d0c8b62539e269e87d8d5baa76e",
                 "reference": "17d621b3aff84d0c8b62539e269e87d8d5baa76e",
+=======
+            "version": "9.6.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sebastianbergmann/phpunit.git",
+                "reference": "c993f0d3b0489ffc42ee2fe0bd645af1538a63b2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/c993f0d3b0489ffc42ee2fe0bd645af1538a63b2",
+                "reference": "c993f0d3b0489ffc42ee2fe0bd645af1538a63b2",
+>>>>>>> 5615247ae5b532ebdcb20e612595c2951846ea9d
                 "shasum": ""
             },
             "require": {
@@ -2385,7 +2489,11 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
+<<<<<<< HEAD
                 "source": "https://github.com/sebastianbergmann/phpunit/tree/9.6.8"
+=======
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/9.6.7"
+>>>>>>> 5615247ae5b532ebdcb20e612595c2951846ea9d
             },
             "funding": [
                 {
@@ -2401,7 +2509,11 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< HEAD
             "time": "2023-05-11T05:14:45+00:00"
+=======
+            "time": "2023-04-14T08:58:40+00:00"
+>>>>>>> 5615247ae5b532ebdcb20e612595c2951846ea9d
         },
         {
             "name": "psr/cache",
@@ -3753,6 +3865,7 @@
         },
         {
             "name": "symfony/console",
+<<<<<<< HEAD
             "version": "v6.2.10",
             "source": {
                 "type": "git",
@@ -3763,6 +3876,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/console/zipball/12288d9f4500f84a4d02254d4aa968b15488476f",
                 "reference": "12288d9f4500f84a4d02254d4aa968b15488476f",
+=======
+            "version": "v5.4.23",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/console.git",
+                "reference": "90f21e27d0d88ce38720556dd164d4a1e4c3934c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/console/zipball/90f21e27d0d88ce38720556dd164d4a1e4c3934c",
+                "reference": "90f21e27d0d88ce38720556dd164d4a1e4c3934c",
+>>>>>>> 5615247ae5b532ebdcb20e612595c2951846ea9d
                 "shasum": ""
             },
             "require": {
@@ -3829,7 +3954,11 @@
                 "terminal"
             ],
             "support": {
+<<<<<<< HEAD
                 "source": "https://github.com/symfony/console/tree/v6.2.10"
+=======
+                "source": "https://github.com/symfony/console/tree/v5.4.23"
+>>>>>>> 5615247ae5b532ebdcb20e612595c2951846ea9d
             },
             "funding": [
                 {
@@ -3845,7 +3974,11 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< HEAD
             "time": "2023-04-28T13:37:43+00:00"
+=======
+            "time": "2023-04-24T18:47:29+00:00"
+>>>>>>> 5615247ae5b532ebdcb20e612595c2951846ea9d
         },
         {
             "name": "symfony/deprecation-contracts",
@@ -4078,6 +4211,7 @@
         },
         {
             "name": "symfony/filesystem",
+<<<<<<< HEAD
             "version": "v6.2.10",
             "source": {
                 "type": "git",
@@ -4088,6 +4222,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/filesystem/zipball/fd588debf7d1bc16a2c84b4b3b71145d9946b894",
                 "reference": "fd588debf7d1bc16a2c84b4b3b71145d9946b894",
+=======
+            "version": "v5.4.23",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/filesystem.git",
+                "reference": "b2f79d86cd9e7de0fff6d03baa80eaed7a5f38b5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/filesystem/zipball/b2f79d86cd9e7de0fff6d03baa80eaed7a5f38b5",
+                "reference": "b2f79d86cd9e7de0fff6d03baa80eaed7a5f38b5",
+>>>>>>> 5615247ae5b532ebdcb20e612595c2951846ea9d
                 "shasum": ""
             },
             "require": {
@@ -4121,7 +4267,11 @@
             "description": "Provides basic utilities for the filesystem",
             "homepage": "https://symfony.com",
             "support": {
+<<<<<<< HEAD
                 "source": "https://github.com/symfony/filesystem/tree/v6.2.10"
+=======
+                "source": "https://github.com/symfony/filesystem/tree/v5.4.23"
+>>>>>>> 5615247ae5b532ebdcb20e612595c2951846ea9d
             },
             "funding": [
                 {
@@ -4137,7 +4287,11 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< HEAD
             "time": "2023-04-18T13:46:08+00:00"
+=======
+            "time": "2023-03-02T11:38:35+00:00"
+>>>>>>> 5615247ae5b532ebdcb20e612595c2951846ea9d
         },
         {
             "name": "symfony/finder",
@@ -4764,6 +4918,7 @@
         },
         {
             "name": "symfony/process",
+<<<<<<< HEAD
             "version": "v6.2.10",
             "source": {
                 "type": "git",
@@ -4774,6 +4929,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/process/zipball/b34cdbc9c5e75d45a3703e63a48ad07aafa8bf2e",
                 "reference": "b34cdbc9c5e75d45a3703e63a48ad07aafa8bf2e",
+=======
+            "version": "v5.4.23",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/process.git",
+                "reference": "4b842fc4b61609e0a155a114082bd94e31e98287"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/process/zipball/4b842fc4b61609e0a155a114082bd94e31e98287",
+                "reference": "4b842fc4b61609e0a155a114082bd94e31e98287",
+>>>>>>> 5615247ae5b532ebdcb20e612595c2951846ea9d
                 "shasum": ""
             },
             "require": {
@@ -4805,7 +4972,11 @@
             "description": "Executes commands in sub-processes",
             "homepage": "https://symfony.com",
             "support": {
+<<<<<<< HEAD
                 "source": "https://github.com/symfony/process/tree/v6.2.10"
+=======
+                "source": "https://github.com/symfony/process/tree/v5.4.23"
+>>>>>>> 5615247ae5b532ebdcb20e612595c2951846ea9d
             },
             "funding": [
                 {
@@ -4821,7 +4992,11 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< HEAD
             "time": "2023-04-18T13:56:57+00:00"
+=======
+            "time": "2023-04-18T13:50:24+00:00"
+>>>>>>> 5615247ae5b532ebdcb20e612595c2951846ea9d
         },
         {
             "name": "symfony/service-contracts",
